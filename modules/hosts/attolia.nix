@@ -27,6 +27,7 @@ in {
     networking.hostName = hostname;
     system.primaryUser = username;
     nixpkgs.hostPlatform = "aarch64-darwin";
+    nixpkgs.config.allowUnfree = true;
     # pathsToLink = ["/Applications"];
     environment.systemPath = [
       "/run/current-system/sw/bin"

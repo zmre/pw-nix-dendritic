@@ -4,7 +4,6 @@
   ...
 }: let
   common = {pkgs, ...}: {
-    imports = [inputs.home-manager.nixosModules.default];
     time.timeZone = "America/Denver";
 
     # environment setup
@@ -19,7 +18,7 @@
       };
       etc = {
         home-manager.source = "${inputs.home-manager}";
-        nixpkgs-unstable.source = "${inputs.nixpkgs-unstable}";
+        nixpkgs-unstable.source = "${inputs.nixpkgs}";
         nixpkgs-stable.source =
           if pkgs.stdenvNoCC.isDarwin
           then "${inputs.nixpkgs-stable-darwin}"
@@ -27,7 +26,7 @@
       };
 
       # list of acceptable shells in /etc/shells
-      shells = with pkgs.stable; [bash zsh];
+      shells = with pkgs; [bash zsh];
       pathsToLink = ["/libexec" "/share/zsh"];
     };
     programs.zsh = {
@@ -61,10 +60,16 @@
   };
 in {
   flake.darwinModules.system = {
-    imports = [common];
+    imports = [
+      common
+      inputs.home-manager.darwinModules.home-manager
+    ];
   };
 
   flake.nixosModules.system = {
-    imports = [common];
+    imports = [
+      common
+      inputs.home-manager.nixosModules.default
+    ];
   };
 }
