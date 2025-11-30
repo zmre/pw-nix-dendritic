@@ -10,6 +10,8 @@ in {
     modules = with config.flake.darwinModules; [
       attolia-config
       system # pulls everything in that always is needed for darwin loads
+      touchid
+      terminfo
     ];
   };
 

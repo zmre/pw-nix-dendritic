@@ -34,29 +34,6 @@
       enableCompletion = true;
       enableBashCompletion = true;
     };
-    nix = {
-      # package = pkgs.stable.nix;
-      settings = {
-        # Because macos sandbox can create issues https://github.com/NixOS/nix/issues/4119
-        sandbox = false; # !pkgs.stdenv.isDarwin;
-        trusted-users = ["root" "@admin" "@wheel"];
-
-        # TODO: turn this back on
-        # disabled 2023-01-21 because of "cannot link" errors as described here:
-        # https://github.com/NixOS/nix/issues/7273
-        # issue still open 2025-11-28
-        auto-optimise-store = false;
-        max-jobs = 8;
-        cores = 0; # use them all
-        allowed-users = ["@wheel"];
-      };
-
-      #optimise.automatic = true;
-      gc = {
-        automatic = true;
-        options = "--delete-older-than 30d";
-      };
-    };
   };
 in {
   flake.darwinModules.system = {
