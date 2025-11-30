@@ -7,7 +7,6 @@
   hostname = "attolia";
 in {
   flake.darwinConfigurations.${hostname} = inputs.darwin.lib.darwinSystem {
-    #system = "aarch64-darwin"; # TODO: is this needed?
     modules = with config.flake.darwinModules; [
       system # pulls everything in that always is needed for darwin loads
     ];
@@ -36,7 +35,7 @@ in {
     ];
     users.users.${username} = {
       home = "/Users/${username}";
-      shell = pkgs.zsh;
+      shell = pkgs.stable.zsh;
       packages = with pkgs; [
         tree # this is just a test, really
       ];

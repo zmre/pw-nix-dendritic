@@ -28,6 +28,21 @@
       "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
     ];
   };
+
+  stableOverlay = final: prev: {
+    stable =
+      if final.stdenv.isDarwin
+      then
+        import inputs.nixpkgs-stable-darwin {
+          inherit (final) system;
+          config = nixpkgsConfig;
+        }
+      else
+        import inputs.nixpkgs-stable {
+          inherit (final) system;
+          config = nixpkgsConfig;
+        };
+  };
 in {
   flake-file.description = "My updated nix config now more 'dendritic'";
 
@@ -65,34 +80,14 @@ in {
 
   flake-file.nixConfig = nixConfig;
 
-  # This entire function here is just so we can have the option to
-  # use both unstable and stable in a mix-and-match way.
-  perSystem = {system, ...}: {
-    _module.args = {
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-        config = nixpkgsConfig;
-        # overlays = [self.overlays.default];
-        overlays = [
-          (final: prev: {
-            # expose other channels via overlays
-            stable =
-              if final.stdenv.isDarwin
-              then
-                import inputs.nixpkgs-stable-darwin {
-                  inherit (final) system;
-                  config = nixpkgsConfig;
-                  nix.package = inputs.nixos-stable.nix;
-                }
-              else
-                import inputs.nixpkgs-stable {
-                  inherit (prev) system;
-                  config = nixpkgsConfig;
-                  nix.package = inputs.nixos-stable.nix;
-                };
-          })
-        ];
-      };
-    };
+  # This module can be imported by any Darwin/NixOS config
+  flake.nixosModules.system = {
+    nixpkgs.overlays = [stableOverlay];
+    nixpkgs.config = nixpkgsConfig;
+  };
+
+  flake.darwinModules.system = {
+    nixpkgs.overlays = [stableOverlay];
+    nixpkgs.config = nixpkgsConfig;
   };
 }
