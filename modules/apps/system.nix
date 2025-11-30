@@ -10,6 +10,7 @@
       dig
       dnsutils
       git
+      gnugrep
       gnused
       lsof
       net-tools

@@ -33,6 +33,14 @@
       inputs.nixpkgs-lib.follows = "nixpkgs-lib";
       url = "github:hercules-ci/flake-parts";
     };
+    gh-feed = {
+      flake = false;
+      url = "github:rsteube/gh-feed";
+    };
+    gh-worktree = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:zmre/gh-worktree";
+    };
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
@@ -42,12 +50,21 @@
     nixpkgs-lib.follows = "nixpkgs";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    pwai.url = "git+ssh://git@github.com/zmre/pwai.git";
     pwneovide = {
       inputs.pwnvim.follows = "pwnvim";
       url = "github:zmre/pwneovide";
     };
     pwnvim.url = "github:zmre/pwnvim";
     systems.url = "github:nix-systems/default";
+    yazi-flavors = {
+      flake = false;
+      url = "github:yazi-rs/flavors";
+    };
+    yazi-quicklook = {
+      flake = false;
+      url = "github:vvatikiotis/quicklook.yazi";
+    };
   };
 
 }
