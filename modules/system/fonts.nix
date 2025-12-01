@@ -25,7 +25,6 @@
     system.defaults = {
       NSGlobalDomain = {
         AppleFontSmoothing = 2;
-        "com.apple.mouse.tapBehavior" = 1; # tap to click
       };
     };
   };

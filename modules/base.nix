@@ -13,6 +13,7 @@
   # Nix configuration (for flake settings like substituters)
   nixConfig = {
     extra-experimental-features = "nix-command flakes pipe-operators";
+    download-buffer-size = 536870912; # 512 MiB (increased from default 64 MiB)
     extra-substituters = [
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
@@ -34,12 +35,12 @@
       if final.stdenv.isDarwin
       then
         import inputs.nixpkgs-stable-darwin {
-          inherit (final) system;
+          system = final.stdenv.hostPlatform.system;
           config = nixpkgsConfig;
         }
       else
         import inputs.nixpkgs-stable {
-          inherit (final) system;
+          system = final.stdenv.hostPlatform.system;
           config = nixpkgsConfig;
         };
   };

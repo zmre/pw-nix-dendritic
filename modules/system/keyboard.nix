@@ -21,6 +21,7 @@
         "com.apple.springing.enabled" = false;
         "com.apple.trackpad.scaling" = 3.0; # fast
         "com.apple.trackpad.enableSecondaryClick" = true;
+        "com.apple.mouse.tapBehavior" = 1; # tap to click
         # enable full keyboard control
         # (e.g. enable Tab in modal dialogs)
         AppleKeyboardUIMode = 3;

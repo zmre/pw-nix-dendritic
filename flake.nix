@@ -6,6 +6,7 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   nixConfig = {
+    download-buffer-size = 536870912;
     extra-experimental-features = "nix-command flakes pipe-operators";
     extra-substituters = [
       "https://cache.nixos.org"
@@ -45,17 +46,36 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
+    homebrew-bundle = {
+      flake = false;
+      url = "github:homebrew/homebrew-bundle";
+    };
+    homebrew-cask = {
+      flake = false;
+      url = "github:homebrew/homebrew-cask";
+    };
+    homebrew-core = {
+      flake = false;
+      url = "github:homebrew/homebrew-core";
+    };
+    homebrew-services = {
+      flake = false;
+      url = "github:homebrew/homebrew-services";
+    };
     import-tree.url = "github:vic/import-tree";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-lib.follows = "nixpkgs";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    pwaerospace.url = "github:zmre/aerospace-sketchybar-nix-lua-config";
     pwai.url = "git+ssh://git@github.com/zmre/pwai.git";
     pwneovide = {
       inputs.pwnvim.follows = "pwnvim";
       url = "github:zmre/pwneovide";
     };
     pwnvim.url = "github:zmre/pwnvim";
+    sbhosts.url = "github:StevenBlack/hosts";
     systems.url = "github:nix-systems/default";
     yazi-flavors = {
       flake = false;

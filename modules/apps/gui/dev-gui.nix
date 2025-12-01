@@ -1,5 +1,15 @@
 {
-  flake.modules.homeManager.gui-dev = {
+  flake.darwinModules.dev-gui = {
+    homebrew.casks = [
+      "dash" # offline developer docs
+      "fork"
+      "gitkraken-cli"
+    ];
+    homebrew.masApps = {
+      "Xcode" = 497799835;
+    };
+  };
+  flake.modules.homeManager.dev-gui = {
     pkgs,
     lib,
     ...

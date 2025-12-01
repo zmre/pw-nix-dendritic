@@ -16,14 +16,14 @@
         LANGUAGE = "en_US.UTF-8";
         LC_ALL = "en_US.UTF-8";
       };
-      etc = {
-        home-manager.source = "${inputs.home-manager}";
-        nixpkgs-unstable.source = "${inputs.nixpkgs}";
-        nixpkgs-stable.source =
-          if pkgs.stdenvNoCC.isDarwin
-          then "${inputs.nixpkgs-stable-darwin}"
-          else "${inputs.nixpkgs-stable}";
-      };
+      # etc = {
+      #   home-manager.source = "${inputs.home-manager}";
+      #   nixpkgs-unstable.source = "${inputs.nixpkgs}";
+      #   nixpkgs-stable.source =
+      #     if pkgs.stdenvNoCC.isDarwin
+      #     then "${inputs.nixpkgs-stable-darwin}"
+      #     else "${inputs.nixpkgs-stable}";
+      # };
 
       # list of acceptable shells in /etc/shells
       shells = with pkgs; [bash zsh];

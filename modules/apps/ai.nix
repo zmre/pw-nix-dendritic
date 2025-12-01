@@ -1,6 +1,16 @@
 {inputs, ...}: {
   flake-file.inputs.pwai.url = "git+ssh://git@github.com/zmre/pwai.git";
 
+  flake.darwinModules.ai-gui = {
+    homebrew.casks = [
+      "chatgpt"
+      "claude"
+      "macwhisper"
+      #"ollama-app"
+      #"lm-studio"
+    ];
+  };
+
   flake.modules.homeManager.ai = {
     pkgs,
     lib,
@@ -22,6 +32,7 @@
     home.packages = with pkgs; [
       aichat-wrapped # ai cli tool that can use local rag, local models, etc.
       inputs.pwai.packages.${system}.default # my personal assistant, which wraps other tools and has crap tons of configs
+      whisper-cpp # Allow GPU accelerated local transcriptions
     ];
     programs = {
     };

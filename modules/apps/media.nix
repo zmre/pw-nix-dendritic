@@ -1,10 +1,20 @@
 {
-  flake.modules.homeManager.media = {
-    inputs,
-    pkgs,
-    lib,
-    ...
-  }: let
+  flake.darwinModules.media-gui = {
+    homebrew.casks = [
+      "adobe-creative-cloud"
+      "descript"
+      "freetube" # TODO: this is in nixpkgs now for darwin -- try there and see if we get arm
+      "imageoptim"
+      "insta360-studio"
+      "keycastr" # show keys being pressed
+      "noun-project"
+      #"obs"
+      "stolendata-mpv" # 2024-12-11 switching to brew but keeping hm config; gui not launching
+      "screenflow"
+      "subler" # used to edit metadata on videos
+    ];
+  };
+  flake.modules.homeManager.media = {pkgs, ...}: let
     system = pkgs.stdenvNoCC.hostPlatform.system;
   in {
     home.packages = with pkgs; [
