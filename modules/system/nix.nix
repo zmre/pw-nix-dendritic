@@ -6,7 +6,7 @@
         # Because macos sandbox can create issues https://github.com/NixOS/nix/issues/4119
         sandbox = false; # !pkgs.stdenv.isDarwin;
         # wheel for linux, admin for darwin
-        trusted-users = ["root" "@admin" "@wheel" "${config.system.primaryUser}"];
+        trusted-users = ["root" "@admin" "@wheel"];
 
         # TODO: turn this back on
         # disabled 2023-01-21 because of "cannot link" errors as described here:

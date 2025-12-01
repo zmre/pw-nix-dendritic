@@ -36,6 +36,11 @@
         pstree
         hackernews-tui
         btop
+        kalker # cli calculator; alt. to bc and calc
+        rink # calculator for unit conversions
+        fortune
+        kondo # free disk space by cleaning project build dirs
+        zk # cli for indexing markdown files
       ]
       ++ (lib.optionals pkgs.stdenv.isDarwin [
         mactop

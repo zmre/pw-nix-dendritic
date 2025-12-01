@@ -84,9 +84,12 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-lib.follows = "nixpkgs";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
-    pwaerospace.url = "github:zmre/aerospace-sketchybar-nix-lua-config";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    pwaerospace = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:zmre/aerospace-sketchybar-nix-lua-config";
+    };
     pwai = {
       inputs = {
         flake-parts.follows = "flake-parts";

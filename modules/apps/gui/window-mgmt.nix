@@ -1,5 +1,6 @@
 {inputs, ...}: {
   flake-file.inputs.pwaerospace.url = "github:zmre/aerospace-sketchybar-nix-lua-config";
+  flake-file.inputs.pwaerospace.inputs.nixpkgs.follows = "nixpkgs";
 
   flake.darwinModules.window-mgmt = {pkgs, ...}: let
     system = pkgs.stdenvNoCC.hostPlatform.system;

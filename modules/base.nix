@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  currentStable = "25.05";
+  currentStable = "25.11";
 
   # nixpkgs configuration (for package settings like allowUnfree)
   nixpkgsConfig = {
