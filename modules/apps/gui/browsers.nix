@@ -1,5 +1,5 @@
 {
-  flake.darwinModules.browsers = {
+  flake.darwinModules.browsers-gui = {
     homebrew.casks = [
       "brave-browser" # TODO: move to home-manager when it builds
       "choosy" # multi-browser url launch selector; see also https://github.com/johnste/finicky

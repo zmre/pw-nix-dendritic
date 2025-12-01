@@ -6,6 +6,10 @@
   common = {pkgs, ...}: {
     time.timeZone = "America/Denver";
 
+    documentation.enable = true;
+    documentation.info.enable = true;
+    documentation.man.enable = true;
+
     # environment setup
     environment = {
       ${

@@ -12,14 +12,17 @@ in {
       system # pulls everything in that always is needed for darwin loads
       prefs
       touchid
-      terminfo
-      brew
       ai-gui
+      brew
+      browsers-gui
+      comms-gui
       dev-gui
+      filemanagement-gui
+      media-gui
       security
       security-gui
-      media-gui
-      browsers
+      term-gui
+      terminfo
       window-mgmt
     ];
   };
@@ -51,21 +54,25 @@ in {
           ai
           dev
           dev-gui
+          espanso
           filemanagement
+          iron
           network
           media
+          prefs
+          prose
+          scripts
           security
           shell
           vim
+          vim-gui
         ];
         home.username = username;
         home.homeDirectory = "/Users/${username}";
-        home.stateVersion = "25.05";
+        home.stateVersion = "25.11";
+        targets.darwin.copyApps.enable = true;
       };
       system.stateVersion = 6;
     };
-
-    # Used for backwards compatibility, please read the changelog before changing.
-    # $ darwin-rebuild changelog
   };
 }

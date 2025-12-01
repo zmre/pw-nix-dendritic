@@ -2,6 +2,7 @@
   flake.darwinModules.media-gui = {
     homebrew.casks = [
       "adobe-creative-cloud"
+      "calibre" # available in nix, but marked broken for darwin as of 2025-09-18
       "descript"
       "freetube" # TODO: this is in nixpkgs now for darwin -- try there and see if we get arm
       "imageoptim"
@@ -12,6 +13,15 @@
       "stolendata-mpv" # 2024-12-11 switching to brew but keeping hm config; gui not launching
       "screenflow"
       "subler" # used to edit metadata on videos
+    ];
+    homebrew.masApps = {
+      "Gifox" = 1461845568; # For short animated gif screen caps
+      "Kindle" = 302584613;
+    };
+    homebrew.brews = [
+      "nghttp2" # needed for yt-dlp curl-impersonate
+      "yt-dlp" # youtube downloader / 2024-11-19 moved back to nix now that curl-cffi (curl-impersonate) is supported
+      "zstd" # needed for yt-dlp curl-impersonate
     ];
   };
   flake.modules.homeManager.media = {pkgs, ...}: let

@@ -81,6 +81,9 @@ in {
 
   flake-file.nixConfig = nixConfig;
 
+  # Make nixConfig accessible to other modules through config.flake
+  flake.nixConfig = nixConfig;
+
   # This module can be imported by any Darwin/NixOS config
   flake.nixosModules.system = {
     nixpkgs.overlays = [stableOverlay];

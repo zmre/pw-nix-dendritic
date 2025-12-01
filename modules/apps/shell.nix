@@ -1,27 +1,45 @@
 {inputs, ...}: {
+  flake-file.inputs.hackernews-tui.url = "github:aome510/hackernews-TUI";
+  flake-file.inputs.hackernews-tui.flake = false;
+
   flake.modules.homeManager.shell = {
     pkgs,
     config,
     lib,
     ...
   }: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    hackernews-tui = pkgs.rustPlatform.buildRustPackage {
+      name = "hackernews-tui";
+      pname = "hackernews-tui";
+      cargoLock = {lockFile = inputs.hackernews-tui + /Cargo.lock;};
+      buildInputs =
+        [pkgs.pkg-config pkgs.libiconv]
+        ++ pkgs.lib.optionals pkgs.stdenv.isDarwin
+        [pkgs.apple-sdk];
+      src = inputs.hackernews-tui;
+    };
   in {
-    home.packages = with pkgs; [
-      less
-      page # like less, but uses nvim, which is handy for selecting out text and such
-      file
-      jq
-      lynx
-      poppler-utils # for pdf2text
-      glow # browse markdown dirs
-      mdcat # colorize markdown
-      html2text
-      neofetch # display key software/version info in term
-      vimv # shell script to bulk rename
-      procps
-      pstree
-    ];
+    home.packages = with pkgs;
+      [
+        less
+        page # like less, but uses nvim, which is handy for selecting out text and such
+        file
+        jq
+        lynx
+        poppler-utils # for pdf2text
+        glow # browse markdown dirs
+        mdcat # colorize markdown
+        html2text
+        neofetch # display key software/version info in term
+        vimv # shell script to bulk rename
+        procps
+        pstree
+        hackernews-tui
+        btop
+      ]
+      ++ (lib.optionals pkgs.stdenv.isDarwin [
+        mactop
+      ]);
     programs = {
       # Nice shell history https://atuin.sh -- experimenting with this 2024-07-26
       atuin = {
@@ -544,6 +562,14 @@
           };
       };
     };
+
+    home.file.".config/hn-tui.toml".text = ''
+      [theme.palette]
+      background = "#242424"
+      foreground = "#f6f6ef"
+      selection_background = "#4a4c4c"
+      selection_foreground = "#d8dad6"
+    '';
 
     home.sessionVariables = {
       NIX_PATH = "nixpkgs=${inputs.nixpkgs}:stable=${inputs.nixpkgs-stable}\${NIX_PATH:+:}$NIX_PATH";

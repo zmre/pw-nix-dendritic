@@ -4,6 +4,19 @@
   flake-file.inputs.yazi-quicklook.url = "github:vvatikiotis/quicklook.yazi";
   flake-file.inputs.yazi-quicklook.flake = false;
 
+  flake.darwinModules.filemanagement-gui = {pkgs, ...}: {
+    homebrew.casks = [
+      "dropbox"
+      "google-drive"
+      "proton-drive"
+      "sync"
+      "transmission"
+    ];
+    homebrew.masApps = {
+      "DaisyDisk" = 411643860;
+    };
+  };
+
   flake.modules.homeManager.filemanagement = {
     pkgs,
     lib,
@@ -30,6 +43,7 @@
       zip
     ];
     programs = {
+      eza.enable = true;
       yazi = {
         enable = true;
         enableZshIntegration = true;

@@ -1,5 +1,7 @@
 {inputs, ...}: {
   flake-file.inputs.pwai.url = "git+ssh://git@github.com/zmre/pwai.git";
+  flake-file.inputs.pwai.inputs.nixpkgs.follows = "nixpkgs";
+  flake-file.inputs.pwai.inputs.flake-parts.follows = "flake-parts";
 
   flake.darwinModules.ai-gui = {
     homebrew.casks = [

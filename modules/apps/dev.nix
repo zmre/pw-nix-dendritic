@@ -43,6 +43,8 @@
       glow # browse markdown dirs
       mdcat # colorize markdown
       html2text
+      colima
+      docker
     ];
     programs = {
       git = {

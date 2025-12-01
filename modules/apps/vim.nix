@@ -3,6 +3,18 @@
   flake-file.inputs.pwneovide.url = "github:zmre/pwneovide";
   flake-file.inputs.pwneovide.inputs.pwnvim.follows = "pwnvim";
 
+  flake.modules.homeManager.vim-gui = {
+    pkgs,
+    lib,
+    ...
+  }: let
+    system = pkgs.stdenvNoCC.hostPlatform.system;
+  in {
+    home.packages = [
+      inputs.pwneovide.packages.${system}.default
+    ];
+  };
+
   flake.modules.homeManager.vim = {
     pkgs,
     lib,

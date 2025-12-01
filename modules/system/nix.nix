@@ -1,4 +1,4 @@
-{...}: let
+{config, ...}: let
   common = {
     nix = {
       # package = pkgs.stable.nix;
@@ -6,7 +6,7 @@
         # Because macos sandbox can create issues https://github.com/NixOS/nix/issues/4119
         sandbox = false; # !pkgs.stdenv.isDarwin;
         # wheel for linux, admin for darwin
-        trusted-users = ["root" "@admin" "@wheel"];
+        trusted-users = ["root" "@admin" "@wheel" "${config.system.primaryUser}"];
 
         # TODO: turn this back on
         # disabled 2023-01-21 because of "cannot link" errors as described here:
@@ -19,6 +19,9 @@
 
         # wheel for linux, admin for darwin
         allowed-users = ["@wheel" "@admin"];
+
+        trusted-substituters = config.flake.nixConfig.extra-substituters;
+        trusted-public-keys = config.flake.nixConfig.extra-trusted-public-keys;
 
         # Fallback quickly if substituters are not available.
         connect-timeout = 5;
