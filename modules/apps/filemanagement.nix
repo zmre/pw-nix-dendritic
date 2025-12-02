@@ -25,9 +25,8 @@
     system = pkgs.stdenvNoCC.hostPlatform.system;
   in {
     home.packages = with pkgs; [
-      fd
-      ripgrep
       dust
+      file
       fzy
       curl
       duf # df alternative showing free disk space
@@ -44,6 +43,19 @@
     ];
     programs = {
       eza.enable = true;
+      fd.enable = true;
+      ripgrep.enable = true;
+      bat = {
+        enable = true;
+        #extraPackages = with pkgs.bat-extras; [ batman batgrep ];
+        config = {
+          theme = "Dracula"; # I like the TwoDark colors better, but want bold/italic in markdown docs
+          #pager = "less -FR";
+          pager = "page -WO -q 90000";
+          italic-text = "always";
+          style = "plain"; # no line numbers, git status, etc... more like cat with colors
+        };
+      };
       yazi = {
         enable = true;
         enableZshIntegration = true;

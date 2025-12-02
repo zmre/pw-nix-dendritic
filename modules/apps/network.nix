@@ -16,6 +16,7 @@
       # network
       gping
       dig
+      curl
       bandwhich # bandwidth monitor by process
       #pkgs.sniffnet # x-platform gui traffic monitor (rust)
       # not building on m1 right now

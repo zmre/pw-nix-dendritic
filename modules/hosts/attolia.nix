@@ -12,6 +12,7 @@ in {
       system # pulls everything in that always is needed for darwin loads
       prefs
       touchid
+
       ai-gui
       brew
       browsers-gui
