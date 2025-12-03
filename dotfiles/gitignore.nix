@@ -255,4 +255,6 @@
   ".direnv"
   "result"
   "settings.local.json"
+  ".claude/"
+  ".env"
 ]
