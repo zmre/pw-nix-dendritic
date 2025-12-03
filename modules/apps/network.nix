@@ -46,6 +46,10 @@
           AddKeysToAgent yes
         '';
       };
+      ssh-agent = {
+        enable = true;
+        enableZshIntegration = true;
+      };
     };
     home.file.".config/curlrc".text = ''
       connect-timeout 10
