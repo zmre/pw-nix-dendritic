@@ -7,6 +7,7 @@
   };
   flake.modules.homeManager.term-gui = {pkgs, ...}: {
     home.file.".wezterm.lua".source = ../../dotfiles/wezterm/wezterm.lua;
+    home.packages = [pkgs.iterm2]; # using remote windows with tmux more so want to experiment here with native seeming windows for tmux panes
     programs.kitty = {
       enable = false;
       #package = pkgs.emptyDirectory; # post 15.1 update, having issues with nix version and moving to brew for now 2024-10-30

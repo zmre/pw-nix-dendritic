@@ -76,6 +76,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764627417,
+        "narHash": "sha256-D6xc3Rl8Ab6wucJWdvjNsGYGSxNjQHzRc2EZ6eeQ6l4=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "5a88a6eceb8fd732b983e72b732f6f4b8269bef3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -493,6 +513,21 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1764440730,
+        "narHash": "sha256-ZlJTNLUKQRANlLDomuRWLBCH5792x+6XUJ4YdFRjtO4=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "9154f4569b6cdfd3c595851a6ba51bfaa472d9f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1764527385,
@@ -762,6 +797,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "disko": "disko",
         "flake-file": "flake-file",
         "flake-parts": "flake-parts",
         "gh-feed": "gh-feed",
@@ -776,6 +812,7 @@
         "ironhide": "ironhide",
         "ironoxide": "ironoxide",
         "nix-homebrew": "nix-homebrew",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-lib": [
           "nixpkgs"

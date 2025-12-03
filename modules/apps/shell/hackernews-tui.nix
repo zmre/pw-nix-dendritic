@@ -15,7 +15,7 @@
     };
   in {
     home.packages = [
-      pkgs.hackernews-tui
+      hackernews-tui
     ];
     home.file.".config/hn-tui.toml".text = ''
       [theme.palette]

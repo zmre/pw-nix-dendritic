@@ -24,25 +24,11 @@
   in {
     home.packages = with pkgs; [
       # file viewers
-      less
-      page # like less, but uses nvim, which is handy for selecting out text and such
-      file
       jq
       lynx
       sourceHighlight # for lf preview
-      ffmpeg-full.bin
-      ffmpegthumbnailer # for lf preview
       pandoc # for lf preview
-      imagemagick # for lf preview
       highlight # code coloring in lf
-      poppler-utils # for pdf2text in lf
-      mediainfo # used by lf
-      exiftool # used by lf
-      #rich-cli # used by lf (experimenting with mdcat replacement)
-      exif
-      glow # browse markdown dirs
-      mdcat # colorize markdown
-      html2text
       colima
       docker
     ];

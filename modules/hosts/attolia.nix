@@ -7,10 +7,13 @@
   hostname = "attolia";
 in {
   flake.darwinConfigurations.${hostname} = inputs.darwin.lib.darwinSystem {
-    modules = with config.flake.darwinModules; [
+    system = "aarch64-darwin";
+
+    modules = with inputs.self.darwinModules; [
       attolia-config
       system # pulls everything in that always is needed for darwin loads
       prefs
+      remote-builders
       touchid
 
       ai-gui
@@ -51,7 +54,7 @@ in {
 
       # Configure home-manager for the pwalsh user
       home-manager.users.${username} = {
-        imports = with config.flake.modules.homeManager; [
+        imports = with inputs.self.modules.homeManager; [
           ai
           dev
           dev-gui

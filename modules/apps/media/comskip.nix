@@ -2,72 +2,78 @@
   # This crazy modules is here so we can post-process recorded TV shows and then
   # mark the commercials (as chapters) so they can be skipped. We could cut them
   # but I don't know how good of a job it does.
-  flake.nixosModules.comskip = {pkgs, ...}: let
-    argtable = pkgs.stdenv.mkDerivation rec {
-      pname = "argtable2";
-      version = "2.13";
+  flake.nixosModules.comskip = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    # Only evaluate on Linux systems to avoid cross-platform check issues
+    config = lib.mkIf pkgs.stdenv.isLinux (let
+      argtable = pkgs.stdenv.mkDerivation rec {
+        pname = "argtable2";
+          version = "2.13";
 
-      NIX_CFLAGS_COMPILE = toString [
-        "-Wno-error=implicit-function-declaration"
-        "-Wno-other-warning"
-      ];
+        NIX_CFLAGS_COMPILE = toString [
+          "-Wno-error=implicit-function-declaration"
+          "-Wno-other-warning"
+        ];
 
-      configureFlags = ["CFLAGS=-Wno-error=implicit-function-declaration"];
+        configureFlags = ["CFLAGS=-Wno-error=implicit-function-declaration"];
 
-      src = pkgs.fetchurl {
-        url = "http://prdownloads.sourceforge.net/argtable/argtable2-13.tar.gz";
-        sha256 = "sha256-j3fop87VMBr24i9HMC/bw7H/QfK4PEPHeuXKBBdx3b8=";
+        src = pkgs.fetchurl {
+          url = "http://prdownloads.sourceforge.net/argtable/argtable2-13.tar.gz";
+          sha256 = "sha256-j3fop87VMBr24i9HMC/bw7H/QfK4PEPHeuXKBBdx3b8=";
+        };
+
+        nativeBuildInputs = [];
+
+        meta = with pkgs.lib; {
+          description = "A library for parsing GNU style command line arguments";
+          homepage = "http://argtable.sourceforge.net/";
+          license = licenses.bsd3;
+          platforms = platforms.unix;
+        };
       };
+      comskip = pkgs.stdenv.mkDerivation rec {
+        pname = "comskip";
+        version = "0.83";
 
-      nativeBuildInputs = [];
+        src = pkgs.fetchFromGitHub {
+          owner = "erikkaashoek";
+          repo = "Comskip";
+          rev = "55b0bcd018ddb9dacfad79addc48df55c1411073";
+          sha256 = "sha256-3bgwS+9agi0BkhOF+Hr593k0BRRCFiCGltgxoRqjT18=";
+        };
 
-      meta = with pkgs.lib; {
-        description = "A library for parsing GNU style command line arguments";
-        homepage = "http://argtable.sourceforge.net/";
-        license = licenses.bsd3;
-        platforms = platforms.unix;
+        buildInputs = with pkgs; [
+          ffmpeg_4 # Comskip relies heavily on ffmpeg libraries
+          argtable # A common dependency for CLI parsing
+        ];
+
+        nativeBuildInputs = with pkgs; [
+          # These are often implicitly handled by stdenv for autoconf projects,
+          # but good to be aware of.
+          autoconf
+          automake
+          libtool
+          # This automatically runs to generate config
+          autoreconfHook
+          pkg-config
+        ];
+
+        meta = with pkgs.lib; {
+          description = "Comskip: Detect and mark commercials in video files";
+          homepage = "https://github.com/erikkaashoek/Comskip";
+          license = licenses.gpl2Plus; # Check Comskip's actual license
+          platforms = platforms.linux; # Or other platforms it supports
+        };
       };
-    };
-    comskip = pkgs.stdenv.mkDerivation rec {
-      pname = "comskip";
-      version = "0.83";
-
-      src = pkgs.fetchFromGitHub {
-        owner = "erikkaashoek";
-        repo = "Comskip";
-        rev = "55b0bcd018ddb9dacfad79addc48df55c1411073";
-        sha256 = "sha256-3bgwS+9agi0BkhOF+Hr593k0BRRCFiCGltgxoRqjT18=";
-      };
-
-      buildInputs = with pkgs; [
-        ffmpeg_4 # Comskip relies heavily on ffmpeg libraries
-        argtable # A common dependency for CLI parsing
-      ];
-
-      nativeBuildInputs = with pkgs; [
-        # These are often implicitly handled by stdenv for autoconf projects,
-        # but good to be aware of.
-        autoconf
-        automake
-        libtool
-        # This automatically runs to generate config
-        autoreconfHook
-        pkg-config
-      ];
-
-      meta = with pkgs.lib; {
-        description = "Comskip: Detect and mark commercials in video files";
-        homepage = "https://github.com/erikkaashoek/Comskip";
-        license = licenses.gpl2Plus; # Check Comskip's actual license
-        platforms = platforms.linux; # Or other platforms it supports
-      };
-    };
-    # Below script taken from https://github.com/BrettSheleski/comchap/blob/master/comchap
-    # I've modified it enough that I don't want to use the version in the repo
-    comchap = pkgs.writeShellApplication {
-      name = "comchap";
-      runtimeInputs = with pkgs; [comskip gawk ffmpeg mktemp];
-      text = ''
+      # Below script taken from https://github.com/BrettSheleski/comchap/blob/master/comchap
+      # I've modified it enough that I don't want to use the version in the repo
+      comchap = pkgs.writeShellApplication {
+        name = "comchap";
+        runtimeInputs = with pkgs; [comskip gawk ffmpeg mktemp];
+        text = ''
               #LD_LIBRARY_PATH is set and will mess up ffmpeg, unset it, then re-set it when done
               ldPath=$LD_LIBRARY_PATH
               unset LD_LIBRARY_PATH
@@ -335,11 +341,12 @@
               fi
 
               exit $exitcode
-      '';
-    };
-  in {
-    environment.systemPackages = [
-      comchap
-    ];
+        '';
+      };
+    in {
+      environment.systemPackages = [
+        comchap
+      ];
+    });
   };
 }

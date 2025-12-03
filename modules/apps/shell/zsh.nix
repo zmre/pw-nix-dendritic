@@ -1,5 +1,9 @@
 {inputs, ...}: {
-  flake.modules.homeManager.zsh = {pkgs, ...}: {
+  flake.modules.homeManager.zsh = {
+    pkgs,
+    lib,
+    ...
+  }: {
     programs.zsh = {
       enable = true;
       enableCompletion = true;

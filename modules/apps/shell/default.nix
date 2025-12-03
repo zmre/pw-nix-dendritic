@@ -1,28 +1,15 @@
 {inputs, ...}: {
-  flake-file.inputs.hackernews-tui.url = "github:aome510/hackernews-TUI";
-  flake-file.inputs.hackernews-tui.flake = false;
-
   flake.modules.homeManager.shell = {
     pkgs,
-    config,
     lib,
+    config,
     ...
-  }: let
-    hackernews-tui = pkgs.rustPlatform.buildRustPackage {
-      name = "hackernews-tui";
-      pname = "hackernews-tui";
-      cargoLock = {lockFile = inputs.hackernews-tui + /Cargo.lock;};
-      buildInputs =
-        [pkgs.pkg-config pkgs.libiconv]
-        ++ pkgs.lib.optionals pkgs.stdenv.isDarwin
-        [pkgs.apple-sdk];
-      src = inputs.hackernews-tui;
-    };
-  in {
-    imports = with config.flake.modules.homeManager; [
+  }: {
+    imports = with inputs.self.modules.homeManager; [
       atuin
       hackernews-tui
       starship
+      tmux
       zsh
     ];
     home.packages = with pkgs;

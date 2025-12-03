@@ -5,7 +5,10 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  username = "pwalsh";
+  hostname = "avalon";
+in {
   flake-file.inputs.nixos-hardware.url = "github:NixOS/nixos-hardware";
   flake-file.inputs.disko = {
     url = "github:nix-community/disko";
@@ -15,39 +18,38 @@
     url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
-  flake.nixosConfigurations.avalon = inputs.nixpkgs.lib.nixosSystem {
-    modules = with config.flake.nixosModules; [
+  flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    modules = with inputs.self.nixosModules; [
       inputs.disko.nixosModules.disko
       inputs.nixos-hardware.nixosModules.framework-desktop-amd-ai-max-300-series
       amd-gpu
       avalon-configuration
       avalon-disk
-      nix-settings
-      users
-      home-manager
+      # home-manager
       nfs
       ssh
       #gui
       tailscale
-      packages
-      ai
+      #packages
+      #ai
       nginx-rtmp
       plex
+      system
     ];
   };
 
-  flake.homeConfigurations.avalon = inputs.home-manager.lib.homeManagerConfiguration {
-    modules = with config.flake.modules.homeManager; [
+  flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
+    modules = with inputs.self.modules.homeManager; [
       shell
+      ai
       {
-        home.username = "pwalsh";
-        home.homeDirectory = "/home/pwalsh";
+        home.username = username;
+        home.homeDirectory = "/home/${username}";
         home.stateVersion = "25.05";
       }
     ];
   };
-
-  flake-file.description = "Avalon's dendritic setup.";
 
   flake.nixosModules.avalon-configuration = {
     config,
@@ -55,17 +57,21 @@
     pkgs,
     ...
   }: {
-    # modules = [
-    # Reference other modules from flake config
-    # ../nixos/users.nix
-    # ../nixos/networking.nix
-    # ../nixos/packages.nix
-    # ../hardware/disk-config.nix
-    #   inputs.disko.nixosModules.disko
-    #   inputs.nixos-hardware.nixosModules.framework-desktop-amd-ai-max-300-series
-    #   inputs.determinate.nixosModules.default
-    # ];
     config = {
+      users.users.${username} = {
+        home = "/Users/${username}";
+        shell = pkgs.stable.zsh;
+        packages = with pkgs; [
+          tree # this is just a test, really
+        ];
+        isNormalUser = true;
+        extraGroups = ["wheel" "power" "docker" "ollama" "render" "video" "nginx" "networkmanager"];
+        openssh.authorizedKeys.keys = [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXh/Nzg2PjtiaOmAAOrEiWrEOjmi6Ps5Jtvu1WqrWtXQYP7g6K0Unx8JGt5GWjeLO6lblDs7nvly3kw3bHDsbXCqYFLqLO0PTKXIaX8spiJ/+r0Pd70Nq5ZNOgoL87hKTXQwwn4FvVzBAu51KS05ZXdfT5xBkzZJc2bcEjR2uIaSI7R27hAyfVMbUx52+sUyi3uShMGmOnrHJbTzNPLjFBXBjNTZTIVI0ztUAGmeiee/ON0yVeONGTldfUXiCM7KcUWVSvlnE3agI/O2p/854bdfIt2KxKRgzBYwVInVc5k8RVlGzCfzw1qdx4nQiky6d2hAek2K9FxG5SnfIDUHUZ test cert 1"
+          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHyqQGP6vlWB9xV61sF9vJubmHMfKwLeTsweia2pdDRJayTp0xGFMa1uTgvfacmqOqcwL8w9cia4PmTOskVf1EQ= pwalsh@attolia"
+        ];
+      };
+      nixpkgs.config.allowUnfree = true;
       boot = {
         loader = {
           systemd-boot.enable = true;
@@ -114,7 +120,7 @@
 
       # zfs requires a hostid
       networking.hostId = "d6e10bc1";
-      networking.hostName = "avalon"; # Define your hostname.
+      networking.hostName = hostname; # Define your hostname.
 
       # We have wifi, but at present there's no real point in setting it up as this box will be plugged into ethernet
       # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -176,7 +182,7 @@
       # Open ports in the firewall.
       # networking.firewall.allowedUDPPorts = [ ... ];
       # Or disable the firewall altogether.
-      networking.firewall.enable = false;
+      networking.firewall.enable = true;
       #networking.firewall.checkReversePath = false;
 
       # This option defines the first version of NixOS you have installed on this particular machine,
