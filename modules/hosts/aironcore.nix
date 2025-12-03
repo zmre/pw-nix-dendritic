@@ -1,7 +1,7 @@
 {inputs, ...}: let
   username = "pwalsh";
   hostname = "aironcore";
-  system = "x86_64-linux"; # Adjust if aironcore is ARM: "aarch64-linux"
+  system = "x86_64-linux";
 in {
   imports = [inputs.home-manager.flakeModules.home-manager];
   flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
@@ -15,7 +15,6 @@ in {
       vim
       network
       {
-        home-manager.backupFileExtension = "nixbk";
         home.username = username;
         home.homeDirectory = "/home/${username}";
         home.stateVersion = "25.05";
