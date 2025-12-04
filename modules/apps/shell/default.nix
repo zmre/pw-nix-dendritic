@@ -4,8 +4,17 @@
     lib,
     config,
     ...
-  }: {
+  }: let
+    # Select btop variant based on GPU type
+    btopPkg =
+      if config.hardware.gpu == "cuda"
+      then pkgs.btop-cuda
+      else if config.hardware.gpu == "rocm"
+      then pkgs.btop-rocm
+      else pkgs.btop;
+  in {
     imports = with inputs.self.modules.homeManager; [
+      hardware-options
       atuin
       hackernews-tui
       starship
@@ -27,7 +36,7 @@
         vimv # shell script to bulk rename
         procps
         pstree
-        btop
+        btopPkg
         kalker # cli calculator; alt. to bc and calc
         rink # calculator for unit conversions
         fortune

@@ -23,6 +23,7 @@ in {
     modules = with inputs.self.nixosModules; [
       inputs.disko.nixosModules.disko
       inputs.nixos-hardware.nixosModules.framework-desktop-amd-ai-max-300-series
+      {hardware.gpu = "rocm";}
       amd-gpu
       avalon-configuration
       avalon-disk
@@ -32,7 +33,7 @@ in {
       #gui
       tailscale
       #packages
-      #ai
+      ollama
       nginx-rtmp
       plex
       system
@@ -44,6 +45,7 @@ in {
       shell
       ai
       {
+        hardware.gpu = "rocm";
         home.username = username;
         home.homeDirectory = "/home/${username}";
         home.stateVersion = "25.05";
