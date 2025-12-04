@@ -397,11 +397,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1764880692,
-        "narHash": "sha256-fwyOt9i8XyRjmg+eva8diGfulxPi5M7eGhVXAWh8ZnY=",
+        "lastModified": 1764885924,
+        "narHash": "sha256-wR7kFwBHlbsnkjHnZQpIBDrPqB8rB3i7ds8u8C5Ymh8=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "2a38dc72713a6eaebc68fcbf6101e061144fda27",
+        "rev": "07edf4f462a5abb82c596d6dbc2a37299e69506d",
         "type": "github"
       },
       "original": {
@@ -413,11 +413,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1764881376,
-        "narHash": "sha256-ybUp0yaG2aX6eYQzJ1NGxQciwK+slFAYBx7qOaipIaM=",
+        "lastModified": 1764881982,
+        "narHash": "sha256-t7rTpgjdDs0BApeKZwFsxDJURUf6nxqLWYbNXJgQAaA=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "fd92d2850691c03b32c6663dc7bbef8af6f16a47",
+        "rev": "5488bf70db2dc2171cf88b9accd1b07cfd86248c",
         "type": "github"
       },
       "original": {
@@ -732,11 +732,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764880446,
-        "narHash": "sha256-pDcBeWEwVhAC0yeVYFc+GdnivzWVHzqh4KZ2A+X2xs8=",
+        "lastModified": 1764885980,
+        "narHash": "sha256-/06zzgVaU9a0YHo10xRsvtrgvzxZljioH8aw/gYGjxU=",
         "owner": "zmre",
         "repo": "nix-pai",
-        "rev": "e510a193d49d273729b01c2e981bf284ef5f57b4",
+        "rev": "912e6aa2e2eb23a74614a28e30723a26ea9a612b",
         "type": "github"
       },
       "original": {
@@ -798,11 +798,11 @@
         "paiTemplate": "paiTemplate_2"
       },
       "locked": {
-        "lastModified": 1764881591,
-        "narHash": "sha256-+7SKpwLqbM6H/YcCMIRnUdOrUd5JhmK+LvpiFTTYHMg=",
+        "lastModified": 1764886353,
+        "narHash": "sha256-mpUWeAe9lmTR5qKJsNT8alqx5EKwuavYvaxV+5O6UWE=",
         "ref": "refs/heads/main",
-        "rev": "3b2289676e8c9ec5aa011ca0cc70b46139cdf013",
-        "revCount": 25,
+        "rev": "ebb0dcd734a6203337df8f1d1498e68688f7afda",
+        "revCount": 26,
         "type": "git",
         "url": "ssh://git@github.com/zmre/pwai.git"
       },
