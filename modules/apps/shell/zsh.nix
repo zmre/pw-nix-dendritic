@@ -241,6 +241,7 @@
           iq = "fabric"; # this is like iris quick, but "IQ" works too and just shorter way to call fabric since "f" is taken
           iqp = "fabric -V Ollama -m gpt-oss:120b"; # this is like iris quick, but "IQ" works too and just shorter way to call fabric since "f" is taken
           it = "fabric --transcript -y"; # fetch a youtube video's transcript
+          neofetch = "fastfetch";
 
           io = "opencode";
 

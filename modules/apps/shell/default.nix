@@ -32,7 +32,7 @@
         glow # browse markdown dirs
         mdcat # colorize markdown
         html2text
-        neofetch # display key software/version info in term
+        fastfetch # display key software/version info in term
         vimv # shell script to bulk rename
         procps
         pstree
