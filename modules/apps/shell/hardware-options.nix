@@ -26,6 +26,7 @@ in {
     config.nixpkgs.config = {
       cudaSupport = config.hardware.gpu == "cuda";
       rocmSupport = config.hardware.gpu == "rocm";
+      cudaVersion = "12";
     };
   };
 }
