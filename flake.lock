@@ -17,11 +17,11 @@
         "paiTemplate": "paiTemplate"
       },
       "locked": {
-        "lastModified": 1764875286,
-        "narHash": "sha256-/uOiO4A0cySoK6up07l57eVjqF7tUHwvuTp36W9BoVo=",
+        "lastModified": 1764875750,
+        "narHash": "sha256-T3Bx2iJuHQx/zf+zdZ95gJ6RpCCK7ZKXfP9M+S8/HdI=",
         "ref": "refs/heads/main",
-        "rev": "4509aa20f0f8976470192c6ba8784b0fece7f536",
-        "revCount": 7,
+        "rev": "24700af6bf708e1596f2578760f56565cf21fd4d",
+        "revCount": 8,
         "type": "git",
         "url": "ssh://git@github.com/ironcorelabs/alita"
       },
@@ -397,11 +397,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1764875223,
-        "narHash": "sha256-w3VEi9hdkYSvyjvbDOJzyHHGQEqrXdDRGEzQo5k7cUc=",
+        "lastModified": 1764880692,
+        "narHash": "sha256-fwyOt9i8XyRjmg+eva8diGfulxPi5M7eGhVXAWh8ZnY=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "b4501e9529de896720c10eab2dc5b18b2e95fd99",
+        "rev": "2a38dc72713a6eaebc68fcbf6101e061144fda27",
         "type": "github"
       },
       "original": {
@@ -413,11 +413,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1764874697,
-        "narHash": "sha256-VFnbIySuE2B6fy/wn/TgPqs97Kh4wtop+L3V8UuGrs8=",
+        "lastModified": 1764881376,
+        "narHash": "sha256-ybUp0yaG2aX6eYQzJ1NGxQciwK+slFAYBx7qOaipIaM=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "09d57a3f53fae52bad0b6ef71400f7e0b6d934be",
+        "rev": "fd92d2850691c03b32c6663dc7bbef8af6f16a47",
         "type": "github"
       },
       "original": {
@@ -703,11 +703,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764220688,
-        "narHash": "sha256-SFg6WqqmKWq9i9dK/vuCImeyrFp0+co7jyMDrMrP4dU=",
+        "lastModified": 1764875480,
+        "narHash": "sha256-iBKt/aoKLkJ31Tn6HvpNkqAGtJuyH+5tMjllGA8E7yY=",
         "owner": "zmre",
         "repo": "nix-pai",
-        "rev": "3e2e14555a3e0df27e0e0ae998045a0204ae7e06",
+        "rev": "fae697b8a060b121446cb015ba2f337fb1a99cc3",
         "type": "github"
       },
       "original": {
@@ -732,11 +732,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764875480,
-        "narHash": "sha256-iBKt/aoKLkJ31Tn6HvpNkqAGtJuyH+5tMjllGA8E7yY=",
+        "lastModified": 1764880446,
+        "narHash": "sha256-pDcBeWEwVhAC0yeVYFc+GdnivzWVHzqh4KZ2A+X2xs8=",
         "owner": "zmre",
         "repo": "nix-pai",
-        "rev": "fae697b8a060b121446cb015ba2f337fb1a99cc3",
+        "rev": "e510a193d49d273729b01c2e981bf284ef5f57b4",
         "type": "github"
       },
       "original": {
@@ -798,11 +798,11 @@
         "paiTemplate": "paiTemplate_2"
       },
       "locked": {
-        "lastModified": 1764876058,
-        "narHash": "sha256-3tPvii5dKWM/C5dqx0Ed3AqYTPbiPipPja9lehDmtL0=",
+        "lastModified": 1764881591,
+        "narHash": "sha256-+7SKpwLqbM6H/YcCMIRnUdOrUd5JhmK+LvpiFTTYHMg=",
         "ref": "refs/heads/main",
-        "rev": "10d66117da24ea6df374fa91de1e2d280104fd8e",
-        "revCount": 24,
+        "rev": "3b2289676e8c9ec5aa011ca0cc70b46139cdf013",
+        "revCount": 25,
         "type": "git",
         "url": "ssh://git@github.com/zmre/pwai.git"
       },
@@ -970,11 +970,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1764728169,
-        "narHash": "sha256-c8zT8faYR37ViQEpbJTxuNwGDYOHN3edDxwbPbr8Ww8=",
+        "lastModified": 1764881424,
+        "narHash": "sha256-i+CthE7tyFicVSDxa7LI/7RkWoD3W2/uNGrKGDpbEtw=",
         "owner": "StevenBlack",
         "repo": "hosts",
-        "rev": "7f24594f7a3cb67f8e80fe4ce4de737d8ee5eb99",
+        "rev": "821e6fbca7e2d70a8f04987a2436752f006c7c14",
         "type": "github"
       },
       "original": {
