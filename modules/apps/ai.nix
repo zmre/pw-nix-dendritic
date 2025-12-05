@@ -3,6 +3,10 @@
   flake-file.inputs.pwai.inputs.nixpkgs.follows = "nixpkgs";
   flake-file.inputs.pwai.inputs.flake-parts.follows = "flake-parts";
 
+  # flake-file.inputs.alita.url = "git+ssh://git@github.com/ironcorelabs/alita.git";
+  # flake-file.inputs.alita.inputs.nixpkgs.follows = "nixpkgs";
+  # flake-file.inputs.alita.inputs.flake-parts.follows = "flake-parts";
+
   flake.darwinModules.ai-gui = {
     homebrew.casks = [
       "chatgpt"
@@ -34,6 +38,7 @@
     home.packages = with pkgs; [
       aichat-wrapped # ai cli tool that can use local rag, local models, etc.
       inputs.pwai.packages.${system}.default # my personal assistant, which wraps other tools and has crap tons of configs
+      #inputs.alita.packages.${system}.default # ironcore version -- just for demo and testing purposes
       whisper-cpp # Allow GPU accelerated local transcriptions
     ];
     programs = {

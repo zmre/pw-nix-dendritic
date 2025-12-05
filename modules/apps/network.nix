@@ -11,6 +11,7 @@
     ...
   }: let
     system = pkgs.stdenvNoCC.hostPlatform.system;
+    isLinux = pkgs.stdenv.isLinux;
   in {
     home.packages = with pkgs; [
       # network
@@ -47,10 +48,21 @@
         '';
       };
     };
-    services.ssh-agent = {
+    # Linux-only: use systemd ssh-agent service
+    services.ssh-agent = lib.mkIf isLinux {
       enable = true;
-      enableZshIntegration = true;
+      # Disable default integration - it only sets SSH_AUTH_SOCK if empty,
+      # which fails when tmux or display manager sets a stale value
+      enableZshIntegration = false;
+      enableBashIntegration = false;
     };
+    # Unconditionally set SSH_AUTH_SOCK to the systemd ssh-agent socket (Linux only)
+    programs.zsh.initContent = lib.mkIf isLinux ''
+      export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
+    '';
+    programs.bash.initExtra = lib.mkIf isLinux ''
+      export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
+    '';
     home.file.".config/curlrc".text = ''
       connect-timeout 10
       speed-time 30
