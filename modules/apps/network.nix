@@ -40,6 +40,7 @@
           "*" = {
             compression = true;
             controlMaster = "auto";
+            forwardAgent = true;
           };
         };
         includes = ["*.conf"];
@@ -57,11 +58,13 @@
       enableBashIntegration = false;
     };
     # Unconditionally set SSH_AUTH_SOCK to the systemd ssh-agent socket (Linux only)
+    # Use /run/user/$(id -u) instead of $XDG_RUNTIME_DIR because XDG_RUNTIME_DIR
+    # may not be set in all contexts (e.g., SSH sessions, tmux, some display managers)
     programs.zsh.initContent = lib.mkIf isLinux ''
-      export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
+      export SSH_AUTH_SOCK="/run/user/$(id -u)/ssh-agent"
     '';
     programs.bash.initExtra = lib.mkIf isLinux ''
-      export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
+      export SSH_AUTH_SOCK="/run/user/$(id -u)/ssh-agent"
     '';
     home.file.".config/curlrc".text = ''
       connect-timeout 10
