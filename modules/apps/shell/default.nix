@@ -23,30 +23,34 @@
     ];
     home.packages = with pkgs;
       [
-        less
-        page # like less, but uses nvim, which is handy for selecting out text and such
-        file
-        jq
-        lynx
-        poppler-utils # for pdf2text
-        glow # browse markdown dirs
-        mdcat # colorize markdown
-        html2text
+        btopPkg
         fastfetch # display key software/version info in term
-        vimv # shell script to bulk rename
+        file
+        fortune
+        glow # browse markdown dirs
+        html2text
+        jq
+        kalker # cli calculator; alt. to bc and calc
+        kondo # free disk space by cleaning project build dirs
+        less
+        lynx
+        mdcat # colorize markdown
+        page # like less, but uses nvim, which is handy for selecting out text and such
+        pigz # gzip, but parallel and faster; use pigz -9 -k input.jsonl for maximum compression and compat
+        poppler-utils # for pdf2text
         procps
         pstree
-        btopPkg
-        kalker # cli calculator; alt. to bc and calc
         rink # calculator for unit conversions
-        fortune
-        kondo # free disk space by cleaning project build dirs
+        vimv # shell script to bulk rename
         zk # cli for indexing markdown files
       ]
       ++ (lib.optionals pkgs.stdenv.isDarwin [
         mactop
       ]);
     programs = {
+      asciinema = {
+        enable = true;
+      };
       bash = {
         enable = true;
         shellAliases = {
