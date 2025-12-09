@@ -1,4 +1,7 @@
 {
+  flake.nixosModules.protonmail-bridge = {...}: {
+    networking.firewall.allowedTCPPorts = [37027 1143 1025];
+  };
   flake.modules.homeManager.protonmail-bridge = {
     pkgs,
     inputs,

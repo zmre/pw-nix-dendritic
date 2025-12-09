@@ -4,6 +4,9 @@
       # gpu utils
       rocmPackages.amdsmi
       rocmPackages.rocminfo
+      rocmPackages.clr
+      rocmPackages.hipblas
+      rocmPackages.rocblas
       amdgpu_top
       vulkan-tools
       rgp # amd workload inspection tool

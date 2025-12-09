@@ -1,18 +1,18 @@
 {config, ...}: let
-  common = {
+  common = {pkgs, ...}: {
     nix = {
       # package = pkgs.stable.nix;
       settings = {
         # Because macos sandbox can create issues https://github.com/NixOS/nix/issues/4119
-        sandbox = false; # !pkgs.stdenv.isDarwin;
+        sandbox = pkgs.stdenv.isLinux;
         # wheel for linux, admin for darwin
         trusted-users = ["root" "@admin" "@wheel"];
 
         # TODO: turn this back on
-        # disabled 2023-01-21 because of "cannot link" errors as described here:
+        # disabled on macos 2023-01-21 because of "cannot link" errors as described here:
         # https://github.com/NixOS/nix/issues/7273
         # issue still open 2025-11-28
-        auto-optimise-store = false;
+        auto-optimise-store = pkgs.stdenv.isLinux;
 
         max-jobs = 8;
         cores = 0; # use them all
@@ -48,6 +48,7 @@
       #optimise.automatic = true;
       gc = {
         automatic = true;
+        dates = "weekly";
         options = "--delete-older-than 30d";
       };
 

@@ -27,7 +27,6 @@ in {
       amd-gpu
       avalon-configuration
       avalon-disk
-      # home-manager
       nfs
       ssh
       #gui
@@ -37,21 +36,30 @@ in {
       nginx-rtmp
       plex
       system
+      search
+      protonmail-bridge
     ];
   };
 
-  flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
-    modules = with inputs.self.modules.homeManager; [
-      shell
-      ai
-      {
-        hardware.gpu = "rocm";
-        home.username = username;
-        home.homeDirectory = "/home/${username}";
-        home.stateVersion = "25.05";
-      }
-    ];
-  };
+  # flake.homeConfigurations.${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
+  #   modules = with inputs.self.modules.homeManager; [
+  #     shell
+  #     media
+  #     ai
+  #     filemanagement
+  #     network
+  #     protonmail-bridge
+  #     {
+  #       hardware.gpu = "rocm";
+  #       home.username = username;
+  #       home.homeDirectory = "/home/${username}";
+  #       home.stateVersion = "25.05";
+  #       home.sessionVariables = {
+  #         OLLAMA_HOST = "127.0.0.1:11434";
+  #       };
+  #     }
+  #   ];
+  # };
 
   flake.nixosModules.avalon-configuration = {
     config,
@@ -60,8 +68,27 @@ in {
     ...
   }: {
     config = {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.${username} = {
+        imports = with inputs.self.modules.homeManager; [
+          shell
+          media
+          ai
+          filemanagement
+          network
+          protonmail-bridge
+        ];
+        hardware.gpu = "rocm";
+        home.username = username;
+        home.homeDirectory = "/home/${username}";
+        home.stateVersion = "25.05";
+        home.sessionVariables = {
+          OLLAMA_HOST = "127.0.0.1:11434";
+        };
+      };
       users.users.${username} = {
-        home = "/Users/${username}";
+        home = "/home/${username}";
         shell = pkgs.stable.zsh;
         packages = with pkgs; [
           tree # this is just a test, really
@@ -84,9 +111,10 @@ in {
         kernelPackages = pkgs.linuxPackages_6_17;
         kernelModules = ["kvm-amd"];
         zfs.package = pkgs.zfs_unstable;
-        initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod"];
+        initrd.availableKernelModules = ["apfs" "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod"];
         tmp.cleanOnBoot = true;
         tmp.useTmpfs = true;
+        extraModulePackages = [pkgs.linuxKernel.packages.linux_6_17.apfs];
       };
 
       boot.kernel.sysctl = {
@@ -169,10 +197,31 @@ in {
 
       # List packages installed in system profile.
       # You can use https://search.nixos.org/ to find more packages (and options).
-      # environment.systemPackages = with pkgs; [
-      #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #   wget
-      # ];
+      environment.systemPackages = with pkgs; [
+        git
+        firmware-manager
+        apfsprogs
+        libsecret
+        psmisc
+        veracrypt
+      ];
+
+      services.locate.enable = true;
+      services.timesyncd.enable = true;
+      services.earlyoom.enable = true;
+      programs.ssh.startAgent = true;
+      programs.mtr.enable = true;
+      services.udisks2 = {
+        enable = true;
+        mountOnMedia = true;
+        settings = {
+          "mount_options.conf" = {
+            defaults = {
+              defaults = "noatime";
+            };
+          };
+        };
+      };
 
       # programs.gnupg.agent = {
       #   enable = true;
