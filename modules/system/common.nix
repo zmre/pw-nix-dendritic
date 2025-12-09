@@ -20,7 +20,23 @@
         LANGUAGE = "en_US.UTF-8";
         LC_ALL = "en_US.UTF-8";
       };
-      systemPackages = with pkgs; [git neovim];
+      systemPackages = with pkgs; [
+        binutils
+        cachix
+        coreutils
+        curl
+        dig
+        dnsutils
+        git
+        gnugrep
+        gnused
+        lsof
+        net-tools
+        pciutils
+        usbutils
+        vim
+        wget
+      ];
 
       # etc = {
       #   home-manager.source = "${inputs.home-manager}";

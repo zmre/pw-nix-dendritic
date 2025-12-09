@@ -235,7 +235,8 @@ in {
       # networking.firewall.allowedUDPPorts = [ ... ];
       # Or disable the firewall altogether.
       networking.firewall.enable = true;
-      #networking.firewall.checkReversePath = false;
+      networking.firewall.allowPing = true;
+      networking.firewall.checkReversePath = false;
 
       # This option defines the first version of NixOS you have installed on this particular machine,
       # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
