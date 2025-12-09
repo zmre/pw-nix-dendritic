@@ -69,6 +69,7 @@ in {
           scripts
           security
           shell
+          term-gui
           vim
           vim-gui
         ];
