@@ -20,6 +20,8 @@
         LANGUAGE = "en_US.UTF-8";
         LC_ALL = "en_US.UTF-8";
       };
+      systemPackages = with pkgs; [git neovim];
+
       # etc = {
       #   home-manager.source = "${inputs.home-manager}";
       #   nixpkgs-unstable.source = "${inputs.nixpkgs}";
