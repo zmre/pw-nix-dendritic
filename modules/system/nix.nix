@@ -48,8 +48,14 @@
       #optimise.automatic = true;
       gc = {
         automatic = true;
-        dates = "weekly";
         options = "--delete-older-than 30d";
+        interval = [
+          {
+            Hour = 3;
+            Minute = 15;
+            Weekday = 7;
+          }
+        ];
       };
 
       # Disable nix channels. Use flakes instead.

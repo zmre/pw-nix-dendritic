@@ -1,6 +1,5 @@
 {
-  flake.darwinModules.prefs = {config, ...}: let
-  in {
+  flake.darwinModules.prefs = {config, ...}: {
     system.defaults = {
       # file viewer settings
       finder = {
@@ -260,6 +259,72 @@
         # Prevent Photos from opening automatically when devices are plugged in
         "com.apple.ImageCapture".disableHotPlug = true;
       };
+    };
+
+    system.activationScripts = {
+      extraActivation = {
+        enable = true;
+        text = ''
+          echo "Activating extra preferences..."
+          # Close any open System Preferences panes, to prevent them from overriding
+          # settings we’re about to change
+          osascript -e 'tell application "System Preferences" to quit'
+
+          # Show the ~/Library folder
+          #chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+
+          # Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app
+          # defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
+
+          # Display emails in threaded mode, sorted by date (newest at the top)
+          defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+          defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "no"
+          defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
+
+          # Doesn't seem to matter in the global domain so trying this
+          defaults write "/Library/Preferences/com.apple.SoftwareUpdate" ScheduleFrequency 1
+
+          defaults write com.apple.spotlight orderedItems -array \
+            '{"enabled" = 1;"name" = "APPLICATIONS";}' \
+            '{"enabled" = 1;"name" = "DIRECTORIES";}' \
+            '{"enabled" = 1;"name" = "PDF";}' \
+            '{"enabled" = 1;"name" = "DOCUMENTS";}' \
+            '{"enabled" = 1;"name" = "PRESENTATIONS";}' \
+            '{"enabled" = 1;"name" = "SPREADSHEETS";}' \
+            '{"enabled" = 1;"name" = "MENU_OTHER";}' \
+            '{"enabled" = 1;"name" = "CONTACT";}' \
+            '{"enabled" = 1;"name" = "IMAGES";}' \
+            '{"enabled" = 1;"name" = "MESSAGES";}' \
+            '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
+            '{"enabled" = 1;"name" = "EVENT_TODO";}' \
+            '{"enabled" = 1;"name" = "MENU_CONVERSION";}' \
+            '{"enabled" = 1;"name" = "MENU_EXPRESSION";}' \
+            '{"enabled" = 0;"name" = "FONTS";}' \
+            '{"enabled" = 0;"name" = "BOOKMARKS";}' \
+            '{"enabled" = 0;"name" = "MUSIC";}' \
+            '{"enabled" = 0;"name" = "MOVIES";}' \
+            '{"enabled" = 0;"name" = "SOURCE";}' \
+            '{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
+            '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
+            '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
+
+          echo "Turning on verbose boot startup"
+          sudo nvram boot-args="-v"
+
+          echo "Restoring system hotkeys and amethyst hotkeys"
+          defaults import com.apple.symbolichotkeys ${./plists/symbolichotkeys.plist}
+          defaults import com.amethyst.Amethyst ${./plists/amethyst.plist}
+
+        '';
+        # to create an importable plist, see export-plists.sh
+      };
+      # TODO: find the new root postActivation script name
+      # then do the activateSettings with su or sudo to primary user
+      # postUserActivation.text = ''
+      #   # Following line should allow us to avoid a logout/login cycle
+      #   echo "Activating settings"
+      #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+      # '';
     };
   };
 

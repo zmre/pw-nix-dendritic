@@ -4,6 +4,7 @@
       "tailscale-app" # moved from darwin services cuz exit nodes https://tailscale.com/kb/1065/macos-variants#comparison-table
     ];
   };
+
   flake.modules.homeManager.network = {
     inputs,
     pkgs,

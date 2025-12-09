@@ -257,4 +257,5 @@
   "settings.local.json"
   ".claude/"
   ".env"
+  "**/.claude/settings.local.json"
 ]

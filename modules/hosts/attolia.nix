@@ -23,10 +23,12 @@ in {
       dev-gui
       filemanagement-gui
       media-gui
+      network-gui
       security
       security-gui
       term-gui
       terminfo
+      ulimits
       window-mgmt
     ];
   };
