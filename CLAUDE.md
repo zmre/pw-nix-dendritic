@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal NixOS/nix-darwin configuration repository using a modern "dendritic" architecture where every file is a flake-parts module. This represents a port from an older, larger monolithic configuration to a more modular structure.
+This is a personal NixOS/nix-darwin configuration repository using a modern "dendritic" architecture where every file is a flake-parts module. The configuration manages multiple hosts across macOS and Linux platforms.
 
 ### Architecture Pattern
 
@@ -23,9 +23,7 @@ The dendritic pattern is "a Nix flake-parts usage pattern in which **every Nix f
 4. **Path-based naming** - File location serves as the feature identifier
 5. **Shared config system** - All files contribute to and read from flake-parts' config, avoiding `specialArgs` complexity
 
-**Critical concept**: Modules contain ALL platform configurations within themselves. For example, a `wezterm.nix` module would include BOTH the Darwin config (using Homebrew) AND the NixOS config (using nix packages) in the same file. When a macOS host includes the module, only the Darwin parts apply; when a Linux host includes it, only the NixOS parts apply.
-
-This solves traditional Nix config problems: managing multiple machines, sharing modules selectively, handling cross-cutting concerns, and accessing values across different module systems (NixOS vs home-manager vs nix-darwin).
+**Critical concept**: Modules contain ALL platform configurations within themselves. For example, a terminal module includes BOTH the Darwin config (using Homebrew) AND the NixOS config (using nix packages) in the same file. When a macOS host includes the module, only the Darwin parts apply; when a Linux host includes it, only the NixOS parts apply.
 
 #### How flake-parts Works
 
@@ -35,8 +33,6 @@ flake-parts is "the core of a distributed framework for writing Nix Flakes." It 
 - **System abstraction** - Proper handling of multi-platform concerns via `perSystem`
 - **Module system** - Break your flake into focused, reusable modules
 - **Shared config** - Values accessible across all modules without passing through specialArgs
-
-Instead of one monolithic `flake.nix`, you write small modules that compose together.
 
 #### How flake-file Works
 
@@ -53,12 +49,81 @@ flake-file **automates generation** of `flake.nix` from your modules:
 
 ```
 .
-├── flake.nix          # AUTO-GENERATED - use `nix run .#write-flake` to regenerate
-├── modules/           # All flake-parts modules
-│   ├── base.nix       # Base configuration (systems, global settings, pkgs setup)
-│   ├── apps/          # Application-specific modules (e.g., vim.nix)
-│   └── hosts/         # Host-specific configurations (e.g., attolia.nix)
-└── dotfiles/          # Dotfiles directory (currently empty)
+├── flake.nix              # AUTO-GENERATED - use `nix run .#write-flake` to regenerate
+├── dotfiles/              # Dotfiles (gitignore.nix)
+└── modules/
+    ├── base.nix           # Core config: systems, nixpkgs, overlays, stable pkgs
+    ├── baseDarwin.nix     # Darwin module type definitions
+    ├── baseHome.nix       # Home-manager integration
+    ├── baseNixos.nix      # NixOS module type definitions (currently empty)
+    ├── substituters.nix   # Binary cache configuration (cachix, cuda, etc.)
+    │
+    ├── hosts/             # Host-specific configurations
+    │   ├── attolia.nix    # Primary macOS workstation (aarch64-darwin)
+    │   ├── avalon.nix     # NixOS server/desktop (x86_64-linux, Framework)
+    │   └── aironcore.nix  # Work machine home-manager only (x86_64-linux)
+    │
+    ├── apps/              # Application modules
+    │   ├── ai.nix         # AI tools (aider, llm, etc.)
+    │   ├── dev.nix        # Development tools (git, gh, languages)
+    │   ├── filemanagement.nix  # File managers (yazi, lf)
+    │   ├── hardened.nix   # Hardened/security-focused apps
+    │   ├── iron.nix       # IronCore Labs tools (ironhide, ironoxide-cli)
+    │   ├── network.nix    # Network utilities
+    │   ├── prose.nix      # Writing tools
+    │   ├── scripts.nix    # Custom shell scripts
+    │   ├── security.nix   # Security tools
+    │   ├── vim.nix        # Neovim config (pwnvim, pwneovide)
+    │   ├── x-windows.nix  # X11/Wayland tools
+    │   │
+    │   ├── gui/           # GUI application modules
+    │   │   ├── browsers.nix   # Web browsers (qutebrowser, Firefox, etc.)
+    │   │   ├── comms-gui.nix  # Communication apps (Slack, Discord, etc.)
+    │   │   ├── dev-gui.nix    # GUI dev tools (VSCode, etc.)
+    │   │   ├── term-gui.nix   # Terminal emulators (Ghostty, WezTerm, etc.)
+    │   │   └── window-mgmt.nix # Window management (aerospace, sketchybar)
+    │   │
+    │   ├── shell/         # Shell environment modules
+    │   │   ├── default.nix       # Main shell config (packages, env vars)
+    │   │   ├── atuin.nix         # Shell history
+    │   │   ├── hackernews-tui.nix # HN terminal client
+    │   │   ├── hardware-options.nix # GPU detection options
+    │   │   ├── starship.nix      # Prompt config
+    │   │   ├── tmux.nix          # Terminal multiplexer
+    │   │   └── zsh.nix           # Zsh configuration
+    │   │
+    │   └── media/         # Media modules
+    │       ├── default.nix   # Media players (mpv, etc.)
+    │       ├── audnexus.nix  # Audiobook metadata
+    │       └── comskip.nix   # Commercial skip for recordings
+    │
+    ├── services/          # System services
+    │   ├── espanso.nix    # Text expansion
+    │   ├── nfs-mounts.nix # NFS mount configuration
+    │   ├── nginx-rtmp.nix # RTMP streaming server
+    │   ├── ollama.nix     # Local LLM server
+    │   ├── plex.nix       # Media server
+    │   ├── protonmail-bridge-for-mobile.nix
+    │   ├── search.nix     # Meilisearch
+    │   ├── ssh.nix        # SSH server config
+    │   └── tailscale.nix  # Mesh VPN
+    │
+    ├── system/            # System-level configuration
+    │   ├── brew.nix       # Homebrew (Darwin only)
+    │   ├── common.nix     # Common system settings
+    │   ├── darwin-prefs.nix # macOS preferences
+    │   ├── fonts.nix      # Font packages
+    │   ├── keyboard.nix   # Keyboard settings
+    │   ├── nix.nix        # Nix daemon settings
+    │   ├── remote-builders.nix # Distributed builds
+    │   ├── terminfo.nix   # Terminal info database
+    │   ├── touchid.nix    # Touch ID for sudo (Darwin)
+    │   └── ulimits.nix    # System limits
+    │
+    └── hardware/          # Hardware-specific modules
+        ├── amd-gpu-tools.nix     # AMD ROCm tools
+        ├── avalon-disk-config.nix # ZFS disk layout
+        └── nvidia-gpu-tools.nix   # CUDA tools
 ```
 
 ## Common Commands
@@ -71,51 +136,165 @@ The `flake.nix` file is auto-generated. To regenerate after modifying modules:
 nix run .#write-flake
 ```
 
-### Building Configurations
-
-This repository supports multiple systems defined in `modules/base.nix`:
-- `aarch64-darwin`
-- `aarch64-linux`
-- `x86_64-darwin`
-- `x86_64-linux`
-
-Standard Nix flake commands apply:
+### Building and Switching
 
 ```bash
-# Build a specific output
-nix build .#<output>
+# macOS (attolia)
+darwin-rebuild switch --flake .#attolia
 
+# NixOS (avalon)
+sudo nixos-rebuild switch --flake .#avalon
+
+# Home-manager only (aironcore)
+home-manager switch --flake .#aironcore
+```
+
+### Other Commands
+
+```bash
 # Update flake inputs
 nix flake update
 
 # Check flake structure
 nix flake show
+
+# Build without switching
+nix build .#darwinConfigurations.attolia.system
+nix build .#nixosConfigurations.avalon.config.system.build.toplevel
 ```
 
 ## Module Architecture
 
-### Base Module (`modules/base.nix`)
+### Module Types
 
-The base module sets up:
-- Supported systems across Darwin and Linux platforms
-- Flake description and metadata
-- nixConfig with allowUnfree, experimental features, and binary cache configuration
-- perSystem arguments including `pkgs` with allowUnfree enabled
-- Custom cachix substituters: zmre, yazi, ghostty
+This config uses three distinct module types, each exposed via `flake.*`:
 
-### Application Modules (`modules/apps/`)
+1. **`flake.darwinModules.*`** - nix-darwin system modules (macOS only)
+2. **`flake.nixosModules.*`** - NixOS system modules (Linux only)
+3. **`flake.modules.homeManager.*`** - home-manager modules (cross-platform)
 
-Application modules declare their own flake inputs inline. For example, `vim.nix` declares:
-- `pwnvim` input (github:zmre/pwnvim)
-- `pwneovide` input (github:zmre/pwneovide)
+### How Hosts Compose Modules
 
-This pattern makes modules portable and self-documenting.
+Hosts import modules by referencing them from `inputs.self.*Modules` or `inputs.self.modules.homeManager.*`:
 
-**Important**: Application modules should contain **all platform configurations** for that app in one file. For example, a terminal emulator module would include both the Darwin Homebrew installation config AND the NixOS package config. Hosts automatically get only the relevant parts based on their platform.
+```nix
+# Example from attolia.nix (Darwin host)
+flake.darwinConfigurations.attolia = inputs.darwin.lib.darwinSystem {
+  modules = with inputs.self.darwinModules; [
+    attolia-config
+    system
+    brew
+    # ... more darwin modules
+  ];
+};
 
-### Host Modules (`modules/hosts/`)
+# Home-manager is configured within the darwin/nixos config:
+home-manager.users.pwalsh = {
+  imports = with inputs.self.modules.homeManager; [
+    shell
+    vim
+    dev
+    # ... more home-manager modules
+  ];
+};
+```
 
-Host-specific configurations go here (e.g., `attolia.nix`). Currently minimal as the port is in progress.
+### Module Patterns
+
+#### Darwin Module Pattern (`flake.darwinModules.*`)
+
+```nix
+{inputs, ...}: {
+  # Declare inputs this module needs
+  flake-file.inputs.some-tool.url = "github:owner/repo";
+
+  flake.darwinModules.my-feature = {pkgs, config, ...}: {
+    # Darwin-specific system config
+    homebrew.casks = ["some-app"];
+    # or nix packages
+    environment.systemPackages = [pkgs.something];
+  };
+}
+```
+
+#### NixOS Module Pattern (`flake.nixosModules.*`)
+
+```nix
+{inputs, ...}: {
+  flake.nixosModules.my-service = {pkgs, config, ...}: {
+    services.something.enable = true;
+    # NixOS-specific config
+  };
+}
+```
+
+#### Home-Manager Module Pattern (`flake.modules.homeManager.*`)
+
+```nix
+{inputs, ...}: {
+  flake.modules.homeManager.my-app = {pkgs, config, lib, ...}: {
+    # Cross-platform home-manager config
+    home.packages = [pkgs.something];
+    programs.something.enable = true;
+
+    # Platform-specific within home-manager
+    home.packages = lib.optionals pkgs.stdenv.isDarwin [pkgs.macos-only];
+  };
+}
+```
+
+### GPU-Aware Modules
+
+Several modules adapt based on GPU type using a custom `hardware.gpu` option:
+
+```nix
+# Defined in hardware-options.nix
+options.hardware.gpu = lib.mkOption {
+  type = lib.types.enum ["none" "cuda" "rocm"];
+  default = "none";
+};
+
+# Used in modules like ollama.nix, shell/default.nix:
+ollamaPkg = if config.hardware.gpu == "cuda" then pkgs.ollama-cuda
+            else if config.hardware.gpu == "rocm" then pkgs.ollama-rocm
+            else pkgs.ollama;
+```
+
+Hosts set this option: `{hardware.gpu = "rocm";}` (avalon) or `{hardware.gpu = "cuda";}` (aironcore).
+
+### Base Modules
+
+- **`base.nix`** - Core setup: systems list, nixpkgs config, stable overlay (`pkgs.stable.*`)
+- **`baseDarwin.nix`** - Defines `flake.darwinModules` option type and darwin input
+- **`baseHome.nix`** - Imports home-manager flake module
+- **`substituters.nix`** - Binary caches (cachix: zmre, nix-community, numtide, yazi, ghostty, nixos-cuda)
+
+## Host Configurations
+
+### attolia (aarch64-darwin)
+
+Primary macOS workstation. Full-featured development environment.
+
+- **Type**: `darwinConfigurations`
+- **Platform**: Apple Silicon Mac
+- **Features**: Homebrew management, aerospace window manager, full GUI apps, home-manager
+
+### avalon (x86_64-linux)
+
+NixOS server/desktop running on Framework Desktop AMD AI Max 300.
+
+- **Type**: `nixosConfigurations`
+- **Platform**: AMD with ROCm GPU support
+- **Features**: ZFS, Plex, Ollama, nginx-rtmp, Tailscale, NFS mounts, SSH server
+- **Hardware**: Uses nixos-hardware Framework module, disko for disk config
+
+### aironcore (x86_64-linux)
+
+Work machine with home-manager only (no system-level NixOS control).
+
+- **Type**: `homeConfigurations`
+- **Platform**: x86_64 Linux with CUDA GPU
+- **Features**: Shell, dev tools, AI tools, vim - no GUI or system services
 
 ## Important Constraints
 
@@ -135,11 +314,19 @@ To add a new flake input:
 1. Add it to the appropriate module file using `flake-file.inputs.<name>.url`
 2. Run `nix run .#write-flake` to regenerate `flake.nix`
 
-Example pattern from `modules/apps/vim.nix`:
+Example pattern:
 ```nix
-{
+{inputs, ...}: {
   flake-file.inputs.pwnvim.url = "github:zmre/pwnvim";
-  flake-file.inputs.pwneovide.url = "github:zmre/pwneovide";
+  flake-file.inputs.pwneovide = {
+    url = "github:zmre/pwneovide";
+    inputs.pwnvim.follows = "pwnvim";
+  };
+
+  # Use the input
+  flake.modules.homeManager.vim = {pkgs, ...}: {
+    home.packages = [inputs.pwnvim.packages.${pkgs.system}.default];
+  };
 }
 ```
 
@@ -148,269 +335,47 @@ Example pattern from `modules/apps/vim.nix`:
 Each module should be a valid flake-parts module function:
 ```nix
 {inputs, ...}: {
-  # module configuration
+  # Optional: declare inputs
+  flake-file.inputs.something.url = "...";
+
+  # Define modules for the appropriate system type
+  flake.darwinModules.feature = { ... };      # Darwin system
+  flake.nixosModules.feature = { ... };       # NixOS system
+  flake.modules.homeManager.feature = { ... }; # Home-manager
 }
 ```
 
-The `inputs` argument provides access to all flake inputs, and the module can declare additional inputs via `flake-file.inputs.*`.
+## Migration Notes
 
-## Migration Context: Porting from Old Nix Config
+This config was ported from https://github.com/zmre/nix-config/. Key differences from the old config:
 
-This is an **active port** from the older configuration at https://github.com/zmre/nix-config/. This section documents what needs to be migrated and how to approach it.
-
-### Old Configuration Structure
-
-The old config (27 Nix files total) is organized with **platform separation** (darwin/ and nixos/ directories):
-
-```
-zmre/nix-config/
-├── flake.nix (centralized inputs & outputs)
-├── modules/
-│   ├── common.nix (shared cross-system settings)
-│   ├── overlays.nix (package overlays)
-│   ├── darwin/                          ← Platform-specific directory
-│   │   ├── default.nix
-│   │   ├── core.nix
-│   │   ├── brew.nix (100+ casks, 50+ Mac App Store apps)
-│   │   ├── pam.nix
-│   │   └── preferences.nix
-│   ├── nixos/                           ← Platform-specific directory
-│   │   └── default.nix
-│   ├── hardware/
-│   │   ├── framework-volantis.nix (Framework laptop)
-│   │   ├── parallels-*.nix (VM configurations)
-│   │   └── volantis.nix
-│   └── home-manager/                    ← Platform-agnostic but monolithic
-│       ├── default.nix (87KB! - THE BIG ONE)
-│       ├── home-darwin.nix              ← Platform-specific
-│       ├── home-linux.nix               ← Platform-specific
-│       ├── home-security.nix
-│       ├── shell-scripts.nix
-│       └── dotfiles/gitignore.nix
-└── nix-shells/security/ (isolated security tools)
-```
-
-**Note**: The old config **separates platforms into different directories** (darwin/, nixos/). The new dendritic approach **combines platform configs within each feature module**.
-
-### Host Configurations to Port
-
-The old config manages multiple hosts:
-
-1. **attolia** (aarch64-darwin) - Primary macOS workstation
-   - Uses nix-homebrew with extensive Homebrew cask management
-   - Home-manager with Darwin-specific modules
-
-2. **volantis** (x86_64-linux) - Framework laptop
-   - NixOS configuration with nixos-hardware integration
-   - Security modules enabled
-
-3. **nixos** (aarch64-linux) - Parallels ARM VM
-   - Basic NixOS setup
-
-4. **nixos-pw-vm** (x86_64-linux) - Parallels x86 VM
-   - Standard home-manager modules
-
-### The 87KB Home-Manager Monster
-
-The `modules/home-manager/default.nix` file is the primary challenge - it contains a comprehensive, monolithic configuration with:
-
-**Development Environment:**
-- Text editors: Neovim (primary), VSCode with extensions, Zed (disabled)
-- Language servers: Rust, Python, Node.js, Scala, Nix, and more
-- Version control: Git with extensive aliases, difftastic, GitHub CLI with extensions
-- Shell: Zsh (vi-mode), Nushell, custom functions and aliases
-- Terminal: Starship prompt, Alacritty, Kitty configurations
-
-**System Tools:**
-- File management: Yazi (modern), lf (legacy)
-- Multiplexing: tmux with Vi keybindings
-- Navigation: fzf, zoxide, direnv
-- Shell history: atuin
-
-**Utilities & Applications:**
-- Productivity: espanso text expansion
-- Media: mpv player
-- RSS: newsboat
-- Compression: multiple format utilities
-- Network tools: various CLI utilities
-
-**Key Characteristics:**
-- Keyboard-driven workflow with Vi keybindings everywhere
-- Conditional macOS-specific configs (aerospace, colima, Docker)
-- Custom environment variables for editors and terminals
-- Project navigation functions
-
-### Flake Inputs to Port
-
-The old config has **extensive inputs** including:
-
-**Core Nix:**
-- nixpkgs (unstable + stable variants)
-- nixpkgs-stable-darwin
-- home-manager
-- nix-darwin
-- nix-homebrew (with tap management)
-
-**Personal Projects:**
-- pwnvim, pwneovide (already ported in `modules/apps/vim.nix`)
-- gtm-okr, babble-cli, gh-worktree
-- pwai (private AI assistant)
-
-**Third-party Tools:**
-- yazi (file manager)
-- ghostty (terminal)
-- Various GitHub CLI extensions
-- NUR (Nix User Repository) for Firefox extensions
-- StevenBlack hosts blocklist
-
-### Porting Strategy
-
-The dendritic pattern requires breaking the monolith into focused, feature-based modules where **each module contains all platform-specific logic within itself**.
-
-**Recommended Module Breakdown:**
-
-```
-modules/
-├── base.nix (already exists - common settings)
-├── hosts/
-│   ├── attolia.nix (macOS workstation - includes platform-agnostic modules)
-│   ├── volantis.nix (Framework laptop - includes platform-agnostic modules)
-│   └── nixos-vms.nix (VM configs)
-├── apps/
-│   ├── vim.nix (already exists - Neovim)
-│   ├── git.nix (Git + GitHub CLI + difftastic)
-│   ├── vscode.nix (VSCode + extensions)
-│   ├── wezterm.nix (Darwin brew config + NixOS package config)
-│   ├── alacritty.nix (cross-platform terminal config)
-│   ├── kitty.nix (cross-platform terminal config)
-│   ├── ghostty.nix (cross-platform terminal config)
-│   ├── shell.nix (Zsh, Nushell, Starship - works on all platforms)
-│   ├── tmux.nix (cross-platform)
-│   ├── yazi.nix (file manager - cross-platform)
-│   ├── fzf.nix (cross-platform)
-│   ├── mpv.nix (media player - cross-platform)
-│   └── newsboat.nix (RSS reader - cross-platform)
-├── system/
-│   ├── homebrew.nix (Darwin-only: brew, casks, Mac App Store)
-│   ├── darwin-preferences.nix (macOS system preferences)
-│   └── darwin-pam.nix (Darwin PAM config)
-├── hardware/
-│   ├── framework-volantis.nix (NixOS-only: Framework laptop hardware)
-│   └── parallels.nix (VM-specific configs)
-└── security/
-    └── tools.nix (security tools - may have platform-specific sections)
-```
-
-**Each module should:**
-1. Be a flake-parts module: `{inputs, ...}: { ... }`
-2. Declare its own flake inputs via `flake-file.inputs.*`
-3. Focus on a single feature/concern
-4. **Contain ALL platform configs for that feature** (Darwin, NixOS, home-manager)
-5. Use conditional logic to apply only relevant parts per platform
-6. Use the file path as its identifier
-
-**Platform-Agnostic Module Pattern:**
-
-A typical cross-platform module like `apps/wezterm.nix`:
-
-```nix
-{inputs, ...}: {
-  flake-file.inputs.wezterm.url = "github:wez/wezterm";
-
-  # Darwin-specific: install via Homebrew
-  darwinConfigurations.attolia.homebrew.casks = ["wezterm"];
-
-  # NixOS-specific: install via nix packages
-  nixosConfigurations.volantis.environment.systemPackages = [inputs.wezterm];
-
-  # home-manager config (works on both platforms)
-  home-manager.users.pwalsh.programs.wezterm = {
-    enable = true;
-    # shared config here
-  };
-}
-```
-
-This way, both `attolia` (macOS) and `volantis` (Linux) can include the same `wezterm.nix` module, and each gets only what's relevant to their platform.
-
-**Migration Approach:**
-1. Start with self-contained, cross-platform apps (git, tmux, individual programs)
-2. Port inputs into their respective modules
-3. Include both Darwin and NixOS configs in each module (where applicable)
-4. Extract truly shared settings into base module
-5. Handle host-specific overrides in `modules/hosts/`
-6. Test incrementally on both platforms - don't migrate everything at once
-7. Maintain reference to old config until port is complete
-
-### Key Differences: Old vs New
-
-| Aspect | Old Config | New Config (Dendritic) |
+| Aspect | Old Config | This Config (Dendritic) |
 |--------|-----------|------------------------|
 | **Inputs** | Centralized in flake.nix | Distributed across modules |
 | **Home-Manager** | 87KB monolithic file | Multiple focused modules |
 | **Module System** | Traditional imports | flake-parts modules |
 | **flake.nix** | Hand-maintained | Auto-generated via flake-file |
-| **Feature Discovery** | Read large files | Check directory structure |
-| **Sharing Values** | specialArgs/extraArgs | flake-parts config system |
 | **Platform Configs** | Separated (darwin/, nixos/ dirs) | Combined in each module |
 
-### Porting Guidelines
+### What Was Ported
 
-When migrating from the old config:
+The migration from the old 87KB monolithic home-manager config is largely complete:
 
-1. **Don't copy-paste large sections** - Break them down by feature/program
-2. **Keep inputs close to usage** - If a module uses yazi, that module declares the yazi input
-3. **One feature per file** - Don't create another monolith
-4. **Combine platform configs in each module** - Don't separate Darwin and NixOS into different directories; put both in the same module file
-5. **Use conditional logic** - Leverage NixOS/Darwin-specific options so each platform gets only what it needs
-6. **Test per module on both platforms** - If a module supports multiple platforms, verify it works on each
-7. **Preserve working config** - Keep old config functional during migration
-8. **Document decisions** - Note why certain configs are grouped together
+- ✅ Shell environment (zsh, atuin, starship, tmux, fzf, zoxide, direnv)
+- ✅ Development tools (git, gh, languages, LSPs)
+- ✅ Editors (neovim via pwnvim/pwneovide)
+- ✅ File management (yazi, lf)
+- ✅ AI tools (aider, llm, fabric)
+- ✅ GUI apps (browsers, terminals, communication, dev tools)
+- ✅ Darwin system (homebrew, preferences, touchid)
+- ✅ NixOS system (avalon with services)
+- ✅ Window management (aerospace, sketchybar)
+- ✅ Media (mpv, plex)
+- ✅ Security tools
+- ✅ Network utilities
 
-**Example of combining platforms in one module:**
+### Remaining Items
 
-Instead of creating `modules/darwin/git.nix` and `modules/nixos/git.nix`, create one `modules/apps/git.nix` that contains:
-
-```nix
-{inputs, pkgs, ...}: {
-  flake-file.inputs.difftastic.url = "github:wilfred/difftastic";
-
-  # Works on both platforms
-  home-manager.users.pwalsh.programs.git = {
-    enable = true;
-    userName = "Patrick Walsh";
-    # ... shared config
-  };
-
-  # Darwin-specific (if needed)
-  darwinConfigurations.attolia = {
-    # Darwin-specific git config
-  };
-
-  # NixOS-specific (if needed)
-  nixosConfigurations.volantis = {
-    # NixOS-specific git config
-  };
-}
-```
-
-### Current Port Status
-
-✅ **Completed:**
-- Base architecture (flake-file, dendritic structure)
-- Vim/Neovim inputs (pwnvim, pwneovide)
-- Base system configuration
-- Multi-platform support setup
-
-⏳ **In Progress:**
-- Host configurations (attolia is stubbed)
-
-❌ **Not Yet Started:**
-- Home-manager module breakdown
-- Darwin-specific configs (Homebrew, system preferences)
-- NixOS configurations
-- Hardware-specific modules
-- Security tools
-- Most application configurations
-- Shell environment
-- Development tools
+- Framework laptop (volantis) config - was in old config, not yet ported
+- Parallels VM configs - not yet needed
+- Some edge-case apps that may be missing
