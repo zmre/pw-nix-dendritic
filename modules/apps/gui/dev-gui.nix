@@ -32,7 +32,7 @@
         $DRY_RUN_CMD mv "$settings" "$settings_nix"
         $DRY_RUN_CMD cp -H "$settings_nix" "$settings"
         $DRY_RUN_CMD chmod u+w "$settings"
-        $DRY_RUN_CMD rm "$settings_bak"
+        $DRY_RUN_CMD rm -f "$settings_bak"
       fi
     '';
 

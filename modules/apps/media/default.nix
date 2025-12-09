@@ -4,7 +4,7 @@
       "adobe-creative-cloud"
       "calibre" # available in nix, but marked broken for darwin as of 2025-09-18
       "descript"
-      "freetube" # TODO: this is in nixpkgs now for darwin -- try there and see if we get arm
+      "pikachuexe/freetube/pikachuexe-freetube" # TODO: this is in nixpkgs now for darwin -- try there and see if we get arm
       "imageoptim"
       "insta360-studio"
       "keycastr" # show keys being pressed

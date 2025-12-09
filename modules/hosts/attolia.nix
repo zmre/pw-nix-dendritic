@@ -28,7 +28,6 @@ in {
       security-gui
       term-gui
       terminfo
-      ulimits
       window-mgmt
     ];
   };
@@ -75,10 +74,11 @@ in {
         ];
         home.username = username;
         home.homeDirectory = "/Users/${username}";
-        home.stateVersion = "25.11";
+        home.stateVersion = "20.09";
         targets.darwin.copyApps.enable = true;
+        targets.darwin.linkApps.enable = false;
       };
-      system.stateVersion = 6;
+      system.stateVersion = 4;
     };
   };
 }

@@ -32,20 +32,20 @@
     environment.systemPackages = [
       pwaerospace
     ];
-    launchd = {
-      # enable by default is true only on darwin
-      agents = {
-        "com.zmre.pwaerospace" = {
-          command = "${pwaerospace}/bin/pwaerospace";
-          serviceConfig = {
-            Label = "com.zmre.pwaerospace";
-            Program = "${pwaerospace}/bin/pwaerospace";
-            RunAtLoad = true;
-            KeepAlive = true;
-          };
-        };
-      };
-    };
+    # launchd = {
+    #   # enable by default is true only on darwin
+    #   agents = {
+    #     "com.zmre.pwaerospace" = {
+    #       command = "${pwaerospace}/bin/pwaerospace";
+    #       serviceConfig = {
+    #         Label = "com.zmre.pwaerospace";
+    #         Program = "${pwaerospace}/bin/pwaerospace";
+    #         RunAtLoad = true;
+    #         KeepAlive = true;
+    #       };
+    #     };
+    #   };
+    # };
     system.defaults.CustomUserPreferences = {
       "mo.com.sleeplessmind.Wooshy" = {
         "KeyboardShortcuts_toggleWith" = "{\"carbonModifiers\":768,\"carbonKeyCode\":49}";

@@ -5,7 +5,7 @@
       "proton-mail-bridge" # TODO: nix version now installs and works -- move over
       "proton-mail"
       "signal" # TODO: move to home-manager (signal-desktop) when not broken
-      "webex"
+      #"webex"
       "zoom" # TODO: move to home-manager (zoom-us)
     ];
     homebrew.masApps = {

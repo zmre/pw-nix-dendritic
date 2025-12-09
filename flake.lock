@@ -378,22 +378,6 @@
         "type": "github"
       }
     },
-    "homebrew-bundle": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1745335228,
-        "narHash": "sha256-TIKR2UgtyUmHLNZp255/vLs+1I10hXe+sciMEbAGFwE=",
-        "owner": "homebrew",
-        "repo": "homebrew-bundle",
-        "rev": "a3265c84b232e13048ecbf6fc18a2eedfadbeb08",
-        "type": "github"
-      },
-      "original": {
-        "owner": "homebrew",
-        "repo": "homebrew-bundle",
-        "type": "github"
-      }
-    },
     "homebrew-cask": {
       "flake": false,
       "locked": {
@@ -426,19 +410,19 @@
         "type": "github"
       }
     },
-    "homebrew-services": {
+    "homebrew-freetube": {
       "flake": false,
       "locked": {
-        "lastModified": 1742475690,
-        "narHash": "sha256-qg3/+iHtnFe6VxGapisTatGnoH0XG4BnWWqwwzWYzk0=",
-        "owner": "homebrew",
-        "repo": "homebrew-services",
-        "rev": "2c294ab9515576d961cea28c93148c6452db2def",
+        "lastModified": 1765147051,
+        "narHash": "sha256-nZV/u1EUDTQA3rJhDPtQbrUWRAlgAPlEem16Cu34NTU=",
+        "owner": "pikachuexe",
+        "repo": "homebrew-freetube",
+        "rev": "58daa852365ad6f1381acb716edc21661856144c",
         "type": "github"
       },
       "original": {
-        "owner": "homebrew",
-        "repo": "homebrew-services",
+        "owner": "pikachuexe",
+        "repo": "homebrew-freetube",
         "type": "github"
       }
     },
@@ -867,10 +851,9 @@
         "gh-worktree": "gh-worktree",
         "hackernews-tui": "hackernews-tui",
         "home-manager": "home-manager",
-        "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
-        "homebrew-services": "homebrew-services",
+        "homebrew-freetube": "homebrew-freetube",
         "import-tree": "import-tree",
         "ironhide": "ironhide",
         "ironoxide": "ironoxide",

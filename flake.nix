@@ -58,10 +58,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    homebrew-bundle = {
-      flake = false;
-      url = "github:homebrew/homebrew-bundle";
-    };
     homebrew-cask = {
       flake = false;
       url = "github:homebrew/homebrew-cask";
@@ -70,9 +66,9 @@
       flake = false;
       url = "github:homebrew/homebrew-core";
     };
-    homebrew-services = {
+    homebrew-freetube = {
       flake = false;
-      url = "github:homebrew/homebrew-services";
+      url = "github:pikachuexe/homebrew-freetube";
     };
     import-tree.url = "github:vic/import-tree";
     ironhide = {

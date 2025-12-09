@@ -10,12 +10,8 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-    homebrew-services = {
-      url = "github:homebrew/homebrew-services";
+    homebrew-freetube = {
+      url = "github:pikachuexe/homebrew-freetube";
       flake = false;
     };
   };
@@ -24,8 +20,7 @@
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
-      "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
-      "homebrew/homebrew-services" = inputs.homebrew-services;
+      "pikachuexe/homebrew-freetube" = inputs.homebrew-freetube; # note: always name things with "homebrew-" prefix in attr name. this is normally pikachuexe/freetube, but adding the homebrew- fixes errors
     };
   in {
     imports = [inputs.nix-homebrew.darwinModules.nix-homebrew];
@@ -63,6 +58,7 @@
       };
       taps = builtins.attrNames taps;
       casks = [
+        # TODO: move these into better places; this file should just setup homebrew system
         "elgato-stream-deck"
         "istat-menus"
         "karabiner-elements"
@@ -74,6 +70,7 @@
       ];
 
       masApps = {
+        # TODO: move these into better places; this file should just setup homebrew system
         "Amphetamine" = 937984704;
         #"Blurred" = 1497527363; # dim non-foreground windows -- removed when I realized this is Intel not ARM :-(
         "Blackmagic Disk Speed Test" = 425264550;
@@ -110,6 +107,7 @@
         #"WireGuard" = 1451685025; # VPN -- but tailscale does it all for me now
       };
       brews = [
+        # TODO: move these into better places; this file should just setup homebrew system
         "ansiweather"
         "brightness"
         "ca-certificates"

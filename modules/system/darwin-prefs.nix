@@ -208,53 +208,53 @@
           "Quit When Finished" = true;
         };
         # Note: this will merge (I hope) with the saved and modified plist with the shortcuts
-        "com.amethyst.Amethyst" = {
-          "enables-layout-hud" = true;
-          "enables-layout-hud-on-space-change" = false;
-          "smart-window-margins" = true;
-          "float-small-windows" = true;
-          SUEnableAutomaticChecks = false;
-          SUSendProfileInfo = false;
-          floating = [
-            {
-              id = "com.raycase.macos";
-              "window-titles" = [];
-            }
-            {
-              id = "com.apple.systempreferences";
-              "window-titles" = [];
-            }
-            {
-              id = "com.kapeli.dashdoc";
-              "window-titles" = [];
-            }
-            {
-              id = "com.markmcguill.strongbox.mac";
-              "window-titles" = [];
-            }
-            {
-              id = "com.yubico.yubioath";
-              "window-titles" = [];
-            }
-          ];
-          "window-resize-step" = 5;
-          "window-margins" = 1;
-          "window-margin-size" = 5;
-          # TODO: Amethyst uses binary blobs for keyboard shortcuts. How to capture here? And defaults read truncates...
-          "mouse-follows-focus" = false;
-          "mouse-resizes-windows" = true;
-          "follow-space-thrown-windows" = true;
-          layouts = [
-            "widescreen-tall"
-            "wide"
-            "tall"
-            "row"
-            "column"
-            "fullscreen"
-            "bsp"
-            "floating"
-          ];
-        };
+        # "com.amethyst.Amethyst" = {
+        #   "enables-layout-hud" = true;
+        #   "enables-layout-hud-on-space-change" = false;
+        #   "smart-window-margins" = true;
+        #   "float-small-windows" = true;
+        #   SUEnableAutomaticChecks = false;
+        #   SUSendProfileInfo = false;
+        #   floating = [
+        #     {
+        #       id = "com.raycase.macos";
+        #       "window-titles" = [];
+        #     }
+        #     {
+        #       id = "com.apple.systempreferences";
+        #       "window-titles" = [];
+        #     }
+        #     {
+        #       id = "com.kapeli.dashdoc";
+        #       "window-titles" = [];
+        #     }
+        #     {
+        #       id = "com.markmcguill.strongbox.mac";
+        #       "window-titles" = [];
+        #     }
+        #     {
+        #       id = "com.yubico.yubioath";
+        #       "window-titles" = [];
+        #     }
+        #   ];
+        #   "window-resize-step" = 5;
+        #   "window-margins" = 1;
+        #   "window-margin-size" = 5;
+        #   # TODO: Amethyst uses binary blobs for keyboard shortcuts. How to capture here? And defaults read truncates...
+        #   "mouse-follows-focus" = false;
+        #   "mouse-resizes-windows" = true;
+        #   "follow-space-thrown-windows" = true;
+        #   layouts = [
+        #     "widescreen-tall"
+        #     "wide"
+        #     "tall"
+        #     "row"
+        #     "column"
+        #     "fullscreen"
+        #     "bsp"
+        #     "floating"
+        #   ];
+        # };
         "com.apple.TimeMachine".DoNotOfferNewDisksForBackup = true;
         # Prevent Photos from opening automatically when devices are plugged in
         "com.apple.ImageCapture".disableHotPlug = true;
@@ -312,8 +312,8 @@
           sudo nvram boot-args="-v"
 
           echo "Restoring system hotkeys and amethyst hotkeys"
-          defaults import com.apple.symbolichotkeys ${./plists/symbolichotkeys.plist}
-          defaults import com.amethyst.Amethyst ${./plists/amethyst.plist}
+          defaults import com.apple.symbolichotkeys ${../../dotfiles/plists/symbolichotkeys.plist}
+          #defaults import com.amethyst.Amethyst ${../../dotfiles/plists/amethyst.plist}
 
         '';
         # to create an importable plist, see export-plists.sh

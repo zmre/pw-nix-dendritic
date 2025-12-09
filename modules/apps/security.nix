@@ -9,17 +9,17 @@
       "knockknock"
       "little-snitch"
       #"lockrattler"
-      "metasploit" # TODO 2024-07-31 nix version not running on mac
+      #"metasploit" # TODO 2024-07-31 nix version not running on mac; 2025-12-09 brew version deprecated
       "qflipper"
       "reikey"
       "silentknight"
       "wireshark-chmodbpf"
-      "yubico-yubikey-manager" # TODO: move to home-manager (yubikey-manager works for ykman cli, but yubikey-manager-qt still broken)
+      #"yubico-yubikey-manager" # deprecated
+      #"yubico-authenticator" # using app store version
       "zap" # TODO: move to home-manager? (zap)
     ];
     homebrew.brews = [
       "chkrootkit" # TODO: moved here 2024-03-25 since nix version is broken
-      "ciphey"
       "recon-ng" # TODO nix version doesn't work on mac at last try 2024-07-31
       "hashcat" # the nix one only builds on linux
       "hydra" # the nix one only builds on linux

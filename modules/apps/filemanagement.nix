@@ -47,7 +47,7 @@
       ripgrep.enable = true;
       bat = {
         enable = true;
-        #extraPackages = with pkgs.bat-extras; [ batman batgrep ];
+        extraPackages = with pkgs.bat-extras; [batman batgrep];
         config = {
           theme = "Dracula"; # I like the TwoDark colors better, but want bold/italic in markdown docs
           #pager = "less -FR";
