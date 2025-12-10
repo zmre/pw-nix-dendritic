@@ -57,7 +57,7 @@
 
 
         jump_key_places(){
-          cd "$(\fd . ~ ~/.config ~/src/sideprojects ~/src/icl ~/src/icl/website.worktree ~/src/personal ~/src/gh ~/Sync/Private/Finances ~/Sync/Private ~/Sync/IronCore\ Docs ~/Sync/IronCore\ Docs/Legal ~/Sync/IronCore\ Docs/Finances ~/Sync/IronCore\ Docs/Design ~/Notes ~/Notes/Notes --min-depth 1 --max-depth 1 --type d -L -E .Trash -E @Trash | fzf)"
+          cd "$(\fd . ~ ~/.config ~/src/sideprojects ~/src/icl ~/src/icl/website.worktree ~/src/personal ~/src/gh ~/Sync/Private/Finances ~/Sync/Private ~/Sync/IronCore\ Docs ~/Sync/IronCore\ Docs/Legal ~/Sync/IronCore\ Docs/Finances ~/Sync/IronCore\ Docs/Design ~/Notes ~/Notes/meetings --min-depth 1 --max-depth 1 --type d -L -E .Trash -E @Trash | fzf)"
           zle reset-prompt
         }
         zle -N jump_key_places

@@ -132,7 +132,7 @@
               }
               {
                 on = ["g" "n"];
-                run = "cd ~/Notes/Notes";
+                run = "cd ~/Notes";
                 desc = "Goto Notes";
               }
             ];
