@@ -6,9 +6,15 @@
   common = {pkgs, ...}: {
     time.timeZone = "America/Denver";
 
-    documentation.enable = true;
-    documentation.info.enable = true;
-    documentation.man.enable = true;
+    documentation =
+      {
+        enable = true;
+        info.enable = true;
+        man.enable = true;
+      }
+      // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+        nixos.enable = true;
+      };
 
     # environment setup
     environment = {
@@ -58,10 +64,14 @@
     };
   };
 in {
+  flake-file.inputs.nix-index-database.url = "github:nix-community/nix-index-database";
+  flake-file.inputs.nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
   flake.darwinModules.system = {
     imports = [
       common
       inputs.home-manager.darwinModules.home-manager
+      inputs.nix-index-database.darwinModules.nix-index
     ];
   };
 
@@ -69,6 +79,7 @@ in {
     imports = [
       common
       inputs.home-manager.nixosModules.default
+      inputs.nix-index-database.nixosModules.nix-index
     ];
   };
 }

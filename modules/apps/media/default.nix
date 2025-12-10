@@ -24,6 +24,13 @@
       "zstd" # needed for yt-dlp curl-impersonate
     ];
   };
+
+  flake.nixosModules.media-gui = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      plex-media-player
+    ];
+  };
+
   flake.modules.homeManager.media = {pkgs, ...}: let
     system = pkgs.stdenvNoCC.hostPlatform.system;
   in {

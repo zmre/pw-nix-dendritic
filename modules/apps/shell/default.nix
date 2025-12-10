@@ -46,6 +46,12 @@
       ]
       ++ (lib.optionals pkgs.stdenv.isDarwin [
         mactop
+      ])
+      ++ (lib.optionals pkgs.stdenv.isLinux [
+        # terminal linux-only apps
+        ueberzug # for terminal image previews
+        ytfzf # terminal youtube search/launch
+        djvulibre
       ]);
     programs = {
       asciinema = {
@@ -74,6 +80,8 @@
       };
       home-manager.enable = true;
       nix-index.enable = true;
+      nix-index.enableBashIntegration = true;
+      nix-index.enableZshIntegration = true;
       zoxide = {
         enable = true;
         enableZshIntegration = true;

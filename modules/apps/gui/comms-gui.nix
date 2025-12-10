@@ -12,4 +12,12 @@
       "Slack" = 803453959;
     };
   };
+
+  flake.nixosModules.comms-gui = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      slack
+      discord
+      element-desktop
+    ];
+  };
 }

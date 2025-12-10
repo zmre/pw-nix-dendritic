@@ -17,6 +17,15 @@
     };
   };
 
+  flake.modules.homeManager.filemanagement-gui = {pkgs, ...}: {
+    services.udiskie = {
+      enable = pkgs.stdenv.isLinux; # automount disks
+      automount = true;
+      notify = true;
+      tray = "auto";
+    };
+  };
+
   flake.modules.homeManager.filemanagement = {
     pkgs,
     lib,

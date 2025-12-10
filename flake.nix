@@ -86,6 +86,10 @@
       url = "github:IronCoreLabs/ironoxide-cli";
     };
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    nix-index-database = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-index-database";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-lib.follows = "nixpkgs";

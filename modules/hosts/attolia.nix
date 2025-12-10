@@ -19,6 +19,7 @@
     "terminfo"
     "touchid"
     "window-mgmt"
+    "hardened"
 
     # Cross-platform or home-manager only
     "ai"
@@ -43,6 +44,7 @@
     "term-gui"
     "vim"
     "vim-gui"
+    "virtualization"
   ];
 
   darwinMods = filterModules inputs.self.darwinModules wantedModules;
