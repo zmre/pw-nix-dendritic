@@ -8,26 +8,47 @@
 }: let
   username = "zmre";
   hostname = "volantis";
+
+  # Helper: filter a list of module names to only those that exist in moduleSet
+  filterModules = moduleSet: names:
+    builtins.filter (m: m != null) (
+      map (n: moduleSet.${n} or null) names
+    );
+
+  # Single source of truth: all desired modules by name
+  wantedModules = [
+    # System-only
+    "browsers-gui"
+    "comms-gui"
+    "gui"
+    "hardened"
+    "media-gui"
+    "ssh"
+    "system"
+    "tailscale"
+    "volantis-configuration"
+
+    # Cross-platform or home-manager only
+    "ai"
+    "dev"
+    "filemanagement"
+    "media"
+    "network"
+    "security"
+    "security-extra"
+    "shell"
+    "vim"
+    "window-mgmt"
+  ];
+
+  nixosMods = filterModules inputs.self.nixosModules wantedModules;
+  homeMods = filterModules inputs.self.modules.homeManager wantedModules;
 in {
   flake-file.inputs.nixos-hardware.url = "github:NixOS/nixos-hardware";
 
   flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
-    modules = with inputs.self.nixosModules; [
-      inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
-      volantis-configuration
-      ssh
-      gui
-      tailscale
-      system
-      hardened
-      security
-      security-extra
-      browsers-gui
-      window-mgtmt
-      comms-gui
-      media-gui
-    ];
+    modules = [inputs.nixos-hardware.nixosModules.framework-11th-gen-intel] ++ nixosMods;
   };
 
   flake.nixosModules.volantis-configuration = {
@@ -40,15 +61,7 @@ in {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${username} = {
-        imports = with inputs.self.modules.homeManager; [
-          shell
-          media
-          ai
-          dev
-          vim
-          filemanagement
-          network
-        ];
+        imports = homeMods;
         home.username = username;
         home.homeDirectory = "/home/${username}";
         home.stateVersion = "25.05";

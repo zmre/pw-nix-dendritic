@@ -1,6 +1,7 @@
 {inputs, ...}: {
   flake-file.inputs.pwaerospace.url = "github:zmre/aerospace-sketchybar-nix-lua-config";
   flake-file.inputs.pwaerospace.inputs.nixpkgs.follows = "nixpkgs";
+  flake-file.inputs.pwaerospace.inputs.flake-utils.follows = "flake-utils";
 
   flake.nixosModules.window-mgmt = {pkgs, ...}: {
     services.displayManager.defaultSession = "none+i3";

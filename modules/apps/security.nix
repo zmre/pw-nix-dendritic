@@ -1,5 +1,6 @@
 {inputs, ...}: {
   flake-file.inputs.sbhosts.url = "github:StevenBlack/hosts";
+  flake-file.inputs.sbhosts.flake = false; # this is a lie, but we don't want to import its dependencies
 
   flake.darwinModules.security-gui = {
     homebrew.casks = [

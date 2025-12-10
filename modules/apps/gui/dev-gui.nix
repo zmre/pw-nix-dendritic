@@ -209,6 +209,7 @@
 
       zed-editor = {
         enable = true; # 2025-07-02 disable until https://github.com/nix-community/home-manager/issues/7327 is resolved
+        package = pkgs.stable.zed-editor; # takes forever to build so sticking to recent stable
         extensions = [
           "catpuccin"
           "csv"

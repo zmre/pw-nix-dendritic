@@ -45,6 +45,7 @@ in {
     # lock files by standardizing the nixpkgs being used across inputs
     # but this can absolutely cause problems so we'll try it for now, but
     # might just need to manually specify the follows
+    # update: alas, things broke
     #inputs.flake-file.flakeModules.allfollow # not sure I like this all the time
     #inputs.flake-file.flakeModules.nix-auto-follow
     inputs.flake-parts.flakeModules.flakeModules
@@ -63,6 +64,12 @@ in {
     flake-file.inputs.flake-parts.url = "github:hercules-ci/flake-parts";
     flake-file.inputs.flake-file.url = "github:vic/flake-file";
     flake-file.inputs.import-tree.url = "github:vic/import-tree";
+
+    # These are common dependencies across flakes; I want to shrink my lock file and closures
+    # by directly referencing them and then having various flake files follow them.
+    # Note: the auto file stuff is cool, but you need to be able to disable selectively, so here we are
+    flake-file.inputs.flake-utils.url = "github:numtide/flake-utils";
+    flake-file.inputs.flake-compat.url = "github:NixOS/flake-compat";
 
     # Workaround
     flake.flakeModules.default = {};

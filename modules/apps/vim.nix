@@ -1,7 +1,12 @@
 {inputs, ...}: {
   flake-file.inputs.pwnvim.url = "github:zmre/pwnvim";
+  flake-file.inputs.pwnvim.inputs.flake-utils.follows = "flake-utils";
+  flake-file.inputs.pwnvim.inputs.flake-compat.follows = "flake-compat";
   flake-file.inputs.pwneovide.url = "github:zmre/pwneovide";
   flake-file.inputs.pwneovide.inputs.pwnvim.follows = "pwnvim";
+  flake-file.inputs.pwneovide.inputs.nixpkgs.follows = "nixpkgs";
+  flake-file.inputs.pwneovide.inputs.flake-utils.follows = "flake-utils";
+  flake-file.inputs.pwneovide.inputs.flake-compat.follows = "flake-compat";
 
   flake.modules.homeManager.vim-gui = {
     pkgs,

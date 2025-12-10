@@ -37,11 +37,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/disko";
     };
+    flake-compat.url = "github:NixOS/flake-compat";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
       inputs.nixpkgs-lib.follows = "nixpkgs-lib";
       url = "github:hercules-ci/flake-parts";
     };
+    flake-utils.url = "github:numtide/flake-utils";
     gh-feed = {
       flake = false;
       url = "github:rsteube/gh-feed";
@@ -73,6 +75,7 @@
     import-tree.url = "github:vic/import-tree";
     ironhide = {
       inputs = {
+        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
       };
@@ -80,6 +83,7 @@
     };
     ironoxide = {
       inputs = {
+        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
       };
@@ -96,7 +100,10 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
     pwaerospace = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
       url = "github:zmre/aerospace-sketchybar-nix-lua-config";
     };
     pwai = {
@@ -107,12 +114,26 @@
       url = "git+ssh://git@github.com/zmre/pwai.git";
     };
     pwneovide = {
-      inputs.pwnvim.follows = "pwnvim";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+        pwnvim.follows = "pwnvim";
+      };
       url = "github:zmre/pwneovide";
     };
-    pwnvim.url = "github:zmre/pwnvim";
+    pwnvim = {
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
+      };
+      url = "github:zmre/pwnvim";
+    };
     rust-overlay.url = "github:oxalica/rust-overlay";
-    sbhosts.url = "github:StevenBlack/hosts";
+    sbhosts = {
+      flake = false;
+      url = "github:StevenBlack/hosts";
+    };
     systems.url = "github:nix-systems/default";
     yazi-flavors = {
       flake = false;

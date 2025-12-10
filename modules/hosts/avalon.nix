@@ -8,6 +8,43 @@
 }: let
   username = "pwalsh";
   hostname = "avalon";
+
+  # Helper: filter a list of module names to only those that exist in moduleSet
+  filterModules = moduleSet: names:
+    builtins.filter (m: m != null) (
+      map (n: moduleSet.${n} or null) names
+    );
+
+  # Single source of truth: all desired modules by name
+  wantedModules = [
+    # System-only
+    "amd-gpu"
+    "avalon-configuration"
+    "avalon-disk"
+    "hardened"
+    "nfs"
+    "nginx-rtmp"
+    "ollama"
+    "plex"
+    "protonmail-bridge"
+    "search"
+    "ssh"
+    "system"
+    "tailscale"
+
+    # Cross-platform or home-manager only
+    "ai"
+    "dev"
+    "filemanagement"
+    "media"
+    "network"
+    "protonmail-bridge"
+    "shell"
+    "vim"
+  ];
+
+  nixosMods = filterModules inputs.self.nixosModules wantedModules;
+  homeMods = filterModules inputs.self.modules.homeManager wantedModules;
 in {
   flake-file.inputs.nixos-hardware.url = "github:NixOS/nixos-hardware";
   flake-file.inputs.disko = {
@@ -17,48 +54,21 @@ in {
 
   flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
-    modules = with inputs.self.nixosModules; [
-      inputs.disko.nixosModules.disko
-      inputs.nixos-hardware.nixosModules.framework-desktop-amd-ai-max-300-series
-      {hardware.gpu = "rocm";}
-      amd-gpu
-      avalon-configuration
-      avalon-disk
-      nfs
-      ssh
-      #gui
-      tailscale
-      #packages
-      ollama
-      nginx-rtmp
-      plex
-      system
-      search
-      protonmail-bridge
-      hardened
-    ];
+    modules =
+      [
+        inputs.disko.nixosModules.disko
+        inputs.nixos-hardware.nixosModules.framework-desktop-amd-ai-max-300-series
+        {hardware.gpu = "rocm";}
+      ]
+      ++ nixosMods;
   };
 
-  flake.nixosModules.avalon-configuration = {
-    config,
-    lib,
-    pkgs,
-    ...
-  }: {
+  flake.nixosModules.avalon-configuration = {pkgs, ...}: {
     config = {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${username} = {
-        imports = with inputs.self.modules.homeManager; [
-          shell
-          media
-          ai
-          dev
-          vim
-          filemanagement
-          network
-          protonmail-bridge
-        ];
+        imports = homeMods;
         hardware.gpu = "rocm";
         home.username = username;
         home.homeDirectory = "/home/${username}";
