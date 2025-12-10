@@ -5,6 +5,11 @@
   flake-file.inputs.gh-feed.url = "github:rsteube/gh-feed";
   flake-file.inputs.gh-feed.flake = false;
 
+  flake.darwinModules.dev = {pkgs, ...}: {
+    environment.systemPackages = [pkgs.container]; # macos native vm
+    #homebrew.casks = ["container"]; # macos native vm
+  };
+
   flake.modules.homeManager.dev = {
     pkgs,
     lib,
