@@ -176,6 +176,16 @@
             esac
         }
 
+        rgfz() {
+          RG_PREFIX="rg --line-number --no-heading --color=always"
+          FZF_DEFAULT_COMMAND="$RG_PREFIX '$*'" \
+          fzf --ansi \
+              --bind "change:reload:$RG_PREFIX {q} || true" \
+              --preview 'bat --style=numbers --color=always {1} --highlight-line {2}' \
+              --delimiter ':' \
+              --bind 'enter:execute($EDITOR +{2} {1} > /dev/tty)'
+        }
+
         #### Make the up arrow default to just the local session commands, but ctrl-up can be global
         #bindkey "''${key [Up]}" up-line-or-local-history
         #bindkey "''${key [Down]}" down-line-or-local-history
