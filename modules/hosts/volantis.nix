@@ -120,10 +120,7 @@ in {
       hardware.enableAllFirmware = true;
       hardware.hackrf.enable = true;
       hardware.ubertooth.enable = true;
-      hardware.pulseaudio = {
-        enable = false;
-        #package = pkgs.pulseaudioFull; # needed for bluetooth audio
-      };
+      services.pulseaudio.enable = true;
       # no bluetooth on boot
       hardware.bluetooth.enable = true;
       hardware.bluetooth.powerOnBoot = false;
