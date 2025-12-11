@@ -17,6 +17,12 @@
     ];
   };
 
+  flake.nixosModules.ai-gui = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      chatgpt
+    ];
+  };
+
   flake.modules.homeManager.ai = {
     pkgs,
     lib,

@@ -10,6 +10,7 @@
       "Xcode" = 497799835;
     };
   };
+
   flake.modules.homeManager.dev-gui = {
     pkgs,
     lib,

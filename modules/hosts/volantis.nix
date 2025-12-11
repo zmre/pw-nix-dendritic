@@ -11,10 +11,7 @@
   # Single source of truth: all desired modules by name
   wantedModules = [
     # System-only
-    "browsers-gui"
-    "comms-gui"
     "gui"
-    "media-gui"
     "ssh"
     "system"
     "tailscale"
@@ -23,16 +20,27 @@
 
     # Cross-platform or home-manager only
     "ai"
+    "ai-gui"
+    "browsers-gui"
+    "comms-gui"
     "dev"
+    "dev-gui"
     "filemanagement"
     "filemanagement-gui"
     "hacking"
+    "iron"
     "media"
+    "media-gui"
     "network"
+    "network-gui"
     "security"
+    "security-gui"
     "security-extra"
     "shell"
+    "terminfo"
+    "term-gui"
     "vim"
+    "vim-gui"
     "window-mgmt"
   ];
 

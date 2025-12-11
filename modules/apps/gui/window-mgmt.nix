@@ -56,7 +56,6 @@
       #i3-auto-layout # should change default split; not working
 
       # apps
-      keepassxc
       #spotify-qt
       nomacs
     ];

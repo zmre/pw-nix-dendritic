@@ -36,6 +36,13 @@
       "Yubico Authenticator" = 1497506650;
     };
   };
+
+  flake.nixosModules.security-gui = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      keepassxc
+    ];
+  };
+
   flake.darwinModules.security = {pkgs, ...}: {
     environment.etc.hosts.source = "${inputs.sbhosts}/hosts";
   };
