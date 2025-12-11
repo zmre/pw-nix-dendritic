@@ -19,6 +19,35 @@
     };
   };
 
+  flake.nixosModules.browsers-gui = {pkgs, ...}: {
+    # In case I want a kiosk mode
+    environment.systemPackages = [pkgs.ungoogled-chromium];
+    programs.chromium = {
+      enable = true;
+      homepageLocation = "https://launchpad.classlink.com/bvsd?chromebook=1";
+      defaultSearchProviderEnabled = true;
+      defaultSearchProviderSearchURL = "https://kiddle.co/s.php?q={searchTerms}";
+      extraOpts = {
+        CloudPrintSubmitEnabled = false;
+        EnableMediaRouter = false;
+        HideWebStoreIcon = true;
+        NewTabPageLocation = "https://launchpad.classlink.com/bvsd?chromebook=1";
+        PasswordManagerEnabled = false;
+        RestoreOnStartup = 5; # 1 restores, 5 does new tab page, 4 opens a list of urls
+        SpellcheckEnabled = true;
+        SpellcheckLanguage = ["en-US"];
+        WelcomePageOnOSUpgradeEnabled = false;
+        # Privacy
+        SyncDisabled = true;
+        MetricsReportingEnabled = false;
+      };
+      extensions = [
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock-origin
+      ];
+      #commandLineArgs = ["--kiosk"]
+    };
+  };
+
   flake.modules.homeManager.browsers-gui = {
     pkgs,
     config,
@@ -54,6 +83,7 @@
       associations.added = associations;
       defaultApplications = associations;
     };
+
     # Backup browser for when Qutebrowser doesn't work as expected
     # currently fails to compile on darwin
     programs.firefox = {
