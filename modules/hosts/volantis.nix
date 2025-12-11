@@ -128,7 +128,7 @@ in {
       hardware.enableAllFirmware = true;
       hardware.hackrf.enable = true;
       hardware.ubertooth.enable = true;
-      services.pulseaudio.enable = true;
+      #services.pulseaudio.enable = true;
       # no bluetooth on boot
       hardware.bluetooth.enable = true;
       hardware.bluetooth.powerOnBoot = false;

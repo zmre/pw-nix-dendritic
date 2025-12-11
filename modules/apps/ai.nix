@@ -19,7 +19,7 @@
 
   flake.nixosModules.ai-gui = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
-      chatgpt
+      #chatgpt
     ];
   };
 

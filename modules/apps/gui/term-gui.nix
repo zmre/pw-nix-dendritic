@@ -5,9 +5,14 @@
       "wezterm"
     ];
   };
+
+  flake.nixosModules.term-gui = {pkgs, ...}: {
+    environment.systemPackages = [pkgs.wezterm];
+  };
+
   flake.modules.homeManager.term-gui = {pkgs, ...}: {
     home.file.".wezterm.lua".source = ../../../dotfiles/wezterm/wezterm.lua;
-    home.packages = [pkgs.iterm2]; # using remote windows with tmux more so want to experiment here with native seeming windows for tmux panes
+    home.packages = [] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.iterm2]; # using remote windows with tmux more so want to experiment here with native seeming windows for tmux panes
     programs.kitty = {
       enable = false;
       #package = pkgs.emptyDirectory; # post 15.1 update, having issues with nix version and moving to brew for now 2024-10-30
@@ -127,7 +132,7 @@
           if pkgs.stdenvNoCC.isDarwin
           then 16
           else 9;
-        shell.program = "${pkgs.zsh}/bin/zsh";
+        terminal.shell.program = "${pkgs.zsh}/bin/zsh";
         general.live_config_reload = true;
         cursor.vi_mode_style = "Underline";
         colors.draw_bold_text_with_bright_colors = true;
