@@ -34,7 +34,7 @@
       autoRepeatInterval = 20;
       windowManager.i3 = {
         enable = true;
-        package = pkgs.stable.i3-gaps; # adds extra functionality
+        package = pkgs.stable.i3;
         extraPackages = with pkgs.stable; [
           rofi
           polybar

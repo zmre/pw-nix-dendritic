@@ -111,8 +111,6 @@
     };
     programs.alacritty = {
       enable = pkgs.stdenv.isLinux; # only install on Linux
-      #package =
-      #pkgs.alacritty; # switching to unstable so i get 0.11 with undercurl support
       settings = {
         window.decorations = "full";
         window.dynamic_title = true;
@@ -130,7 +128,7 @@
           then 16
           else 9;
         shell.program = "${pkgs.zsh}/bin/zsh";
-        live_config_reload = true;
+        general.live_config_reload = true;
         cursor.vi_mode_style = "Underline";
         colors.draw_bold_text_with_bright_colors = true;
         keyboard.bindings = [

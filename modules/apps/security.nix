@@ -211,7 +211,7 @@
         stegseek
 
         # Manipulation
-        radare2-cutter
+        #radare2-cutter
         #afl # fuzzer tool
         # cloud
         cloud-nuke

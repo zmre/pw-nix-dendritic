@@ -27,7 +27,7 @@
 
   flake.nixosModules.media-gui = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
-      plex-media-player
+      plex-desktop
     ];
   };
 

@@ -61,7 +61,7 @@
       # turns out you have to setup a profile (below) for extensions to install
       profiles = {
         home = {
-          extensions.packages = with inputs.nur.${system}.repos.rycee.firefox-addons; [
+          extensions.packages = with inputs.nur.legacyPackages.${system}.repos.rycee.firefox-addons; [
             ublock-origin
             #https-everywhere
             noscript

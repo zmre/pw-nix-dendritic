@@ -83,7 +83,6 @@ in {
         initrd.kernelModules = ["i915"];
         kernelModules = ["kvm-intel"];
         extraModulePackages = [];
-        readOnlyNixStore = true;
         kernelParams = ["mem_sleep_default=deep" "nvme.noacpi=1" "net.ifnames=1"];
         tmp.cleanOnBoot = true;
         tmp.useTmpfs = true;
