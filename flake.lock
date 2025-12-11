@@ -563,6 +563,29 @@
         "type": "github"
       }
     },
+    "nur": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765474800,
+        "narHash": "sha256-5vqsZM7Bg8iUfN/q9qFsA+15hXkzeIpBbgcL1O1vnic=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "484f5bcf5dc2a70775c0a4afbe9ccd0b72d550b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "paiTemplate": {
       "inputs": {
         "flake-parts": [
@@ -743,6 +766,7 @@
         ],
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-stable-darwin": "nixpkgs-stable-darwin",
+        "nur": "nur",
         "pwaerospace": "pwaerospace",
         "pwai": "pwai",
         "pwneovide": "pwneovide",
