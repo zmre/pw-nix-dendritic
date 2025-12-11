@@ -63,7 +63,7 @@
   };
 
   flake.darwinModules.window-mgmt = {pkgs, ...}: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
     pwaerospace = inputs.pwaerospace.packages.${system}.default;
   in {
     homebrew.casks = [
@@ -205,7 +205,7 @@
     };
   };
 
-  flake.modules.homeManager.window-mgt = {
+  flake.modules.homeManager.window-mgmt = {
     pkgs,
     config,
     lib,

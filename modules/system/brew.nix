@@ -35,7 +35,7 @@
       user = config.system.primaryUser;
 
       # Optional: Declarative tap management
-      taps = taps;
+      inherit taps;
 
       # Optional: Enable fully-declarative tap management
       #

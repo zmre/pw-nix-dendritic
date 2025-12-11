@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   lib,
   ...
 }: let
@@ -22,12 +21,12 @@
       if final.stdenv.isDarwin
       then
         import inputs.nixpkgs-stable-darwin {
-          system = final.stdenv.hostPlatform.system;
+          inherit (final.stdenv.hostPlatform) system;
           config = nixpkgsConfig;
         }
       else
         import inputs.nixpkgs-stable {
-          system = final.stdenv.hostPlatform.system;
+          inherit (final.stdenv.hostPlatform) system;
           config = nixpkgsConfig;
         };
   };

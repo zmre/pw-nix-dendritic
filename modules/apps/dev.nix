@@ -10,7 +10,7 @@
     lib,
     ...
   }: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
 
     gh-feed = pkgs.buildGoModule {
       pname = "gh-feed";

@@ -1,10 +1,9 @@
 {
-  flake.nixosModules.protonmail-bridge = {...}: {
+  flake.nixosModules.protonmail-bridge = {
     networking.firewall.allowedTCPPorts = [37027 1143 1025];
   };
   flake.modules.homeManager.protonmail-bridge = {
     pkgs,
-    inputs,
     lib,
     ...
   }: let
@@ -32,7 +31,7 @@
       pass-secret-service
       gnupg
       gpg-tui
-      pinentry-tty
+      # pinentry-tty
     ];
   in {
     services.gpg-agent = {

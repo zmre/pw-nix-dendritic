@@ -1,11 +1,4 @@
-{
-  self,
-  inputs,
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
+{inputs, ...}: let
   username = "pwalsh";
   hostname = "avalon";
 
@@ -21,7 +14,6 @@
     "amd-gpu"
     "avalon-configuration"
     "avalon-disk"
-    "hardened"
     "nfs"
     "nginx-rtmp"
     "ollama"

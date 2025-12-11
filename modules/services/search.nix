@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.search = {...}: {
+  flake.nixosModules.search = {
     services.meilisearch = {
       enable = true;
       masterKeyFile = "/etc/meilisearch-key";

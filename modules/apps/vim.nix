@@ -13,7 +13,7 @@
     lib,
     ...
   }: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
     home.packages = [
       inputs.pwneovide.packages.${system}.default
@@ -25,7 +25,7 @@
     lib,
     ...
   }: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
     home.packages = [
       inputs.pwnvim.packages.${system}.default

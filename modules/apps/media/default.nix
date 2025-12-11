@@ -32,7 +32,7 @@
   };
 
   flake.modules.homeManager.media = {pkgs, ...}: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
     home.packages = with pkgs; [
       sourceHighlight # for lf preview

@@ -1,4 +1,4 @@
-{...}: let
+_: let
   common = {
     nix.settings.allowed-users = ["@users" "@staff"];
   };

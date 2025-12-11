@@ -5,7 +5,7 @@
     config,
     ...
   }: let
-    gpu = config.hardware.gpu;
+    inherit (config.hardware) gpu;
     # Package selection based on GPU type
     # Note: acceleration option was removed - now just set the package variant
     ollamaPkg =

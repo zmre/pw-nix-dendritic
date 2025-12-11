@@ -22,7 +22,7 @@
     lib,
     ...
   }: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
     aichat-wrapped = let
       pkg = pkgs.aichat;
       tools = with pkgs; [argc jq poppler-utils pdfminer tesseract];

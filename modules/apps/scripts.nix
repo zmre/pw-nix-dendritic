@@ -72,8 +72,8 @@
         transcribe-rode-meeting
         transcribe-video-to-subtitles
       ]
-      ++ lib.optionals (pkgs.stdenvNoCC.isLinux) []
-      ++ lib.optionals (pkgs.stdenvNoCC.isDarwin) [
+      ++ lib.optionals pkgs.stdenvNoCC.isLinux []
+      ++ lib.optionals pkgs.stdenvNoCC.isDarwin [
         bright
         desktop-hide
         desktop-show

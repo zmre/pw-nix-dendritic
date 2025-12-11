@@ -1,11 +1,4 @@
-{
-  self,
-  inputs,
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
+{inputs, ...}: let
   username = "zmre";
   hostname = "volantis";
 
@@ -21,17 +14,19 @@
     "browsers-gui"
     "comms-gui"
     "gui"
-    "hardened"
     "media-gui"
     "ssh"
     "system"
     "tailscale"
     "volantis-configuration"
+    "virtualization"
 
     # Cross-platform or home-manager only
     "ai"
     "dev"
     "filemanagement"
+    "filemanagement-gui"
+    "hacking"
     "media"
     "network"
     "security"
@@ -51,12 +46,7 @@ in {
     modules = [inputs.nixos-hardware.nixosModules.framework-11th-gen-intel] ++ nixosMods;
   };
 
-  flake.nixosModules.volantis-configuration = {
-    config,
-    lib,
-    pkgs,
-    ...
-  }: {
+  flake.nixosModules.volantis-configuration = {pkgs, ...}: {
     config = {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
@@ -161,7 +151,7 @@ in {
           #disableWhileTyping = true;
         };
       };
-
+      services.autorandr.enable = true; # detect displays
       services.fprintd.enable = true; # enable fingerprint scanner
       # Allow fingerprint use by root and zmre
       security.polkit.enable = true;

@@ -15,7 +15,7 @@
     lib,
     ...
   }: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
     # VSCode whines like a ... I don't know, but a lot when the config file is read-only
     # I want nix to govern the configs, but to let vscode edit it (ephemerally) if I change

@@ -28,7 +28,7 @@
       };
     };
   };
-  flake.nixosModules.fonts = {pkgs, ...}: {
+  flake.nixosModules.gui = {pkgs, ...}: {
     fonts = {
       enableDefaultPackages = true;
       fontconfig.enable = true;

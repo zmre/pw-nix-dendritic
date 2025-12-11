@@ -10,7 +10,7 @@
   flake-file.inputs.ironoxide.inputs.flake-utils.follows = "flake-utils";
 
   flake.modules.homeManager.iron = {pkgs, ...}: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
     home.packages = [
       inputs.ironhide.packages.${system}.ironhide

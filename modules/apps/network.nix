@@ -6,13 +6,12 @@
   };
 
   flake.modules.homeManager.network = {
-    inputs,
     pkgs,
     lib,
     ...
   }: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
-    isLinux = pkgs.stdenv.isLinux;
+    # system = pkgs.stdenvNoCC.hostPlatform.system;
+    inherit (pkgs.stdenv) isLinux;
   in {
     home.packages = with pkgs; [
       # network
@@ -59,6 +58,8 @@
       enableZshIntegration = false;
       enableBashIntegration = false;
     };
+    services.gpg-agent.enable = isLinux;
+
     # Unconditionally set SSH_AUTH_SOCK to the systemd ssh-agent socket (Linux only)
     # Use /run/user/$(id -u) instead of $XDG_RUNTIME_DIR because XDG_RUNTIME_DIR
     # may not be set in all contexts (e.g., SSH sessions, tmux, some display managers)

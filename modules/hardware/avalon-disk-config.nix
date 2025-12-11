@@ -1,6 +1,6 @@
 {inputs, ...}: {
   #flake.modules.hosts.avalon.disko = {
-  flake.nixosModules.avalon-disk = {...}: {
+  flake.nixosModules.avalon-disk = _: {
     config.disko.devices = {
       disk = {
         primary = {

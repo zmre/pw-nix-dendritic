@@ -19,7 +19,6 @@
     "terminfo"
     "touchid"
     "window-mgmt"
-    "hardened"
 
     # Cross-platform or home-manager only
     "ai"

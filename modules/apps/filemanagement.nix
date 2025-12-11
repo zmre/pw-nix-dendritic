@@ -4,7 +4,7 @@
   flake-file.inputs.yazi-quicklook.url = "github:vvatikiotis/quicklook.yazi";
   flake-file.inputs.yazi-quicklook.flake = false;
 
-  flake.darwinModules.filemanagement-gui = {pkgs, ...}: {
+  flake.darwinModules.filemanagement-gui = {
     homebrew.casks = [
       "dropbox"
       "google-drive"
@@ -26,13 +26,7 @@
     };
   };
 
-  flake.modules.homeManager.filemanagement = {
-    pkgs,
-    lib,
-    ...
-  }: let
-    system = pkgs.stdenvNoCC.hostPlatform.system;
-  in {
+  flake.modules.homeManager.filemanagement = {pkgs, ...}: {
     home.packages = with pkgs; [
       dust
       file
@@ -69,7 +63,7 @@
         enable = true;
         enableZshIntegration = true;
         flavors = {
-          catppuccin-mocha = (inputs.yazi-flavors) + /catppuccin-mocha.yazi;
+          catppuccin-mocha = inputs.yazi-flavors + /catppuccin-mocha.yazi;
         };
         theme = {
           use = "catppuccin-mocha";

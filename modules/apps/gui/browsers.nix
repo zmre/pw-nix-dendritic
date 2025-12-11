@@ -1,4 +1,10 @@
-{
+{inputs, ...}: {
+  flake-file.inputs.nur = {
+    url = "github:nix-community/NUR";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.flake-parts.follows = "flake-parts";
+  };
+
   flake.darwinModules.browsers-gui = {
     homebrew.casks = [
       "brave-browser" # TODO: move to home-manager when it builds
@@ -41,6 +47,7 @@
       "application/json" = browser; # ".json"  JSON format
       "application/pdf" = browser; # ".pdf"  Adobe Portable Document Format (PDF)
     };
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
     xdg.mimeApps = {
       enable = pkgs.stdenv.isLinux;
@@ -54,7 +61,7 @@
       # turns out you have to setup a profile (below) for extensions to install
       profiles = {
         home = {
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          extensions.packages = with inputs.nur.${system}.repos.rycee.firefox-addons; [
             ublock-origin
             #https-everywhere
             noscript
