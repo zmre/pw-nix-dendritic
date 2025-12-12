@@ -41,17 +41,19 @@
     environment.systemPackages = with pkgs; [
       keepassxc
     ];
+    services.gpg-agent = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      pinentryPackage = pkgs.pinentry-tty;
+    };
   };
 
   flake.darwinModules.security = {pkgs, ...}: {
     environment.etc.hosts.source = "${inputs.sbhosts}/hosts";
   };
 
-  flake.modules.homeManager.security = {
-    pkgs,
-    lib,
-    ...
-  }: {
+  flake.modules.homeManager.security = {pkgs, ...}: {
     home.packages = with pkgs; [
       exploitdb
       # Recon

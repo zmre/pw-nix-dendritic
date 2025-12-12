@@ -58,7 +58,6 @@
       enableZshIntegration = false;
       enableBashIntegration = false;
     };
-    services.gpg-agent.enable = isLinux;
 
     # Unconditionally set SSH_AUTH_SOCK to the systemd ssh-agent socket (Linux only)
     # Use /run/user/$(id -u) instead of $XDG_RUNTIME_DIR because XDG_RUNTIME_DIR

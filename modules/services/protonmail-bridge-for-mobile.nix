@@ -34,13 +34,6 @@
       # pinentry-tty
     ];
   in {
-    services.gpg-agent = {
-      enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      pinentry.package = pkgs.pinentry-tty;
-    };
-
     ## turns out both the nixos and the home-manager services are only triggered to start after a GUI starts
     ## and we aren't currently running a gui on this machine. so... gonna need to do this by hand;
     ## here are the settings that would work if we had a gui running:
