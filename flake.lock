@@ -670,11 +670,11 @@
         "paiTemplate": "paiTemplate"
       },
       "locked": {
-        "lastModified": 1765469053,
-        "narHash": "sha256-xN/7T/qD/jbN0haprTsNZ9XBxMFStznUvNCvNRmmk7Y=",
+        "lastModified": 1765489934,
+        "narHash": "sha256-fcJTJX8efUqF0pP0FpS+jznChmkpTE7X3dDRX5rsc0k=",
         "ref": "refs/heads/main",
-        "rev": "304b06f879eaaa4a3b530552810cdee99b104194",
-        "revCount": 39,
+        "rev": "d9b2459ab721dc6e39d7c87bb0899c7f54acf299",
+        "revCount": 40,
         "type": "git",
         "url": "ssh://git@github.com/zmre/pwai.git"
       },
