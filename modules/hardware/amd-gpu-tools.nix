@@ -8,6 +8,8 @@
       rocmPackages.hipblas
       rocmPackages.rocblas
       amdgpu_top
+      radeontop
+      radeontools
       vulkan-tools
       rgp # amd workload inspection tool
     ];

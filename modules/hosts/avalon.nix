@@ -23,6 +23,8 @@
     "ssh"
     "system"
     "tailscale"
+    "caddy"
+    "glance"
 
     # Cross-platform or home-manager only
     "ai"

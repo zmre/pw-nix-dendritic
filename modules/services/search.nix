@@ -1,7 +1,7 @@
 {
   flake.nixosModules.search = {
     services.meilisearch = {
-      enable = true;
+      enable = false;
       masterKeyFile = "/etc/meilisearch-key";
       listenAddress = "0.0.0.0";
       settings = {

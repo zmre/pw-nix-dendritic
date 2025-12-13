@@ -25,9 +25,10 @@
       enable = true;
       package = ollamaPkg;
       group = "ollama";
-      host = "0.0.0.0";
+      host = "127.0.0.1";
+      port = 11433;
       loadModels = ["gpt-oss:20b" "gemma3:27b" "qwen3-coder:30b" "llama3:8b" "deepseek-r1:32b" "gpt-oss:120b" "llama3.1:70b" "glm4:9b" "qwen3:30b"];
-      openFirewall = true;
+      openFirewall = false;
       home = "/var/lib/ollama";
       user = "ollama";
       rocmOverrideGfx = lib.mkIf (gpu == "rocm") "11.0.2";
@@ -36,6 +37,21 @@
         OLLAMA_MAX_LOADED_MODELS = "2";
         OLLAMA_MAX_QUEUE = "512";
       };
+    };
+    networking.firewall.allowedTCPPorts = [11434];
+    services.caddy.virtualHosts."${config.networking.hostName}.${config.networking.domain}:11434" = {
+      listenAddresses = ["0.0.0.0"];
+      extraConfig = ''
+        tls {
+          get_certificate tailscale
+        }
+        encode {
+          zstd
+          gzip
+          minimum_length 1024
+        }
+        reverse_proxy http://127.0.0.1:11433
+      '';
     };
   };
 }

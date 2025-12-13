@@ -1,8 +1,9 @@
 {
   flake.nixosModules.tailscale = {pkgs, ...}: {
+    networking.domain = "savannah-basilisk.ts.net";
     services.tailscale = {
       enable = true; # p2p mesh vpn with my hosts -- does it override dnscrypt-proxy?
-      permitCertUid = "pwalsh";
+      permitCertUid = "caddy";
       useRoutingFeatures = "server";
       #interfaceName = "userspace-networking";
       # extraSetFlags = [
