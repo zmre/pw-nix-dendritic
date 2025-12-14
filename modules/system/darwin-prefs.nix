@@ -240,7 +240,6 @@
         #   "window-resize-step" = 5;
         #   "window-margins" = 1;
         #   "window-margin-size" = 5;
-        #   # TODO: Amethyst uses binary blobs for keyboard shortcuts. How to capture here? And defaults read truncates...
         #   "mouse-follows-focus" = false;
         #   "mouse-resizes-windows" = true;
         #   "follow-space-thrown-windows" = true;
@@ -318,7 +317,6 @@
         '';
         # to create an importable plist, see export-plists.sh
       };
-      # TODO: find the new root postActivation script name
       # then do the activateSettings with su or sudo to primary user
       # postUserActivation.text = ''
       #   # Following line should allow us to avoid a logout/login cycle

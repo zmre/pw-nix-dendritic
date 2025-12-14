@@ -246,7 +246,7 @@
           f = "\\fd -H --hyperlink"; # default search this dir for files ignoring .gitignore etc
           fa = "\\fd -H -I -t f -t l --hyperlink"; # show all files and symlinks (including ignored and hidden)
 
-          i = "iris"; # shortcut for iris digital assistant TODO: enable this once iris is installed properly
+          i = "iris"; # shortcut for iris digital assistant
           #i = "nix run ~/src/personal/pwai --";
           iq = "fabric"; # this is like iris quick, but "IQ" works too and just shorter way to call fabric since "f" is taken
           iqp = "fabric -V Ollama -m gpt-oss:120b"; # this is like iris quick, but "IQ" works too and just shorter way to call fabric since "f" is taken

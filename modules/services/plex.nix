@@ -4,10 +4,12 @@
     config,
     lib,
     ...
-  }: let
-    #defaultPlexPort = 32400;
-    #defaultJellyPort = 8096;
-  in {
+  }:
+  #let
+  #defaultPlexPort = 32400;
+  #defaultJellyPort = 8096;
+  #in
+  {
     imports = [inputs.self.nixosModules.comskip];
 
     # Only evaluate on Linux systems to avoid cross-platform check issues
