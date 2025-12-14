@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+# Pre-commit hook for Nix config validation
+# This hook validates the config before each commit using statix and nix flake show
+
+set -e
+
+# Only use colors if stdout is a terminal AND not running from Neovim (e.g., fugitive)
+# $NVIM is set by Neovim's jobstart() for all child processes
+# -t 1 checks if stdout is a TTY (handles pipes, redirects)
+if [[ -t 1 && -z "$NVIM" ]]; then
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[0;33m'
+    NC='\033[0m'
+else
+    RED=''
+    GREEN=''
+    YELLOW=''
+    NC=''
+fi
+
+echo -e "${YELLOW}Running pre-commit checks...${NC}"
+
+# Check 1: Run statix for static analysis
+echo -n "  Checking Nix syntax with statix... "
+# Use nix shell (not develop) to avoid shellHook output
+STATIX_OUTPUT=$(nix shell nixpkgs#statix -c statix check . 2>&1)
+STATIX_EXIT=$?
+if [[ $STATIX_EXIT -eq 0 ]]; then
+    echo -e "${GREEN}OK${NC}"
+else
+    echo -e "${RED}FAILED${NC}"
+    echo "$STATIX_OUTPUT"
+    exit 1
+fi
+
+# Check 2: Validate flake structure with nix flake show
+echo -n "  Validating flake structure... "
+if nix flake show --no-update-lock-file > /dev/null 2>&1; then
+    echo -e "${GREEN}OK${NC}"
+else
+    echo -e "${RED}FAILED${NC}"
+    echo -e "${RED}Flake structure validation failed. Run 'nix flake show' for details.${NC}"
+    exit 1
+fi
+
+# Check 3: Evaluate current system's configuration (platform-aware)
+echo -n "  Evaluating configuration for current system... "
+SYSTEM=$(nix eval --impure --expr 'builtins.currentSystem' --raw 2>/dev/null)
+
+# Determine what config to evaluate based on current system
+EVAL_SUCCESS=true
+case "$SYSTEM" in
+    aarch64-darwin|x86_64-darwin)
+        # On macOS, check Darwin config if it exists for this system
+        if nix eval ".#darwinConfigurations" --json 2>/dev/null | grep -q attolia; then
+            if ! nix eval ".#darwinConfigurations.attolia.system" 2>/dev/null; then
+                EVAL_SUCCESS=false
+            fi
+        fi
+        ;;
+    x86_64-linux|aarch64-linux)
+        # On Linux, check NixOS config if there's one for this system
+        # Note: avalon is x86_64-linux, skip if we're on aarch64-linux
+        if [[ "$SYSTEM" == "x86_64-linux" ]]; then
+            if nix eval ".#nixosConfigurations" --json 2>/dev/null | grep -q avalon; then
+                if ! nix eval ".#nixosConfigurations.avalon.config.system.build.toplevel" 2>/dev/null; then
+                    EVAL_SUCCESS=false
+                fi
+            fi
+        fi
+        ;;
+esac
+
+if $EVAL_SUCCESS; then
+    echo -e "${GREEN}OK${NC}"
+else
+    echo -e "${RED}FAILED${NC}"
+    echo -e "${RED}Configuration evaluation failed for current system ($SYSTEM).${NC}"
+    exit 1
+fi
+
+# Check 4: Verify flake.nix is up to date (if flake-file is being used)
+echo -n "  Checking if flake.nix is up to date... "
+if nix build .#checks."$SYSTEM".check-flake-file --no-link 2>/dev/null; then
+    echo -e "${GREEN}OK${NC}"
+else
+    echo -e "${YELLOW}WARN${NC}"
+    echo -e "${YELLOW}flake.nix may be out of date. Run 'nix run .#write-flake' to regenerate.${NC}"
+    # Don't fail on this, just warn
+fi
+
+echo -e "${GREEN}All pre-commit checks passed!${NC}"
