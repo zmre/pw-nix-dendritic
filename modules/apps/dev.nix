@@ -114,9 +114,6 @@
       };
       gh = {
         enable = true;
-        package = pkgs.gh;
-        # Ones I have installed that aren't available in pkgs 2024-07-31:
-        #inputs.gh-feed
         extensions = with pkgs; [gh-dash gh-notify gh-poi inputs.gh-worktree.packages.${system}.gh-worktree gh-feed gh-s gh-i];
         settings = {git_protocol = "ssh";};
       };
