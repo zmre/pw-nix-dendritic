@@ -726,11 +726,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1765723096,
-        "narHash": "sha256-L8uP9OSxFtGznVTfHM5U8oseUFSIgbZb/wrPfhJ36n8=",
+        "lastModified": 1765740534,
+        "narHash": "sha256-Ymgig5Q7Lv+547ThoKp2u5kDIThwQDx4Nrzlc2VupQs=",
         "owner": "zmre",
         "repo": "pwnvim",
-        "rev": "bb2417de13cd05e8f7fbda168bc98736cea1023a",
+        "rev": "a06291a93b00e73a0ba239b1ef6eb9e0b5f28ebd",
         "type": "github"
       },
       "original": {

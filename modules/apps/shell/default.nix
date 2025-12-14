@@ -104,7 +104,7 @@
       TZ = "America/Denver";
       LESS = "--raw-control-chars -FXRadeqs -P--Less--?e?x(Next file: %x):(END).:?pB%pB%.";
       CLICOLOR = 1;
-      CLICOLOR_FORCE = "yes";
+      #CLICOLOR_FORCE = "yes"; # has unintended consequences
       PAGER = "page -WO -q 90000";
       # Add colors to man pages
       MANPAGER = "less -R --use-color -Dd+r -Du+b +Gg -M -s";

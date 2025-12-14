@@ -115,7 +115,9 @@
       gh = {
         enable = true;
         extensions = with pkgs; [gh-dash gh-notify gh-poi inputs.gh-worktree.packages.${system}.gh-worktree gh-feed gh-s gh-i];
-        settings = {git_protocol = "ssh";};
+        settings = {
+          git_protocol = "ssh";
+        };
       };
     };
   };
