@@ -5,6 +5,7 @@
       "calibre" # available in nix, but marked broken for darwin as of 2025-09-18
       "descript"
       "pikachuexe/freetube/pikachuexe-freetube" # TODO: this is in nixpkgs now for darwin -- try there and see if we get arm
+      "plex" # plex desktop client
       "imageoptim"
       "insta360-studio"
       "keycastr" # show keys being pressed
@@ -31,9 +32,7 @@
     ];
   };
 
-  flake.modules.homeManager.media = {pkgs, ...}: let
-    inherit (pkgs.stdenvNoCC.hostPlatform) system;
-  in {
+  flake.modules.homeManager.media = {pkgs, ...}: {
     home.packages = with pkgs; [
       sourceHighlight # for lf preview
       ffmpeg-full.bin
@@ -56,12 +55,18 @@
         embed-metadata = true;
       };
     };
+  };
+  flake.modules.homeManager.media-gui = {pkgs, ...}: {
     programs.mpv = {
       enable = true;
       # Until someone changes makeWrapper to makeBinaryWrapper in https://github.com/NixOS/nixpkgs/issues/356860, we need to use the brew version to avoid the
       # issue where post macos 15.1, gui doesn't start from Finder (The application “Finder” does not have permission to open “(null).”)
-      package = pkgs.emptyDirectory;
-      #scripts = with pkgs.mpvScripts; [thumbnail sponsorblock uosc];
+      # NOTE: that issue is still open, but it looks like the code is fixed so we should remove the darwin logic below TODO
+      package =
+        if pkgs.stdenv.isDarwin
+        then pkgs.emptyDirectory
+        else pkgs.mpv;
+      scripts = pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs.mpvScripts; [thumbnail sponsorblock uosc]);
       config = {
         osc = true;
         # Use a large seekable RAM cache even for local input.
