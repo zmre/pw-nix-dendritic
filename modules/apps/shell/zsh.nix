@@ -71,7 +71,6 @@
         bindkey '^w' backward-kill-word
         bindkey '\e^h' backward-kill-word
         bindkey '\e^?' backward-kill-word
-        bindkey '^r' history-incremental-search-backward
         bindkey '^a' beginning-of-line
         bindkey '^e' end-of-line
         bindkey '\eb' backward-word
@@ -94,6 +93,14 @@
 
         bindkey -M vicmd '/' history-incremental-pattern-search-backward # default is vi-history-search-backward
         bindkey -M vicmd '?' vi-history-search-backward # default is vi-history-search-forward
+
+        # To make it so the up arrow defaults to local session history, don't
+        # load the shared history file by unsetting SHARE_HISTORY.
+        unsetopt SHARE_HISTORY
+
+        # If we want to contribute to the global history file (despite not using it dynamically)
+        # we can set INC_APPEND_HISTORY (or conversely unset it)
+        setopt INC_APPEND_HISTORY
 
         autoload -Uz edit-command-line
         zle -N edit-command-line

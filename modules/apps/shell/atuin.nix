@@ -1,10 +1,5 @@
-{inputs, ...}: {
+{
   flake.modules.homeManager.atuin = {
-    pkgs,
-    config,
-    lib,
-    ...
-  }: {
     # Nice shell history https://atuin.sh -- experimenting with this 2024-07-26
     programs.atuin = {
       enable = true;
