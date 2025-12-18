@@ -27,9 +27,9 @@
         skip_global_compinit=1
         # disable the reading of /etc/zshrc, which has redundant things and crap I don't want
         # like brew shellenv which takes forever, plus redundant compinit calls
-        NOSYSZSHRC="1"
-        LANGUAGE="en_US.UTF-8"
-        LC_ALL="en_US.UTF-8"
+        export NOSYSZSHRC="1"
+        export LANGUAGE="en_US.UTF-8"
+        export LC_ALL="en_US.UTF-8"
       '';
 
       completionInit = ''
@@ -184,7 +184,7 @@
         }
 
         rgfz() {
-          RG_PREFIX="rg --line-number --no-heading --color=always"
+          RG_PREFIX="rg --line-number --no-heading --color=always -i"
           FZF_DEFAULT_COMMAND="$RG_PREFIX '$*'" \
           fzf --ansi \
               --bind "change:reload:$RG_PREFIX {q} || true" \

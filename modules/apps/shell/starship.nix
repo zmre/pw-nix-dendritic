@@ -1,5 +1,13 @@
 {inputs, ...}: {
   flake.modules.homeManager.starship = {pkgs, ...}: {
+    # When entering a nix folder the direnv stuff sometimes takes awhile and the commands needed (like rustc -v) for the prompt
+    # aren't yet available, so the prompt hangs a bit trying to run things and then prints a bunch of warnings about it.
+    # What I want to happen: just have a more bare bones prompt.  I've shortened the timeout times and am setting the log level
+    # so I don't see warnings in the future.
+    programs.zsh.envExtra = ''
+      export STARSHIP_LOG=error # stop annoying timeout warnings
+    '';
+
     programs.starship = {
       enable = true;
       enableNushellIntegration =
@@ -12,9 +20,9 @@
           # alt for linux: "🐧 "
           (
             if pkgs.stdenv.isLinux
-            then "❄️"
+            then "❄️ "
             else if pkgs.stdenv.isDarwin
-            then ""
+            then " "
             else "🪟 "
           )
           "$shell"
@@ -106,6 +114,7 @@
           vicmd_symbol = "[❮](green)";
         };
         scan_timeout = 30;
+        command_timeout = 200; # default is 500ms, but screw that
         add_newline = true;
         gcloud.disabled = true;
         aws.disabled = true;
