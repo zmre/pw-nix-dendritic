@@ -8,7 +8,7 @@
     # Needs reboot to take effect.
     environment.launchDaemons.ulimitMaxFiles = {
       enable = true;
-      target = "limit.maxfiles"; # suffix .plist
+      target = "limit.maxfiles.plist";
       text = ''
         <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
