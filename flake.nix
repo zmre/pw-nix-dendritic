@@ -73,6 +73,13 @@
       url = "github:pikachuexe/homebrew-freetube";
     };
     import-tree.url = "github:vic/import-tree";
+    iris = {
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "git+ssh://git@github.com/zmre/iris.git";
+    };
     ironhide = {
       inputs = {
         flake-utils.follows = "flake-utils";
@@ -112,13 +119,6 @@
         nixpkgs.follows = "nixpkgs";
       };
       url = "github:zmre/aerospace-sketchybar-nix-lua-config";
-    };
-    pwai = {
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
-      url = "git+ssh://git@github.com/zmre/pwai.git";
     };
     pwneovide = {
       inputs = {
