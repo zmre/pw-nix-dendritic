@@ -1,9 +1,11 @@
 {
   flake.darwinModules.system = {pkgs, ...}: {
-    # Fix "Too many open files" problems. Based on this:
-    # https://medium.com/mindful-technology/too-many-open-files-limit-ulimit-on-mac-os-x-add0f1bfddde
-    # Needs reboot to take effect
-    # Changes default from 256 to 524,288 (probably a bigger jump than is really necessary)
+    # Fix "Too many open files" problems.
+    # IMPORTANT: As of macOS 13.5+, `launchctl limit maxfiles` is blocked by SIP.
+    # Instead, we use SoftResourceLimits/HardResourceLimits plist keys which
+    # set kern.maxfiles and kern.maxfilesperproc sysctl values directly.
+    # See: https://developer.apple.com/forums/thread/735798
+    # Needs reboot to take effect.
     environment.launchDaemons.ulimitMaxFiles = {
       enable = true;
       target = "limit.maxfiles"; # suffix .plist
@@ -17,18 +19,24 @@
             <string>limit.maxfiles</string>
             <key>ProgramArguments</key>
             <array>
-              <string>launchctl</string>
-              <string>limit</string>
-              <string>maxfiles</string>
-              <string>524288</string>
-              <string>524288</string>
+              <string>/usr/bin/true</string>
             </array>
             <key>RunAtLoad</key>
             <true/>
             <key>ServiceIPC</key>
             <false/>
+            <key>SoftResourceLimits</key>
+            <dict>
+              <key>NumberOfFiles</key>
+              <integer>524288</integer>
+            </dict>
+            <key>HardResourceLimits</key>
+            <dict>
+              <key>NumberOfFiles</key>
+              <integer>524288</integer>
+            </dict>
           </dict>
-        </plist
+        </plist>
       '';
     };
   };
