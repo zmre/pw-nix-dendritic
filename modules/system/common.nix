@@ -73,6 +73,7 @@ in {
       inputs.home-manager.darwinModules.home-manager
       inputs.nix-index-database.darwinModules.nix-index
     ];
+    home-manager.backupFileExtension = "hmbk";
   };
 
   flake.nixosModules.system = {
@@ -81,5 +82,6 @@ in {
       inputs.home-manager.nixosModules.default
       inputs.nix-index-database.nixosModules.nix-index
     ];
+    home-manager.backupFileExtension = "hmbk";
   };
 }

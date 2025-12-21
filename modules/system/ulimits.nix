@@ -19,7 +19,11 @@
             <string>limit.maxfiles</string>
             <key>ProgramArguments</key>
             <array>
-              <string>/usr/bin/true</string>
+              <string>launchctl</string>
+              <string>limit</string>
+              <string>maxfiles</string>
+              <string>524288</string>
+              <string>524288</string>
             </array>
             <key>RunAtLoad</key>
             <true/>
