@@ -28,8 +28,7 @@
       extraGroups = ["ollama" "video" "render"];
     };
     boot.kernelParams = [
-      # these are just trying to workaround issues
-      # TODO: try to remove these in awhile
+      # TODO: try to remove these in awhile; working around some errors
       "amdgpu.cwsr_enable=0"
       "amdgpu.ppfeaturemask=0xf7fff"
     ];
@@ -39,18 +38,18 @@
       group = "ollama";
       host = "127.0.0.1";
       port = 11433; # non-standard because we're fronting with caddy for tls and cert management
-      loadModels = ["gpt-oss:20b" "gemma3:27b" "qwen3-coder:30b" "llama3:8b" "deepseek-r1:32b" "gpt-oss:120b" "llama3.1:70b" "glm4:9b" "qwen3:30b-a3b"]; # qwen3:30b-a3b
+      loadModels = ["gpt-oss:20b" "gemma3:27b" "qwen3-coder:30b" "llama3:8b" "deepseek-r1:32b" "gpt-oss:120b" "llama3.1:70b" "glm4:9b" "qwen3:30b-a3b"]; # qwen3:30b
       openFirewall = false;
       home = "/var/lib/ollama";
       user = "ollama";
       #rocmOverrideGfx = lib.mkIf (gpu == "rocm") "11.0.2";
       environmentVariables = {
-        OLLAMA_CONTEXT_LENGTH = "25000";
-        OLLAMA_MAX_LOADED_MODELS = "2";
+        OLLAMA_CONTEXT_LENGTH = "128000";
+        OLLAMA_MAX_LOADED_MODELS = "3";
         OLLAMA_MAX_QUEUE = "512";
-        OLLAMA_DEBUG = "2";
+        #OLLAMA_DEBUG = "2";
         OLLAMA_LLM_LIBRARY = ollamaLibrary;
-        AMD_LOG_LEVEL = "3";
+        #AMD_LOG_LEVEL = "3";
       };
     };
     networking.firewall.allowedTCPPorts = [11434];
@@ -65,7 +64,25 @@
           gzip
           minimum_length 1024
         }
-        reverse_proxy http://127.0.0.1:11433
+            # Set CORS headers
+        @options method OPTIONS
+        handle @options {
+          header Access-Control-Allow-Origin {http.request.header.origin}
+          header Access-Control-Allow-Credentials true
+          header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+          header Access-Control-Allow-Headers "Authorization, Content-Type"
+          header Access-Control-Max-Age 1728000
+          respond "" 204
+        }
+
+        handle {
+          # Add CORS headers
+          header Access-Control-Allow-Origin {http.request.header.origin}
+          header Access-Control-Allow-Credentials true
+          header Access-Control-Allow-Headers "Authorization, Content-Type"
+
+          reverse_proxy http://127.0.0.1:11433
+        }
       '';
     };
   };
