@@ -68,7 +68,7 @@ in {
         home.homeDirectory = "/home/${username}";
         home.stateVersion = "25.05";
         home.sessionVariables = {
-          OLLAMA_HOST = "127.0.0.1:11434";
+          OLLAMA_HOST = "127.0.0.1:11433"; # non-standard port, no tls
         };
       };
       users.defaultUserShell = pkgs.zsh;
@@ -92,10 +92,12 @@ in {
           efi.canTouchEfiVariables = true;
         };
         supportedFilesystems = ["zfs"];
-        initrd.kernelModules = ["zfs"];
-        kernelPackages = pkgs.linuxPackages_6_17;
+        initrd.kernelModules = ["zfs" "amdgpu"];
+        # kernelPackages = pkgs.linuxPackages_6_17;
+        kernelPackages = pkgs.stable.linuxPackages_6_17; # should still be 6.17 for 25.11, but we will specify
         kernelModules = ["kvm-amd"];
-        zfs.package = pkgs.zfs_unstable;
+        #zfs.package = pkgs.zfs_unstable;
+        zfs.package = pkgs.stable.zfs;
         initrd.availableKernelModules = ["apfs" "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod"];
         tmp.cleanOnBoot = true;
         tmp.useTmpfs = true;
@@ -119,6 +121,7 @@ in {
       networking.defaultGateway = "192.168.37.1";
       networking.nameservers = ["100.100.100.100" "192.168.37.1"];
       networking.stevenblack.enable = true; # hosts based blocklist
+      networking.timeServers = ["time.nist.gov" "us.pool.ntp.org"]; # I prefer NIST time servers
       #networking.resolvconf.enable = false;
 
       nixpkgs.hostPlatform = "x86_64-linux";

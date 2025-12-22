@@ -35,6 +35,7 @@
         less
         lynx
         mdcat # colorize markdown
+        nixpkgs-track # check if a PR is available in unstable/stable/etc
         page # like less, but uses nvim, which is handy for selecting out text and such
         pigz # gzip, but parallel and faster; use pigz -9 -k input.jsonl for maximum compression and compat
         poppler-utils # for pdf2text
