@@ -14,7 +14,7 @@
       else pkgs.btop;
   in {
     imports = with inputs.self.modules.homeManager; [
-      hardware-options
+      # Note: hardware-options is imported at host level to avoid duplicates
       atuin
       hackernews-tui
       starship

@@ -11,20 +11,23 @@
   # Single source of truth: all desired modules by name
   wantedModules = [
     # System-only
+    "hardware-options"
     "amd-gpu"
     "avalon-configuration"
     "avalon-disk"
+    "caddy"
+    "glance"
+    #"llamacpp"
     "nfs"
     "nginx-rtmp"
     "ollama"
     "plex"
+    #"vllm"
     "protonmail-bridge"
     "search"
     "ssh"
     "system"
     "tailscale"
-    "caddy"
-    "glance"
 
     # Cross-platform or home-manager only
     "ai"
@@ -121,8 +124,9 @@ in {
       networking.defaultGateway = "192.168.37.1";
       networking.nameservers = ["100.100.100.100" "192.168.37.1"];
       networking.stevenblack.enable = true; # hosts based blocklist
-      networking.timeServers = ["time.nist.gov" "us.pool.ntp.org"]; # I prefer NIST time servers
-      #networking.resolvconf.enable = false;
+      # I prefer NIST time servers
+      networking.timeServers = ["time.nist.gov" "us.pool.ntp.org"];
+      networking.resolvconf.enable = true;
 
       nixpkgs.hostPlatform = "x86_64-linux";
       hardware.cpu.amd.updateMicrocode = true;

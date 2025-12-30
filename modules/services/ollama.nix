@@ -21,7 +21,8 @@
       then "rocm_v6"
       else "cpu cpu_avx cpu_avx2";
   in {
-    imports = [inputs.self.nixosModules.hardware-options];
+    # Note: hardware-options module must be imported at the host level
+    # This module uses config.hardware.gpu which is defined there
 
     users.users.ollama = {
       isNormalUser = false;
@@ -38,7 +39,22 @@
       group = "ollama";
       host = "127.0.0.1";
       port = 11433; # non-standard because we're fronting with caddy for tls and cert management
-      loadModels = ["gpt-oss:20b" "gemma3:27b" "qwen3-coder:30b" "llama3:8b" "deepseek-r1:32b" "gpt-oss:120b" "llama3.1:70b" "glm4:9b" "qwen3:30b-a3b"]; # qwen3:30b
+      loadModels = [
+        "deepseek-coder-v2:16b"
+        "deepseek-r1:32b"
+        "deepseek-r1:8b"
+        "devstral-small-2:24b"
+        "gemma3:27b"
+        "glm4:9b"
+        "gpt-oss:20b"
+        "llama3:8b"
+        "magistral:24b"
+        "ministral-3:14b"
+        "nemotron-3-nano:latest"
+        "qwen3-coder:30b"
+        "qwen3:30b"
+        "qwen3:30b-thinking"
+      ];
       openFirewall = false;
       home = "/var/lib/ollama";
       user = "ollama";
@@ -46,10 +62,15 @@
       environmentVariables = {
         OLLAMA_CONTEXT_LENGTH = "128000";
         OLLAMA_MAX_LOADED_MODELS = "3";
+        # Optimize GPU usage -- load everything in GPU
+        OLLAMA_GPU_LAYERS = "999";
+        # Keep model in RAM longer
+        OLLAMA_KEEP_ALIVE = "30m";
         OLLAMA_MAX_QUEUE = "512";
-        #OLLAMA_DEBUG = "2";
+        OLLAMA_DEBUG = "2";
         OLLAMA_LLM_LIBRARY = ollamaLibrary;
-        #AMD_LOG_LEVEL = "3";
+        AMD_LOG_LEVEL = "3";
+        OLLAMA_ORIGINS = "*"; # Allow requests through Caddy reverse proxy
       };
     };
     networking.firewall.allowedTCPPorts = [11434];
@@ -64,24 +85,9 @@
           gzip
           minimum_length 1024
         }
-            # Set CORS headers
-        @options method OPTIONS
-        handle @options {
-          header Access-Control-Allow-Origin {http.request.header.origin}
-          header Access-Control-Allow-Credentials true
-          header Access-Control-Allow-Methods "GET, POST, OPTIONS"
-          header Access-Control-Allow-Headers "Authorization, Content-Type"
-          header Access-Control-Max-Age 1728000
-          respond "" 204
-        }
 
-        handle {
-          # Add CORS headers
-          header Access-Control-Allow-Origin {http.request.header.origin}
-          header Access-Control-Allow-Credentials true
-          header Access-Control-Allow-Headers "Authorization, Content-Type"
-
-          reverse_proxy http://127.0.0.1:11433
+        reverse_proxy http://127.0.0.1:11433 {
+          header_up Host {upstream_hostport}
         }
       '';
     };

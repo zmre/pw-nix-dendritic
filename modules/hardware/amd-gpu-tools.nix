@@ -7,6 +7,7 @@
       rocmPackages.clr
       rocmPackages.hipblas
       rocmPackages.rocblas
+      rocmPackages.rocm-smi
       amdgpu_top
       radeontop
       radeontools

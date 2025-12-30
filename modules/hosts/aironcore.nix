@@ -10,6 +10,7 @@ in {
     pkgs = inputs.nixpkgs.legacyPackages.${system};
     modules = with inputs.self.modules.homeManager; [
       inputs.nix-index-database.homeModules.default
+      hardware-options
       shell
       filemanagement
       network

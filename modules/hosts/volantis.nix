@@ -10,6 +10,9 @@
 
   # Single source of truth: all desired modules by name
   wantedModules = [
+    # Shared options
+    "hardware-options"
+
     # System-only
     "gui"
     "ssh"

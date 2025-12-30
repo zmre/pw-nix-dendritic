@@ -10,7 +10,7 @@
       autoPrune.enable = true;
       autoPrune.dates = "weekly";
       # Don't start on boot; but it will start on-demand
-      enableOnBoot = false;
+      enableOnBoot = true;
     };
 
     virtualisation.libvirtd = {
