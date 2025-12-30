@@ -58,7 +58,7 @@
       exploitdb
       # Recon
       arp-scan
-      arping
+      pkgs.stable.arping
       dnsenum
       fierce # dns recon
       hping
@@ -93,7 +93,6 @@
         # Recon
         avahi
         arp-scan
-        arping
         dnsenum
         dnsrecon
         fierce # dns recon
