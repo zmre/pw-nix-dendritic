@@ -67,7 +67,7 @@
         # Keep model in RAM longer
         OLLAMA_KEEP_ALIVE = "30m";
         OLLAMA_MAX_QUEUE = "512";
-        OLLAMA_DEBUG = "2";
+        #OLLAMA_DEBUG = "2";
         OLLAMA_LLM_LIBRARY = ollamaLibrary;
         AMD_LOG_LEVEL = "3";
         OLLAMA_ORIGINS = "*"; # Allow requests through Caddy reverse proxy

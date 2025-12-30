@@ -252,6 +252,7 @@
           fd = "\\fd -H -t d --hyperlink"; # default search directories
           f = "\\fd -H --hyperlink"; # default search this dir for files ignoring .gitignore etc
           fa = "\\fd -H -I -t f -t l --hyperlink"; # show all files and symlinks (including ignored and hidden)
+          fr = "\\fd -H --hypterlink --changed-within 1week";
 
           i = "iris"; # shortcut for iris digital assistant
           #i = "nix run ~/src/personal/iris --";
