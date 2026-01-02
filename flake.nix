@@ -6,7 +6,7 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   nixConfig = {
-    download-buffer-size = 536870912;
+    download-buffer-size = 1073741824;
     extra-experimental-features = "nix-command flakes pipe-operators";
     extra-substituters = [
       "https://cache.nixos.org?priority=1"
@@ -26,6 +26,7 @@
       "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
+    nar-buffer-size = 134217728;
   };
 
   inputs = {

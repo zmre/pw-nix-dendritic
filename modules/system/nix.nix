@@ -37,6 +37,10 @@
         # The default at 10 is rarely enough.
         log-lines = 25;
 
+        # Increase download buffers for faster connections
+        download-buffer-size = 1073741824; # 1 GiB
+        nar-buffer-size = 134217728; # 128 MiB
+
         # Avoid disk full issues
         max-free = 3000 * 1024 * 1024;
         min-free = 512 * 1024 * 1024;
