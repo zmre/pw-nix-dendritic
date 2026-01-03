@@ -189,6 +189,10 @@
                             title = "Magic";
                             url = "https://synology1.${config.networking.domain}/magic/";
                           }
+                          {
+                            title = "AudioBookShelf";
+                            url = "https://avalon.${config.networking.domain}:8000/";
+                          }
                         ];
                       }
                     ];

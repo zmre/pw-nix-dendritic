@@ -15,6 +15,7 @@
     "amd-gpu"
     "avalon-configuration"
     "avalon-disk"
+    "audiobookshelf"
     "caddy"
     "glance"
     #"llamacpp"
