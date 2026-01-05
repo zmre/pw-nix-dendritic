@@ -17,6 +17,7 @@
     "avalon-disk"
     "audiobookshelf"
     "caddy"
+    "calibre-web"
     "glance"
     #"llamacpp"
     "nfs"
@@ -83,7 +84,9 @@ in {
           tree # this is just a test, really
         ];
         isNormalUser = true;
-        extraGroups = ["wheel" "power" "docker" "ollama" "render" "video" "nginx" "networkmanager" "libvirtd"];
+        # TODO: need to put the various extra groups into their module files so they only get added
+        #       when the module is used.  Example: caddy, calibre-web, docker, etc.
+        extraGroups = ["wheel" "power" "docker" "ollama" "render" "video" "nginx" "networkmanager" "libvirtd" "calibre-web" "caddy" "audiobookshelf"];
         openssh.authorizedKeys.keys = [
           "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXh/Nzg2PjtiaOmAAOrEiWrEOjmi6Ps5Jtvu1WqrWtXQYP7g6K0Unx8JGt5GWjeLO6lblDs7nvly3kw3bHDsbXCqYFLqLO0PTKXIaX8spiJ/+r0Pd70Nq5ZNOgoL87hKTXQwwn4FvVzBAu51KS05ZXdfT5xBkzZJc2bcEjR2uIaSI7R27hAyfVMbUx52+sUyi3uShMGmOnrHJbTzNPLjFBXBjNTZTIVI0ztUAGmeiee/ON0yVeONGTldfUXiCM7KcUWVSvlnE3agI/O2p/854bdfIt2KxKRgzBYwVInVc5k8RVlGzCfzw1qdx4nQiky6d2hAek2K9FxG5SnfIDUHUZ test cert 1"
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHyqQGP6vlWB9xV61sF9vJubmHMfKwLeTsweia2pdDRJayTp0xGFMa1uTgvfacmqOqcwL8w9cia4PmTOskVf1EQ= pwalsh@attolia"

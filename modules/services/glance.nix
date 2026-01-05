@@ -193,6 +193,10 @@
                             title = "AudioBookShelf";
                             url = "https://avalon.${config.networking.domain}:8000/";
                           }
+                          {
+                            title = "Calibre";
+                            url = "https://avalon.${config.networking.domain}:8083/";
+                          }
                         ];
                       }
                     ];
