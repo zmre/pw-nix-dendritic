@@ -10,7 +10,7 @@
   #defaultJellyPort = 8096;
   #in
   {
-    imports = [inputs.self.nixosModules.comskip];
+    # imports = [inputs.self.nixosModules.comskip];
 
     # Only evaluate on Linux systems to avoid cross-platform check issues
     config = lib.mkIf pkgs.stdenv.isLinux (let

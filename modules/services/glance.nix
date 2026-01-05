@@ -201,6 +201,10 @@
                             title = "MBR Magic";
                             url = "https://avalon.${config.networking.domain}:5201/";
                           }
+                          {
+                            title = "City Livability Explorer";
+                            url = "http://avalon.walsh.local/";
+                          }
                         ];
                       }
                     ];
