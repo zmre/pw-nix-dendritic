@@ -102,15 +102,13 @@ in {
         };
         supportedFilesystems = ["zfs"];
         initrd.kernelModules = ["zfs" "amdgpu"];
-        # kernelPackages = pkgs.linuxPackages_6_17;
-        kernelPackages = pkgs.stable.linuxPackages_6_17; # should still be 6.17 for 25.11, but we will specify
+        kernelPackages = pkgs.linuxPackages_6_18;
         kernelModules = ["kvm-amd"];
-        #zfs.package = pkgs.zfs_unstable;
-        zfs.package = pkgs.stable.zfs;
+        zfs.package = pkgs.zfs_unstable;
         initrd.availableKernelModules = ["apfs" "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod"];
         tmp.cleanOnBoot = true;
         tmp.useTmpfs = true;
-        extraModulePackages = [pkgs.stable.linuxKernel.packages.linux_6_17.apfs];
+        extraModulePackages = [pkgs.linuxKernel.packages.linux_6_18.apfs];
       };
 
       boot.kernel.sysctl = {
