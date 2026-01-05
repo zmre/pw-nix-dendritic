@@ -57,8 +57,9 @@ in {
     modules = [inputs.nixos-hardware.nixosModules.framework-11th-gen-intel] ++ nixosMods;
   };
 
-  flake.nixosModules.volantis-configuration = {pkgs, ...}: {
+  flake.nixosModules.volantis-configuration = {pkgs, config, ...}: {
     config = {
+      system.primaryUser = username;
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${username} = {
@@ -160,12 +161,12 @@ in {
       };
       services.autorandr.enable = true; # detect displays
       services.fprintd.enable = true; # enable fingerprint scanner
-      # Allow fingerprint use by root and zmre
+      # Allow fingerprint use by root and primary user
       security.polkit.enable = true;
       security.polkit.extraConfig = ''
         polkit.addRule(function (action, subject) {
           if (action.id == "net.reactivated.fprint.device.enroll") {
-            return subject.user == "zmre" || subject.user == "root" ? polkit.Result.YES : polkit.Result.NO
+            return subject.user == "${config.system.primaryUser}" || subject.user == "root" ? polkit.Result.YES : polkit.Result.NO
           }
         })
       '';

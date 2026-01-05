@@ -17,10 +17,18 @@ in {
     config,
     ...
   }: {
-    options.hardware.gpu = lib.mkOption {
-      type = lib.types.enum ["none" "cuda" "rocm"];
-      default = "none";
-      description = "GPU acceleration type for packages like btop and ollama";
+    options = {
+      hardware.gpu = lib.mkOption {
+        type = lib.types.enum ["none" "cuda" "rocm"];
+        default = "none";
+        description = "GPU acceleration type for packages like btop and ollama";
+      };
+
+      # Equivalent to Darwin's system.primaryUser for NixOS
+      system.primaryUser = lib.mkOption {
+        type = lib.types.str;
+        description = "The primary user account for this system, used by services that need a specific user.";
+      };
     };
 
     config.nixpkgs.config = {

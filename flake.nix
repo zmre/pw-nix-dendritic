@@ -96,6 +96,7 @@
       };
       url = "github:IronCoreLabs/ironoxide-cli";
     };
+    mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";

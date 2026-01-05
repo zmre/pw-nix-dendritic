@@ -20,6 +20,7 @@
     "calibre-web"
     "glance"
     #"llamacpp"
+    "mbr"
     "nfs"
     "nginx-rtmp"
     "ollama"
@@ -64,6 +65,7 @@ in {
 
   flake.nixosModules.avalon-configuration = {pkgs, ...}: {
     config = {
+      system.primaryUser = username;
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${username} = {

@@ -197,6 +197,10 @@
                             title = "Calibre";
                             url = "https://avalon.${config.networking.domain}:8083/";
                           }
+                          {
+                            title = "MBR Magic";
+                            url = "https://avalon.${config.networking.domain}:5201/";
+                          }
                         ];
                       }
                     ];

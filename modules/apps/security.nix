@@ -41,6 +41,9 @@
     environment.systemPackages = with pkgs; [
       keepassxc
     ];
+  };
+
+  flake.modules.homeManager.security-gui = {pkgs, ...}: {
     services.gpg-agent = {
       enable = true;
       enableBashIntegration = true;
