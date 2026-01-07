@@ -75,10 +75,7 @@
     };
     import-tree.url = "github:vic/import-tree";
     iris = {
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.flake-parts.follows = "flake-parts";
       url = "git+ssh://git@github.com/zmre/iris.git";
     };
     ironhide = {

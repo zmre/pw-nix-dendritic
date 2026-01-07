@@ -1,6 +1,7 @@
 {inputs, ...}: {
   flake-file.inputs.iris.url = "git+ssh://git@github.com/zmre/iris.git";
-  flake-file.inputs.iris.inputs.nixpkgs.follows = "nixpkgs";
+  # Note: Do NOT follow nixpkgs - iris needs its own nixpkgs version for
+  # fetchNpmDepsWithPackuments compatibility with gemini-cli
   flake-file.inputs.iris.inputs.flake-parts.follows = "flake-parts";
 
   # flake-file.inputs.alita.url = "git+ssh://git@github.com/ironcorelabs/alita.git";
