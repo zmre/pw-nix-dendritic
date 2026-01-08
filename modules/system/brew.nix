@@ -49,7 +49,7 @@
       user = config.system.primaryUser;
       onActivation = {
         autoUpdate = false;
-        upgrade = true;
+        upgrade = false; # upgrades happen in dwupdate alias after nix flake update
         cleanup = "uninstall"; # should maybe be "zap" - remove anything not listed here
       };
       global = {
