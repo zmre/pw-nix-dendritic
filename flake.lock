@@ -453,11 +453,11 @@
         "paiTemplate": "paiTemplate"
       },
       "locked": {
-        "lastModified": 1767676624,
-        "narHash": "sha256-2movjQ1iO4ON779Zk903itRpoqYyk48rujbyzknqf6U=",
+        "lastModified": 1767890416,
+        "narHash": "sha256-VbmkSJBf5MkxmpwmYZ/BOj0HuQwO7jTj6DVGoiAYMzg=",
         "ref": "refs/heads/main",
-        "rev": "ce18fc502e6e9210101239adaca8fad0900f74d8",
-        "revCount": 57,
+        "rev": "61c959dc2a42b4e5799a15a1064f91f0dfc708f3",
+        "revCount": 58,
         "type": "git",
         "url": "ssh://git@github.com/zmre/iris.git"
       },
@@ -550,11 +550,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1767673346,
-        "narHash": "sha256-TRmykbmmVSJldW952E0qSiFD1JaCB5ETTrnwNaqkp8s=",
+        "lastModified": 1767844892,
+        "narHash": "sha256-Ns/DM4uNDJy6lQTtelSEQlRhN6/HuHoej+/xiBaiqh8=",
         "owner": "zmre",
         "repo": "mbr-markdown-browser",
-        "rev": "ad18e90c61c4f7f9dd4f49980a498dc18cd6592d",
+        "rev": "cedbac38416bd83f56b24fb98bb460b9e2f6d524",
         "type": "github"
       },
       "original": {
@@ -957,11 +957,11 @@
         "todo-comments-nvim": "todo-comments-nvim"
       },
       "locked": {
-        "lastModified": 1767673416,
-        "narHash": "sha256-PgvQKVD/eX7ApntwVmeKnnddbOSiT2APSVbRfkKo5jY=",
+        "lastModified": 1767759877,
+        "narHash": "sha256-7927CSdWMBNsCbue79gcnT8JFEf4OaJsZlfgWnGpsK4=",
         "owner": "zmre",
         "repo": "pwnvim",
-        "rev": "3f358b4ad163ffc926bf16d9425c11eb8d0b535f",
+        "rev": "31740438cfde7a3a83091bff41a30b04ece534ee",
         "type": "github"
       },
       "original": {
