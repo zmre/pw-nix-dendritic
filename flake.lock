@@ -166,11 +166,11 @@
     "fabric": {
       "flake": false,
       "locked": {
-        "lastModified": 1767633803,
-        "narHash": "sha256-9GR5WePMx5/DL4OaNrKDqNYhxA3MHx8G9OpB16bsqsI=",
+        "lastModified": 1767761346,
+        "narHash": "sha256-teN3N58pIObG/snAjbcQfOX3TMxr83XLVA4JK/YjQiI=",
         "owner": "danielmiessler",
         "repo": "fabric",
-        "rev": "90712506f1d7957b7315e9ea90b62aaf438b3391",
+        "rev": "d96a1721bbd5cc675b81cf37dac8a8a3a6bb5725",
         "type": "github"
       },
       "original": {
@@ -453,11 +453,11 @@
         "paiTemplate": "paiTemplate"
       },
       "locked": {
-        "lastModified": 1767890416,
-        "narHash": "sha256-VbmkSJBf5MkxmpwmYZ/BOj0HuQwO7jTj6DVGoiAYMzg=",
+        "lastModified": 1767900466,
+        "narHash": "sha256-jQt56iQ0QzV1vbg1I40J83T+wHUxarN0QhAOzy5QW3Q=",
         "ref": "refs/heads/main",
-        "rev": "61c959dc2a42b4e5799a15a1064f91f0dfc708f3",
-        "revCount": 58,
+        "rev": "1570aea477165688e0484d7e1e64ef55b17a1c5d",
+        "revCount": 60,
         "type": "git",
         "url": "ssh://git@github.com/zmre/iris.git"
       },
@@ -570,11 +570,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1767669309,
-        "narHash": "sha256-D6SwnN3vN1iKkEuzmLX9kahY3MQ37IfPTwSsW+V3UiQ=",
+        "lastModified": 1767882842,
+        "narHash": "sha256-Wo1jRV29yb3NwWf1hG80rmhrTC5x3F+bvj5u/fvxMW4=",
         "owner": "numtide",
         "repo": "nix-ai-tools",
-        "rev": "84dd55ed30c341f82819ba1b3e877f347a9bba85",
+        "rev": "1e0eaa265ba27a04f89b3265583bdf7da54a3972",
         "type": "github"
       },
       "original": {
@@ -686,11 +686,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1767379071,
-        "narHash": "sha256-EgE0pxsrW9jp9YFMkHL9JMXxcqi/OoumPJYwf+Okucw=",
+        "lastModified": 1767767207,
+        "narHash": "sha256-Mj3d3PfwltLmukFal5i3fFt27L6NiKXdBezC1EBuZs4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fb7944c166a3b630f177938e478f0378e64ce108",
+        "rev": "5912c1772a44e31bf1c63c0390b90501e5026886",
         "type": "github"
       },
       "original": {
@@ -856,11 +856,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767676320,
-        "narHash": "sha256-EVLj8QAEmH5M0S5j9s9Mvhq1EElCUBY32HxrufiObKI=",
+        "lastModified": 1767899940,
+        "narHash": "sha256-WCOCCZpWSY5UGQvtiGK9FBHC4Rd25BiG740ruRpztFY=",
         "owner": "zmre",
         "repo": "nix-pai",
-        "rev": "374b5ca76966d130775ac8aced0eaf1c652efc48",
+        "rev": "0889b025452b488b0402eada1ee62d82e6153804",
         "type": "github"
       },
       "original": {
@@ -1266,11 +1266,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767468822,
-        "narHash": "sha256-MpffQxHxmjVKMiQd0Tg2IM/bSjjdQAM+NDcX6yxj7rE=",
+        "lastModified": 1767801790,
+        "narHash": "sha256-QfX6g3Wj2vQe7oBJEbTf0npvC6sJoDbF9hb2+gM5tf8=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "d56486eb9493ad9c4777c65932618e9c2d0468fc",
+        "rev": "778a1d691f1ef45dd68c661715c5bf8cbf131c80",
         "type": "github"
       },
       "original": {
