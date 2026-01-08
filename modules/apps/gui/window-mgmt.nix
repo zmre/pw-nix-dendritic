@@ -69,7 +69,7 @@
       "default-folder-x"
 
       # quicklook plugins
-      "qlmarkdown"
+      #"qlmarkdown" # to be replaced by mbr
       "qlstephen"
       #"qlprettypatch" # not updated in 9 years
       "qlvideo"

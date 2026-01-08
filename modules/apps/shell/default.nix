@@ -1,4 +1,25 @@
 {inputs, ...}: {
+  # Declare flake input for mbr-markdown-browser (note, this is duplicated here and in the service, but that's on purpose)
+  flake-file.inputs.mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
+
+  # Putting mbr in global packages instead of home-manager ones so that the .app on macos will go where it can register
+  # the quicklook plugin properly.
+  flake.nixosModules.shell = {pkgs, ...}: let
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
+  in {
+    environment.systemPackages = [
+      inputs.mbr-markdown-browser.packages.${system}.default # my markdown previewer, browser, and static builder tool
+    ];
+  };
+
+  flake.darwinModules.shell = {pkgs, ...}: let
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
+  in {
+    environment.systemPackages = [
+      inputs.mbr-markdown-browser.packages.${system}.default # my markdown previewer, browser, and static builder tool
+    ];
+  };
+
   flake.modules.homeManager.shell = {
     pkgs,
     lib,
