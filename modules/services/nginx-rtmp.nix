@@ -8,9 +8,18 @@
       ${pkgs.lib.getExe pkgs.ffmpeg-full} -y -i "$dirname/$filename" -c copy "$dirname/$basename.mp4" && ${pkgs.coreutils}/bin/rm -f "$dirname/$filename"
 
       ${pkgs.lib.getExe pkgs.ffmpeg-full} -i "$dirname/$basename.mp4" -ar 16000 -ac 1 -c:a pcm_s16le "$dirname/$basename.wav"
+
       ${pkgs.whisper-cpp-vulkan}/bin/whisper-cli "$dirname/$basename.wav" -m "$modeldir/ggml-large-v3-turbo.bin" -l en --output-vtt >& /dev/null
-      # TODO: figure out how to get speaker labeling
       #${pkgs.whisper-cpp-vulkan}/bin/whisper-cli -f "$dirname/$basename.wav" -m "$modeldir/ggml-small.en-tdrz.bin" -tdrz -l en --output-srt >& /dev/null
+
+      # Rename to remove .wav. from filenames
+      mv "$dirname/$basename.wav.vtt" "$dirname/$basename.vtt"
+      mv "$dirname/$basename.wav.srt" "$dirname/$basename.srt"
+
+      # Send transcripts to attolia via taildrop
+      ${pkgs.tailscale}/bin/tailscale file cp "$dirname/$basename.vtt" attolia:
+      ${pkgs.tailscale}/bin/tailscale file cp "$dirname/$basename.srt" attolia:
+
       ${pkgs.coreutils}/bin/rm "$dirname/$basename.wav"
     '';
   in {
