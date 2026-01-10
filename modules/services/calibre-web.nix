@@ -9,7 +9,8 @@
     services.calibre-web = {
       enable = true;
       listen.port = internalPort;
-      listen.ip = "127.0.0.1";
+      # allow local net devices without tailscale to connect
+      listen.ip = "0.0.0.0";
       options = {
         # calibreLibrary = "/var/lib/calibre-web/db";
         enableBookConversion = true;
