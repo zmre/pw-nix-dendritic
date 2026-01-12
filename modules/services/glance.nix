@@ -37,8 +37,8 @@
                   }
                   {
                     type = "rss";
-                    limit = 12;
-                    collapse-after = 6;
+                    limit = 20;
+                    collapse-after = 8;
                     cache = "12h";
                     feeds = [
                       {
@@ -141,6 +141,10 @@
                       {
                         type = "reddit";
                         subreddit = "neovim";
+                      }
+                      {
+                        type = "reddit";
+                        subreddit = "apple";
                       }
                       {
                         type = "reddit";
