@@ -10,7 +10,7 @@
       buildInputs = with pkgs; [
         statix # Static Nix linter
         deadnix # Find unused Nix code
-        nixfmt-rfc-style # Nix formatter (RFC 166)
+        nixfmt # Nix formatter
         nil # Nix LSP
       ];
 

@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: let
+_: let
   substituters = [
     {
       url = "https://cache.nixos.org";
@@ -39,10 +35,15 @@
       publicKey = "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=";
       priority = 7;
     }
+    {
+      url = "zed.cachix.org";
+      publicKey = "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU=";
+      priority = 8;
+    }
   ];
   nixConfig = {
     extra-trusted-public-keys = builtins.catAttrs "publicKey" substituters;
-    extra-substituters = builtins.map (def: "${def.url}?priority=${toString def.priority}") substituters;
+    extra-substituters = map (def: "${def.url}?priority=${toString def.priority}") substituters;
   };
 in {
   flake.nixConfig = nixConfig;

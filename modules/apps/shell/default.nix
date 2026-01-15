@@ -18,6 +18,9 @@
     environment.systemPackages = [
       inputs.mbr-markdown-browser.packages.${system}.default # my markdown previewer, browser, and static builder tool
     ];
+    homebrew.brews = [
+      #"mactop" # moved here while nix version is failing to compile
+    ];
   };
 
   flake.modules.homeManager.shell = {
@@ -67,7 +70,7 @@
         zk # cli for indexing markdown files
       ]
       ++ (lib.optionals pkgs.stdenv.isDarwin [
-        mactop
+        pkgs.stable.mactop # unstable not building 2026-01-14
       ])
       ++ (lib.optionals pkgs.stdenv.isLinux [
         # terminal linux-only apps
