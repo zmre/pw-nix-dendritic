@@ -1,5 +1,8 @@
 {
   flake.darwinModules.network-gui = {
+    homebrew.brews = [
+      "iperf3"
+    ];
     homebrew.casks = [
       "tailscale-app" # moved from darwin services cuz exit nodes https://tailscale.com/kb/1065/macos-variants#comparison-table
     ];
