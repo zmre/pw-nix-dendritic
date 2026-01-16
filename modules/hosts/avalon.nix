@@ -18,6 +18,7 @@
     "audiobookshelf"
     "caddy"
     "calibre-web"
+    "city-explorer"
     "glance"
     #"llamacpp"
     "mbr"
@@ -231,23 +232,6 @@ in {
       networking.firewall.enable = true;
       networking.firewall.allowPing = true;
       networking.firewall.checkReversePath = false;
-
-      networking.firewall.allowedTCPPorts = [80];
-      services.caddy.virtualHosts."${hostname}.walsh.local:80" = {
-        listenAddresses = ["0.0.0.0"];
-        extraConfig = ''
-          encode {
-            zstd
-            gzip
-            minimum_length 1024
-          }
-
-          root * /var/lib/caddy/climate-research
-          file_server {
-            index index.html index.htm
-          }
-        '';
-      };
 
       # This option defines the first version of NixOS you have installed on this particular machine,
       # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -207,7 +207,7 @@
                           }
                           {
                             title = "City Livability Explorer";
-                            url = "http://avalon.walsh.local/";
+                            url = "https://avalon.${config.networking.domain}:8090/";
                           }
                         ];
                       }
