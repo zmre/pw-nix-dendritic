@@ -16,7 +16,7 @@
       "https://yazi.cachix.org?priority=5"
       "https://ghostty.cachix.org?priority=6"
       "https://cache.nixos-cuda.org?priority=7"
-      "zed.cachix.org?priority=8"
+      "https://zed.cachix.org?priority=8"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -32,6 +32,13 @@
   };
 
   inputs = {
+    city-explorer = {
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:zmre/city-explorer";
+    };
     darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-darwin/nix-darwin";

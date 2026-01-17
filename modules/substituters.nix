@@ -36,7 +36,7 @@ _: let
       priority = 7;
     }
     {
-      url = "zed.cachix.org";
+      url = "https://zed.cachix.org";
       publicKey = "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU=";
       priority = 8;
     }

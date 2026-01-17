@@ -186,7 +186,7 @@
                           }
                           {
                             title = "Channels";
-                            url = "https://synology1.${config.networking.domain}:8089/";
+                            url = "http://synology1.${config.networking.domain}:8089/";
                           }
                           #{title="Jellyfin"; url="https://${config.networking.hostName}${config.networking.domain}:8096/";}
                           {
