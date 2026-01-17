@@ -209,6 +209,10 @@
                             title = "City Livability Explorer";
                             url = "https://avalon.${config.networking.domain}:8090/";
                           }
+                          {
+                            title = "HDHomeRun";
+                            url = "http://192.168.37.12/lineup.html";
+                          }
                         ];
                       }
                     ];
