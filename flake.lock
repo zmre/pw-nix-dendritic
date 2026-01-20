@@ -482,6 +482,22 @@
         "type": "github"
       }
     },
+    "homebrew-sandreas": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753200179,
+        "narHash": "sha256-dUcROprFTfLipaG9rA5IkeOHA8IRP2nydTZDs+skODw=",
+        "owner": "sandreas",
+        "repo": "homebrew-tap",
+        "rev": "d717c5a375151a907217f5f9ed427e6cb421b3cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sandreas",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "import-tree": {
       "locked": {
         "lastModified": 1763762820,
@@ -1096,6 +1112,7 @@
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "homebrew-freetube": "homebrew-freetube",
+        "homebrew-sandreas": "homebrew-sandreas",
         "import-tree": "import-tree",
         "iris": "iris",
         "ironhide": "ironhide",

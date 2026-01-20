@@ -23,6 +23,7 @@
       "nghttp2" # needed for yt-dlp curl-impersonate
       "yt-dlp" # youtube downloader / 2024-11-19 moved back to nix now that curl-cffi (curl-impersonate) is supported
       "zstd" # needed for yt-dlp curl-impersonate
+      "m4b-tool"
     ];
   };
 
@@ -37,6 +38,8 @@
       sourceHighlight # for lf preview
       ffmpeg-full.bin
       ffmpegthumbnailer
+      fdk-aac-encoder
+      mp4v2
       imagemagick
       mediainfo
       exiftool
