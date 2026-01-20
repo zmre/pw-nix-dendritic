@@ -82,10 +82,6 @@
       flake = false;
       url = "github:pikachuexe/homebrew-freetube";
     };
-    homebrew-sandreas = {
-      flake = false;
-      url = "github:sandreas/homebrew-tap";
-    };
     import-tree.url = "github:vic/import-tree";
     iris = {
       inputs.flake-parts.follows = "flake-parts";
