@@ -141,6 +141,7 @@
       inputs = {
         flake-compat.follows = "flake-compat";
         flake-utils.follows = "flake-utils";
+        mbr.follows = "mbr-markdown-browser";
       };
       url = "github:zmre/pwnvim";
     };
