@@ -1,6 +1,6 @@
 {
   flake.nixosModules.nfs = {pkgs, ...}: let
-    nfsShares = ["web" "video" "homes" "Audiobook" "Books"];
+    nfsShares = ["web" "video" "homes" "Audiobook" "Books" "Podcasts"];
   in {
     environment.systemPackages = with pkgs; [
       nfs-utils
