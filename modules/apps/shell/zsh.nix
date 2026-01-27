@@ -288,11 +288,14 @@
           # Figure out the uniform type identifiers and uri schemes of a file (must specify the file)
           # for use in SwiftDefaultApps
           checktype = "mdls -name kMDItemContentType -name kMDItemContentTypeTree -name kMDItemKind";
-          dwupdate = "pushd ~/src/pw-nix-dendritic ; git pull ; nix run .#write-flake ; nix flake update ; popd ; brew upgrade -g ; dwswitchx ; dwshowupdates";
+          dwupdate = "pushd ~/src/pw-nix-dendritic ; git pull ; nix run .#write-flake ; nix flake update ; brew upgrade -g ; popd ; dwswitchx";
           # Cachix on my whole nix store is burning unnecessary bandwidth and time -- slowing things down rather than speeding up
           # From now on will just use for select personal flakes and things
           #dwswitch = "pushd ~; cachix watch-exec zmre darwin-rebuild -- switch --flake ~/.config/nixpkgs/.#$(hostname -s) ; popd";
-          dwswitchx = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; sudo darwin-rebuild switch --flake ~/src/pw-nix-dendritic/.#$(hostname -s) ; popd";
+          #dwswitchx = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; sudo darwin-rebuild switch --flake ~/src/pw-nix-dendritic/.#$(hostname -s) ; popd";
+          # Try out the `nh` tool for switching
+          dwswitchx = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; nh darwin switch . -H $(hostname -s) ; popd";
+          # TODO: Try out the `nh` tool for cleaning
           dwclean = "pushd ~; sudo nix-env --delete-generations +7 --profile /nix/var/nix/profiles/system; sudo nix-collect-garbage --delete-older-than 30d ; nix store optimise ; popd";
           dwupcheck = "pushd ~/src/pw-nix-dendritic ; nix run .#write-flake ; nix flake update ; sudo darwin-rebuild build --flake ~/src/pw-nix-dendritic.#$(hostname -s) && nix store diff-closures /nix/var/nix/profiles/system ~/src/pw-nix-dendritic/result; popd"; # todo: prefer nvd?
           # i use the zsh shell out in case anyone blindly copies this into their bash or fish profile since syntax is zsh specific
@@ -300,8 +303,10 @@
             zsh -c "nix store diff-closures /nix/var/nix/profiles/system-*-link(om[2]) /nix/var/nix/profiles/system-*-link(om[1])"'';
         }
         // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+          # TODO: Try out the `nh` tool for home-manager switching (nh home switch . -c myHome)
           hmswitch = "pushd ~/src/pw-nix-dendritic ; nix run .#write-flake ; home-manager switch --flake ~/src/pw-nix-dendritic/.#$(hostname -s) --show-trace; popd";
           hmupdate = "pushd ~/src/pw-nix-dendritic ; git pull ; nix run .#write-flake ; nix flake update ; popd ; hmswitch";
+          # TODO: Try out the `nh` tool for nixos switching (nh os switch . -H myHost)
           noupdate = "pushd ~/src/pw-nix-dendritic; git pull ; nix run .#write-flake ; nix flake update; popd; noswitch";
           noswitch = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; sudo nixos-rebuild switch --flake .# ; popd";
         };

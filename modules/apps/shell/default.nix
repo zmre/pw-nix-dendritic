@@ -36,6 +36,10 @@
       else if config.hardware.gpu == "rocm"
       then pkgs.btop-rocm
       else pkgs.btop;
+    homeDir =
+      if pkgs.stdenvNoCC.isDarwin
+      then "/Users/${config.home.username}"
+      else "/home/${config.home.username}";
   in {
     imports = with inputs.self.modules.homeManager; [
       # Note: hardware-options is imported at host level to avoid duplicates
@@ -107,6 +111,12 @@
       nix-index.enable = true;
       nix-index.enableBashIntegration = true;
       nix-index.enableZshIntegration = true;
+      nh = {
+        enable = true;
+        clean.enable = false;
+        clean.extraArgs = "--keep-since 30d --keep 7";
+        flake = "${homeDir}/src/pw-nix-dendritic"; # sets NH_OS_FLAKE variable for you
+      };
       zoxide = {
         enable = true;
         enableZshIntegration = true;
@@ -144,8 +154,8 @@
 
       ZK_NOTEBOOK_DIR =
         if pkgs.stdenvNoCC.isDarwin
-        then "/Users/${config.home.username}/Library/Mobile Documents/com~apple~CloudDocs/Notes"
-        else "/home/${config.home.username}/Notes";
+        then "${homeDir}/Library/Mobile Documents/com~apple~CloudDocs/Notes"
+        else "${homeDir}/Notes";
     };
   };
 }
