@@ -2,7 +2,7 @@
   flake.nixosModules.amd-gpu = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       # gpu utils
-      rocmPackages.amdsmi
+      #rocmPackages.amdsmi
       rocmPackages.rocminfo
       rocmPackages.clr
       rocmPackages.hipblas

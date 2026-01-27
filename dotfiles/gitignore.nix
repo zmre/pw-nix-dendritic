@@ -1,4 +1,14 @@
 [
+  # Secrets
+  "*.pem"
+  "*.key"
+  "*.p12"
+  "*.pfx"
+  "credentials.json"
+  "secrets.json"
+  "*-credentials.json"
+  "service-account*.json"
+
   "$RECYCLE.BIN/"
   "*$py.class"
   "**/*.rs.bk"

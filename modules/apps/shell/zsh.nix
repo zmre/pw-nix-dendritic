@@ -308,7 +308,7 @@
           hmupdate = "pushd ~/src/pw-nix-dendritic ; git pull ; nix run .#write-flake ; nix flake update ; popd ; hmswitch";
           # TODO: Try out the `nh` tool for nixos switching (nh os switch . -H myHost)
           noupdate = "pushd ~/src/pw-nix-dendritic; git pull ; nix run .#write-flake ; nix flake update; popd; noswitch";
-          noswitch = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; sudo nixos-rebuild switch --flake .# ; popd";
+          noswitch = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; nh os switch . -H $(hostname -s); popd";
         };
     };
   };
