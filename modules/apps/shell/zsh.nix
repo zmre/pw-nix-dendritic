@@ -295,8 +295,8 @@
           #dwswitchx = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; sudo darwin-rebuild switch --flake ~/src/pw-nix-dendritic/.#$(hostname -s) ; popd";
           # Try out the `nh` tool for switching
           dwswitchx = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; nh darwin switch . -H $(hostname -s) ; popd";
-          # TODO: Try out the `nh` tool for cleaning
-          dwclean = "pushd ~; sudo nix-env --delete-generations +7 --profile /nix/var/nix/profiles/system; sudo nix-collect-garbage --delete-older-than 30d ; nix store optimise ; popd";
+          dwclean = "nh clean all -k 7 -K 30d --optimise";
+          #dwclean = "pushd ~; sudo nix-env --delete-generations +7 --profile /nix/var/nix/profiles/system; sudo nix-collect-garbage --delete-older-than 30d ; nix store optimise ; popd";
           dwupcheck = "pushd ~/src/pw-nix-dendritic ; nix run .#write-flake ; nix flake update ; sudo darwin-rebuild build --flake ~/src/pw-nix-dendritic.#$(hostname -s) && nix store diff-closures /nix/var/nix/profiles/system ~/src/pw-nix-dendritic/result; popd"; # todo: prefer nvd?
           # i use the zsh shell out in case anyone blindly copies this into their bash or fish profile since syntax is zsh specific
           dwshowupdates = ''
@@ -306,9 +306,10 @@
           # TODO: Try out the `nh` tool for home-manager switching (nh home switch . -c myHome)
           hmswitch = "pushd ~/src/pw-nix-dendritic ; nix run .#write-flake ; home-manager switch --flake ~/src/pw-nix-dendritic/.#$(hostname -s) --show-trace; popd";
           hmupdate = "pushd ~/src/pw-nix-dendritic ; git pull ; nix run .#write-flake ; nix flake update ; popd ; hmswitch";
-          # TODO: Try out the `nh` tool for nixos switching (nh os switch . -H myHost)
+          hmclean = "nh clean user -k 7 -K 30d --optimise";
           noupdate = "pushd ~/src/pw-nix-dendritic; git pull ; nix run .#write-flake ; nix flake update; popd; noswitch";
           noswitch = "pushd ~/src/pw-nix-dendritic; nix run .#write-flake ; nh os switch . -H $(hostname -s); popd";
+          noclean = "nh clean all -k 7 -K 30d --optimise";
         };
     };
   };
