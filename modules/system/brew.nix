@@ -66,6 +66,7 @@
       casks = [
         # TODO: move these into better places; this file should just setup homebrew system
         "elgato-stream-deck"
+        "handy"
         "istat-menus"
         "karabiner-elements"
         "kopiaui" # ui for kopia dedupe backup
