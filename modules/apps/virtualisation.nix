@@ -15,7 +15,7 @@
 
     virtualisation.oci-containers.backend = "podman"; # or docker
     virtualisation.podman = {
-      enable = true;
+      enable = pkgs.stdenv.isLinux;
       autoPrune.enable = true;
       dockerCompat = true;
     };
@@ -26,12 +26,19 @@
     };
   };
 
-  flake.modules.homeManager.virtualization = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      colima
-      #docker
-      podman
-      toolbox
-    ];
+  flake.modules.homeManager.virtualization = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    home.packages = with pkgs;
+      [
+        colima
+        #docker
+      ]
+      ++ lib.optionals pkgs.stdenv.isLinux [
+        podman
+        toolbox
+      ];
   };
 }
