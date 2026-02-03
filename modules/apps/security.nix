@@ -118,7 +118,7 @@
         sslsplit
         # wireshark moved to nixos config
         # pick one of wireshark or wireshark-cli
-        pkgs.stable.wireshark
+        #pkgs.stable.wireshark
         #wireshark-cli
 
         # Passwords
@@ -126,7 +126,7 @@
         john
         hashcat-utils
         pdfcrack
-        rarcrack
+        #rarcrack
         crunch # wordlist generator
         #chntpw
         #crowbar # build issues on 2024-10-30
@@ -188,7 +188,7 @@
         brutespray
 
         # Sniffing
-        dsniff
+        #dsniff
         tcpflow
         p0f
         netsniff-ng
