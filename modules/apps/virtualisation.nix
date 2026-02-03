@@ -6,13 +6,19 @@
 
   flake.nixosModules.virtualization = {pkgs, ...}: {
     virtualisation.docker = {
-      enable = true;
+      enable = false;
       autoPrune.enable = true;
       autoPrune.dates = "weekly";
       # Don't start on boot; but it will start on-demand
       enableOnBoot = true;
     };
 
+    virtualisation.oci-containers.backend = "podman"; # or docker
+    virtualisation.podman = {
+      enable = true;
+      autoPrune.enable = true;
+      dockerCompat = true;
+    };
     virtualisation.libvirtd = {
       enable = true;
       onBoot = "start";
@@ -23,7 +29,9 @@
   flake.modules.homeManager.virtualization = {pkgs, ...}: {
     home.packages = with pkgs; [
       colima
-      docker
+      #docker
+      podman
+      toolbox
     ];
   };
 }

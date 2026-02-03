@@ -1,7 +1,7 @@
 # DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
 # Use `nix run .#write-flake` to regenerate it.
 {
-  description = "My updated nix config now more 'dendritic'";
+  description = "My updated nix config; now more 'dendritic'";
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
@@ -103,6 +103,7 @@
       };
       url = "github:IronCoreLabs/ironoxide-cli";
     };
+    llamacpp-strix-halo.url = "github:hellas-ai/nix-strix-halo";
     mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-index-database = {

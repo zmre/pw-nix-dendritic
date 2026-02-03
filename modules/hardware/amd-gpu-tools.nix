@@ -6,6 +6,7 @@
       rocmPackages.rocminfo
       rocmPackages.clr
       rocmPackages.hipblas
+      rocmPackages.hipblaslt # BF16 acceleration for llama.cpp
       rocmPackages.rocblas
       rocmPackages.rocm-smi
       amdgpu_top

@@ -52,7 +52,7 @@ in {
   ];
 
   config = {
-    flake-file.description = "My updated nix config now more 'dendritic'";
+    flake-file.description = "My updated nix config; now more 'dendritic'";
 
     # nixpkgs -- unstable is default, stable will be found under pkgs.stable
     flake-file.inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";

@@ -13,6 +13,7 @@
     # System-only
     "hardware-options"
     "amd-gpu"
+    "strix-halo-memory" # TTM memory config for 112GB GPU allocation
     "avalon-configuration"
     "avalon-disk"
     "audiobookshelf"
@@ -20,11 +21,14 @@
     "calibre-web"
     "city-explorer"
     "glance"
-    #"llamacpp"
+    #"llamacpp-glm" # GLM-4.7-Flash (smallest, for initial testing)
+    "llamacpp-gptoss" # Alternative: GPT-OSS-120B
+    #"llamacpp-minimax"   # Alternative: MiniMax-M2.1
+    #"llamacpp-qwen235b"  # Alternative: Qwen3-235B
     "mbr"
     "nfs"
     "nginx-rtmp"
-    "ollama"
+    #"ollama" # Replaced by llama.cpp services
     "plex"
     #"vllm"
     "protonmail-bridge"
@@ -32,6 +36,7 @@
     "ssh"
     "system"
     "tailscale"
+    "virtualization"
 
     # Cross-platform or home-manager only
     "ai"
@@ -76,7 +81,8 @@ in {
         home.homeDirectory = "/home/${username}";
         home.stateVersion = "25.05";
         home.sessionVariables = {
-          OLLAMA_HOST = "127.0.0.1:11433"; # non-standard port, no tls
+          # llama.cpp endpoint via Caddy with TLS
+          LLAMA_CPP_HOST = "https://avalon.savannah-basilisk.ts.net:8082";
         };
       };
       users.defaultUserShell = pkgs.zsh;
@@ -89,7 +95,7 @@ in {
         isNormalUser = true;
         # TODO: need to put the various extra groups into their module files so they only get added
         #       when the module is used.  Example: caddy, calibre-web, docker, etc.
-        extraGroups = ["wheel" "power" "docker" "ollama" "render" "video" "nginx" "networkmanager" "libvirtd" "calibre-web" "caddy" "audiobookshelf"];
+        extraGroups = ["wheel" "power" "docker" "render" "video" "render" "nginx" "networkmanager" "libvirtd" "calibre-web" "caddy" "audiobookshelf"];
         openssh.authorizedKeys.keys = [
           "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXh/Nzg2PjtiaOmAAOrEiWrEOjmi6Ps5Jtvu1WqrWtXQYP7g6K0Unx8JGt5GWjeLO6lblDs7nvly3kw3bHDsbXCqYFLqLO0PTKXIaX8spiJ/+r0Pd70Nq5ZNOgoL87hKTXQwwn4FvVzBAu51KS05ZXdfT5xBkzZJc2bcEjR2uIaSI7R27hAyfVMbUx52+sUyi3uShMGmOnrHJbTzNPLjFBXBjNTZTIVI0ztUAGmeiee/ON0yVeONGTldfUXiCM7KcUWVSvlnE3agI/O2p/854bdfIt2KxKRgzBYwVInVc5k8RVlGzCfzw1qdx4nQiky6d2hAek2K9FxG5SnfIDUHUZ test cert 1"
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHyqQGP6vlWB9xV61sF9vJubmHMfKwLeTsweia2pdDRJayTp0xGFMa1uTgvfacmqOqcwL8w9cia4PmTOskVf1EQ= pwalsh@attolia"
@@ -205,6 +211,7 @@ in {
       services.locate.enable = true;
       services.timesyncd.enable = true;
       services.earlyoom.enable = true;
+      services.earlyoom.freeMemThreshold = 5;
       programs.ssh.startAgent = true;
       programs.mtr.enable = true;
       services.udisks2 = {

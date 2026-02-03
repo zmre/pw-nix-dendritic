@@ -3,7 +3,7 @@
     programs.calibre.enable = true;
   };
   flake.nixosModules.calibre-web = {config, ...}: let
-    internalPort = 8082;
+    internalPort = 7082;
     remotePort = 8083;
   in {
     services.calibre-web = {

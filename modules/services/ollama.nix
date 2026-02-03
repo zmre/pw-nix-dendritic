@@ -41,12 +41,12 @@
       port = 11433; # non-standard because we're fronting with caddy for tls and cert management
       loadModels = [
         "deepseek-coder-v2:16b"
-        "deepseek-r1:32b"
-        "deepseek-r1:8b"
         "devstral-small-2:24b"
         "gemma3:27b"
+        "glm-4.7-flash"
         "glm4:9b"
         "gpt-oss:20b"
+        "gpt-oss-safeguard:120b"
         "llama3:8b"
         "magistral:24b"
         "ministral-3:14b"
