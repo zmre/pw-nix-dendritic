@@ -18,6 +18,7 @@
     "ssh"
     "system"
     "tailscale"
+    "determinate"
     "volantis-configuration"
     "virtualization"
 

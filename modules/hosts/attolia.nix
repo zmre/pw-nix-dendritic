@@ -16,8 +16,8 @@
     # System/darwin-only
     "attolia-config"
     "brew"
+    "determinate"
     "prefs"
-    "remote-builders"
     "system"
     "terminfo"
     "touchid"

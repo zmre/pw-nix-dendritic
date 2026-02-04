@@ -7,7 +7,7 @@
 
   nixConfig = {
     download-buffer-size = 1073741824;
-    extra-experimental-features = "nix-command flakes pipe-operators";
+    extra-experimental-features = "pipe-operators";
     extra-substituters = [
       "https://cache.nixos.org?priority=1"
       "https://zmre.cachix.org?priority=2"
@@ -43,6 +43,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-darwin/nix-darwin";
     };
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
     disko = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/disko";

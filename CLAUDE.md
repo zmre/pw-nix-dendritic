@@ -60,7 +60,8 @@ flake-file **automates generation** of `flake.nix` from your modules:
     │
     ├── hosts/             # Host-specific configurations
     │   ├── attolia.nix    # Primary macOS workstation (aarch64-darwin)
-    │   ├── avalon.nix     # NixOS server/desktop (x86_64-linux, Framework)
+    │   ├── avalon.nix     # NixOS server/desktop (x86_64-linux, Framework Desktop)
+    │   ├── volantis.nix   # NixOS laptop (x86_64-linux, Framework 11th-gen Intel)
     │   └── aironcore.nix  # Work machine home-manager only (x86_64-linux)
     │
     ├── apps/              # Application modules
@@ -112,10 +113,11 @@ flake-file **automates generation** of `flake.nix` from your modules:
     │   ├── brew.nix       # Homebrew (Darwin only)
     │   ├── common.nix     # Common system settings
     │   ├── darwin-prefs.nix # macOS preferences
+    │   ├── determinate.nix # Determinate Nix integration (Darwin + NixOS)
     │   ├── fonts.nix      # Font packages
     │   ├── keyboard.nix   # Keyboard settings
-    │   ├── nix.nix        # Nix daemon settings
-    │   ├── remote-builders.nix # Distributed builds
+    │   ├── nix.nix        # Nix daemon settings (NixOS only; Darwin defers to Determinate)
+    │   ├── remote-builders.nix # Distributed builds (NixOS only; Darwin uses Determinate's native Linux builder)
     │   ├── terminfo.nix   # Terminal info database
     │   ├── touchid.nix    # Touch ID for sudo (Darwin)
     │   └── ulimits.nix    # System limits
@@ -277,6 +279,7 @@ Primary macOS workstation. Full-featured development environment.
 
 - **Type**: `darwinConfigurations`
 - **Platform**: Apple Silicon Mac
+- **Nix**: Determinate Nix — `nix.enable = false` on Darwin; all nix settings managed via `determinateNix.customSettings` in `determinate.nix`. Native Linux builder replaces remote-builders.
 - **Features**: Homebrew management, aerospace window manager, full GUI apps, home-manager
 
 ### avalon (x86_64-linux)
@@ -285,8 +288,18 @@ NixOS server/desktop running on Framework Desktop AMD AI Max 300.
 
 - **Type**: `nixosConfigurations`
 - **Platform**: AMD with ROCm GPU support
-- **Features**: ZFS, Plex, Ollama, nginx-rtmp, Tailscale, NFS mounts, SSH server
+- **Nix**: Determinate Nix via NixOS module; `nix.nix` common settings still apply
+- **Features**: ZFS, Plex, llama.cpp, nginx-rtmp, Tailscale, NFS mounts, SSH server
 - **Hardware**: Uses nixos-hardware Framework module, disko for disk config
+
+### volantis (x86_64-linux)
+
+NixOS laptop on Framework 11th-gen Intel.
+
+- **Type**: `nixosConfigurations`
+- **Platform**: Intel with integrated graphics
+- **Nix**: Determinate Nix via NixOS module
+- **Features**: Full GUI desktop, security/hacking tools, Tailscale, fingerprint reader
 
 ### aironcore (x86_64-linux)
 
@@ -294,6 +307,7 @@ Work machine with home-manager only (no system-level NixOS control).
 
 - **Type**: `homeConfigurations`
 - **Platform**: x86_64 Linux with CUDA GPU
+- **Nix**: Standard Nix (no Determinate — no system-level control)
 - **Features**: Shell, dev tools, AI tools, vim - no GUI or system services
 
 ## Important Constraints
@@ -374,8 +388,17 @@ The migration from the old 87KB monolithic home-manager config is largely comple
 - ✅ Security tools
 - ✅ Network utilities
 
+### Determinate Nix
+
+This config uses [Determinate Nix](https://determinate.systems/) on all system-managed hosts (attolia, avalon, volantis). Key architectural points:
+
+- **Darwin (attolia)**: `nix.enable = false` in `nix.nix` — nix-darwin does NOT manage `/etc/nix/nix.conf`. All nix settings are provided via `determinateNix.customSettings` in `modules/system/determinate.nix`. GC is handled automatically by Determinate's nixd.
+- **NixOS (avalon, volantis)**: The Determinate NixOS module is imported alongside the existing `nix.nix` common settings. Both coexist.
+- **aironcore**: Excluded — home-manager only, no system-level nix management.
+- **Do NOT use `follows`** for the Determinate input — it causes cache misses per upstream recommendation.
+- `nix-command` and `flakes` are stable in Determinate Nix. Only `pipe-operators` remains in `extra-experimental-features`.
+
 ### Remaining Items
 
-- Framework laptop (volantis) config - was in old config, not yet ported
 - Parallels VM configs - not yet needed
 - Some edge-case apps that may be missing

@@ -74,7 +74,9 @@
   };
 in {
   flake.darwinModules.system = {
-    imports = [common];
+    # Determinate Nix manages nix config on Darwin via determinateNix.customSettings
+    nix.enable = false;
+    nix.channel.enable = false;
   };
   flake.nixosModules.system = {
     imports = [common];

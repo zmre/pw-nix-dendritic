@@ -12,7 +12,7 @@
 
   # Nix configuration (for flake settings like substituters)
   nixConfig = {
-    extra-experimental-features = "nix-command flakes pipe-operators";
+    extra-experimental-features = "pipe-operators";
     download-buffer-size = 1073741824; # 1 GiB (increased from 512 MiB)
     nar-buffer-size = 134217728; # 128 MiB (increased from default 32 MiB)
   };

@@ -16,6 +16,7 @@
     "strix-halo-memory" # TTM memory config for 112GB GPU allocation
     "avalon-configuration"
     "avalon-disk"
+    "determinate"
     "audiobookshelf"
     "caddy"
     "calibre-web"
