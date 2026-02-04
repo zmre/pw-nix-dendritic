@@ -56,7 +56,7 @@ in {
     imports = [
       common
     ];
-    security.lockKernelModules = true;
+    security.lockKernelModules = false;
     security.forcePageTableIsolation = true;
     security.protectKernelImage = true;
     boot.kernelParams = [

@@ -133,11 +133,16 @@ in {
         }
       ];
       networking.defaultGateway = "192.168.37.1";
-      networking.nameservers = ["100.100.100.100" "192.168.37.1"];
+      # systemd-resolved provides split DNS — Tailscale configures it via D-Bus
+      # so tailnet queries go to MagicDNS and everything else goes to NextDNS
+      services.resolved = {
+        enable = true;
+        dnssec = "allow-downgrade";
+        fallbackDns = ["1.1.1.1" "8.8.8.8"];
+      };
       networking.stevenblack.enable = true; # hosts based blocklist
       # I prefer NIST time servers
       networking.timeServers = ["time.nist.gov" "us.pool.ntp.org"];
-      networking.resolvconf.enable = true;
 
       nixpkgs.hostPlatform = "x86_64-linux";
       hardware.cpu.amd.updateMicrocode = true;
@@ -238,7 +243,7 @@ in {
       # Or disable the firewall altogether.
       networking.firewall.enable = true;
       networking.firewall.allowPing = true;
-      networking.firewall.checkReversePath = false;
+      # checkReversePath now handled in tailscale.nix with "loose"
 
       # This option defines the first version of NixOS you have installed on this particular machine,
       # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
