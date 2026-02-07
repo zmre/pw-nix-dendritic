@@ -1,17 +1,11 @@
-{inputs, ...}: {
-  # Strix Halo optimized llama.cpp with ROCWMMA (15x faster flash attention)
-  flake-file.inputs.llamacpp-strix-halo.url = "github:hellas-ai/nix-strix-halo";
-
+{
   flake.nixosModules.llamacpp-glm = {
     pkgs,
     config,
     lib,
     ...
   }: let
-    #strixPkgs = inputs.llamacpp-strix-halo.packages.x86_64-linux;
-    # Use the ROCWMMA-optimized build for gfx1151 (Strix Halo)
     llamacppPkg = pkgs.llama-cpp-vulkan;
-    #rocmPkg = strixPkgs."rocm-gfx1151";
   in {
     # GLM-4.7-Flash service (~10GB Q8_0 quant)
     # Efficient MoE, supports 200K context, starting with 128K

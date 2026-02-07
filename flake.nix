@@ -103,7 +103,6 @@
       };
       url = "github:IronCoreLabs/ironoxide-cli";
     };
-    llamacpp-strix-halo.url = "github:hellas-ai/nix-strix-halo";
     mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-index-database = {
