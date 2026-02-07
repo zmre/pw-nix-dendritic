@@ -262,6 +262,9 @@
           #nixfmt # nix formatter
           alejandra # better nix formatter alternative
           statix # linter for nix
+          nil # nix lsp
+          nixd # nix lsp
+          cargo-toml-lint
           shellcheck
           languagetool # needed by grammarous, but must be v5.9 (see overlay)
           # luajitPackages.lua-lsp
