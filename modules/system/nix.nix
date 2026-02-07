@@ -1,7 +1,7 @@
 {config, ...}: let
   common = {pkgs, ...}: {
     nix = {
-      # package = pkgs.stable.nix;
+      package = pkgs.nix;
       settings = {
         # Because macos sandbox can create issues https://github.com/NixOS/nix/issues/4119
         sandbox = pkgs.stdenv.isLinux;
