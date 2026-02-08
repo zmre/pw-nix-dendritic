@@ -13,6 +13,7 @@
       radeontop
       radeontools
       vulkan-tools
+      nvtopPackages.amd
       rgp # amd workload inspection tool
     ];
   };
