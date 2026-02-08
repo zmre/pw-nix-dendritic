@@ -2,6 +2,7 @@
   flake.darwinModules.dev-gui = {
     homebrew.casks = [
       "dash" # offline developer docs
+      "devtoys"
       "fork"
       "gitkraken-cli"
     ];
