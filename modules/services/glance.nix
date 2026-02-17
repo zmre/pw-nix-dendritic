@@ -301,6 +301,32 @@
                   }
                   {
                     type = "repository";
+                    repository = "zmre/mbr-markdown-browser";
+                    cache = "12h";
+                  }
+                  {
+                    type = "repository";
+                    repository = "zmre/nix-pai";
+                    cache = "12h";
+                  }
+                  {
+                    type = "repository";
+                    repository = "zmre/pwnvim";
+                    cache = "12h";
+                  }
+                  {
+                    type = "repository";
+                    repository = "zmre/mdenhance";
+                    cache = "12h";
+                  }
+                  {
+                    type = "repository";
+                    repository = "zmre/pwdev";
+                    cache = "12h";
+                  }
+
+                  {
+                    type = "repository";
                     repository = "ironcorelabs/recrypt-rs";
                     cache = "12h";
                   }
