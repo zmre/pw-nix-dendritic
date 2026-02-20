@@ -20,7 +20,7 @@
         # wheel for linux, admin for darwin
         allowed-users = ["@wheel" "@admin"];
 
-        trusted-substituters = config.flake.nixConfig.extra-substituters;
+        substituters = config.flake.nixConfig.extra-substituters;
         trusted-public-keys = config.flake.nixConfig.extra-trusted-public-keys;
 
         # Fallback quickly if substituters are not available.

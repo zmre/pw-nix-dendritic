@@ -26,7 +26,7 @@
       code_dir="$(echo ~/Library)/Application Support/Code/User"
       settings="$code_dir/settings.json"
       settings_nix="$code_dir/settings.nix.json"
-      settings_bak="$settings.bak"
+      settings_bak="$settings.hmbk"
 
       if [ -f "$settings" ] ; then
         echo "activating $settings"
@@ -210,9 +210,8 @@
       };
 
       zed-editor = {
-        enable = true; # 2025-07-02 disable until https://github.com/nix-community/home-manager/issues/7327 is resolved
-        #package = pkgs.stable.zed-editor; # takes forever to build so sticking to recent stable
-        # added the zed cachix so this should be better now
+        enable = true;
+        package = pkgs.stable.zed-editor; # takes forever to build so sticking to recent stable
         extensions = [
           "catpuccin"
           "csv"

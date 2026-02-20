@@ -93,7 +93,8 @@
         "iMovie" = 408981434;
         #"iStumbler" = 546033581;
         "Ivory" = 6444602274;
-        "Keynote" = 409183694;
+        #"Keynote" = 409183694; # this is old keynote (v14)
+        "Keynote" = 361285480; # this is keynote creator studio (v15)
         "Keyshape" = 1223341056; # animated svg editor
         "Microsoft Excel" = 462058435;
         "Microsoft Word" = 462054704;

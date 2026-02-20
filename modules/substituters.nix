@@ -35,11 +35,12 @@ _: let
       publicKey = "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=";
       priority = 7;
     }
-    {
-      url = "https://zed.cachix.org";
-      publicKey = "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU=";
-      priority = 8;
-    }
+    # Not getting updated as of 2026-02-20
+    # {
+    #   url = "https://zed.cachix.org";
+    #   publicKey = "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU=";
+    #   priority = 8;
+    # }
   ];
   nixConfig = {
     extra-trusted-public-keys = builtins.catAttrs "publicKey" substituters;
