@@ -37,8 +37,8 @@
                   }
                   {
                     type = "rss";
-                    limit = 20;
-                    collapse-after = 8;
+                    limit = 25;
+                    collapse-after = 15;
                     cache = "12h";
                     feeds = [
                       {
@@ -208,6 +208,10 @@
                           {
                             title = "City Livability Explorer";
                             url = "https://avalon.${config.networking.domain}:8090/";
+                          }
+                          {
+                            title = "Synology Admin";
+                            url = "http://synology1.${config.networking.domain}:5000/";
                           }
                           {
                             title = "HDHomeRun";
