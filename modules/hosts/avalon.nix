@@ -22,7 +22,7 @@
     "city-explorer"
     "glance"
     #"llamacpp-glm" # GLM-4.7-Flash (smallest, for initial testing)
-    "llamacpp-gptoss" # Alternative: GPT-OSS-120B
+    #"llamacpp-gptoss" # Alternative: GPT-OSS-120B
     #"llamacpp-minimax"   # Alternative: MiniMax-M2.1
     #"llamacpp-qwen235b"  # Alternative: Qwen3-235B
     "mbr"

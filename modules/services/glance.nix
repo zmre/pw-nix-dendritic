@@ -91,36 +91,52 @@
                     collapse-after = 15;
                     cache = "12h";
                     widgets = [
-                      {type = "hacker-news";}
+                      {
+                        type = "hacker-news";
+                        limit = 20;
+                        collapse-after = 10;
+                      }
                       {
                         type = "reddit";
                         subreddit = "boulder";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "news";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "worldnews";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "magic";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "coinmagic";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "magictricksrevealed";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                     ];
                   }
                   {
                     type = "videos";
-                    collapse-after-rows = 2;
+                    collapse-after-rows = 3;
                     style = "grid-cards";
                     include-shorts = true;
                     "channels" = [
@@ -141,22 +157,32 @@
                       {
                         type = "reddit";
                         subreddit = "neovim";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "apple";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "nixos";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "selfhosted";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                       {
                         type = "reddit";
                         subreddit = "commandline";
+                        limit = 20;
+                        collapse-after = 10;
                       }
                     ];
                   }
