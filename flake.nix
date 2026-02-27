@@ -148,7 +148,6 @@
       flake = false;
       url = "github:StevenBlack/hosts";
     };
-    systems.url = "github:nix-systems/default";
     yazi-flavors = {
       flake = false;
       url = "github:yazi-rs/flavors";

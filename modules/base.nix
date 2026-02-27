@@ -17,6 +17,27 @@
     nar-buffer-size = 134217728; # 128 MiB (increased from default 32 MiB)
   };
 
+  # Disable jeepney checks on Darwin — installCheck needs dbus-daemon and
+  # pythonImportsCheck tries to import jeepney.io.trio which needs `outcome`
+  # (a trio dep not present).  Affects yt-dlp → secretstorage → jeepney.
+  darwinFixesOverlay = final: prev:
+    lib.optionalAttrs prev.stdenv.isDarwin {
+      pythonPackagesExtensions =
+        prev.pythonPackagesExtensions
+        ++ [
+          (
+            pfinal: pprev: {
+              jeepney = pprev.jeepney.overrideAttrs (old: {
+                doInstallCheck = false;
+                pythonImportsCheck =
+                  builtins.filter (m: m != "jeepney.io.trio")
+                  (old.pythonImportsCheck or []);
+              });
+            }
+          )
+        ];
+    };
+
   stableOverlay = final: prev: {
     stable =
       if final.stdenv.isDarwin
@@ -91,7 +112,7 @@ in {
     };
 
     flake.darwinModules.system = {
-      nixpkgs.overlays = [stableOverlay];
+      nixpkgs.overlays = [stableOverlay darwinFixesOverlay];
       nixpkgs.config = nixpkgsConfig;
     };
   };

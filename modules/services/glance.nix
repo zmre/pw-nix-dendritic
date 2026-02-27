@@ -243,6 +243,10 @@
                             title = "HDHomeRun";
                             url = "http://192.168.37.12/lineup.html";
                           }
+                          {
+                            title = "Local Protect Video Feed";
+                            url = "https://192.168.37.195/protect/dashboard"
+                          }
                         ];
                       }
                     ];
