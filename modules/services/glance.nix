@@ -245,7 +245,7 @@
                           }
                           {
                             title = "Local Protect Video Feed";
-                            url = "https://192.168.37.195/protect/dashboard"
+                            url = "https://192.168.37.195/protect/dashboard";
                           }
                         ];
                       }
