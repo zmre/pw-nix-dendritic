@@ -981,11 +981,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1768447987,
-        "narHash": "sha256-9h4Mtp8DB7FgPoprsN56QqRbnhykEgs5welsKzf3bjA=",
+        "lastModified": 1772561327,
+        "narHash": "sha256-A9T1jCbia1FIGIODMijIbIZdMrao9hEvj2TcTz8dYEs=",
         "owner": "zmre",
         "repo": "pwneovide",
-        "rev": "777243d8088efa2cab2ba7dce94202d4417fe8b8",
+        "rev": "2c2ee756e6ac114861a04b4c343d5f1ce6fcd290",
         "type": "github"
       },
       "original": {
@@ -1013,11 +1013,11 @@
         "todo-comments-nvim": "todo-comments-nvim"
       },
       "locked": {
-        "lastModified": 1772142185,
-        "narHash": "sha256-6evuexqZohys0xyPiKUPcSD4OcD8Zrdnd6NjO4oaUi8=",
+        "lastModified": 1772559571,
+        "narHash": "sha256-ESuzMPMmFkuNPllLitFW7a5uyeDenjM7Lxl+ctm7TH0=",
         "owner": "zmre",
         "repo": "pwnvim",
-        "rev": "5321e2f2cb956351c751ef2ecd25a6f6752d285c",
+        "rev": "ab3bf4850b3a32645d9b53782ad75e08d4d428d6",
         "type": "github"
       },
       "original": {
@@ -1127,11 +1127,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1768445213,
-        "narHash": "sha256-y0BglISgDr61vvdb35m0O4npuqh1pojlBNDILo9j8AI=",
+        "lastModified": 1772507320,
+        "narHash": "sha256-GdGXniFvtIfRiakc+ncdQYnoQjKbTCv9Imjfl4ggquI=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "1cd63408e71cc0e6a89ff2cb7c4107214e2523cc",
+        "rev": "1775eafa1879ac098ee436849bc9c3d963206f89",
         "type": "github"
       },
       "original": {
