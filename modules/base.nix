@@ -20,6 +20,7 @@
   # Disable jeepney checks on Darwin — installCheck needs dbus-daemon and
   # pythonImportsCheck tries to import jeepney.io.trio which needs `outcome`
   # (a trio dep not present).  Affects yt-dlp → secretstorage → jeepney.
+  # TODO: check when I can remove this https://github.com/NixOS/nixpkgs/issues/493775
   darwinFixesOverlay = final: prev:
     lib.optionalAttrs prev.stdenv.isDarwin {
       pythonPackagesExtensions =
