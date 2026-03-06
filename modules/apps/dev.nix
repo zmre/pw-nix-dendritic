@@ -23,6 +23,7 @@
     };
   in {
     home.packages = with pkgs; [
+      devenv # alternative to direnv stuff
       # file viewers
       jq
       lynx
