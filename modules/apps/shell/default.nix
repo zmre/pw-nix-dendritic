@@ -57,6 +57,7 @@
         fortune
         glow # browse markdown dirs
         html2text
+        hydra-check
         jq
         kalker # cli calculator; alt. to bc and calc
         kondo # free disk space by cleaning project build dirs
