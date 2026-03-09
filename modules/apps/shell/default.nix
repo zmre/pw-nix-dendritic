@@ -1,6 +1,7 @@
 {inputs, ...}: {
   # Declare flake input for mbr-markdown-browser (note, this is duplicated here and in the service, but that's on purpose)
   flake-file.inputs.mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
+  flake-file.inputs.nix-auth.url = "github:numtide/nix-auth";
 
   # Putting mbr in global packages instead of home-manager ones so that the .app on macos will go where it can register
   # the quicklook plugin properly.
@@ -40,6 +41,7 @@
       if pkgs.stdenvNoCC.isDarwin
       then "/Users/${config.home.username}"
       else "/home/${config.home.username}";
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
     imports = with inputs.self.modules.homeManager; [
       # Note: hardware-options is imported at host level to avoid duplicates
@@ -65,6 +67,7 @@
         lynx
         mdcat # colorize markdown
         nixpkgs-track # check if a PR is available in unstable/stable/etc
+        inputs.nix-auth.packages.${system}.default # setup github auth for nix
         page # like less, but uses nvim, which is handy for selecting out text and such
         pigz # gzip, but parallel and faster; use pigz -9 -k input.jsonl for maximum compression and compat
         poppler-utils # for pdf2text
