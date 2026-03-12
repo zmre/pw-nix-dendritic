@@ -9,7 +9,7 @@
 
       ${pkgs.lib.getExe pkgs.ffmpeg-full} -i "$dirname/$basename.mp4" -ar 16000 -ac 1 -c:a pcm_s16le "$dirname/$basename.wav"
 
-      ${pkgs.whisper-cpp-vulkan}/bin/whisper-cli "$dirname/$basename.wav" -m "$modeldir/ggml-large-v3-turbo.bin" -l en --output-vtt >& /dev/null
+      ${pkgs.stable.whisper-cpp}/bin/whisper-cli "$dirname/$basename.wav" -m "$modeldir/ggml-large-v3-turbo.bin" -l en --output-vtt >& /dev/null
       #${pkgs.whisper-cpp-vulkan}/bin/whisper-cli -f "$dirname/$basename.wav" -m "$modeldir/ggml-small.en-tdrz.bin" -tdrz -l en --output-srt >& /dev/null
 
       # Rename to remove .wav. from filenames

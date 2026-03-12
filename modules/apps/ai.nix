@@ -46,7 +46,7 @@
       aichat-wrapped # ai cli tool that can use local rag, local models, etc.
       inputs.iris.packages.${system}.default # my personal assistant, which wraps other tools and has crap tons of configs
       #inputs.alita.packages.${system}.default # ironcore version -- just for demo and testing purposes
-      whisper-cpp # Allow GPU accelerated local transcriptions
+      stable.whisper-cpp # Allow GPU accelerated local transcriptions
       python313Packages.huggingface-hub
       python313Packages.hf-transfer
     ];

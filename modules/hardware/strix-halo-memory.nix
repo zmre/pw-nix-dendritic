@@ -11,6 +11,7 @@
     ];
     boot.extraModprobeConfig = ''
       options amdgpu gttsize=120000      # 120GB GTT for large models
+      options iommu=pt                  # pass-through mode that helps reduc overhead for iGPU mem access
       options ttm pages_limit=32768000  # TTM page limit
       options ttm page_pool_size=32768000  # TTM page pool
       options amdgpu sg_display=0       # Disable display memory allocation

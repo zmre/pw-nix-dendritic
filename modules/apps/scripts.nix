@@ -55,12 +55,12 @@
     };
     transcribe-rode-meeting = pkgs.writeShellApplication {
       name = "transcribe-rode-meeting";
-      runtimeInputs = with pkgs; [ffmpeg whisper-cpp];
+      runtimeInputs = with pkgs; [ffmpeg stable.whisper-cpp];
       text = builtins.readFile ../../dotfiles/scripts/transcribe-rode-meeting;
     };
     transcribe-video-to-subtitles = pkgs.writeShellApplication {
       name = "transcribe-video-to-subtitles";
-      runtimeInputs = with pkgs; [ffmpeg whisper-cpp];
+      runtimeInputs = with pkgs; [ffmpeg stable.whisper-cpp];
       text = builtins.readFile ../../dotfiles/scripts/transcribe-video-to-subtitles;
     };
   in {
