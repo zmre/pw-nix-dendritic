@@ -23,6 +23,13 @@ in {
 
   options = {
     flake = mkSubmoduleOptions {
+      darwinConfigurations = mkOption {
+        type = types.lazyAttrsOf types.raw;
+        default = {};
+        description = ''
+          Nix-Darwin system configurations.
+        '';
+      };
       darwinModules = mkOption {
         type = types.lazyAttrsOf types.deferredModule;
         default = {};
