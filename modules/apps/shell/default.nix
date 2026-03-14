@@ -150,7 +150,7 @@
       SYSTEMD_COLORS = "true";
       COLORTERM = "truecolor";
       FZF_CTRL_R_OPTS = "--sort --exact";
-      BROWSER = "qutebrowser";
+      #BROWSER = "qutebrowser";
       #TERMINAL = "kitty";
       HOMEBREW_NO_AUTO_UPDATE = 1;
       #LIBVA_DRIVER_NAME="iHD";

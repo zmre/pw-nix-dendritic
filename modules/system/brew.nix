@@ -56,7 +56,7 @@
       onActivation = {
         autoUpdate = false;
         upgrade = false; # upgrades happen in dwupdate alias after nix flake update
-        cleanup = "uninstall"; # should maybe be "zap" - remove anything not listed here
+        #cleanup = "uninstall"; # should maybe be "zap" - remove anything not listed here
       };
       global = {
         brewfile = true;
@@ -83,7 +83,7 @@
         "Blackmagic Disk Speed Test" = 425264550;
         #"Boxy SVG" = 611658502; # nice code-oriented visual svg editor
         "Brother iPrint&Scan" = 1193539993;
-        "Cardhop" = 1290358394; # contacts alternative
+        #"Cardhop" = 1290358394; # contacts alternative
         #"Drafts" = 1435957248;
         "Fantastical" = 975937182; # calendar alternative
         "Forecast Bar" = 982710545;
@@ -91,6 +91,7 @@
         "iA Writer" = 775737590;
         #"Ice Cubes" = 6444915884; # mastodon client -- it's good but i switched to ivory
         "iMovie" = 408981434;
+        "InYourFace" = 1476964367;
         #"iStumbler" = 546033581;
         "Ivory" = 6444602274;
         #"Keynote" = 409183694; # this is old keynote (v14)

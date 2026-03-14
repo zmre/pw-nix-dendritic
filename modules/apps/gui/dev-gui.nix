@@ -7,7 +7,7 @@
       "gitkraken-cli"
     ];
     homebrew.masApps = {
-      "Kaleidoscope" = 587512244; # GUI 3-way merge
+      #"Kaleidoscope" = 587512244; # GUI 3-way merge
       "Xcode" = 497799835;
     };
   };

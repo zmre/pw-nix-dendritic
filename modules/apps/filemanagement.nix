@@ -8,7 +8,7 @@
     homebrew.casks = [
       "dropbox"
       "google-drive"
-      "proton-drive"
+      #"proton-drive"
       "sync"
       "transmission"
     ];
