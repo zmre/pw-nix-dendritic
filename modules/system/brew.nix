@@ -68,10 +68,11 @@
         "elgato-stream-deck"
         "handy"
         "istat-menus"
-        "karabiner-elements"
+        #"karabiner-elements"
         "kopiaui" # ui for kopia dedupe backup
-        "league-of-legends"
-        "marked-app"
+        #"league-of-legends"
+        "lm-studio"
+        #"marked-app"
         "parallels"
         "zotero" # TODO: move to home-manager?
       ];
