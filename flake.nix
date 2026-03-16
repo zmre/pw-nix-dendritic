@@ -31,83 +31,83 @@
 
   inputs = {
     city-explorer = {
+      url = "github:zmre/city-explorer";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:zmre/city-explorer";
     };
     darwin = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     disko = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-compat.url = "github:NixOS/flake-compat";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
-      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
       url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     };
     flake-utils.url = "github:numtide/flake-utils";
     gh-feed = {
-      flake = false;
       url = "github:rsteube/gh-feed";
+      flake = false;
     };
     gh-worktree = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:zmre/gh-worktree";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     hackernews-tui = {
-      flake = false;
       url = "github:aome510/hackernews-TUI";
+      flake = false;
     };
     home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     homebrew-cask = {
-      flake = false;
       url = "github:homebrew/homebrew-cask";
+      flake = false;
     };
     homebrew-core = {
-      flake = false;
       url = "github:homebrew/homebrew-core";
+      flake = false;
     };
     homebrew-freetube = {
-      flake = false;
       url = "github:pikachuexe/homebrew-freetube";
+      flake = false;
     };
     import-tree.url = "github:vic/import-tree";
     iris = {
-      inputs.flake-parts.follows = "flake-parts";
       url = "git+ssh://git@github.com/zmre/iris.git";
+      inputs.flake-parts.follows = "flake-parts";
     };
     ironhide = {
+      url = "github:IronCoreLabs/ironhide";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
       };
-      url = "github:IronCoreLabs/ironhide";
     };
     ironoxide = {
+      url = "github:IronCoreLabs/ironoxide-cli";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
       };
-      url = "github:IronCoreLabs/ironoxide-cli";
     };
     mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
     nix-auth.url = "github:numtide/nix-auth";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-index-database = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -115,49 +115,48 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
     nur = {
+      url = "github:nix-community/NUR";
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:nix-community/NUR";
     };
     pwaerospace = {
+      url = "github:zmre/aerospace-sketchybar-nix-lua-config";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:zmre/aerospace-sketchybar-nix-lua-config";
     };
     pwneovide = {
+      url = "github:zmre/pwneovide";
       inputs = {
         flake-compat.follows = "flake-compat";
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         pwnvim.follows = "pwnvim";
       };
-      url = "github:zmre/pwneovide";
     };
     pwnvim = {
+      url = "github:zmre/pwnvim";
       inputs = {
         flake-compat.follows = "flake-compat";
         flake-utils.follows = "flake-utils";
         mbr.follows = "mbr-markdown-browser";
       };
-      url = "github:zmre/pwnvim";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
     sbhosts = {
-      flake = false;
       url = "github:StevenBlack/hosts";
+      flake = false;
     };
     yazi-flavors = {
-      flake = false;
       url = "github:yazi-rs/flavors";
+      flake = false;
     };
     yazi-quicklook = {
-      flake = false;
       url = "github:vvatikiotis/quicklook.yazi";
+      flake = false;
     };
   };
-
 }
