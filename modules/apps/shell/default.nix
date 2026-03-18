@@ -1,6 +1,8 @@
 {inputs, ...}: {
   # Declare flake input for mbr-markdown-browser (note, this is duplicated here and in the service, but that's on purpose)
   flake-file.inputs.mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
+  flake-file.inputs.mdterm.url = "github:bahdotsh/mdterm";
+  flake-file.inputs.mdterm.flake = false;
   flake-file.inputs.nix-auth.url = "github:numtide/nix-auth";
 
   # Putting mbr in global packages instead of home-manager ones so that the .app on macos will go where it can register
@@ -30,6 +32,15 @@
     config,
     ...
   }: let
+    mdterm = pkgs.rustPlatform.buildRustPackage {
+      pname = "mdterm";
+      version = "1.0.0";
+      src = inputs.mdterm;
+      cargoLock = {lockFile = inputs.mdterm + /Cargo.lock;};
+      buildInputs =
+        [pkgs.libiconv]
+        ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.apple-sdk];
+    };
     # Select btop variant based on GPU type
     btopPkg =
       if config.hardware.gpu == "cuda"
@@ -57,6 +68,7 @@
         fastfetch # display key software/version info in term
         file
         fortune
+        #mdterm # terminal markdown viewer - new one, no obvious advantage over glow though as link jumping didn't work right and I don't care about slide mode much
         glow # browse markdown dirs
         html2text
         hydra-check
