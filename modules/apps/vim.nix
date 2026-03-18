@@ -1,13 +1,14 @@
 {inputs, ...}: {
   flake-file.inputs.pwnvim.url = "github:zmre/pwnvim";
-  flake-file.inputs.pwnvim.inputs.flake-utils.follows = "flake-utils";
-  flake-file.inputs.pwnvim.inputs.flake-compat.follows = "flake-compat";
-  flake-file.inputs.pwnvim.inputs.mbr.follows = "mbr-markdown-browser";
+  # It makes our lock bigger and dependencies bigger, but if we start overriding follows, we can't use binary caches and have to build everything from scratch
+  #flake-file.inputs.pwnvim.inputs.flake-utils.follows = "flake-utils";
+  #flake-file.inputs.pwnvim.inputs.flake-compat.follows = "flake-compat";
+  #flake-file.inputs.pwnvim.inputs.mbr.follows = "mbr-markdown-browser";
   flake-file.inputs.pwneovide.url = "github:zmre/pwneovide";
-  flake-file.inputs.pwneovide.inputs.pwnvim.follows = "pwnvim";
-  flake-file.inputs.pwneovide.inputs.nixpkgs.follows = "nixpkgs";
-  flake-file.inputs.pwneovide.inputs.flake-utils.follows = "flake-utils";
-  flake-file.inputs.pwneovide.inputs.flake-compat.follows = "flake-compat";
+  #flake-file.inputs.pwneovide.inputs.pwnvim.follows = "pwnvim";
+  #flake-file.inputs.pwneovide.inputs.nixpkgs.follows = "nixpkgs";
+  #flake-file.inputs.pwneovide.inputs.flake-utils.follows = "flake-utils";
+  #flake-file.inputs.pwneovide.inputs.flake-compat.follows = "flake-compat";
 
   flake.modules.homeManager.vim-gui = {
     pkgs,
