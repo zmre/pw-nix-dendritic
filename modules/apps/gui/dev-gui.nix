@@ -210,7 +210,7 @@
       };
 
       zed-editor = {
-        enable = true;
+        enable = false; # every other time I update I have to build zed and it takes foooorrrrrreeeeeevvvvvvvveeeeeeer
         package = pkgs.stable.zed-editor; # takes forever to build so sticking to recent stable
         extensions = [
           "catpuccin"
