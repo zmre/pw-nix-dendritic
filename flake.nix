@@ -103,6 +103,10 @@
       };
     };
     mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
+    mdterm = {
+      url = "github:bahdotsh/mdterm";
+      flake = false;
+    };
     nix-auth.url = "github:numtide/nix-auth";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-index-database = {
@@ -128,23 +132,8 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    pwneovide = {
-      url = "github:zmre/pwneovide";
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-        pwnvim.follows = "pwnvim";
-      };
-    };
-    pwnvim = {
-      url = "github:zmre/pwnvim";
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
-        mbr.follows = "mbr-markdown-browser";
-      };
-    };
+    pwneovide.url = "github:zmre/pwneovide";
+    pwnvim.url = "github:zmre/pwnvim";
     rust-overlay.url = "github:oxalica/rust-overlay";
     sbhosts = {
       url = "github:StevenBlack/hosts";
