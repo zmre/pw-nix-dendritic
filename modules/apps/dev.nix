@@ -24,6 +24,7 @@
   in {
     home.packages = with pkgs; [
       devenv # alternative to direnv stuff
+      lazygit
       # file viewers
       jq
       lynx
