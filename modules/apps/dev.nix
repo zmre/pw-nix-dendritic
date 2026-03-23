@@ -41,6 +41,8 @@
             user = {
               name = "Patrick Walsh";
               email = "patrick.walsh@ironcorelabs.com";
+              #signingkey = "5551979F16FEEEBA"; # zmre
+              signingkey = "9BC3461501F30F5C"; # icl
             };
             alias = {
               gone = ''
@@ -78,6 +80,7 @@
             init.defaultBranch = "main";
             http.sslVerify = true;
             commit.verbose = true;
+            commit.gpgsign = true;
             credential.helper =
               if pkgs.stdenvNoCC.isDarwin
               then "osxkeychain"

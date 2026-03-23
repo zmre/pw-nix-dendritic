@@ -48,7 +48,10 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      pinentry.package = pkgs.pinentry-tty;
+      pinentry.package =
+        if pkgs.stdenv.isLinux
+        then pkgs.pinentry-tty
+        else pkgs.pinentry_mac;
     };
   };
 
