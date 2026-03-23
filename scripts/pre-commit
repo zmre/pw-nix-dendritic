@@ -24,7 +24,7 @@ echo -e "${YELLOW}Running pre-commit checks...${NC}"
 # Check 1: Run statix for static analysis
 echo -n "  Checking Nix syntax with statix... "
 # Use nix shell (not develop) to avoid shellHook output
-STATIX_OUTPUT=$(nix shell nixpkgs#statix -c statix check . 2>&1)
+STATIX_OUTPUT=$(statix check . 2>&1)
 STATIX_EXIT=$?
 if [[ $STATIX_EXIT -eq 0 ]]; then
     echo -e "${GREEN}OK${NC}"
