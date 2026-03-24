@@ -52,8 +52,8 @@
               br = "branch";
               st = "status -sb";
               wtf = "!git-wtf";
-              lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --topo-order --date=relative";
-              gl = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --topo-order --date=relative";
+              lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(auto)%G?%Creset' --abbrev-commit --topo-order --date=relative";
+              gl = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(auto)%G?%Creset' --abbrev-commit --topo-order --date=relative";
               lp = "log -p";
               lr = "reflog";
               ls = "ls-files";
@@ -80,7 +80,8 @@
             init.defaultBranch = "main";
             http.sslVerify = true;
             commit.verbose = true;
-            commit.gpgsign = true;
+            commit.gpgSign = true;
+            tag.gpgSign = true;
             credential.helper =
               if pkgs.stdenvNoCC.isDarwin
               then "osxkeychain"
