@@ -72,7 +72,7 @@
       #"qlmarkdown" # to be replaced by mbr
       "qlstephen"
       #"qlprettypatch" # not updated in 9 years
-      "qlvideo"
+      #"qlvideo"
       "apparency" # get info on apps
       "syntax-highlight" # looks like a nice way to view source code; same person that does qlmarkdown
 
