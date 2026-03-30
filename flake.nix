@@ -62,7 +62,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hackernews-tui = {
-      url = "github:aome510/hackernews-TUI";
+      url = "github:aome510/hackernews-TUI?ref=v0.13.5";
       flake = false;
     };
     home-manager = {

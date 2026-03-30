@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  flake-file.inputs.hackernews-tui.url = "github:aome510/hackernews-TUI";
+  flake-file.inputs.hackernews-tui.url = "github:aome510/hackernews-TUI?ref=v0.13.5";
   flake-file.inputs.hackernews-tui.flake = false;
 
   flake.modules.homeManager.hackernews-tui = {pkgs, ...}: let

@@ -310,6 +310,9 @@
           echo "Turning on verbose boot startup"
           sudo nvram boot-args="-v"
 
+          echo "Enable SSID fetch from CLI"
+          sudo ipconfig setverbose 1
+
           echo "Restoring system hotkeys and amethyst hotkeys"
           defaults import com.apple.symbolichotkeys ${../../dotfiles/plists/symbolichotkeys.plist}
           #defaults import com.amethyst.Amethyst ${../../dotfiles/plists/amethyst.plist}
