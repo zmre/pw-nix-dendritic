@@ -71,7 +71,6 @@
         #"karabiner-elements"
         "kopiaui" # ui for kopia dedupe backup
         #"league-of-legends"
-        "lm-studio"
         #"marked-app"
         "parallels"
         "zotero" # TODO: move to home-manager?

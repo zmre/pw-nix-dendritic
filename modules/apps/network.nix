@@ -58,8 +58,8 @@
       enable = true;
       # Disable default integration - it only sets SSH_AUTH_SOCK if empty,
       # which fails when tmux or display manager sets a stale value
-      enableZshIntegration = false;
-      enableBashIntegration = false;
+      #enableZshIntegration = false;
+      #enableBashIntegration = false;
     };
 
     # Unconditionally set SSH_AUTH_SOCK to the systemd ssh-agent socket (Linux only)

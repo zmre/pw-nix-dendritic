@@ -13,8 +13,8 @@
       "chatgpt"
       "claude"
       "macwhisper"
-      #"ollama-app"
-      #"lm-studio"
+      "ollama-app"
+      "lm-studio"
     ];
   };
 
