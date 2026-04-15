@@ -112,7 +112,7 @@
       direnv = {
         enable = true;
         enableZshIntegration = true;
-        enableNushellIntegration = true;
+        enableNushellIntegration = false;
         nix-direnv.enable = true;
       };
       fzf = {

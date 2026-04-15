@@ -50,7 +50,7 @@
       ripgrep.enable = true;
       bat = {
         enable = true;
-        extraPackages = with pkgs.bat-extras; [batman batgrep];
+        extraPackages = with pkgs.bat-extras; []; # removed batman and batgrep because they were each causing nushell full compile and install
         config = {
           theme = "Dracula"; # I like the TwoDark colors better, but want bold/italic in markdown docs
           #pager = "less -FR";
