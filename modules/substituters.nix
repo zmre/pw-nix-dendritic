@@ -35,6 +35,11 @@ _: let
       publicKey = "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=";
       priority = 7;
     }
+    {
+      url = "https://cache.numtide.com";
+      publicKey = "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=";
+      priority = 8;
+    }
     # Not getting updated as of 2026-02-20
     # {
     #   url = "https://zed.cachix.org";
