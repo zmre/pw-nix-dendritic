@@ -102,6 +102,10 @@
         rust-overlay.follows = "rust-overlay";
       };
     };
+    markless = {
+      url = "github:jvanderberg/markless";
+      flake = false;
+    };
     mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
     mdterm = {
       url = "github:bahdotsh/mdterm";

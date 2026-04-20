@@ -968,6 +968,22 @@
         "type": "github"
       }
     },
+    "markless": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773464074,
+        "narHash": "sha256-LeruL/jlTi3o25dR3tInPtE8y2gwO6pVpQpacwrcsXQ=",
+        "owner": "jvanderberg",
+        "repo": "markless",
+        "rev": "3188241bef6c2f6b9d83e746d03fcfd106f08e00",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jvanderberg",
+        "repo": "markless",
+        "type": "github"
+      }
+    },
     "mbr": {
       "inputs": {
         "crane": "crane",
@@ -1785,6 +1801,7 @@
         "iris": "iris",
         "ironhide": "ironhide",
         "ironoxide": "ironoxide",
+        "markless": "markless",
         "mbr-markdown-browser": "mbr-markdown-browser",
         "mdterm": "mdterm",
         "nix-auth": "nix-auth",
