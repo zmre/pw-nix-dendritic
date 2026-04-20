@@ -89,7 +89,11 @@
               else "cache --timeout=10000000";
             diff.algorithm = "patience";
             protocol.version = "2";
-            core.commitGraph = true;
+            core = {
+              commitGraph = true;
+              fsmonitor = false;
+              untrackedCache = false;
+            };
             gc.writeCommitGraph = true;
             push.autoSetupRemote = true;
           }
