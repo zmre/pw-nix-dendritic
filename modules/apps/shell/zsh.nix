@@ -1,4 +1,22 @@
 {inputs, ...}: {
+  flake.darwinModules.zsh = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    # needed at the system level or else some init scripts don't get included
+    programs.zsh.enable = true;
+  };
+
+  flake.nixosModules.terminfo = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    # needed at the system level or else some init scripts don't get included
+    programs.zsh.enable = true;
+  };
+
   flake.modules.homeManager.zsh = {
     pkgs,
     lib,

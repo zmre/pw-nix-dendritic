@@ -33,70 +33,73 @@
       inputs.pwnvim.packages.${system}.default
     ];
     programs = {
-      zsh.defaultKeymap = "viins";
+      zsh = {
+        enable = true;
+        defaultKeymap = "viins";
+        initContent = lib.mkBefore ''
+          #zmodload zsh/zprof
+          set -o vi
+          bindkey -v
+
+                # Setup preferred key bindings that emulate the parts of
+          # emacs-style input manipulation that I'm familiar with
+          bindkey '^P' up-history
+          bindkey '^N' down-history
+          bindkey '^?' backward-delete-char
+          bindkey '^h' backward-delete-char
+          bindkey '^w' backward-kill-word
+          bindkey '\e^h' backward-kill-word
+          bindkey '\e^?' backward-kill-word
+          bindkey '^r' history-incremental-search-backward
+          bindkey '^a' beginning-of-line
+          bindkey '^e' end-of-line
+          bindkey '\eb' backward-word
+          bindkey '\ef' forward-word
+          bindkey '^k' kill-line
+          bindkey '^u' backward-kill-line
+          bindkey '^f' jump_key_places
+
+          # I prefer for up/down and j/k to do partial searches if there is
+          # already text in play, rather than just normal through history
+          bindkey '^[[A' up-line-or-search
+          bindkey '^[[B' down-line-or-search
+          bindkey -M vicmd 'k' up-line-or-search
+          bindkey -M vicmd 'j' down-line-or-search
+          bindkey '^r' history-incremental-search-backward
+          bindkey '^s' history-incremental-search-forward
+
+          # You might not like what I'm doing here, but '/' works like ctrl-r
+          # and matches as you type. I've added pattern matches here though.
+
+          bindkey -M vicmd '/' history-incremental-pattern-search-backward # default is vi-history-search-backward
+          bindkey -M vicmd '?' vi-history-search-backward # default is vi-history-search-forward
+
+          autoload -Uz edit-command-line
+          zle -N edit-command-line
+          bindkey -M vicmd 'v' edit-command-line
+
+                #### Change cursor depending on mode
+          # following are needed with starship to get the cursors right
+          # below versions are non-blinking; use 1,3,5 for blinking versions
+          function _cursor_block() { echo -ne '\e[2 q' }
+          function _cursor_bar() { echo -ne '\e[4 q' }
+          function _cursor_beam() { echo -ne '\e[6 q' }
+          function zle-line-finish {
+              _cursor_block
+          }
+          function zle-keymap-select zle-line-init {
+              case $KEYMAP in
+                  vicmd)      _cursor_block;;
+                  viins|main) _cursor_beam;;
+                  *)          _cursor_bar;;
+              esac
+          }
+
+
+        '';
+      };
       nushell.settings.edit_mode = "vi";
     };
-    programs.zsh.initContent = lib.mkBefore ''
-      #zmodload zsh/zprof
-      set -o vi
-      bindkey -v
-
-            # Setup preferred key bindings that emulate the parts of
-      # emacs-style input manipulation that I'm familiar with
-      bindkey '^P' up-history
-      bindkey '^N' down-history
-      bindkey '^?' backward-delete-char
-      bindkey '^h' backward-delete-char
-      bindkey '^w' backward-kill-word
-      bindkey '\e^h' backward-kill-word
-      bindkey '\e^?' backward-kill-word
-      bindkey '^r' history-incremental-search-backward
-      bindkey '^a' beginning-of-line
-      bindkey '^e' end-of-line
-      bindkey '\eb' backward-word
-      bindkey '\ef' forward-word
-      bindkey '^k' kill-line
-      bindkey '^u' backward-kill-line
-      bindkey '^f' jump_key_places
-
-      # I prefer for up/down and j/k to do partial searches if there is
-      # already text in play, rather than just normal through history
-      bindkey '^[[A' up-line-or-search
-      bindkey '^[[B' down-line-or-search
-      bindkey -M vicmd 'k' up-line-or-search
-      bindkey -M vicmd 'j' down-line-or-search
-      bindkey '^r' history-incremental-search-backward
-      bindkey '^s' history-incremental-search-forward
-
-      # You might not like what I'm doing here, but '/' works like ctrl-r
-      # and matches as you type. I've added pattern matches here though.
-
-      bindkey -M vicmd '/' history-incremental-pattern-search-backward # default is vi-history-search-backward
-      bindkey -M vicmd '?' vi-history-search-backward # default is vi-history-search-forward
-
-      autoload -Uz edit-command-line
-      zle -N edit-command-line
-      bindkey -M vicmd 'v' edit-command-line
-
-            #### Change cursor depending on mode
-      # following are needed with starship to get the cursors right
-      # below versions are non-blinking; use 1,3,5 for blinking versions
-      function _cursor_block() { echo -ne '\e[2 q' }
-      function _cursor_bar() { echo -ne '\e[4 q' }
-      function _cursor_beam() { echo -ne '\e[6 q' }
-      function zle-line-finish {
-          _cursor_block
-      }
-      function zle-keymap-select zle-line-init {
-          case $KEYMAP in
-              vicmd)      _cursor_block;;
-              viins|main) _cursor_beam;;
-              *)          _cursor_bar;;
-          esac
-      }
-
-
-    '';
 
     home.file.".inputrc".text = ''
       set show-all-if-ambiguous on

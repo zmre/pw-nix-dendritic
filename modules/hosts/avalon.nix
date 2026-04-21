@@ -46,6 +46,7 @@
     "network"
     "protonmail-bridge"
     "shell"
+    "terminfo"
     "vim"
   ];
 
