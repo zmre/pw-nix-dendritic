@@ -37,72 +37,71 @@
         enable = true;
         signing.format = null;
         lfs.enable = true;
-        settings =
-          {
-            user = {
-              name = "Patrick Walsh";
-              email = "patrick.walsh@ironcorelabs.com";
-              #signingkey = "5551979F16FEEEBA"; # zmre
-              signingkey = "9BC3461501F30F5C"; # icl
-            };
-            alias = {
-              gone = ''
-                ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == "[gone]" {print $1}' | xargs -r git branch -D'';
-              tatus = "status";
-              co = "checkout";
-              br = "branch";
-              st = "status -sb";
-              wtf = "!git-wtf";
-              lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(auto)%G?%Creset' --abbrev-commit --topo-order --date=relative";
-              gl = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(auto)%G?%Creset' --abbrev-commit --topo-order --date=relative";
-              lp = "log -p";
-              lr = "reflog";
-              ls = "ls-files";
-              dall = "diff";
-              d = "diff --relative";
-              dv = "difftool";
-              df = "diff --relative --name-only";
-              dvf = "difftool --relative --name-only";
-              dfall = "diff --name-only";
-              ds = "diff --relative --name-status";
-              dvs = "difftool --relative --name-status";
-              dsall = "diff --name-status";
-              dvsall = "difftool --name-status";
-              dr = "diff-index --cached --name-only --relative HEAD";
-              di = "diff-index --cached --patch --relative HEAD";
-              dfi = "diff-index --cached --name-only --relative HEAD";
-              subpull = "submodule foreach git pull";
-              subco = "submodule foreach git checkout master";
-            };
-            github.user = "zmre";
-            color.ui = true;
-            pull.rebase = true;
-            merge.conflictstyle = "diff3";
-            init.defaultBranch = "main";
-            http.sslVerify = true;
-            commit.verbose = true;
-            commit.gpgSign = true;
-            tag.gpgSign = true;
-            credential.helper =
-              if pkgs.stdenvNoCC.isDarwin
-              then "osxkeychain"
-              else "cache --timeout=10000000";
-            diff.algorithm = "patience";
-            protocol.version = "2";
-            core = {
-              commitGraph = true;
-              fsmonitor = false;
-              untrackedCache = false;
-            };
-            gc.writeCommitGraph = true;
-            push.autoSetupRemote = true;
-          }
-          // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
-            # these should speed up vim nvim-tree and other things that watch git repos but
-            # only works on mac. see https://github.com/nvim-tree/nvim-tree.lua/wiki/Troubleshooting#git-fsmonitor-daemon
-            core.fsmonitor = true;
-            core.untrackedcache = true;
+        settings = {
+          user = {
+            name = "Patrick Walsh";
+            email = "patrick.walsh@ironcorelabs.com";
+            #signingkey = "5551979F16FEEEBA"; # zmre
+            signingkey = "9BC3461501F30F5C"; # icl
           };
+          alias = {
+            gone = ''
+              ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == "[gone]" {print $1}' | xargs -r git branch -D'';
+            tatus = "status";
+            co = "checkout";
+            br = "branch";
+            st = "status -sb";
+            wtf = "!git-wtf";
+            lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(auto)%G?%Creset' --abbrev-commit --topo-order --date=relative";
+            gl = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(auto)%G?%Creset' --abbrev-commit --topo-order --date=relative";
+            lp = "log -p";
+            lr = "reflog";
+            ls = "ls-files";
+            dall = "diff";
+            d = "diff --relative";
+            dv = "difftool";
+            df = "diff --relative --name-only";
+            dvf = "difftool --relative --name-only";
+            dfall = "diff --name-only";
+            ds = "diff --relative --name-status";
+            dvs = "difftool --relative --name-status";
+            dsall = "diff --name-status";
+            dvsall = "difftool --name-status";
+            dr = "diff-index --cached --name-only --relative HEAD";
+            di = "diff-index --cached --patch --relative HEAD";
+            dfi = "diff-index --cached --name-only --relative HEAD";
+            subpull = "submodule foreach git pull";
+            subco = "submodule foreach git checkout master";
+          };
+          github.user = "zmre";
+          color.ui = true;
+          pull.rebase = true;
+          merge.conflictstyle = "diff3";
+          init.defaultBranch = "main";
+          http.sslVerify = true;
+          commit.verbose = true;
+          commit.gpgSign = pkgs.stdenvNoCC.isDarwin; # only sign on my main machine where my keys live
+          tag.gpgSign = pkgs.stdenvNoCC.isDarwin; # only sign on my main machine where my keys live
+          credential.helper =
+            if pkgs.stdenvNoCC.isDarwin
+            then "osxkeychain"
+            else "cache --timeout=10000000";
+          diff.algorithm = "patience";
+          protocol.version = "2";
+          core = {
+            commitGraph = true;
+            fsmonitor = false;
+            untrackedCache = false;
+          };
+          gc.writeCommitGraph = true;
+          push.autoSetupRemote = true;
+        };
+        #// pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
+        # these should speed up vim nvim-tree and other things that watch git repos but
+        # only works on mac. see https://github.com/nvim-tree/nvim-tree.lua/wiki/Troubleshooting#git-fsmonitor-daemon
+        #core.fsmonitor = true;
+        #core.untrackedcache = true;
+        #};
         ignores = import ../../dotfiles/gitignore.nix;
       };
       # intelligent diffs that are syntax parse tree aware per language in git
