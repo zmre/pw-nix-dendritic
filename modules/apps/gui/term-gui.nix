@@ -13,7 +13,7 @@
   flake.modules.homeManager.term-gui = {pkgs, ...}: {
     home.file.".wezterm.lua".source = ../../../dotfiles/wezterm/wezterm.lua;
     # using remote windows with tmux more so want to experiment here with iterm2's native seeming windows for tmux panes
-    home.packages = pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.iterm2 pkgs.ghostty-bin] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [pkgs.ghostty];
+    home.packages = pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.iterm2];
     programs.kitty = {
       enable = false;
       #package = pkgs.emptyDirectory; # post 15.1 update, having issues with nix version and moving to brew for now 2024-10-30
@@ -115,6 +115,43 @@
       themeFile = "OneHalfDark"; # or Dracula or OneDark see https://github.com/kovidgoyal/kitty-themes/tree/master/themes
       # extraConfig = "\n";
     };
+    programs.ghostty = {
+      enable = true;
+      package =
+        if pkgs.stdenv.isDarwin
+        then pkgs.ghostty-bin
+        else pkgs.ghostty;
+      enableZshIntegration = true;
+      installBatSyntax = true;
+      installVimSyntax = true;
+      settings = {
+        #theme = "catppuccin-mocha";
+        #theme = "OneHalfDark";
+        theme = "tokyonight";
+        font-size = 18;
+        font-family = "Hasklug Nerd Font Mono";
+        #background-blur-radius = 20;
+        background-blur-radius = 10;
+        mouse-hide-while-typing = true;
+        window-decoration = true;
+        keybind = "global:cmd+/=toggle_quick_terminal";
+        macos-option-as-alt = true;
+        background-opacity = 0.9;
+        quick-terminal-position = "top";
+        quick-terminal-screen = "mouse";
+        quick-terminal-autohide = true;
+        #quick-terminal-animation-duration = 0;
+
+        macos-titlebar-style = "tabs";
+        #macos-titlebar-style = "hidden";
+        #macos-titlebar-style = "native";
+        #macos-titlebar-style = "transparent";
+
+        window-height = 35;
+        window-width = 110;
+      };
+    };
+
     programs.alacritty = {
       enable = pkgs.stdenv.isLinux; # only install on Linux
       settings = {
