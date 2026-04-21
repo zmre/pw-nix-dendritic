@@ -159,7 +159,10 @@
       #TERM = "xterm-256color";
       KEYTIMEOUT = 1;
       EDITOR = "nvim";
-      VISUAL = "nvim";
+      VISUAL =
+        if pkgs.stdenvNoCC.isDarwin
+        then "pwneovide"
+        else "nvim";
       GIT_EDITOR = "nvim";
       LS_COLORS = "no=00:fi=00:di=01;34:ln=35;40:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:";
       LSCOLORS = "ExfxcxdxCxegedabagacad";
