@@ -1,7 +1,7 @@
 {
   flake.darwinModules.term-gui = {
     homebrew.casks = [
-      "ghostty" # available in nixos only for linux
+      #"ghostty" # available in nixos only for linux
       "wezterm"
     ];
   };
@@ -12,7 +12,8 @@
 
   flake.modules.homeManager.term-gui = {pkgs, ...}: {
     home.file.".wezterm.lua".source = ../../../dotfiles/wezterm/wezterm.lua;
-    home.packages = pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.iterm2]; # using remote windows with tmux more so want to experiment here with native seeming windows for tmux panes
+    # using remote windows with tmux more so want to experiment here with iterm2's native seeming windows for tmux panes
+    home.packages = pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.iterm2 pkgs.ghostty-bin] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [pkgs.ghostty];
     programs.kitty = {
       enable = false;
       #package = pkgs.emptyDirectory; # post 15.1 update, having issues with nix version and moving to brew for now 2024-10-30

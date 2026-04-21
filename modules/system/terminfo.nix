@@ -12,6 +12,11 @@
       ++ lib.optionals (pkgs.stdenv.hostPlatform == pkgs.stdenv.buildPlatform) [
         pkgs.kitty.terminfo
         pkgs.termite.terminfo
+        (
+          if pkgs.stdenv.isDarwin
+          then pkgs.ghostty-bin.terminfo
+          else pkgs.ghostty.terminfo
+        )
       ];
   };
 

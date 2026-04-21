@@ -4,7 +4,7 @@
 
   flake.darwinModules.security-gui = {
     homebrew.casks = [
-      "blockblock"
+      #"blockblock"
       "burp-suite" # TODO: move to home-manager? (burpsuite)
       "gpg-suite"
       "knockknock"
