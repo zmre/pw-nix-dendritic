@@ -210,7 +210,7 @@
       };
 
       zed-editor = {
-        enable = false; # every other time I update I have to build zed and it takes foooorrrrrreeeeeevvvvvvvveeeeeeer
+        enable = true; # every other time I update I have to build zed and it takes foooorrrrrreeeeeevvvvvvvveeeeeeer
         package = pkgs.stable.zed-editor; # takes forever to build so sticking to recent stable
         extensions = [
           "catpuccin"
@@ -271,15 +271,15 @@
           lua-language-server
           pyright # python lsp (written in node? so weird)
           vscode-langservers-extracted # lsp servers for json, html, css, eslint
-          nodePackages.eslint_d # js/ts code formatter and linter
-          nodePackages.prettier # ditto
-          #nodePackages.prisma # dependency prisma-engines not compiling right now 2024-08-26
-          nodePackages.svelte-language-server
-          nodePackages.diagnostic-languageserver
-          nodePackages.typescript-language-server
-          nodePackages.bash-language-server
-          nodePackages."@tailwindcss/language-server"
-          #nodePackages_latest.grammarly-languageserver # besides being a privacy issue if triggered, we have these issues:
+          eslint_d # js/ts code formatter and linter
+          prettier # ditto
+          #prisma # dependency prisma-engines not compiling right now 2024-08-26
+          svelte-language-server
+          diagnostic-languageserver
+          typescript-language-server
+          bash-language-server
+          #"@tailwindcss/language-server"
+          #grammarly-languageserver # besides being a privacy issue if triggered, we have these issues:
           # https://github.com/znck/grammarly/issues/411 grammarly sdk deprecated
           # https://github.com/NixOS/nixpkgs/issues/293172 requires node16, which is EOL
           yaml-language-server
