@@ -123,6 +123,7 @@
       };
       direnv = {
         enable = true;
+        package = pkgs.stable.direnv;
         enableZshIntegration = true;
         enableNushellIntegration = false;
         nix-direnv.enable = true;

@@ -36,7 +36,7 @@
   flake.modules.homeManager.media = {pkgs, ...}: {
     home.packages = with pkgs; [
       sourceHighlight # for lf preview
-      ffmpeg-full.bin
+      stable.ffmpeg-full.bin
       ffmpegthumbnailer
       #fdk-aac-encoder # needed by m4btool
       #mp4v2 # needed by m4btool
