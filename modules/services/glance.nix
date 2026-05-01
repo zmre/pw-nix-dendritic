@@ -247,6 +247,10 @@
                             title = "Local Protect Video Feed";
                             url = "https://192.168.37.195/protect/dashboard";
                           }
+                          {
+                            title = "NextDNS";
+                            url = "https://my.nextdns.io/f73bff/logs";
+                          }
                         ];
                       }
                     ];
