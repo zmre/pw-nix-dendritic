@@ -73,7 +73,7 @@
         #"league-of-legends"
         #"marked-app"
         "parallels"
-        "reader"
+        #"reader"
         "zotero" # TODO: move to home-manager?
       ];
 

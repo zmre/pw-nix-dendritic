@@ -130,7 +130,7 @@
       };
       fzf = {
         enable = true;
-        enableZshIntegration = false;
+        enableZshIntegration = true;
         tmux.enableShellIntegration = false;
         defaultCommand = "\fd --type f --hidden --exclude .git";
         fileWidgetCommand = "\fd --exclude .git --type f"; # for when ctrl-t is pressed

@@ -5,6 +5,7 @@
     ...
   }: {
     # Default dev shell with tools for working on this config
+    # NOTE: not a module so this should get pulled in everywhere
     devShells.default = pkgs.mkShell {
       name = "nix-config-dev";
       buildInputs = with pkgs; [
@@ -34,13 +35,14 @@
     };
 
     # Check that runs statix
-    checks.statix = pkgs.runCommand "statix-check" {
-      nativeBuildInputs = [pkgs.statix];
-      src = inputs.self;
-    } ''
-      cd $src
-      statix check .
-      touch $out
-    '';
+    checks.statix =
+      pkgs.runCommand "statix-check" {
+        nativeBuildInputs = [pkgs.statix];
+        src = inputs.self;
+      } ''
+        cd $src
+        statix check .
+        touch $out
+      '';
   };
 }
