@@ -146,6 +146,11 @@
         clean.extraArgs = "--keep-since 30d --keep 7";
         flake = "${homeDir}/src/pw-nix-dendritic"; # sets NH_OS_FLAKE variable for you
       };
+      nix-your-shell = {
+        enable = true;
+        enableZshIntegration = true;
+        nix-output-monitor.enable = true;
+      };
       zoxide = {
         enable = true;
         enableZshIntegration = true;
