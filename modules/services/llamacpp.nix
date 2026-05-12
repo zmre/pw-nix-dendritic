@@ -17,45 +17,46 @@
     services.llama-cpp = {
       enable = true;
       host = "127.0.0.1";
-      openFirewall = true;
+      openFirewall = false;
       extraFlags = [
-        "--jinja" # what is this?
+        #"--jinja" # what is this?
         "--verbose"
         "--log-file"
         "/tmp/llama-server.log"
         "--gpu-layers" # same as -ngl
         "999" # 999 = as many as possible
-        "--threads"
-        "25"
-        "--threads-batch"
-        "25"
+        #"--threads"
+        #"25"
+        #"--threads-batch"
+        #"25"
         "--ctx-size"
         #"65536" # could try bigger?
         "131072" #for devstral?
-        "--cache-type-k"
-        "q4_0"
-        "--cache-type-v"
-        "q4_0"
-        "--batch-size"
-        "2048"
-        "--ubatch-size"
-        "256"
-        "--flash-attn"
-        "on"
-        "--temp"
-        "0.7"
-        "--min-p"
-        "0.0"
-        "--top-p"
-        "0.80"
-        "--top-k"
-        "20"
-        "--repeat-penalty"
-        "1.05"
+        #"--cache-type-k"
+        #"q4_0"
+        #"--cache-type-v"
+        #"q4_0"
+        #"--batch-size"
+        #"2048"
+        #"--ubatch-size"
+        #"256"
+        #"--flash-attn"
+        #"on"
+        #"--temp"
+        #"0.7"
+        #"--min-p"
+        #"0.0"
+        #"--top-p"
+        #"0.80"
+        #"--top-k"
+        #"20"
+        #"--repeat-penalty"
+        #"1.05"
       ];
       #model = "/var/lib/models/Qwen3-Coder-30B-A3B-Instruct-Q8_0.gguf";
-      model = "/var/lib/models/Qwen_Qwen3-30B-A3B-Instruct-2507-Q8_0.gguf";
+      #model = "/var/lib/models/Qwen_Qwen3-30B-A3B-Instruct-2507-Q8_0.gguf";
       #model = "/var/lib/models/Devstral-Small-2507_gguf/Devstral-Small-2507-Q4_K_M.gguf";
+      model = "/var/lib/models/gemma-4-26B-A4B-it-Q8_0.gguf";
       port = 8081; # cuz glance is on 8080
     };
     networking.firewall.allowedTCPPorts = [8082];

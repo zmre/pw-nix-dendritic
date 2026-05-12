@@ -11,11 +11,11 @@
     #
     # toolbox enter llama-vulkan-amdvlk -- only thing that i got to work for this, but
 
-    environment.systemPackages = [pkgs.stable.llama-cpp-vulkan];
+    environment.systemPackages = [pkgs.stable.llama-cpp-rocm];
 
     services.llama-cpp = {
       enable = true;
-      package = pkgs.stable.llama-cpp-vulkan;
+      package = pkgs.stable.llama-cpp-rocm;
       host = "127.0.0.1";
       port = 5533;
       model = "/var/lib/models/ggml-org_gpt-oss-120b-GGUF_gpt-oss-120b-mxfp4-00001-of-00003.gguf";
