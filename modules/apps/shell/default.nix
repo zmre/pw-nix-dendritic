@@ -102,7 +102,7 @@
         zk # cli for indexing markdown files
       ]
       ++ (lib.optionals pkgs.stdenv.isDarwin [
-        pkgs.stable.mactop # unstable not building 2026-01-14
+        #pkgs.stable.mactop # unstable not building 2026-01-14
       ])
       ++ (lib.optionals pkgs.stdenv.isLinux [
         # terminal linux-only apps
