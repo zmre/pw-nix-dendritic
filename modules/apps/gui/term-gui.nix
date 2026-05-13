@@ -2,7 +2,7 @@
   flake.darwinModules.term-gui = {
     homebrew.casks = [
       #"ghostty" # available in nixos only for linux
-      "wezterm"
+      "wezterm@nightly"
     ];
   };
 

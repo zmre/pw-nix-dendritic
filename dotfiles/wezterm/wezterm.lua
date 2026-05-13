@@ -24,6 +24,9 @@ config.automatically_reload_config = true
 config.tab_bar_at_bottom = true
 config.scrollback_lines = 10000
 -- Following two settings are per Wez https://github.com/wez/wezterm/issues/3731 to get the cmd key to pass through to nvim
+-- That issue says to set enable_kitty_keyboard = true and csi_u_key_encoding to false. But I'm not getting anything different
+-- for <C-\> and <C-S-\> in neovim in wezterm. After upgrading wezterm, still no go. Claude thinks the fallback behavior might
+-- work better so trying kitty_keyboard = false on 2026-05-13; but the shift modifier still isn't detected so back to true
 config.enable_kitty_keyboard = true
 config.enable_csi_u_key_encoding = false
 config.window_frame = {
