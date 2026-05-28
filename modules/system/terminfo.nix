@@ -10,7 +10,6 @@
       ]
       ++ lib.optionals (pkgs.stdenv.hostPlatform == pkgs.stdenv.buildPlatform) [
         pkgs.kitty.terminfo
-        pkgs.termite.terminfo
         pkgs.ghostty-bin.terminfo
         pkgs.alacritty.terminfo
       ];
@@ -40,7 +39,6 @@
       ++ lib.optionals (pkgs.stdenv.hostPlatform == pkgs.stdenv.buildPlatform) [
         pkgs.foot.terminfo
         pkgs.kitty.terminfo
-        pkgs.termite.terminfo
         pkgs.ghostty.terminfo
         pkgs.alacritty.terminfo
       ];
