@@ -39,6 +39,17 @@
         ];
     };
 
+  # highlight 4.20 already contains the shellscript crash fix that nixpkgs still
+  # carries as a patch, so the patch fails to apply ("Reversed (or previously
+  # applied) patch detected").  Upstream reverted the redundant patch in
+  # NixOS/nixpkgs@ebacc39 (2026-06-02), just after our pinned nixpkgs rev.
+  # Drop the patch locally to match upstream; remove this overlay once nixpkgs
+  # is bumped past that commit.
+  # TODO: remove after nixpkgs bump past 2026-06-02 (NixOS/nixpkgs@ebacc39).
+  highlightFixOverlay = final: prev: {
+    highlight = prev.highlight.overrideAttrs (_: {patches = [];});
+  };
+
   stableOverlay = final: prev: {
     stable =
       if final.stdenv.isDarwin
@@ -108,12 +119,12 @@ in {
 
     # This module can be imported by any Darwin/NixOS config
     flake.nixosModules.system = {
-      nixpkgs.overlays = [stableOverlay];
+      nixpkgs.overlays = [stableOverlay highlightFixOverlay];
       nixpkgs.config = nixpkgsConfig;
     };
 
     flake.darwinModules.system = {
-      nixpkgs.overlays = [stableOverlay darwinFixesOverlay];
+      nixpkgs.overlays = [stableOverlay darwinFixesOverlay highlightFixOverlay];
       nixpkgs.config = nixpkgsConfig;
     };
   };
