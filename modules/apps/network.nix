@@ -40,17 +40,15 @@
       ssh = {
         enable = true;
         enableDefaultConfig = false;
-        matchBlocks = {
+        settings = {
           "*" = {
             compression = true;
             controlMaster = "auto";
             forwardAgent = true;
+            addKeysToAgent = "yes";
           };
         };
         includes = ["*.conf"];
-        extraConfig = ''
-          AddKeysToAgent yes
-        '';
       };
     };
     # Linux-only: use systemd ssh-agent service
