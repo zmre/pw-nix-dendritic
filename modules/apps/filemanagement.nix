@@ -146,7 +146,7 @@
           folder-rules = ../../dotfiles/yazi/plugins/folder-rules.yazi;
         };
         settings = {
-          title_format = "y ({cwd})";
+          title-format = "y ({cwd})";
           mgr = {
             sort_by = "natural";
             sort_dir_first = true;
@@ -230,7 +230,7 @@
             rules = [
               # Folder
               {
-                name = "*/";
+                url = "*/";
                 use = ["open" "reveal"];
               } # open explorer of current selected directory
               # Text
@@ -273,7 +273,7 @@
               }
               # Fallback
               {
-                name = "*";
+                url = "*";
                 use = ["open" "reveal"];
               }
             ];
