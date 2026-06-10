@@ -251,6 +251,10 @@
                             title = "NextDNS";
                             url = "https://my.nextdns.io/f73bff/logs";
                           }
+                          {
+                            title = "Homebridge";
+                            url = "http://avalon.savannah-basilisk.ts.net:8581/";
+                          }
                         ];
                       }
                     ];

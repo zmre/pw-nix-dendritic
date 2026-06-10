@@ -21,6 +21,7 @@
     "calibre-web"
     "city-explorer"
     "glance"
+    "homebridge"
     "llamacpp" # GLM-4.7-Flash (smallest, for initial testing)
     #"llamacpp-glm" # GLM-4.7-Flash (smallest, for initial testing)
     #"llamacpp-gptoss" # Alternative: GPT-OSS-120B
