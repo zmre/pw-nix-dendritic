@@ -14,6 +14,7 @@
     "hardware-options"
     "amd-gpu"
     "strix-halo-memory" # TTM memory config for 112GB GPU allocation
+    "actual-server"
     "avalon-configuration"
     "avalon-disk"
     "audiobookshelf"

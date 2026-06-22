@@ -33,6 +33,7 @@
     "espanso"
     "filemanagement"
     "filemanagement-gui"
+    "finance-gui"
     "iron"
     "media"
     "media-gui"

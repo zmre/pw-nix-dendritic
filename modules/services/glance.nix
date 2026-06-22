@@ -255,6 +255,14 @@
                             title = "Homebridge";
                             url = "http://avalon.savannah-basilisk.ts.net:8581/";
                           }
+                          {
+                            title = "Unifi Local";
+                            url = "https://192.168.37.1/network/default/dashboard";
+                          }
+                          {
+                            title = "Actual Budgeting";
+                            url = "https://avalon.${config.networking.domain}:8002/";
+                          }
                         ];
                       }
                     ];
