@@ -82,7 +82,7 @@
         "Amphetamine" = 937984704;
         #"Blurred" = 1497527363; # dim non-foreground windows -- removed when I realized this is Intel not ARM :-(
         "Blackmagic Disk Speed Test" = 425264550;
-        #"Boxy SVG" = 611658502; # nice code-oriented visual svg editor
+        "Boxy SVG" = 611658502; # nice code-oriented visual svg editor
         "Brother iPrint&Scan" = 1193539993;
         #"Cardhop" = 1290358394; # contacts alternative
         #"Drafts" = 1435957248;
