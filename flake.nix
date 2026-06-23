@@ -32,6 +32,11 @@
   };
 
   inputs = {
+    accountant24-bin = {
+      type = "file";
+      url = "https://github.com/machulav/accountant24/releases/download/v0.1.10/accountant24-darwin-arm64.tar.gz";
+      flake = false;
+    };
     city-explorer = {
       url = "github:zmre/city-explorer";
       inputs = {
@@ -103,6 +108,15 @@
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
       };
+    };
+    ldash-src = {
+      url = "git+https://codeberg.org/md-weber/ldash?ref=refs/tags/v1.3.1";
+      flake = false;
+    };
+    ledgera-macos-app = {
+      type = "file";
+      url = "https://github.com/thesmokinator/ledgera/releases/download/v0.1.5/Ledgera-v0.1.5-macos-app.zip";
+      flake = false;
     };
     markless = {
       url = "github:jvanderberg/markless";

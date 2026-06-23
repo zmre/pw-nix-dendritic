@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "accountant24-bin": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-4iT4Y4WNcn1t61VN7eY7evaSr9kOX2Cnvtssu93a6ro=",
+        "type": "file",
+        "url": "https://github.com/machulav/accountant24/releases/download/v0.1.10/accountant24-darwin-arm64.tar.gz"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/machulav/accountant24/releases/download/v0.1.10/accountant24-darwin-arm64.tar.gz"
+      }
+    },
     "alita": {
       "inputs": {
         "fabric": [
@@ -978,6 +990,35 @@
         "type": "github"
       }
     },
+    "ldash-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781091929,
+        "narHash": "sha256-ji1sgzDjJ8KVUVaKzhhCFBgIAAzRS2NQ7DTvJxb3PKA=",
+        "ref": "refs/tags/v1.3.1",
+        "rev": "ad6f68a184a4d1a9b6efd399852d45a6a34afafc",
+        "revCount": 77,
+        "type": "git",
+        "url": "https://codeberg.org/md-weber/ldash"
+      },
+      "original": {
+        "ref": "refs/tags/v1.3.1",
+        "type": "git",
+        "url": "https://codeberg.org/md-weber/ldash"
+      }
+    },
+    "ledgera-macos-app": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-vwpK0eYJFLm2DK19MAadOYe8wADDc50c3AQ0Rr/1/0U=",
+        "type": "file",
+        "url": "https://github.com/thesmokinator/ledgera/releases/download/v0.1.5/Ledgera-v0.1.5-macos-app.zip"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/thesmokinator/ledgera/releases/download/v0.1.5/Ledgera-v0.1.5-macos-app.zip"
+      }
+    },
     "llm-agents": {
       "inputs": {
         "blueprint": "blueprint",
@@ -1898,6 +1939,7 @@
     },
     "root": {
       "inputs": {
+        "accountant24-bin": "accountant24-bin",
         "city-explorer": "city-explorer",
         "darwin": "darwin",
         "determinate": "determinate",
@@ -1917,6 +1959,8 @@
         "iris": "iris",
         "ironhide": "ironhide",
         "ironoxide": "ironoxide",
+        "ldash-src": "ldash-src",
+        "ledgera-macos-app": "ledgera-macos-app",
         "markless": "markless",
         "mbr-markdown-browser": "mbr-markdown-browser",
         "mdterm": "mdterm",
