@@ -16,26 +16,21 @@
     services.llama-cpp = {
       enable = true;
       package = pkgs.stable.llama-cpp-rocm;
-      host = "127.0.0.1";
-      port = 5533;
-      model = "/var/lib/models/ggml-org_gpt-oss-120b-GGUF_gpt-oss-120b-mxfp4-00001-of-00003.gguf";
-      extraFlags = [
-        "--no-mmap" # CRITICAL for ROCm (2X+ perf)
+      settings = {
+        host = "127.0.0.1";
+        port = 5533;
+        model = "/var/lib/models/ggml-org_gpt-oss-120b-GGUF_gpt-oss-120b-mxfp4-00001-of-00003.gguf";
+        "no-mmap" = true; # CRITICAL for ROCm (2X+ perf)
         #"--mlock" # Keep in memory
-        "--gpu-layers"
-        "999" # All layers to GPU
+        "gpu-layers" = 999; # All layers to GPU
         #"--threads"
         #"16" # CPU threads for non-GPU ops
         #"--threads-batch"
         #"16"
-        "--ctx-size"
-        "0" # any size
-        "--batch-size"
-        "512" # Small batch for MoE stability
-        "--ubatch-size"
-        "512"
-        "--flash-attn"
-        "on"
+        "ctx-size" = 0; # any size
+        "batch-size" = 512; # Small batch for MoE stability
+        "ubatch-size" = 512;
+        "flash-attn" = "on";
 
         #--predict 256 (num tokens to predict, same as -n) batch-size 2048, ubatch-size 2048
         #llama-bench -m gpt-oss-20b-mxfp4.gguf -t 1 -fa 1 -b 2048 -ub 2048 -p 2048,8192,16384,32768
@@ -49,21 +44,16 @@
         #"q4_0"
         #"--tensor-split"
         #"0" # No tensor splitting (single GPU)
-        "--temp"
-        "1.0"
-        "--min-p"
-        "0.0"
-        "--top-p"
-        "0.95"
-        "--top-k"
-        "20"
-        "--main-gpu"
-        "0"
-        "--jinja"
-        "--verbose"
+        "temp" = 1.0;
+        "min-p" = 0.0;
+        "top-p" = 0.95;
+        "top-k" = 20;
+        "main-gpu" = 0;
+        "jinja" = true;
+        "verbose" = true;
         #"--log-file"
         #"/tmp/llama-gptoss.log"
-      ];
+      };
     };
 
     systemd.services.llama-cpp = {

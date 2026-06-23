@@ -10,7 +10,7 @@
   }: let
     internalPort = 5200;
     remotePort = 5201;
-    mbrPkg = inputs.mbr-markdown-browser.packages.${pkgs.system}.default;
+    mbrPkg = inputs.mbr-markdown-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
     dataDir = "/var/lib/mbr";
     contentPath = "${dataDir}/magic/content";
     inherit (config.system) primaryUser;

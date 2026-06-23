@@ -13,35 +13,25 @@
     services.llama-cpp = {
       enable = true;
       package = pkgs.llama-cpp;
-      host = "127.0.0.1";
-      port = 8081;
-      model = "/var/lib/models/MiniMax-M2.1-IQ3_M.gguf";
-      extraFlags = [
-        "--no-mmap" # CRITICAL for ROCm (2X+ perf)
-        "--mlock" # Keep in memory
-        "--gpu-layers"
-        "999" # All layers to GPU
-        "--threads"
-        "16" # CPU threads for non-GPU ops
-        "--threads-batch"
-        "16"
-        "--ctx-size"
-        "8192" # Start small, increase after testing
-        "--batch-size"
-        "512"
-        "--ubatch-size"
-        "256"
-        "--flash-attn"
-        "off" # Disabled - gfx1151 crashes during graph_reserve with flash-attn
-        "--cache-type-k"
-        "q4_0"
-        "--cache-type-v"
-        "q4_0"
-        "--jinja"
-        "--verbose"
-        "--log-file"
-        "/tmp/llama-minimax.log"
-      ];
+      settings = {
+        host = "127.0.0.1";
+        port = 8081;
+        model = "/var/lib/models/MiniMax-M2.1-IQ3_M.gguf";
+        "no-mmap" = true; # CRITICAL for ROCm (2X+ perf)
+        "mlock" = true; # Keep in memory
+        "gpu-layers" = 999; # All layers to GPU
+        "threads" = 16; # CPU threads for non-GPU ops
+        "threads-batch" = 16;
+        "ctx-size" = 8192; # Start small, increase after testing
+        "batch-size" = 512;
+        "ubatch-size" = 256;
+        "flash-attn" = "off"; # Disabled - gfx1151 crashes during graph_reserve with flash-attn
+        "cache-type-k" = "q4_0";
+        "cache-type-v" = "q4_0";
+        "jinja" = true;
+        "verbose" = true;
+        "log-file" = "/tmp/llama-minimax.log";
+      };
     };
 
     systemd.services.llama-cpp = {

@@ -16,22 +16,21 @@
     environment.systemPackages = [llamacppPkg];
     services.llama-cpp = {
       enable = true;
-      host = "127.0.0.1";
       openFirewall = false;
-      extraFlags = [
+      settings = {
+        host = "127.0.0.1";
+        model = "/var/lib/models/gemma-4-26B-A4B-it-Q8_0.gguf";
+        port = 8081; # cuz glance is on 8080
         #"--jinja" # what is this?
-        "--verbose"
-        "--log-file"
-        "/tmp/llama-server.log"
-        "--gpu-layers" # same as -ngl
-        "999" # 999 = as many as possible
+        "verbose" = true;
+        "log-file" = "/tmp/llama-server.log";
+        "gpu-layers" = 999; # 999 = as many as possible
         #"--threads"
         #"25"
         #"--threads-batch"
         #"25"
-        "--ctx-size"
+        "ctx-size" = 131072; #for devstral?
         #"65536" # could try bigger?
-        "131072" #for devstral?
         #"--cache-type-k"
         #"q4_0"
         #"--cache-type-v"
@@ -52,12 +51,10 @@
         #"20"
         #"--repeat-penalty"
         #"1.05"
-      ];
+      };
       #model = "/var/lib/models/Qwen3-Coder-30B-A3B-Instruct-Q8_0.gguf";
       #model = "/var/lib/models/Qwen_Qwen3-30B-A3B-Instruct-2507-Q8_0.gguf";
       #model = "/var/lib/models/Devstral-Small-2507_gguf/Devstral-Small-2507-Q4_K_M.gguf";
-      model = "/var/lib/models/gemma-4-26B-A4B-it-Q8_0.gguf";
-      port = 8081; # cuz glance is on 8080
     };
     networking.firewall.allowedTCPPorts = [8082];
     services.caddy.virtualHosts."${config.networking.hostName}.${config.networking.domain}:8082" = {

@@ -116,6 +116,7 @@ in {
         kernelPackages = pkgs.linuxPackages_6_18;
         kernelModules = ["kvm-amd"];
         zfs.package = pkgs.zfs_unstable;
+        zfs.forceImportRoot = false;
         initrd.availableKernelModules = ["apfs" "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod"];
         tmp.cleanOnBoot = true;
         tmp.useTmpfs = true;
@@ -141,8 +142,10 @@ in {
       # so tailnet queries go to MagicDNS and everything else goes to NextDNS
       services.resolved = {
         enable = true;
-        dnssec = "allow-downgrade";
-        fallbackDns = ["1.1.1.1" "8.8.8.8"];
+        settings.Resolve = {
+          DNSSEC = "allow-downgrade";
+          FallbackDNS = ["1.1.1.1" "8.8.8.8"];
+        };
       };
       networking.stevenblack.enable = true; # hosts based blocklist
       # I prefer NIST time servers

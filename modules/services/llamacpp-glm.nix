@@ -17,14 +17,13 @@
     services.llama-cpp = {
       enable = true;
       package = llamacppPkg;
-      host = "127.0.0.1";
-      port = 8081;
-      model = "/var/lib/models/GLM-4.7-Flash-Q8_0.gguf";
-      extraFlags = [
-        "--no-mmap" # CRITICAL for ROCm (2X+ perf)
+      settings = {
+        host = "127.0.0.1";
+        port = 8081;
+        model = "/var/lib/models/GLM-4.7-Flash-Q8_0.gguf";
+        "no-mmap" = true; # CRITICAL for ROCm (2X+ perf)
         #"--mlock" # Keep in memory
-        "--gpu-layers"
-        "999" # All layers to GPU
+        "gpu-layers" = 999; # All layers to GPU
         #"--threads"
         #"16" # CPU threads for non-GPU ops
         #"--threads-batch"
@@ -41,23 +40,20 @@
         #"64"
         #"--main-gpu"
         #"0"
-        "--ctx-size"
-        "0" # Whatever model says
+        "ctx-size" = "0"; # Whatever model says
         #"--batch-size"
         #"512"
         #"--ubatch-size"
         #"256"
-        "--flash-attn" # Required for V cache quantization
-        "on"
+        "flash-attn" = "on"; # Required for V cache quantization
         #"--cache-type-k"
         #"q4_0"
         #"--cache-type-v"
         #"q4_0"
-        "--jinja"
-        "--verbose"
-        "--log-file"
-        "/tmp/llama-glm.log"
-      ];
+        "jinja" = true;
+        "verbose" = true;
+        "log-file" = "/tmp/llama-glm.log";
+      };
     };
 
     systemd.services.llama-cpp = {
