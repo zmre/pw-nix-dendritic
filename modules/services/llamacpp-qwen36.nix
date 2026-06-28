@@ -1,7 +1,6 @@
 {inputs, ...}: {
-  flake.nixosModules.llamacpp = {
+  flake.nixosModules.llamacpp-qwen36 = {
     pkgs,
-    lib,
     config,
     ...
   }: let
@@ -19,41 +18,19 @@
       openFirewall = false;
       settings = {
         host = "127.0.0.1";
-        model = "/var/lib/models/gemma-4-26B-A4B-it-Q8_0.gguf";
+        model = "/var/lib/models/Qwen3.6-27B-Q4_K_M.gguf";
         port = 8081; # cuz glance is on 8080
-        #"--jinja" # what is this?
         "verbose" = true;
         "log-file" = "/tmp/llama-server.log";
         "gpu-layers" = 999; # 999 = as many as possible
-        #"--threads"
-        #"25"
-        #"--threads-batch"
-        #"25"
-        "ctx-size" = 131072;
-        #"--cache-type-k"
-        #"q4_0"
-        #"--cache-type-v"
-        #"q4_0"
-        #"--batch-size"
-        #"2048"
-        #"--ubatch-size"
-        #"256"
-        #"--flash-attn"
-        #"on"
-        #"--temp"
-        #"0.7"
-        #"--min-p"
-        #"0.0"
-        #"--top-p"
-        #"0.80"
-        #"--top-k"
-        #"20"
-        #"--repeat-penalty"
-        #"1.05"
+        "ctx-size" = 262144;
+        "presence-penalty" = 0.2;
+        "n-predict" = 32768; # this is output-length
+        "temp" = 0.6;
+        "top-p" = 0.95;
+        "top-k" = 20;
+        "min-p" = 0.00;
       };
-      #model = "/var/lib/models/Qwen3-Coder-30B-A3B-Instruct-Q8_0.gguf";
-      #model = "/var/lib/models/Qwen_Qwen3-30B-A3B-Instruct-2507-Q8_0.gguf";
-      #model = "/var/lib/models/Devstral-Small-2507_gguf/Devstral-Small-2507-Q4_K_M.gguf";
     };
     networking.firewall.allowedTCPPorts = [8082];
     services.caddy.virtualHosts."${config.networking.hostName}.${config.networking.domain}:8082" = {
