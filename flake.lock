@@ -1,17 +1,5 @@
 {
   "nodes": {
-    "accountant24-bin": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-4iT4Y4WNcn1t61VN7eY7evaSr9kOX2Cnvtssu93a6ro=",
-        "type": "file",
-        "url": "https://github.com/machulav/accountant24/releases/download/v0.1.10/accountant24-darwin-arm64.tar.gz"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/machulav/accountant24/releases/download/v0.1.10/accountant24-darwin-arm64.tar.gz"
-      }
-    },
     "alita": {
       "inputs": {
         "fabric": [
@@ -208,11 +196,11 @@
     },
     "crane_2": {
       "locked": {
-        "lastModified": 1780532242,
-        "narHash": "sha256-D+BsdpxmtUwtqGoY0IXPhHgTlmqgcZKCEo1oMyn7ep0=",
+        "lastModified": 1781825982,
+        "narHash": "sha256-SlXKwIRIhrOSAcTjCB3ftPLzJWZStQIPS7J1FlZPnKk=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "59a82a1222dd3b2080b5cc52a1a2e8d5f1b77f37",
+        "rev": "469fd08d0bcf6926321fa973c6777fbc87785dd7",
         "type": "github"
       },
       "original": {
@@ -957,11 +945,11 @@
         "paiTemplate": "paiTemplate"
       },
       "locked": {
-        "lastModified": 1781820306,
-        "narHash": "sha256-gOpeUjDAQZhJL2Poe5QeUPl6YKEebQHY52fWF+GFrxM=",
+        "lastModified": 1782333385,
+        "narHash": "sha256-4MAdCx7wQR6p/qgOK8AfaEh6GpX8qOp41mMOMQDa1wM=",
         "ref": "refs/heads/main",
-        "rev": "7d7a00ff97f42d0b098f53a8436e8675512692e2",
-        "revCount": 106,
+        "rev": "aa43c6e69402f411d23da76f696891276ffadef2",
+        "revCount": 109,
         "type": "git",
         "url": "ssh://git@github.com/zmre/iris.git"
       },
@@ -1042,13 +1030,13 @@
     "ledgera-macos-app": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-vwpK0eYJFLm2DK19MAadOYe8wADDc50c3AQ0Rr/1/0U=",
+        "narHash": "sha256-jWwiig58I2fAN/fQUcyLKgXCoGsiA6IrFgkC5SYAqVQ=",
         "type": "file",
-        "url": "https://github.com/thesmokinator/ledgera/releases/download/v0.1.5/Ledgera-v0.1.5-macos-app.zip"
+        "url": "https://github.com/thesmokinator/ledgera/releases/download/v0.1.6/Ledgera-v0.1.6-macos-app.zip"
       },
       "original": {
         "type": "file",
-        "url": "https://github.com/thesmokinator/ledgera/releases/download/v0.1.5/Ledgera-v0.1.5-macos-app.zip"
+        "url": "https://github.com/thesmokinator/ledgera/releases/download/v0.1.6/Ledgera-v0.1.6-macos-app.zip"
       }
     },
     "llm-agents": {
@@ -1121,11 +1109,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1781032948,
-        "narHash": "sha256-ETrsCvgWMwq4U313ls6zsl3gZndUGWdQ8ImYsS/L5Nw=",
+        "lastModified": 1782260556,
+        "narHash": "sha256-eLeA05M2v5YXQC2ZS6H7hmnf8nBm0ih8kiWRDetXEbY=",
         "owner": "zmre",
         "repo": "mbr-markdown-browser",
-        "rev": "c4485027fb57e8bf9638388adece9537d25f06bb",
+        "rev": "636d00ef6ab056591bea0fc5282c05f2fac76e42",
         "type": "github"
       },
       "original": {
@@ -1380,11 +1368,11 @@
     },
     "nixpkgs-darwin_2": {
       "locked": {
-        "lastModified": 1780614800,
-        "narHash": "sha256-xq6r60DU54c2C//D+ok+y5A7fp/zpFcNUeX5uGqKyMQ=",
+        "lastModified": 1782041437,
+        "narHash": "sha256-QxQvXkDqx7DrzQSGRzh7Lv08t2fCCnLICQvap3WVzQQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "cc598dfd09b0a543d574a238d4b3473bb1c6d587",
+        "rev": "ea68a74f45ad6311f4bff62b865932ac195d46a7",
         "type": "github"
       },
       "original": {
@@ -1694,11 +1682,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1780453794,
-        "narHash": "sha256-bXMRa9VTsHSPXL4Cw8R6JJLQeY3Y/IP4+YJCYVmQ7FY=",
+        "lastModified": 1782116945,
+        "narHash": "sha256-G3tw/IXmaH6IQ2upZvhuN9sG8CkuX+BLuJDpE8hz0Ds=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6b316287bae2ee04c9b93c8c858d930fd07d7338",
+        "rev": "34268251cf5547d39063f2c5ea9a196246f7f3a6",
         "type": "github"
       },
       "original": {
@@ -1882,11 +1870,11 @@
         "rust-overlay": "rust-overlay_4"
       },
       "locked": {
-        "lastModified": 1782256077,
-        "narHash": "sha256-HfSYvJHFl95kDvLaDye0Cc8GFxNJ6B96HddJH1csxPw=",
+        "lastModified": 1782257156,
+        "narHash": "sha256-G1rHxCCQGEN1EAImqkEw/nJ/IEzh7jU5fBf6+hd7XEs=",
         "owner": "zmre",
         "repo": "pwneovide",
-        "rev": "2261965f888b091c683d153b3afac3c53d4800ac",
+        "rev": "2ef55237e6903229a9226747da176c136585b77c",
         "type": "github"
       },
       "original": {
@@ -1914,11 +1902,11 @@
         "todo-comments-nvim": "todo-comments-nvim"
       },
       "locked": {
-        "lastModified": 1782254865,
-        "narHash": "sha256-wghbD+7hydsRzJcuiKeXDuD3wQjLx14WnKpjRlsbKZU=",
+        "lastModified": 1782256975,
+        "narHash": "sha256-dN7dHwy5Qf5XuvE7L7jxGDMlquAl6ZhpmL2Jfn0Gn0k=",
         "owner": "zmre",
         "repo": "pwnvim",
-        "rev": "5e25dc76d3db72efd08e543d4679c0ac39894431",
+        "rev": "751e794f776a45ebffbdbb156921d88e1918d69d",
         "type": "github"
       },
       "original": {
@@ -1943,11 +1931,11 @@
         "todo-comments-nvim": "todo-comments-nvim_2"
       },
       "locked": {
-        "lastModified": 1782254865,
-        "narHash": "sha256-wghbD+7hydsRzJcuiKeXDuD3wQjLx14WnKpjRlsbKZU=",
+        "lastModified": 1782408075,
+        "narHash": "sha256-KB258ITjRnlZW919/lIKDB9395Vzz5Fl/KJebKAp9V0=",
         "owner": "zmre",
         "repo": "pwnvim",
-        "rev": "5e25dc76d3db72efd08e543d4679c0ac39894431",
+        "rev": "54eec07fe310c55dc3406701240362e1f5b672ea",
         "type": "github"
       },
       "original": {
@@ -1990,7 +1978,6 @@
     },
     "root": {
       "inputs": {
-        "accountant24-bin": "accountant24-bin",
         "city-explorer": "city-explorer",
         "darwin": "darwin",
         "determinate": "determinate",
@@ -2089,11 +2076,11 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1780802404,
-        "narHash": "sha256-bGtIUeLb0yChX4h6hB40OOCwcYhcpQZHXSDvZGdWgeM=",
+        "lastModified": 1782184651,
+        "narHash": "sha256-4XHdXp3MRa++XiGkltJChCtdbCmSlNTwQRfWQOhqbRw=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "8e596a8430f2ce54d55c742198187d6945a5501e",
+        "rev": "f59bc28dd0b89e9c0240d1b80195559fc79c2471",
         "type": "github"
       },
       "original": {

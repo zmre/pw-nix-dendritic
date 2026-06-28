@@ -32,11 +32,6 @@
   };
 
   inputs = {
-    accountant24-bin = {
-      type = "file";
-      url = "https://github.com/machulav/accountant24/releases/download/v0.1.10/accountant24-darwin-arm64.tar.gz";
-      flake = false;
-    };
     city-explorer = {
       url = "github:zmre/city-explorer";
       inputs = {
@@ -115,7 +110,7 @@
     };
     ledgera-macos-app = {
       type = "file";
-      url = "https://github.com/thesmokinator/ledgera/releases/download/v0.1.5/Ledgera-v0.1.5-macos-app.zip";
+      url = "https://github.com/thesmokinator/ledgera/releases/download/v0.1.6/Ledgera-v0.1.6-macos-app.zip";
       flake = false;
     };
     markless = {

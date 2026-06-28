@@ -6,7 +6,7 @@
   # NOTE: the build is unsigned/not-notarized -- on first launch use
   # right-click -> Open (or `xattr -dr com.apple.quarantine` on the .app).
   flake-file.inputs.ledgera-macos-app = {
-    url = "https://github.com/thesmokinator/ledgera/releases/download/v0.1.5/Ledgera-v0.1.5-macos-app.zip";
+    url = "https://github.com/thesmokinator/ledgera/releases/download/v0.1.6/Ledgera-v0.1.6-macos-app.zip";
     type = "file";
     flake = false;
   };
@@ -23,7 +23,7 @@
   }: let
     ledgera = pkgs.stdenvNoCC.mkDerivation {
       pname = "ledgera";
-      version = "0.1.5";
+      version = "0.1.6";
       src = inputs.ledgera-macos-app;
       nativeBuildInputs = [pkgs.unzip];
       unpackPhase = ''

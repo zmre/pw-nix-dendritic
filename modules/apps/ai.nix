@@ -30,6 +30,7 @@
     ...
   }: let
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
+    irisPkg = inputs.iris.packages.${system}.default;
     aichat-wrapped = let
       pkg = pkgs.aichat;
       tools = with pkgs; [argc jq poppler-utils pdfminer tesseract];
@@ -44,12 +45,21 @@
   in {
     home.packages = with pkgs; [
       aichat-wrapped # ai cli tool that can use local rag, local models, etc.
-      inputs.iris.packages.${system}.default # my personal assistant, which wraps other tools and has crap tons of configs
+      irisPkg # my personal assistant, which wraps other tools and has crap tons of configs
       #inputs.alita.packages.${system}.default # ironcore version -- just for demo and testing purposes
       stable.whisper-cpp # Allow GPU accelerated local transcriptions
       python313Packages.huggingface-hub
       python313Packages.hf-transfer
     ];
+
+    # Link opencode's skills/agents at iris's bundled copies. These are
+    # symlinks into the iris store path, so they re-point on every activation
+    # (and whenever iris updates to a new store path).
+    xdg.configFile = {
+      "opencode/skills".source = "${irisPkg}/claude/skills";
+      "opencode/agents".source = "${irisPkg}/claude/agents";
+    };
+
     programs = {
     };
   };

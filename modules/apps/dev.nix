@@ -88,7 +88,7 @@
             else "cache --timeout=10000000";
           diff.algorithm = "patience";
           protocol.version = "2";
-          remote.origin.fetch = "+refs/heads/*:refs/remotes/origin/*";
+          # remote.origin.fetch = "+refs/heads/*:refs/remotes/origin/*";
           core = {
             commitGraph = true;
             fsmonitor = false;
