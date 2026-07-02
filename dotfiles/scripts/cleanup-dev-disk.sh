@@ -36,7 +36,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
-RED='\033[0;31m'; YELLOW='\033[1;33m'; GREEN='\033[0;32m'
+# RED='\033[0;31m'
+YELLOW='\033[1;33m'; GREEN='\033[0;32m'
 CYAN='\033[0;36m'; BOLD='\033[1m'; RESET='\033[0m'
 
 header()  { echo -e "\n${BOLD}${CYAN}══════════════════════════════════════${RESET}"; \
@@ -170,9 +171,7 @@ cleanup_docker() {
   header "Docker via Colima"
 
   # ── Check colima is running ───────────────────────────────────────────────
-  COLIMA_RUNNING=false
   if colima status 2>/dev/null | grep -q "running"; then
-    COLIMA_RUNNING=true
     info "Colima is running — docker commands will work"
   else
     warn "Colima does not appear to be running."
@@ -399,6 +398,7 @@ cleanup_rust() {
   if [[ -d "$CARGO_BIN" ]]; then
     info "Cargo-installed binaries: $(disk_usage "$CARGO_BIN")"
     info "Listing (review manually for unused tools):"
+    # shellcheck disable=SC2012  # display-only listing; cargo bin names are simple
     ls "$CARGO_BIN" 2>/dev/null | column
   fi
 
@@ -433,11 +433,11 @@ echo -e "  ${BOLD}/nix/store:${RESET}          ${nix_used} used / ${nix_total} t
 
 # For the rest, du is fine — much smaller than the nix store
 for entry in \
-  "~/.cargo|$HOME/.cargo" \
-  "~/.rustup|${RUSTUP_HOME:-$HOME/.rustup}" \
-  "~/.colima|$HOME/.colima" \
-  "~/.cache/nix|$HOME/.cache/nix" \
-  "~/.cache/direnv|$HOME/.cache/direnv"
+  "$HOME/.cargo" \
+  "${RUSTUP_HOME:-$HOME/.rustup}" \
+  "$HOME/.colima" \
+  "$HOME/.cache/nix" \
+  "$HOME/.cache/direnv"
 do
   label="${entry%%|*}"
   path="${entry##*|}"
