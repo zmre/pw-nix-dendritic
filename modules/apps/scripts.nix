@@ -63,6 +63,18 @@
       runtimeInputs = with pkgs; [ffmpeg stable.whisper-cpp];
       text = builtins.readFile ../../dotfiles/scripts/transcribe-video-to-subtitles;
     };
+    cleanup-dev-disk = pkgs.writeShellApplication {
+      name = "cleanup-dev-disk"; # this is murph's script, defaults to dry run mode, handles nix (incl flake/direnv), rust, docker
+      # kondo is the app that handles rust, python, java, scala, etc., but not nix or docker
+      # Usage:
+      #   cleanup-dev-disk           # dry-run (safe, shows what WOULD be freed)
+      #   cleanup-dev-disk --run     # actually execute cleanup
+      #   cleanup-dev-disk --run --section nix
+      #   cleanup-dev-disk --run --section docker
+      #   cleanup-dev-disk --run --section rust
+      #runtimeInputs = with pkgs; [];
+      text = builtins.readFile ../../dotfiles/scripts/cleanup-dev-disk.sh;
+    };
   in {
     home.packages =
       [
@@ -71,6 +83,7 @@
         yt-fix
         transcribe-rode-meeting
         transcribe-video-to-subtitles
+        cleanup-dev-disk
       ]
       ++ lib.optionals pkgs.stdenvNoCC.isLinux []
       ++ lib.optionals pkgs.stdenvNoCC.isDarwin [
