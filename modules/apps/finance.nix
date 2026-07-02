@@ -24,7 +24,7 @@
     };
   in {
     home.sessionVariables = {
-      "LEDGER_FILE" = "~/Sync/Private/Finances/Ledger/main.journal"; # used by ldash
+      "LEDGER_FILE" = "$HOME/Sync/Private/Finances/Ledger/main.journal"; # used by ldash
     };
     home.packages = with pkgs; [
       hledger # core CLI: plain-text double-entry accounting
@@ -36,7 +36,6 @@
       puffin # terminal dashboard for hledger
       ldash # portfolio / budget TUI
       pricehist # fetch portfolio price histories
-      paisa
     ];
   };
 }

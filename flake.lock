@@ -1931,11 +1931,11 @@
         "todo-comments-nvim": "todo-comments-nvim_2"
       },
       "locked": {
-        "lastModified": 1782408075,
-        "narHash": "sha256-KB258ITjRnlZW919/lIKDB9395Vzz5Fl/KJebKAp9V0=",
+        "lastModified": 1782742852,
+        "narHash": "sha256-VY8diCIxv9SujFGI9/YMqCJunuBUXTgQpkg+AxPYpGg=",
         "owner": "zmre",
         "repo": "pwnvim",
-        "rev": "54eec07fe310c55dc3406701240362e1f5b672ea",
+        "rev": "000208dc5aa9c34f8606bf1713240d2e34181121",
         "type": "github"
       },
       "original": {
