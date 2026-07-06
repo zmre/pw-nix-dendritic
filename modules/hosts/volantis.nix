@@ -226,6 +226,7 @@ in {
         compsize # btrfs util
         x11_ssh_askpass
         veracrypt
+        brightnessctl # replaced programs.light, which was removed from nixpkgs
       ];
 
       services.locate.enable = true;
@@ -233,7 +234,6 @@ in {
       services.earlyoom.enable = true;
       programs.ssh.startAgent = true;
       programs.dconf.enable = true;
-      programs.light.enable = true;
       # clight requires a latitude and longitude
       location.latitude = 38.0;
       location.longitude = -105.0;

@@ -212,7 +212,12 @@
     config,
     lib,
     ...
-  }: {
+  }: let
+    gtkTheme = {
+      package = pkgs.matcha-gtk-theme;
+      name = "Matcha-dark-azul";
+    };
+  in {
     home.file = {
       ".wallpaper.jpg".source = ../../../wallpaper/castle2.jpg;
       ".lockpaper.png".source = ../../../wallpaper/kali.png;
@@ -231,10 +236,9 @@
         #name = "Breeze Dark";
         #package = pkgs.gnome-breeze;
       };
-      theme = {
-        package = pkgs.matcha-gtk-theme;
-        name = "Matcha-dark-azul";
-      };
+      theme = gtkTheme;
+      # keep legacy behavior; new HM default for gtk4.theme is null
+      gtk4.theme = gtkTheme;
     };
     services.dunst.enable = pkgs.stdenv.isLinux; # notification daemon
     # top bar
@@ -612,8 +616,8 @@
           "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
           "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl prev";
           # backlight
-          "XF86MonBrightnessUp" = "exec --no-startup-id ${pkgs.light}/bin/light -A 1";
-          "XF86MonBrightnessDown" = "exec --no-startup-id ${pkgs.light}/bin/light -U 1";
+          "XF86MonBrightnessUp" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set +1%";
+          "XF86MonBrightnessDown" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 1%-";
         };
       defaultWorkspace = "workspace number 1";
       assigns = {

@@ -88,6 +88,8 @@
     # currently fails to compile on darwin
     programs.firefox = {
       enable = pkgs.stdenv.isLinux;
+      # keep legacy location; HM default moved to $XDG_CONFIG_HOME/mozilla/firefox
+      configPath = ".mozilla/firefox";
       # turns out you have to setup a profile (below) for extensions to install
       profiles = {
         home = {

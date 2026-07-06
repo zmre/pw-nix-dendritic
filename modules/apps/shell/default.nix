@@ -133,8 +133,9 @@
         enableZshIntegration = true;
         tmux.enableShellIntegration = false;
         defaultCommand = "\fd --type f --hidden --exclude .git";
-        fileWidgetCommand = "\fd --exclude .git --type f"; # for when ctrl-t is pressed
-        changeDirWidgetCommand = "\fd --type d --hidden --follow --max-depth 3 --exclude .git";
+        fileWidget.command = "\fd --exclude .git --type f"; # for when ctrl-t is pressed
+        changeDirWidget.command = "\fd --type d --hidden --follow --max-depth 3 --exclude .git";
+        historyWidget.command = ""; # atuin owns ctrl-r
       };
       home-manager.enable = true;
       nix-index.enable = true;
