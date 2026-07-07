@@ -1110,11 +1110,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1783346376,
-        "narHash": "sha256-FryhWcbf7GsabLnVYSlW/ckDWfIJ9JWv8L7znW50/Kg=",
+        "lastModified": 1783436064,
+        "narHash": "sha256-/8KV/Xq0LTDj19haZbf3gADUCCAl6wvwhLHSlfPYAfk=",
         "owner": "zmre",
         "repo": "mbr-markdown-browser",
-        "rev": "d4c17dcbc5ea3193e365cff5c18afc403fb56fb0",
+        "rev": "2350ca1868dc551f878093c6510ad00c0d27015d",
         "type": "github"
       },
       "original": {
