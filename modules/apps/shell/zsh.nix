@@ -291,6 +291,7 @@
           # search for a note and with ctrl-n, create it if not found
           # add subdir as needed like "n meetings" or "n wiki"
           n = "zk edit --interactive";
+          "pwdev-go" = "nix develop ~/src/sideprojects/pwdev#go";
           "pwdev-rust" = "nix develop ~/src/sideprojects/pwdev#rust";
           "pwdev-ts" = "nix develop ~/src/sideprojects/pwdev#ts";
           "pwdev-python" = "nix develop ~/src/sideprojects/pwdev#python";
