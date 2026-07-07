@@ -22,6 +22,7 @@
     "city-explorer"
     "glance"
     "homebridge"
+    "llamacpp-packages" # overlay with tuned llama.cpp builds (gfx1151)
     "llamacpp-qwen36" # Qwen 3.6
     #"llamacpp-glm" # GLM-4.7-Flash (smallest, for initial testing)
     #"llamacpp-gptoss" # Alternative: GPT-OSS-120B
