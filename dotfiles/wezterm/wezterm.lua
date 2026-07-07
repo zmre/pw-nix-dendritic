@@ -23,6 +23,10 @@ config.automatically_reload_config = true
 -- config.window_close_confirmation = "NeverPrompt"
 config.tab_bar_at_bottom = true
 config.scrollback_lines = 10000
+-- Newer wezterm defaults this to true, which points SSH_AUTH_SOCK at a
+-- wezterm-managed symlink that dangles after restarts and hides the macOS
+-- Keychain-integrated launchd agent. Keep the system agent.
+config.mux_enable_ssh_agent = false
 -- Following two settings are per Wez https://github.com/wez/wezterm/issues/3731 to get the cmd key to pass through to nvim
 -- That issue says to set enable_kitty_keyboard = true and csi_u_key_encoding to false. But I'm not getting anything different
 -- for <C-\> and <C-S-\> in neovim in wezterm. After upgrading wezterm, still no go. Claude thinks the fallback behavior might

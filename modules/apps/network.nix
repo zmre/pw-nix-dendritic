@@ -41,12 +41,18 @@
         enable = true;
         enableDefaultConfig = false;
         settings = {
-          "*" = {
-            compression = true;
-            controlMaster = "auto";
-            forwardAgent = true;
-            addKeysToAgent = "yes";
-          };
+          "*" =
+            {
+              compression = true;
+              controlMaster = "auto";
+              forwardAgent = true;
+              addKeysToAgent = "yes";
+            }
+            // lib.optionalAttrs pkgs.stdenv.isDarwin {
+              # Apple's ssh stores/retrieves key passphrases in the Keychain;
+              # Linux openssh doesn't know this keyword, so Darwin-only
+              UseKeychain = "yes";
+            };
         };
         includes = ["*.conf"];
       };
