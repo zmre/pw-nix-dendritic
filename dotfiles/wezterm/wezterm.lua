@@ -258,9 +258,10 @@ wezterm.on('gui-startup', function(cmd)
   local yazi_tab, yazi_pane, _ = window:spawn_tab { cwd = wezterm.home_dir, set_environment_variables = { PATH = path } }
   yazi_pane:send_text("y\n")
   local news_right_pane = news_left_pane:split({ direction = "Right", size = 0.5, set_environment_variables = { PATH = path }, args = { "hackernews_tui" } })
-  notes_tab:set_title('notes')
-  news_tab:set_title('news')
-  website_tab:set_title('code')
+  -- no more fixed titles for tabs; should be dynamic
+  -- notes_tab:set_title('notes')
+  -- news_tab:set_title('news')
+  -- website_tab:set_title('code')
   notes_pane:send_text("nvim -c 'norm ,fn'\n")
   -- news_left_pane:send_text("btop\n")
   main_pane:activate()
