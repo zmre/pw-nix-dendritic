@@ -1934,11 +1934,11 @@
         "zk-src": "zk-src"
       },
       "locked": {
-        "lastModified": 1783374737,
-        "narHash": "sha256-22UhUXxZMpJnSzcgEAfK8USqqJUYTqKBveCSLsws4dA=",
+        "lastModified": 1783555242,
+        "narHash": "sha256-pkgHWfimSMwjCf76v8YWhQOLBpq6viNTbVWVh3pnDKQ=",
         "owner": "zmre",
         "repo": "pwnvim",
-        "rev": "61b7f7461d9c484463caec92e810e8d76ab6090b",
+        "rev": "fbf822ecabd41c4de9b678921da54359a1f91edf",
         "type": "github"
       },
       "original": {
