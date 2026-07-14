@@ -20,6 +20,7 @@
     "caddy"
     "calibre-web"
     "city-explorer"
+    "garage"
     "glance"
     "homebridge"
     "llamacpp-packages" # overlay with tuned llama.cpp builds (gfx1151)
