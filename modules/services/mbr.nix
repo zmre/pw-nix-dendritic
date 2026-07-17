@@ -31,7 +31,7 @@
         Type = "simple";
         User = primaryUser;
         Group = "users";
-        ExecStart = "${mbrPkg}/bin/mbr -s ${contentPath}";
+        ExecStart = "${mbrPkg}/bin/mbr --edit -s ${contentPath}";
         Restart = "on-failure";
         RestartSec = "5s";
         WorkingDirectory = "${dataDir}/magic";
