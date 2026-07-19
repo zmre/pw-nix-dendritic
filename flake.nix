@@ -108,11 +108,7 @@
       url = "git+https://codeberg.org/md-weber/ldash?ref=refs/tags/v1.3.1";
       flake = false;
     };
-    ledgera-macos-app = {
-      type = "file";
-      url = "https://github.com/thesmokinator/ledgera/releases/download/v0.1.6/Ledgera-v0.1.6-macos-app.zip";
-      flake = false;
-    };
+    ledgeline.url = "github:zmre/ledgeline";
     markless = {
       url = "github:jvanderberg/markless";
       flake = false;

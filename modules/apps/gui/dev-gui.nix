@@ -44,6 +44,10 @@
         mutableExtensionsDir =
           true; # to allow vscode to install extensions not available via nix
         # package = pkgs.vscode-fhs; # or pkgs.vscodium or pkgs.vscode-with-extensions
+        # Pinned to stable 2026-07-20: unstable vscode 1.129.1 fails to build on
+        # darwin-arm64 -- nixpkgs patchPhase chmods a ripgrep path that upstream
+        # renamed (@vscode/ripgrep-universal). Revert to default once nixpkgs fixes it.
+        package = pkgs.stable.vscode;
         profiles.default = {
           extensions = with pkgs.vscode-extensions; [
             bbenoist.nix

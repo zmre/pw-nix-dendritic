@@ -1,15 +1,12 @@
 {inputs, ...}: {
-  # Ledgera: cross-platform Tauri/Rust GUI for hledger.
-  # Not in nixpkgs and no Homebrew cask exists; upstream ships an unsigned
-  # prebuilt macOS .app. Fetch the zipped bundle as a raw file and unpack it so
-  # home-manager's copyApps drops Ledgera.app into ~/Applications.
-  # NOTE: the build is unsigned/not-notarized -- on first launch use
-  # right-click -> Open (or `xattr -dr com.apple.quarantine` on the .app).
-  flake-file.inputs.ledgera-macos-app = {
-    url = "https://github.com/thesmokinator/ledgera/releases/download/v0.1.6/Ledgera-v0.1.6-macos-app.zip";
-    type = "file";
-    flake = false;
-  };
+  # Ledgeline: local hledger GUI (axum server + wry/tao webview) with an
+  # embedded SvelteKit SPA. A proper flake (github:zmre/ledgeline, private).
+  # On darwin `packages.default` (macDist) is a symlinkJoin of the CLI binary
+  # (`bin/ledgeline`, real SPA baked in) plus `Applications/Ledgeline.app`, so
+  # home-manager puts the CLI on PATH and copies the app into ~/Applications.
+  # Builds pull from zmre.cachix.org (already a configured substituter).
+  # NOTE: private repo -- eval/build needs GitHub auth (nix `access-tokens`).
+  flake-file.inputs.ledgeline.url = "github:zmre/ledgeline";
 
   # Kept as a slot for any future Homebrew casks under this feature.
   flake.darwinModules.finance-gui = {
@@ -21,28 +18,10 @@
     lib,
     ...
   }: let
-    ledgera = pkgs.stdenvNoCC.mkDerivation {
-      pname = "ledgera";
-      version = "0.1.6";
-      src = inputs.ledgera-macos-app;
-      nativeBuildInputs = [pkgs.unzip];
-      unpackPhase = ''
-        runHook preUnpack
-        mkdir -p unpacked
-        unzip -q $src -d unpacked
-        runHook postUnpack
-      '';
-      sourceRoot = "unpacked";
-      installPhase = ''
-        runHook preInstall
-        mkdir -p $out/Applications
-        app=$(find . -maxdepth 3 -name '*.app' -type d | head -n1)
-        cp -R "$app" "$out/Applications/"
-        runHook postInstall
-      '';
-      meta.platforms = pkgs.lib.platforms.darwin;
-    };
+    inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
-    home.packages = lib.optionals pkgs.stdenv.isDarwin [ledgera];
+    home.packages = lib.optionals pkgs.stdenv.isDarwin [
+      inputs.ledgeline.packages.${system}.default
+    ];
   };
 }
