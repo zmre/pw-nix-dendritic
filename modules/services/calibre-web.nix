@@ -28,6 +28,16 @@
         calibre-web = prev.calibre-web.overridePythonAttrs (old: {
           pythonRelaxDeps = (old.pythonRelaxDeps or []) ++ ["chardet" "certifi"];
         });
+        # Pin the desktop calibre (used by programs.calibre AND by the
+        # calibre-web service's book-conversion pre-start) to the stable
+        # branch.  Unstable calibre 9.11 pulls piper-tts -> torch, and on
+        # avalon (nixpkgs.config.rocmSupport = true) that torch is ROCm-enabled,
+        # forcing a from-source build of aotriton (huge, hangs the rebuild).
+        # pkgs.stable is imported without rocmSupport, so its torch is CPU-only
+        # and Hydra-cached -> no aotriton build.  final.stable is used (not prev)
+        # so it resolves regardless of overlay ordering.
+        # TODO: drop once nixpkgs no longer defaults calibre to ROCm torch.
+        calibre = final.stable.calibre;
       })
     ];
 
