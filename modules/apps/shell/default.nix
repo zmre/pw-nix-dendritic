@@ -80,7 +80,7 @@
         file
         fortune
         #mdterm # terminal markdown viewer - new one, no obvious advantage over glow though as link jumping didn't work right and I don't care about slide mode much
-        markless # new markdown renderer I'm testing
+        #markless # new markdown renderer I'm testing
         glow # browse markdown dirs
         html2text
         hydra-check
