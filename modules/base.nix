@@ -17,39 +17,6 @@
     nar-buffer-size = 134217728; # 128 MiB (increased from default 32 MiB)
   };
 
-  # Disable jeepney checks on Darwin — installCheck needs dbus-daemon and
-  # pythonImportsCheck tries to import jeepney.io.trio which needs `outcome`
-  # (a trio dep not present).  Affects yt-dlp → secretstorage → jeepney.
-  # TODO: check when I can remove this https://github.com/NixOS/nixpkgs/issues/493775
-  darwinFixesOverlay = final: prev:
-    lib.optionalAttrs prev.stdenv.isDarwin {
-      pythonPackagesExtensions =
-        prev.pythonPackagesExtensions
-        ++ [
-          (
-            pfinal: pprev: {
-              jeepney = pprev.jeepney.overrideAttrs (old: {
-                doInstallCheck = false;
-                pythonImportsCheck =
-                  builtins.filter (m: m != "jeepney.io.trio")
-                  (old.pythonImportsCheck or []);
-              });
-            }
-          )
-        ];
-    };
-
-  # highlight 4.20 already contains the shellscript crash fix that nixpkgs still
-  # carries as a patch, so the patch fails to apply ("Reversed (or previously
-  # applied) patch detected").  Upstream reverted the redundant patch in
-  # NixOS/nixpkgs@ebacc39 (2026-06-02), just after our pinned nixpkgs rev.
-  # Drop the patch locally to match upstream; remove this overlay once nixpkgs
-  # is bumped past that commit.
-  # TODO: remove after nixpkgs bump past 2026-06-02 (NixOS/nixpkgs@ebacc39).
-  highlightFixOverlay = final: prev: {
-    highlight = prev.highlight.overrideAttrs (_: {patches = [];});
-  };
-
   stableOverlay = final: prev: {
     stable =
       if final.stdenv.isDarwin
@@ -119,12 +86,12 @@ in {
 
     # This module can be imported by any Darwin/NixOS config
     flake.nixosModules.system = {
-      nixpkgs.overlays = [stableOverlay highlightFixOverlay];
+      nixpkgs.overlays = [stableOverlay];
       nixpkgs.config = nixpkgsConfig;
     };
 
     flake.darwinModules.system = {
-      nixpkgs.overlays = [stableOverlay darwinFixesOverlay highlightFixOverlay];
+      nixpkgs.overlays = [stableOverlay];
       nixpkgs.config = nixpkgsConfig;
     };
   };

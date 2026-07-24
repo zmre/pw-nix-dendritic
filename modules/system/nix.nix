@@ -8,11 +8,9 @@
         # wheel for linux, admin for darwin
         trusted-users = ["root" "@admin" "@wheel"];
 
-        # TODO: turn this back on
-        # disabled on macos 2023-01-21 because of "cannot link" errors as described here:
-        # https://github.com/NixOS/nix/issues/7273
-        # issue still open 2025-11-28
-        auto-optimise-store = pkgs.stdenv.isLinux;
+        # Re-enabled on macOS 2026-07-23: the "cannot link" bug was fixed upstream
+        # (NixOS/nix#7273, closed 2025-12-01).
+        auto-optimise-store = true;
 
         max-jobs = 8;
         cores = 0; # use them all
