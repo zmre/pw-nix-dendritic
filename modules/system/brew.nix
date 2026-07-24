@@ -1,6 +1,11 @@
 {inputs, ...}: {
   flake-file.inputs = {
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # TODO: revert to "github:zhaofengli/nix-homebrew" once PR #162 merges.
+    # Upstream nix-homebrew pins Homebrew/brew 6.0.11, which doesn't understand the
+    # `source_glob` cask DSL keyword used by newer casks (e.g. wezterm@nightly), so
+    # `brew bundle` fails with "unknown keyword: :source_glob". This fork branch bumps
+    # brew-src 6.0.11 -> 6.0.12. https://github.com/zhaofengli/nix-homebrew/pull/162
+    nix-homebrew.url = "github:ELD/nix-homebrew/update-brew-src";
 
     homebrew-core = {
       url = "github:homebrew/homebrew-core";

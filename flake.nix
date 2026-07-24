@@ -119,7 +119,7 @@
       flake = false;
     };
     nix-auth.url = "github:numtide/nix-auth";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    nix-homebrew.url = "github:ELD/nix-homebrew/update-brew-src";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
