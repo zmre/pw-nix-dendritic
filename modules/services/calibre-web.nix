@@ -37,7 +37,7 @@
         # and Hydra-cached -> no aotriton build.  final.stable is used (not prev)
         # so it resolves regardless of overlay ordering.
         # TODO: drop once nixpkgs no longer defaults calibre to ROCm torch.
-        calibre = final.stable.calibre;
+        inherit (final.stable) calibre;
       })
     ];
 

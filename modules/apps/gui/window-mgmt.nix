@@ -51,7 +51,7 @@
     environment.systemPackages = with pkgs; [
       # wm support
       xss-lock
-      syncthingtray-minimal
+      #syncthingtray-minimal
       arandr
       #i3-auto-layout # should change default split; not working
 
@@ -649,11 +649,6 @@
           notification = false;
         }
         {
-          command = "systemctl --user restart syncthing";
-          always = true;
-          notification = false;
-        }
-        {
           command = "feh --bg-fill ~/.wallpaper.jpg";
           always = true;
           notification = false;
@@ -662,11 +657,6 @@
         # and nm-applet is a desktop environment-independent system tray GUI for it.
         {
           command = "nm-applet";
-          notification = false;
-        }
-        {
-          command = "syncthingtray";
-          always = true;
           notification = false;
         }
         {

@@ -57,7 +57,11 @@ in {
     modules = [inputs.nixos-hardware.nixosModules.framework-11th-gen-intel] ++ nixosMods;
   };
 
-  flake.nixosModules.volantis-configuration = {pkgs, config, ...}: {
+  flake.nixosModules.volantis-configuration = {
+    pkgs,
+    config,
+    ...
+  }: {
     config = {
       system.primaryUser = username;
       home-manager.useGlobalPkgs = true;
@@ -91,10 +95,10 @@ in {
         supportedFilesystems = ["btrfs"];
         kernelPackages = pkgs.linuxPackages_latest;
         initrd.checkJournalingFS = false;
-        initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "uas" "sd_mod"];
+        initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "uas" "sd_mod" "apfs" "usbhid"];
         initrd.kernelModules = ["i915"];
         kernelModules = ["kvm-intel"];
-        extraModulePackages = [];
+        extraModulePackages = [pkgs.linuxKernel.packages.linux_6_18.apfs];
         kernelParams = ["mem_sleep_default=deep" "nvme.noacpi=1" "net.ifnames=1"];
         tmp.cleanOnBoot = true;
         tmp.useTmpfs = true;
