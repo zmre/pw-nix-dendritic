@@ -1,11 +1,22 @@
-{inputs, ...}: {
+{inputs, ...}: let
+  # nix-homebrew pins the Homebrew/brew source, and it always lags behind the
+  # homebrew-core/homebrew-cask taps (which we track at HEAD). When brew is older
+  # than the taps, formulae/casks using newly-added DSL keywords become unreadable
+  # and `brew bundle` fails. Past breakages: `:source_glob` (needed 6.0.12),
+  # `run`/`terminate_process` in *_steps blocks (needed 6.0.13).
+  #
+  # So we pin brew-src ourselves rather than inherit nix-homebrew's. Bump this tag
+  # (https://github.com/Homebrew/brew/releases) whenever `nix flake update` moves
+  # the taps past what this brew understands.
+  brewVersion = "6.0.14";
+in {
   flake-file.inputs = {
-    # TODO: revert to "github:zhaofengli/nix-homebrew" once PR #162 merges.
-    # Upstream nix-homebrew pins Homebrew/brew 6.0.11, which doesn't understand the
-    # `source_glob` cask DSL keyword used by newer casks (e.g. wezterm@nightly), so
-    # `brew bundle` fails with "unknown keyword: :source_glob". This fork branch bumps
-    # brew-src 6.0.11 -> 6.0.12. https://github.com/zhaofengli/nix-homebrew/pull/162
-    nix-homebrew.url = "github:ELD/nix-homebrew/update-brew-src";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    brew-src = {
+      url = "github:Homebrew/brew/6.0.14"; # keep in sync with brewVersion above
+      flake = false;
+    };
 
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -38,6 +49,15 @@
     nix-homebrew = {
       # Install Homebrew under the default prefix
       enable = true;
+
+      # Override nix-homebrew's own (older) brew pin. Upstream sets this with
+      # mkOptionDefault, so a plain assignment wins.
+      package =
+        inputs.brew-src
+        // {
+          name = "brew-${brewVersion}";
+          version = brewVersion;
+        };
 
       # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
       enableRosetta = false;

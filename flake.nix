@@ -32,6 +32,10 @@
   };
 
   inputs = {
+    brew-src = {
+      url = "github:Homebrew/brew/6.0.14";
+      flake = false;
+    };
     city-explorer = {
       url = "github:zmre/city-explorer";
       inputs = {
@@ -119,7 +123,7 @@
       flake = false;
     };
     nix-auth.url = "github:numtide/nix-auth";
-    nix-homebrew.url = "github:ELD/nix-homebrew/update-brew-src";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
