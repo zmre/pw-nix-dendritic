@@ -80,6 +80,8 @@
       netcat
       vulnix # check for live nix apps that are listed in NVD
       yubikey-manager # cli for yubikey
+      esptool
+      espflash
     ];
     programs = {
     };
