@@ -44,12 +44,13 @@
       '';
   in {
     home.packages = with pkgs; [
-      aichat-wrapped # ai cli tool that can use local rag, local models, etc.
+      #aichat-wrapped # ai cli tool that can use local rag, local models, etc.
       irisPkg # my personal assistant, which wraps other tools and has crap tons of configs
       #inputs.alita.packages.${system}.default # ironcore version -- just for demo and testing purposes
       stable.whisper-cpp # Allow GPU accelerated local transcriptions
       python313Packages.huggingface-hub
       python313Packages.hf-transfer
+      herdr # TODO: switch to programs.herdr if i like this after testing (2026-07-31) and once i know what config i want
     ];
 
     # Link opencode's skills/agents at iris's bundled copies. These are
