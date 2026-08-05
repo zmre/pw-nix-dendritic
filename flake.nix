@@ -148,6 +148,13 @@
     };
     pwneovide.url = "github:zmre/pwneovide";
     pwnvim.url = "github:zmre/pwnvim";
+    remarkable = {
+      url = "github:zmre/remarkable";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     rust-overlay.url = "github:oxalica/rust-overlay";
     sbhosts = {
       url = "github:StevenBlack/hosts";

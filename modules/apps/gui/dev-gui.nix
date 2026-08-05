@@ -1,4 +1,11 @@
-{
+{inputs, ...}: {
+  # Rich text -> markdown converter. macOS only: Cocoa app whose .xib files need
+  # ibtool, so it compiles against the system Xcode (masApps below) rather than
+  # nixpkgs. No binary cache -- expect a local build on every version bump.
+  flake-file.inputs.remarkable.url = "github:zmre/remarkable";
+  flake-file.inputs.remarkable.inputs.nixpkgs.follows = "nixpkgs";
+  flake-file.inputs.remarkable.inputs.flake-utils.follows = "flake-utils";
+
   flake.darwinModules.dev-gui = {
     homebrew.casks = [
       "dash" # offline developer docs
@@ -19,6 +26,10 @@
   }: let
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
+    home.packages = lib.optionals pkgs.stdenv.isDarwin [
+      inputs.remarkable.packages.${system}.default
+    ];
+
     # VSCode whines like a ... I don't know, but a lot when the config file is read-only
     # I want nix to govern the configs, but to let vscode edit it (ephemerally) if I change
     # the zoom or whatever. This hack just copies the symlink to a normal file

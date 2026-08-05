@@ -2045,6 +2045,29 @@
         "type": "github"
       }
     },
+    "remarkable": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785904555,
+        "narHash": "sha256-ZQoZkIyHEuoy08nf5Ab3ri9F896DWzdjfZIratDf++I=",
+        "owner": "zmre",
+        "repo": "remarkable",
+        "rev": "890e68ec6c7f863ae20a594d07d88d04a55453bc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zmre",
+        "repo": "remarkable",
+        "type": "github"
+      }
+    },
     "review-nvim": {
       "flake": false,
       "locked": {
@@ -2115,6 +2138,7 @@
         "pwaerospace": "pwaerospace",
         "pwneovide": "pwneovide",
         "pwnvim": "pwnvim_2",
+        "remarkable": "remarkable",
         "rust-overlay": "rust-overlay_7",
         "sbhosts": "sbhosts",
         "yazi-flavors": "yazi-flavors",
