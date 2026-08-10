@@ -236,6 +236,21 @@
               ];
             }
             {
+              # Dates
+              trigger = "ttomorrow";
+              replace = "{{mydate}}";
+              vars = [
+                {
+                  name = "mydate";
+                  type = "date";
+                  params = {
+                    offset = 86400; # shifts today's date 24hrs forward
+                    format = "%Y-%m-%d";
+                  };
+                }
+              ];
+            }
+            {
               # Shell commands example
               trigger = ":shell";
               replace = "{{output}}";
