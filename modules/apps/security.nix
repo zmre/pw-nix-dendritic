@@ -28,6 +28,7 @@
     homebrew.masApps = {
       "1Blocker" = 1365531024;
       "Apple Configurator" = 1037126344;
+      "Bitdefender Virus Scanner" = 500154009;
       "Disk Decipher" = 516538625;
       "MailTrackerBlocker" = 6450760473; # Mail extension for blocking tracker pixels
       "Strongbox" = 1270075435; # password manager
@@ -43,7 +44,56 @@
     ];
   };
 
-  flake.modules.homeManager.security-gui = {pkgs, ...}: {
+  flake.modules.homeManager.security-gui = {
+    pkgs,
+    lib,
+    ...
+  }: let
+    inherit (pkgs.stdenv) isDarwin;
+
+    # qt6 qtwebengine 6.11.1 does not build on aarch64-darwin: its bundled
+    # Chromium GN build calls the *unwrapped* clang, and neither apple-sdk-15.5
+    # nor clang-21 carry libc++ headers, so every <cstdint>/<string>/<atomic>
+    # include fails. Upstream is NixOS/nixpkgs#514179; the fix needs three
+    # unmerged PRs and a from-scratch Chromium build, so route around it.
+    #
+    # gnuradio only reaches qtwebengine via pyqtgraph -> pyqt6's QtPdf
+    # bindings, which nothing here uses.
+    sdrPkgs =
+      if isDarwin
+      then
+        pkgs.stable.appendOverlays [
+          (final: prev: {
+            python3 = prev.python3.override {
+              packageOverrides = _pyFinal: pyPrev: {
+                pyqt6 = pyPrev.pyqt6.override {withPdf = false;};
+              };
+            };
+          })
+        ]
+      else pkgs.stable;
+
+    # sdrangel links qtwebengine directly; dropping it costs the Map feature
+    # plugin and nothing else. That then exposes a latent upstream bug: the
+    # remotetcpsink plugin links ${FLAC_LIBRARIES}, but FindFLAC.cmake sets
+    # FLAC_LIBRARY. The plural is only ever set by the vendored FLAC that
+    # external/CMakeLists.txt git-clones, which the sandbox forbids. Harmless
+    # on Linux, where ELF resolves undefined symbols in shared modules at load
+    # time; fatal for a macOS -bundle link, so point it at nixpkgs' libFLAC.
+    sdrangel =
+      if isDarwin
+      then
+        sdrPkgs.sdrangel.overrideAttrs (old: {
+          buildInputs =
+            builtins.filter
+            (p: !(lib.hasInfix "qtwebengine" (p.name or "")))
+            old.buildInputs;
+          cmakeFlags =
+            old.cmakeFlags
+            ++ ["-DFLAC_LIBRARIES=${sdrPkgs.flac.out}/lib/libFLAC.dylib"];
+        })
+      else sdrPkgs.sdrangel;
+  in {
     services.gpg-agent = {
       enable = true;
       enableBashIntegration = true;
@@ -53,6 +103,12 @@
         then pkgs.pinentry-tty
         else pkgs.pinentry_mac;
     };
+    home.packages = [
+      sdrPkgs.gnuradio
+      sdrPkgs.sdrpp
+      sdrPkgs.gqrx
+      sdrangel
+    ];
   };
 
   flake.darwinModules.security = {pkgs, ...}: {
@@ -217,8 +273,7 @@
         bluez
         # rfid
         proxmark3
-        gnuradio
-        gqrx
+        # gqrx/gnuradio come from security-gui now, for both platforms
         hackrf
         ubertooth
         multimon-ng
