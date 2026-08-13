@@ -308,7 +308,8 @@
           # Figure out the uniform type identifiers and uri schemes of a file (must specify the file)
           # for use in SwiftDefaultApps
           checktype = "mdls -name kMDItemContentType -name kMDItemContentTypeTree -name kMDItemKind";
-          dwupdate = "pushd ~/src/pw-nix-dendritic ; git pull ; nix run .#write-flake ; nix flake update ; brew upgrade -g ; popd ; dwswitchx";
+          # putting brew upgrade after the dwswitch because sometimes we need to update the brew binary before processing updated recipes
+          dwupdate = "pushd ~/src/pw-nix-dendritic ; git pull ; nix run .#write-flake ; nix flake update ; dwswitchx && brew upgrade -g ; popd";
           # Cachix on my whole nix store is burning unnecessary bandwidth and time -- slowing things down rather than speeding up
           # From now on will just use for select personal flakes and things
           #dwswitch = "pushd ~; cachix watch-exec zmre darwin-rebuild -- switch --flake ~/.config/nixpkgs/.#$(hostname -s) ; popd";

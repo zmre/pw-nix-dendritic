@@ -33,7 +33,7 @@
 
   inputs = {
     brew-src = {
-      url = "github:Homebrew/brew/6.0.14";
+      url = "github:Homebrew/brew";
       flake = false;
     };
     city-explorer = {

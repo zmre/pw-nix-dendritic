@@ -1,20 +1,20 @@
-{inputs, ...}: let
-  # nix-homebrew pins the Homebrew/brew source, and it always lags behind the
-  # homebrew-core/homebrew-cask taps (which we track at HEAD). When brew is older
-  # than the taps, formulae/casks using newly-added DSL keywords become unreadable
-  # and `brew bundle` fails. Past breakages: `:source_glob` (needed 6.0.12),
-  # `run`/`terminate_process` in *_steps blocks (needed 6.0.13).
-  #
-  # So we pin brew-src ourselves rather than inherit nix-homebrew's. Bump this tag
-  # (https://github.com/Homebrew/brew/releases) whenever `nix flake update` moves
-  # the taps past what this brew understands.
-  brewVersion = "6.0.14";
-in {
+{inputs, ...}: {
   flake-file.inputs = {
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
+    # Track brew's main branch, not a release tag, and not nix-homebrew's own pin
+    # (which lags further still). homebrew-core CI gates formulae against brew main,
+    # so the taps — which we track at HEAD — start using new DSL keywords hours
+    # before the next tag ships. Any tag pin therefore breaks periodically: past
+    # casualties were `:source_glob` (6.0.12), `run`/`terminate_process` in *_steps
+    # blocks (6.0.13), and `overwrite:` on symlink steps (6.0.15, which openssl@3
+    # began using 6.5h before that release existed).
+    #
+    # With main, one `nix flake update` moves brew and the taps to the same instant,
+    # so brew is never behind what the taps assume. If main ever regresses, pin a
+    # tag temporarily: url = "github:Homebrew/brew/6.0.17";
     brew-src = {
-      url = "github:Homebrew/brew/6.0.14"; # keep in sync with brewVersion above
+      url = "github:Homebrew/brew";
       flake = false;
     };
 
@@ -51,12 +51,14 @@ in {
       enable = true;
 
       # Override nix-homebrew's own (older) brew pin. Upstream sets this with
-      # mkOptionDefault, so a plain assignment wins.
+      # mkOptionDefault, so a plain assignment wins. `version` is cosmetic: the sed
+      # in nix-homebrew's patchBrew only matches unindented `HOMEBREW_VERSION=`, and
+      # the value brew actually reports comes from the git-less fallback in brew.sh.
       package =
         inputs.brew-src
         // {
-          name = "brew-${brewVersion}";
-          version = brewVersion;
+          name = "brew-${inputs.brew-src.shortRev}";
+          version = inputs.brew-src.shortRev;
         };
 
       # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
