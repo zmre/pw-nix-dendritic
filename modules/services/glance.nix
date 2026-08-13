@@ -403,13 +403,24 @@
       };
     };
 
-    networking.firewall.allowedTCPPorts = [443];
+    networking.firewall.allowedTCPPorts = [443 80];
     services.caddy.virtualHosts."${config.networking.hostName}.${config.networking.domain}:443" = {
       listenAddresses = ["0.0.0.0"];
       extraConfig = ''
         tls {
           get_certificate tailscale
         }
+        encode {
+          zstd
+          gzip
+          minimum_length 1024
+        }
+        reverse_proxy http://127.0.0.1:8080
+      '';
+    };
+    services.caddy.virtualHosts."${config.networking.hostName}.walsh.local:80" = {
+      listenAddresses = ["0.0.0.0"];
+      extraConfig = ''
         encode {
           zstd
           gzip
