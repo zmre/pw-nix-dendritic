@@ -43,6 +43,10 @@
         makeBinaryWrapper ${pkgs.lib.getExe pkg} $out/bin/${pkg.pname} --prefix PATH : ${toolPath}
       '';
   in {
+    imports = with inputs.self.modules.homeManager; [
+      herdr
+    ];
+
     home.packages = with pkgs; [
       #aichat-wrapped # ai cli tool that can use local rag, local models, etc.
       irisPkg # my personal assistant, which wraps other tools and has crap tons of configs
@@ -50,7 +54,8 @@
       stable.whisper-cpp # Allow GPU accelerated local transcriptions
       python313Packages.huggingface-hub
       python313Packages.hf-transfer
-      herdr # TODO: switch to programs.herdr if i like this after testing (2026-07-31) and once i know what config i want
+      # herdr is installed by programs.herdr — see apps/herdr.nix
+      tuicr # terminal review diff where you can add comments and then share in different ways
     ];
 
     # Link opencode's skills/agents at iris's bundled copies. These are
