@@ -1,4 +1,4 @@
-{...}: {
+_: {
   # herdr: terminal multiplexer / AI-agent orchestrator. Config and the glue
   # scripts its keybindings invoke both live here so all hosts get them.
   #
