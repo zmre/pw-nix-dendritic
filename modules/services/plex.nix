@@ -13,7 +13,7 @@
     # imports = [inputs.self.nixosModules.comskip];
 
     # Only evaluate on Linux systems to avoid cross-platform check issues
-    config = lib.mkIf pkgs.stdenv.isLinux (let
+    config = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (let
       # Make the plugin fetch lazy - only evaluated when this config is actually merged
       audnexusPlugin = pkgs.fetchFromGitHub {
         owner = "djdembeck";

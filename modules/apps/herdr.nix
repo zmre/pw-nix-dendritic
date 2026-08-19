@@ -322,7 +322,7 @@ _: {
             # There is deliberately no cmd+shift+a counterpart: WezTerm delivers
             # that chord as a bare "a", which lands as literal text in the focused
             # agent's pane. Use prefix+shift+a to go backwards.
-            ++ lib.optionals pkgs.stdenv.isDarwin [
+            ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
               {
                 key = "cmd+a";
                 type = "shell";

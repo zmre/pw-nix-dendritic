@@ -99,7 +99,7 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
       pinentry.package =
-        if pkgs.stdenv.isLinux
+        if pkgs.stdenv.hostPlatform.isLinux
         then pkgs.pinentry-tty
         else pkgs.pinentry_mac;
     };
@@ -229,7 +229,7 @@
         pwntools
       ]
       ++ lib.optionals
-      (!pkgs.stdenv.isDarwin) [
+      (!pkgs.stdenv.hostPlatform.isDarwin) [
         # Things that only build on Linux go here
         # Exploitation
         metasploit

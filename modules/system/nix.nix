@@ -4,7 +4,7 @@
       package = pkgs.nix;
       settings = {
         # Because macos sandbox can create issues https://github.com/NixOS/nix/issues/4119
-        sandbox = pkgs.stdenv.isLinux;
+        sandbox = pkgs.stdenv.hostPlatform.isLinux;
         # wheel for linux, admin for darwin
         trusted-users = ["root" "@admin" "@wheel"];
 
@@ -53,10 +53,10 @@
           automatic = true;
           options = "--delete-older-than 30d";
         }
-        // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+        // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
           dates = "weekly";
         }
-        // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
+        // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
           interval = [
             {
               Hour = 3;

@@ -223,7 +223,7 @@
       ".lockpaper.png".source = ../../../wallpaper/kali.png;
     };
 
-    gtk = pkgs.lib.mkIf pkgs.stdenv.isLinux {
+    gtk = pkgs.lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       enable = true;
 
       font = {
@@ -240,10 +240,10 @@
       # keep legacy behavior; new HM default for gtk4.theme is null
       gtk4.theme = gtkTheme;
     };
-    services.dunst.enable = pkgs.stdenv.isLinux; # notification daemon
+    services.dunst.enable = pkgs.stdenv.hostPlatform.isLinux; # notification daemon
     # top bar
     services.polybar = rec {
-      enable = pkgs.stdenv.isLinux;
+      enable = pkgs.stdenv.hostPlatform.isLinux;
       package = pkgs.polybar.override {
         # i3GapsSupport = true;
         pulseSupport = true;
@@ -548,11 +548,11 @@
         };
       };
     };
-    services.playerctld.enable = pkgs.stdenv.isLinux;
+    services.playerctld.enable = pkgs.stdenv.hostPlatform.isLinux;
     #services.spotifyd.enable = true;
 
-    services.picom.enable = pkgs.stdenv.isLinux; # xsession compositor
-    xsession.windowManager.i3.enable = pkgs.stdenv.isLinux;
+    services.picom.enable = pkgs.stdenv.hostPlatform.isLinux; # xsession compositor
+    xsession.windowManager.i3.enable = pkgs.stdenv.hostPlatform.isLinux;
     xsession.windowManager.i3.config = {
       terminal = "${pkgs.alacritty}/bin/alacritty";
       modifier = "Mod4";
@@ -691,7 +691,7 @@
       for_window [title="Chooser"] floating enable
       for_window [class="KeePassXC"] move scratchpad
     '';
-    programs.i3status-rust.enable = pkgs.stdenv.isLinux;
+    programs.i3status-rust.enable = pkgs.stdenv.hostPlatform.isLinux;
     programs.i3status-rust.bars = {
       bottom = {
         blocks = [

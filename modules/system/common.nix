@@ -12,14 +12,14 @@
         info.enable = true;
         man.enable = true;
       }
-      // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+      // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
         nixos.enable = true;
       };
 
     # environment setup
     environment = {
       ${
-        if pkgs.stdenv.isLinux
+        if pkgs.stdenv.hostPlatform.isLinux
         then "sessionVariables"
         else "variables"
       } = {

@@ -19,7 +19,7 @@
     ...
   }: {
     # Mail.app script menu is macOS-only
-    home.file = lib.optionalAttrs pkgs.stdenv.isDarwin {
+    home.file = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
       "Library/Scripts/Applications/Mail/mail-app-copy-message-link.scpt".source = ../../../dotfiles/scripts/mail-app-copy-message-link-compiled.scpt;
     };
   };

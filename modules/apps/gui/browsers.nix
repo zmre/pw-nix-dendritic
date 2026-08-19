@@ -79,7 +79,7 @@
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
     xdg.mimeApps = {
-      enable = pkgs.stdenv.isLinux;
+      enable = pkgs.stdenv.hostPlatform.isLinux;
       associations.added = associations;
       defaultApplications = associations;
     };
@@ -87,7 +87,7 @@
     # Backup browser for when Qutebrowser doesn't work as expected
     # currently fails to compile on darwin
     programs.firefox = {
-      enable = pkgs.stdenv.isLinux;
+      enable = pkgs.stdenv.hostPlatform.isLinux;
       # keep legacy location; HM default moved to $XDG_CONFIG_HOME/mozilla/firefox
       configPath = ".mozilla/firefox";
       # turns out you have to setup a profile (below) for extensions to install
@@ -127,7 +127,7 @@
 
     # currently fails to compile on darwin
     programs.qutebrowser = {
-      enable = pkgs.stdenv.isLinux;
+      enable = pkgs.stdenv.hostPlatform.isLinux;
       loadAutoconfig = false;
       keyBindings = {
         normal = {
@@ -195,7 +195,7 @@
         # Disable smooth scrolling on mac because of https://github.com/qutebrowser/qutebrowser/issues/6840
         # Note: this is in home-linux so this if is pointless, but I'm hoping qutebrowser will build on mac soon and this can move
         scrolling.smooth =
-          if pkgs.stdenv.isDarwin
+          if pkgs.stdenv.hostPlatform.isDarwin
           then false
           else true;
         auto_save.session = true; # remember open tabs
@@ -208,7 +208,7 @@
         };
         downloads = {
           location.directory = "${
-            if pkgs.stdenv.isDarwin
+            if pkgs.stdenv.hostPlatform.isDarwin
             then "/Users/"
             else "/home/"
           }${config.home.username}/Downloads";

@@ -19,9 +19,9 @@
           #"$os" # turns out it takes starship 20ms to figure out the OS at every prompt, but we can hard code it at build time
           # alt for linux: "🐧 "
           (
-            if pkgs.stdenv.isLinux
+            if pkgs.stdenv.hostPlatform.isLinux
             then "❄️ "
-            else if pkgs.stdenv.isDarwin
+            else if pkgs.stdenv.hostPlatform.isDarwin
             then " "
             else "🪟 "
           )

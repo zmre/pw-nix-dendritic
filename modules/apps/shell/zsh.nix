@@ -304,7 +304,7 @@
           # -S '+vcodec:avc,+acodec:m4a'
           # -S 'codec:h264:m4a'
         }
-        // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
+        // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
           # Figure out the uniform type identifiers and uri schemes of a file (must specify the file)
           # for use in SwiftDefaultApps
           checktype = "mdls -name kMDItemContentType -name kMDItemContentTypeTree -name kMDItemKind";
@@ -323,7 +323,7 @@
           dwshowupdates = ''
             zsh -c "nix store diff-closures /nix/var/nix/profiles/system-*-link(om[2]) /nix/var/nix/profiles/system-*-link(om[1])"'';
         }
-        // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+        // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
           # TODO: Try out the `nh` tool for home-manager switching (nh home switch . -c myHome)
           hmswitch = "pushd ~/src/pw-nix-dendritic ; nix run .#write-flake ; home-manager switch --flake ~/src/pw-nix-dendritic/.#$(hostname -s) --show-trace; popd";
           hmupdate = "pushd ~/src/pw-nix-dendritic ; git pull ; nix run .#write-flake ; nix flake update ; popd ; hmswitch";

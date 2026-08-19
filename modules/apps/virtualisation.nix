@@ -15,7 +15,7 @@
 
     virtualisation.oci-containers.backend = "podman"; # or docker
     virtualisation.podman = {
-      enable = pkgs.stdenv.isLinux;
+      enable = pkgs.stdenv.hostPlatform.isLinux;
       autoPrune.enable = true;
       dockerCompat = true;
     };
@@ -36,7 +36,7 @@
         colima
         #docker
       ]
-      ++ lib.optionals pkgs.stdenv.isLinux [
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
         podman
         toolbox
       ];

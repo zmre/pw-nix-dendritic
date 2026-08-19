@@ -41,7 +41,7 @@
       cargoLock = {lockFile = inputs.mdterm + /Cargo.lock;};
       buildInputs =
         [pkgs.libiconv]
-        ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.apple-sdk];
+        ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [pkgs.apple-sdk];
     };
     markless = pkgs.rustPlatform.buildRustPackage {
       pname = "markless";
@@ -50,7 +50,7 @@
       cargoLock = {lockFile = inputs.markless + /Cargo.lock;};
       buildInputs =
         [pkgs.libiconv]
-        ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.apple-sdk];
+        ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [pkgs.apple-sdk];
     };
     # Select btop variant based on GPU type
     btopPkg =
@@ -101,10 +101,10 @@
         vimv # shell script to bulk rename
         zk # cli for indexing markdown files
       ]
-      ++ (lib.optionals pkgs.stdenv.isDarwin [
+      ++ (lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
         #pkgs.stable.mactop # unstable not building 2026-01-14
       ])
-      ++ (lib.optionals pkgs.stdenv.isLinux [
+      ++ (lib.optionals pkgs.stdenv.hostPlatform.isLinux [
         # terminal linux-only apps
         ueberzug # for terminal image previews
         ytfzf # terminal youtube search/launch

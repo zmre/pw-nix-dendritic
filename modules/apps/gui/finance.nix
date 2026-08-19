@@ -20,7 +20,7 @@
   }: let
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
   in {
-    home.packages = lib.optionals pkgs.stdenv.isDarwin [
+    home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       inputs.ledgeline.packages.${system}.default
     ];
   };

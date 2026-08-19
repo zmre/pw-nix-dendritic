@@ -19,7 +19,7 @@
 
   stableOverlay = final: prev: {
     stable =
-      if final.stdenv.isDarwin
+      if final.stdenv.hostPlatform.isDarwin
       then
         import inputs.nixpkgs-stable-darwin {
           inherit (final.stdenv.hostPlatform) system;

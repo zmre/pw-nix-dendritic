@@ -19,7 +19,7 @@
       # Snapshot (insta) tests aren't needed to install the binary.
       doCheck = false;
       buildInputs =
-        lib.optionals pkgs.stdenv.isDarwin [pkgs.libiconv pkgs.apple-sdk];
+        lib.optionals pkgs.stdenv.hostPlatform.isDarwin [pkgs.libiconv pkgs.apple-sdk];
       meta.mainProgram = "ldash";
     };
   in {

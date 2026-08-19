@@ -9,7 +9,7 @@
       cargoLock = {lockFile = inputs.hackernews-tui + /Cargo.lock;};
       buildInputs =
         [pkgs.pkg-config pkgs.libiconv]
-        ++ pkgs.lib.optionals pkgs.stdenv.isDarwin
+        ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin
         [pkgs.apple-sdk];
       src = inputs.hackernews-tui;
     };

@@ -19,7 +19,7 @@
     };
     config = {
       audnexusPlugin =
-        if pkgs.stdenv.isLinux
+        if pkgs.stdenv.hostPlatform.isLinux
         then
           builtins.path {
             name = "Audnexus.bundle";

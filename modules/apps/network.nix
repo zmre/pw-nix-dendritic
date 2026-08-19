@@ -48,7 +48,7 @@
               forwardAgent = true;
               addKeysToAgent = "yes";
             }
-            // lib.optionalAttrs pkgs.stdenv.isDarwin {
+            // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
               # Apple's ssh stores/retrieves key passphrases in the Keychain;
               # Linux openssh doesn't know this keyword, so Darwin-only
               UseKeychain = "yes";

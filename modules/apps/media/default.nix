@@ -66,10 +66,10 @@
       # issue where post macos 15.1, gui doesn't start from Finder (The application “Finder” does not have permission to open “(null).”)
       # NOTE: that issue is still open, but it looks like the code is fixed so we should remove the darwin logic below TODO
       package =
-        if pkgs.stdenv.isDarwin
+        if pkgs.stdenv.hostPlatform.isDarwin
         then pkgs.emptyDirectory
         else pkgs.mpv;
-      scripts = pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs.mpvScripts; [thumbnail sponsorblock uosc]);
+      scripts = pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux (with pkgs.mpvScripts; [thumbnail sponsorblock uosc]);
       config = {
         osc = true;
         # Use a large seekable RAM cache even for local input.

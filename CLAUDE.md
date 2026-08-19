@@ -238,7 +238,7 @@ home-manager.users.pwalsh = {
     programs.something.enable = true;
 
     # Platform-specific within home-manager
-    home.packages = lib.optionals pkgs.stdenv.isDarwin [pkgs.macos-only];
+    home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [pkgs.macos-only];
   };
 }
 ```

@@ -13,7 +13,7 @@
   flake.modules.homeManager.term-gui = {pkgs, ...}: {
     home.file.".wezterm.lua".source = ../../../dotfiles/wezterm/wezterm.lua;
     # using remote windows with tmux more so want to experiment here with iterm2's native seeming windows for tmux panes
-    home.packages = pkgs.lib.optionals pkgs.stdenv.isDarwin [pkgs.iterm2];
+    home.packages = pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [pkgs.iterm2];
     programs.kitty = {
       enable = false;
       #package = pkgs.emptyDirectory; # post 15.1 update, having issues with nix version and moving to brew for now 2024-10-30
@@ -118,7 +118,7 @@
     programs.ghostty = {
       enable = true;
       package =
-        if pkgs.stdenv.isDarwin
+        if pkgs.stdenv.hostPlatform.isDarwin
         then pkgs.ghostty-bin
         else pkgs.ghostty;
       enableZshIntegration = true;
@@ -153,7 +153,7 @@
     };
 
     programs.alacritty = {
-      enable = pkgs.stdenv.isLinux; # only install on Linux
+      enable = pkgs.stdenv.hostPlatform.isLinux; # only install on Linux
       settings = {
         window.decorations = "full";
         window.dynamic_title = true;

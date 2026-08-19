@@ -8,10 +8,10 @@
     ...
   }: {
     # Only evaluate on Linux systems to avoid cross-platform check issues
-    config = lib.mkIf pkgs.stdenv.isLinux (let
+    config = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (let
       argtable = pkgs.stdenv.mkDerivation rec {
         pname = "argtable2";
-          version = "2.13";
+        version = "2.13";
 
         NIX_CFLAGS_COMPILE = toString [
           "-Wno-error=implicit-function-declaration"
@@ -74,273 +74,273 @@
         name = "comchap";
         runtimeInputs = with pkgs; [comskip gawk ffmpeg mktemp];
         text = ''
-              #LD_LIBRARY_PATH is set and will mess up ffmpeg, unset it, then re-set it when done
-              ldPath=$LD_LIBRARY_PATH
-              unset LD_LIBRARY_PATH
+                #LD_LIBRARY_PATH is set and will mess up ffmpeg, unset it, then re-set it when done
+                ldPath=$LD_LIBRARY_PATH
+                unset LD_LIBRARY_PATH
 
-              exitcode=0
+                exitcode=0
 
-              ffmpegPath="${pkgs.ffmpeg}/bin/ffmpeg"
-              comskipPath="${comskip}/bin/comskip"
+                ffmpegPath="${pkgs.ffmpeg}/bin/ffmpeg"
+                comskipPath="${comskip}/bin/comskip"
 
-              if [[ $# -lt 1 ]]; then
+                if [[ $# -lt 1 ]]; then
 
-                exename=$(basename "$0")
+                  exename=$(basename "$0")
 
-                echo "Add chapters to video file using EDL file"
-                echo "     (If no EDL file is found, comskip will be used to generate one)"
-                echo ""
-                echo "Usage: $exename infile [outfile]"
+                  echo "Add chapters to video file using EDL file"
+                  echo "     (If no EDL file is found, comskip will be used to generate one)"
+                  echo ""
+                  echo "Usage: $exename infile [outfile]"
 
-                exit 1
-              fi
-
-              comskipini=/tmp/comskip.ini
-
-              deleteedl=true
-              deletemeta=true
-              deletelog=true
-              deletelogo=true
-              deletetxt=true
-              verbose=false
-              lockfile=""
-              workdir=""
-
-              while [[ $# -gt 0 ]]
-              do
-              key="$1"
-              case $key in
-                  --keep-edl)
-                  deleteedl=false
-                  shift
-                  ;;
-                  --keep-meta)
-                  deletemeta=false
-                  shift
-                  ;;
-                  --verbose)
-                  verbose=true
-                  shift
-                  ;;
-                  --ffmpeg=*)
-                  ffmpegPath="''${key#*=}"
-                  shift
-                  ;;
-                  --comskip=*)
-                  comskipPath="''${key#*=}"
-                  shift
-                  ;;
-                  --comskip-ini=*)
-                  comskipini="''${key#*=}"
-                  shift
-                  ;;
-                  --lockfile=*)
-                  lockfile="''${key#*=}"
-                  shift
-                  ;;
-                  --work-dir=*)
-                  workdir="''${key#*=}"
-                  shift
-                  ;;
-                  -*)
-                  echo "Option $1 doesn't exist, please check the documentation"
                   exit 1
-                  ;;
-                  *)
-                  if [ -z "$infile" ]; then
-                    infile=$1
-                    if [ ! -f "$infile" ]; then
-                      echo "Inputfile '$infile' doesn't exist. Please check."
-                      exit 1
-                    fi
-                  else
-                    if [ -z "$outfile" ]; then
-                      outfile=$1
-                    else
-                      echo "Error: too many parameters. Inputfile and Outputfile already defined. Please check your command."
-                      exit 1
-                    fi
-                  fi
-                  shift
-                  ;;
-              esac
-              done
+                fi
 
-        # Setup for verbose
-              exec 3>&1
-              exec 4>&2
+                comskipini=/tmp/comskip.ini
 
-              if ! $verbose; then
-                exec 1>/dev/null
-                exec 2>/dev/null
-              fi
+                deleteedl=true
+                deletemeta=true
+                deletelog=true
+                deletelogo=true
+                deletetxt=true
+                verbose=false
+                lockfile=""
+                workdir=""
 
-              if [ ! -z "$lockfile" ]; then
-
-                echo "lockfile: $lockfile" 1>&3 2>&4
-                while [[ -f "$lockfile" ]]; do
-                  echo "Waiting" 1>&3 2>&4
-                  sleep 5
-                done
-
-                touch "$lockfile"
-              fi
-
-              if [ ! -f "$comskipini" ]; then
-                echo "output_edl=1" > "$comskipini"
-              elif ! grep -q "output_edl=1" "$comskipini"; then
-                echo "output_edl=1" >> "$comskipini"
-              fi
-
-              if [[ -z "$outfile" ]]; then
-                outfile="$infile"
-              fi
-
-              outdir=$(dirname "$outfile")
-
-              outextension="''${outfile##*.}"
-
-              if [[ ! -z "$workdir" ]]; then
-                case "$workdir" in
-                  */)
+                while [[ $# -gt 0 ]]
+                do
+                key="$1"
+                case $key in
+                    --keep-edl)
+                    deleteedl=false
+                    shift
                     ;;
-                  *)
-                    # PW: below is unused elsewhere...
-                    #comskipoutput="--output=$workdir"
-                    workdir="$workdir/"
+                    --keep-meta)
+                    deletemeta=false
+                    shift
+                    ;;
+                    --verbose)
+                    verbose=true
+                    shift
+                    ;;
+                    --ffmpeg=*)
+                    ffmpegPath="''${key#*=}"
+                    shift
+                    ;;
+                    --comskip=*)
+                    comskipPath="''${key#*=}"
+                    shift
+                    ;;
+                    --comskip-ini=*)
+                    comskipini="''${key#*=}"
+                    shift
+                    ;;
+                    --lockfile=*)
+                    lockfile="''${key#*=}"
+                    shift
+                    ;;
+                    --work-dir=*)
+                    workdir="''${key#*=}"
+                    shift
+                    ;;
+                    -*)
+                    echo "Option $1 doesn't exist, please check the documentation"
+                    exit 1
+                    ;;
+                    *)
+                    if [ -z "$infile" ]; then
+                      infile=$1
+                      if [ ! -f "$infile" ]; then
+                        echo "Inputfile '$infile' doesn't exist. Please check."
+                        exit 1
+                      fi
+                    else
+                      if [ -z "$outfile" ]; then
+                        outfile=$1
+                      else
+                        echo "Error: too many parameters. Inputfile and Outputfile already defined. Please check your command."
+                        exit 1
+                      fi
+                    fi
+                    shift
                     ;;
                 esac
-              infileb=$(basename "$infile")
-              edlfile="$workdir''${infileb%.*}.edl"
-              metafile="$workdir''${infileb%.*}.ffmeta"
-              logfile="$workdir''${infileb%.*}.log"
-              logofile="$workdir''${infileb%.*}.logo.txt"
-              txtfile="$workdir''${infileb%.*}.txt"
-              else
-              edlfile="$workdir''${infile%.*}.edl"
-              metafile="$workdir''${infile%.*}.ffmeta"
-              logfile="$workdir''${infile%.*}.log"
-              logofile="$workdir''${infile%.*}.logo.txt"
-              txtfile="$workdir''${infile%.*}.txt"
-              fi
+                done
 
-              if [ ! -f "$edlfile" ]; then
-                $comskipPath --ini="$comskipini" "$infile"
+          # Setup for verbose
+                exec 3>&1
+                exec 4>&2
 
-                if [ ! -f "$edlfile" ] ; then
-                  echo "Error running comskip. EDL File not found: $infile"  1>&3 2>&4 >&2
-                  exitcode=-1
+                if ! $verbose; then
+                  exec 1>/dev/null
+                  exec 2>/dev/null
                 fi
-              fi
 
-              start=0
-              i=0
-              hascommercials=false
+                if [ ! -z "$lockfile" ]; then
 
-              echo ";FFMETADATA1" > "$metafile"
-              # Reads in from $edlfile, see end of loop.
-              while IFS=$'\t' read -r -a line
-              do
-                ((i++))
+                  echo "lockfile: $lockfile" 1>&3 2>&4
+                  while [[ -f "$lockfile" ]]; do
+                    echo "Waiting" 1>&3 2>&4
+                    sleep 5
+                  done
 
-                end=$(awk -vp="''${line[0]}" 'BEGIN{printf "%.0f" ,p*1000}')
-                startnext=$(awk -vp="''${line[1]}" 'BEGIN{printf "%.0f" ,p*1000}')
-                hascommercials=true
+                  touch "$lockfile"
+                fi
 
-              { echo "[CHAPTER]"
-                echo "TIMEBASE=1/1000"
-                echo "START=$start"
-                echo "END=$end"
-                echo "title=Chapter $i"
+                if [ ! -f "$comskipini" ]; then
+                  echo "output_edl=1" > "$comskipini"
+                elif ! grep -q "output_edl=1" "$comskipini"; then
+                  echo "output_edl=1" >> "$comskipini"
+                fi
 
-                echo "[CHAPTER]"
-                echo "TIMEBASE=1/1000"
-                echo "START=$end"
-                echo "END=$startnext"
-                echo "title=Commercial $i"
-              } >> "$metafile"
+                if [[ -z "$outfile" ]]; then
+                  outfile="$infile"
+                fi
 
-                start=$startnext
-              done < "$edlfile"
+                outdir=$(dirname "$outfile")
 
-              if $hascommercials ; then
-                ((i++))
-              { echo "[CHAPTER]"
-                echo "TIMEBASE=1/1000"
-                echo "START=$start"
-                echo END="$($ffmpegPath -i "$infile" 2>&1 | grep Duration | awk '{print $2}' | tr -d , | awk -F: '{ print ($1*3600)+($2*60)+$3 }' | awk '{printf "%.0f",$1*1000}')"
-                echo "title=Chapter $i"
-              } >> "$metafile"
+                outextension="''${outfile##*.}"
 
-                if [ "$infile" -ef "$outfile" ] ; then
+                if [[ ! -z "$workdir" ]]; then
+                  case "$workdir" in
+                    */)
+                      ;;
+                    *)
+                      # PW: below is unused elsewhere...
+                      #comskipoutput="--output=$workdir"
+                      workdir="$workdir/"
+                      ;;
+                  esac
+                infileb=$(basename "$infile")
+                edlfile="$workdir''${infileb%.*}.edl"
+                metafile="$workdir''${infileb%.*}.ffmeta"
+                logfile="$workdir''${infileb%.*}.log"
+                logofile="$workdir''${infileb%.*}.logo.txt"
+                txtfile="$workdir''${infileb%.*}.txt"
+                else
+                edlfile="$workdir''${infile%.*}.edl"
+                metafile="$workdir''${infile%.*}.ffmeta"
+                logfile="$workdir''${infile%.*}.log"
+                logofile="$workdir''${infile%.*}.logo.txt"
+                txtfile="$workdir''${infile%.*}.txt"
+                fi
 
-                  tempfile=$(mktemp --suffix=."$outextension" "$outdir"/XXXXXXXX)
+                if [ ! -f "$edlfile" ]; then
+                  $comskipPath --ini="$comskipini" "$infile"
 
-                  echo "Writing file to temporary file: $tempfile"
-                  if $ffmpegPath -loglevel error -hide_banner -nostdin -i "$infile" -i "$metafile" -map_metadata 1 -codec copy -y "$tempfile" 1>&3 2>&4; then
-                    mv -f "$tempfile" "$outfile"
-                    echo Saved to: "$outfile"
+                  if [ ! -f "$edlfile" ] ; then
+                    echo "Error running comskip. EDL File not found: $infile"  1>&3 2>&4 >&2
+                    exitcode=-1
+                  fi
+                fi
+
+                start=0
+                i=0
+                hascommercials=false
+
+                echo ";FFMETADATA1" > "$metafile"
+                # Reads in from $edlfile, see end of loop.
+                while IFS=$'\t' read -r -a line
+                do
+                  ((i++))
+
+                  end=$(awk -vp="''${line[0]}" 'BEGIN{printf "%.0f" ,p*1000}')
+                  startnext=$(awk -vp="''${line[1]}" 'BEGIN{printf "%.0f" ,p*1000}')
+                  hascommercials=true
+
+                { echo "[CHAPTER]"
+                  echo "TIMEBASE=1/1000"
+                  echo "START=$start"
+                  echo "END=$end"
+                  echo "title=Chapter $i"
+
+                  echo "[CHAPTER]"
+                  echo "TIMEBASE=1/1000"
+                  echo "START=$end"
+                  echo "END=$startnext"
+                  echo "title=Commercial $i"
+                } >> "$metafile"
+
+                  start=$startnext
+                done < "$edlfile"
+
+                if $hascommercials ; then
+                  ((i++))
+                { echo "[CHAPTER]"
+                  echo "TIMEBASE=1/1000"
+                  echo "START=$start"
+                  echo END="$($ffmpegPath -i "$infile" 2>&1 | grep Duration | awk '{print $2}' | tr -d , | awk -F: '{ print ($1*3600)+($2*60)+$3 }' | awk '{printf "%.0f",$1*1000}')"
+                  echo "title=Chapter $i"
+                } >> "$metafile"
+
+                  if [ "$infile" -ef "$outfile" ] ; then
+
+                    tempfile=$(mktemp --suffix=."$outextension" "$outdir"/XXXXXXXX)
+
+                    echo "Writing file to temporary file: $tempfile"
+                    if $ffmpegPath -loglevel error -hide_banner -nostdin -i "$infile" -i "$metafile" -map_metadata 1 -codec copy -y "$tempfile" 1>&3 2>&4; then
+                      mv -f "$tempfile" "$outfile"
+                      echo Saved to: "$outfile"
+                    else
+                      echo "Error running ffmpeg: $infile" 1>&3 2>&4 >&2
+                      exitcode=-1
+                    fi
                   else
-                    echo "Error running ffmpeg: $infile" 1>&3 2>&4 >&2
+                    if $ffmpegPath -loglevel error -hide_banner -nostdin -i "$infile" -i "$metafile" -map_metadata 1 -codec copy -y "$outfile" 1>&3 2>&4; then
+                      echo "Saved to: $outfile"
+                    else
+                      echo "Error running ffmpeg: $infile" 1>&3 2>&4 >&2
+                      exitcode=-1
+                    fi
+                  fi
+
+                  if [ ! -f "$outfile" ]; then
+                    echo "Error, $outfile does not exist." 1>&3 2>&4 >&2
                     exitcode=-1
                   fi
                 else
-                  if $ffmpegPath -loglevel error -hide_banner -nostdin -i "$infile" -i "$metafile" -map_metadata 1 -codec copy -y "$outfile" 1>&3 2>&4; then
-                    echo "Saved to: $outfile"
-                  else
-                    echo "Error running ffmpeg: $infile" 1>&3 2>&4 >&2
-                    exitcode=-1
+                  echo "No commercials found: $infile" 1>&3 2>&4 >&2
+                fi
+
+                if [ "$deleteedl" == true ] ; then
+                  if [ -f "$edlfile" ] ; then
+                    rm "$edlfile";
                   fi
                 fi
 
-                if [ ! -f "$outfile" ]; then
-                  echo "Error, $outfile does not exist." 1>&3 2>&4 >&2
-                  exitcode=-1
+                if [ "$deletemeta" == true ] ; then
+                  if [ -f "$metafile" ]; then
+                    rm "$metafile";
+                  fi
                 fi
-              else
-                echo "No commercials found: $infile" 1>&3 2>&4 >&2
-              fi
 
-              if [ "$deleteedl" == true ] ; then
-                if [ -f "$edlfile" ] ; then
-                  rm "$edlfile";
+                if [ "$deletelog" == true ] ; then
+                  if [ -f "$logfile" ]; then
+                    rm "$logfile";
+                  fi
                 fi
-              fi
 
-              if [ "$deletemeta" == true ] ; then
-                if [ -f "$metafile" ]; then
-                  rm "$metafile";
+                if [ "$deletelogo" == true ] ; then
+                  if [ -f "$logofile" ]; then
+                    rm "$logofile";
+                  fi
                 fi
-              fi
 
-              if [ "$deletelog" == true ] ; then
-                if [ -f "$logfile" ]; then
-                  rm "$logfile";
+                if [ "$deletetxt" == true ] ; then
+                  if [ -f "$txtfile" ]; then
+                    rm "$txtfile";
+                  fi
                 fi
-              fi
 
-              if [ "$deletelogo" == true ] ; then
-                if [ -f "$logofile" ]; then
-                  rm "$logofile";
+                if [ ! -z "$ldPath" ] ; then
+                  #re-set LD_LIBRARY_PATH
+                  export LD_LIBRARY_PATH="$ldPath"
                 fi
-              fi
 
-              if [ "$deletetxt" == true ] ; then
-                if [ -f "$txtfile" ]; then
-                  rm "$txtfile";
+                if [ ! -z "$lockfile" ]; then
+                  rm "$lockfile"
                 fi
-              fi
 
-              if [ ! -z "$ldPath" ] ; then
-                #re-set LD_LIBRARY_PATH
-                export LD_LIBRARY_PATH="$ldPath"
-              fi
-
-              if [ ! -z "$lockfile" ]; then
-                rm "$lockfile"
-              fi
-
-              exit $exitcode
+                exit $exitcode
         '';
       };
     in {
