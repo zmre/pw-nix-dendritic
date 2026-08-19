@@ -259,8 +259,8 @@ _: {
           # prefix+a / prefix+shift+a walk the attention queue instead — see the
           # agent-attention bindings below. The built-ins cycle every agent
           # including the ones still working, so they stay unbound.
-          next_agent = "";
-          previous_agent = "";
+          #next_agent = "";
+          #previous_agent = "";
           split_vertical = "prefix+|";
 
           command =
