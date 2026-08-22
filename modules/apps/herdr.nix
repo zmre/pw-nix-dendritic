@@ -255,82 +255,91 @@ _: {
           auto_switch = false;
         };
 
-        keys = {
-          # prefix+a / prefix+shift+a walk the attention queue instead — see the
-          # agent-attention bindings below. The built-ins cycle every agent
-          # including the ones still working, so they stay unbound.
-          #next_agent = "";
-          #previous_agent = "";
-          split_vertical = "prefix+|";
-
-          command =
-            [
-              {
-                key = "prefix+f";
-                type = "plugin_action";
-                command = "herdr-floax.toggle";
-                description = "Toggle floating pane";
-              }
-              # tuicr review overlay for the focused agent. type = "popup" is
-              # herdr's own session-modal floating terminal: it draws over the
-              # layout without splitting or changing the tab.
-              {
-                key = "prefix+v";
-                type = "popup";
-                command = lib.getExe tuicr-overlay;
-                description = "Review focused agent's diff in tuicr";
-                width = "90%";
-                height = "90%";
-              }
-              # Same review, as a toggleable zoomed pane instead of a popup. A
-              # popup swallows the prefix, so nothing but its own command exiting
-              # can close it. A pane keeps herdr's key handling, so this key both
-              # opens and dismisses, one instance per workspace.
-              {
-                key = "prefix+shift+v";
-                type = "shell";
-                command = lib.getExe tuicr-toggle;
-                description = "Toggle tuicr review pane for focused agent";
-              }
-              # Attention queue: walk the agents that are blocked (waiting on you)
-              # or done (finished), oldest wait first, wrapping at the end. When
-              # nothing needs attention — or you are the only one that does — it
-              # degrades to plain next/previous over every agent, so the key always
-              # moves you somewhere.
-              {
-                key = "prefix+a";
-                type = "shell";
-                command = "${lib.getExe agent-attention} next";
-                description = "Next agent needing attention (else next agent)";
-              }
-              {
-                key = "prefix+shift+a";
-                type = "shell";
-                command = "${lib.getExe agent-attention} prev";
-                description = "Previous agent needing attention (else previous)";
-              }
-            ]
-            # Same jump, no prefix. herdr parses cmd/super fine; whether the
-            # keystroke ever reaches herdr is up to WezTerm, which only forwards
-            # SUPER-modified keys when the app negotiates the kitty keyboard
-            # protocol (config.enable_kitty_keyboard = true in wezterm.lua). If
-            # this never fires, remap it WezTerm-side to a chord herdr always sees.
-            #
-            # Darwin only: on Linux herdr reads cmd as super, which the window
-            # manager generally swallows before herdr sees it.
-            #
-            # There is deliberately no cmd+shift+a counterpart: WezTerm delivers
-            # that chord as a bare "a", which lands as literal text in the focused
-            # agent's pane. Use prefix+shift+a to go backwards.
-            ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
-              {
-                key = "cmd+a";
-                type = "shell";
-                command = "${lib.getExe agent-attention} next";
-                description = "Next agent needing attention";
-              }
-            ];
-        };
+        keys =
+          {
+            # prefix+a / prefix+shift+a walk the attention queue instead — see the
+            # agent-attention bindings below. The built-ins cycle every agent
+            # including the ones still working, so they stay unbound.
+            new_workspace = "prefix+shift+N";
+            #next_agent = "";
+            #previous_agent = "";
+            split_vertical = "prefix+|";
+            detach = "prefix+d";
+            switch_workspace = "prefix+shift+1..9";
+          }
+          # agent's pane. Use prefix+shift+a to go backwards.
+          // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+            goto = "cmd+g";
+          }
+          // {
+            command =
+              [
+                {
+                  key = "prefix+f";
+                  type = "plugin_action";
+                  command = "herdr-floax.toggle";
+                  description = "Toggle floating pane";
+                }
+                # tuicr review overlay for the focused agent. type = "popup" is
+                # herdr's own session-modal floating terminal: it draws over the
+                # layout without splitting or changing the tab.
+                {
+                  key = "prefix+v";
+                  type = "popup";
+                  command = lib.getExe tuicr-overlay;
+                  description = "Review focused agent's diff in tuicr";
+                  width = "90%";
+                  height = "90%";
+                }
+                # Same review, as a toggleable zoomed pane instead of a popup. A
+                # popup swallows the prefix, so nothing but its own command exiting
+                # can close it. A pane keeps herdr's key handling, so this key both
+                # opens and dismisses, one instance per workspace.
+                {
+                  key = "prefix+shift+v";
+                  type = "shell";
+                  command = lib.getExe tuicr-toggle;
+                  description = "Toggle tuicr review pane for focused agent";
+                }
+                # Attention queue: walk the agents that are blocked (waiting on you)
+                # or done (finished), oldest wait first, wrapping at the end. When
+                # nothing needs attention — or you are the only one that does — it
+                # degrades to plain next/previous over every agent, so the key always
+                # moves you somewhere.
+                {
+                  key = "prefix+a";
+                  type = "shell";
+                  command = "${lib.getExe agent-attention} next";
+                  description = "Next agent needing attention (else next agent)";
+                }
+                {
+                  key = "prefix+shift+a";
+                  type = "shell";
+                  command = "${lib.getExe agent-attention} prev";
+                  description = "Previous agent needing attention (else previous)";
+                }
+              ]
+              # Same jump, no prefix. herdr parses cmd/super fine; whether the
+              # keystroke ever reaches herdr is up to WezTerm, which only forwards
+              # SUPER-modified keys when the app negotiates the kitty keyboard
+              # protocol (config.enable_kitty_keyboard = true in wezterm.lua). If
+              # this never fires, remap it WezTerm-side to a chord herdr always sees.
+              #
+              # Darwin only: on Linux herdr reads cmd as super, which the window
+              # manager generally swallows before herdr sees it.
+              #
+              # There is deliberately no cmd+shift+a counterpart: WezTerm delivers
+              # that chord as a bare "a", which lands as literal text in the focused
+              # agent's pane. Use prefix+shift+a to go backwards.
+              ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+                {
+                  key = "cmd+a";
+                  type = "shell";
+                  command = "${lib.getExe agent-attention} next";
+                  description = "Next agent needing attention";
+                }
+              ];
+          };
 
         experimental = {
           # Save recent pane screen history across full server restarts.
