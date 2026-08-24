@@ -13,9 +13,9 @@
   flake.modules.homeManager.term-gui = {pkgs, ...}: {
     home.file.".wezterm.lua".source = ../../../dotfiles/wezterm/wezterm.lua;
     # using remote windows with tmux more so want to experiment here with iterm2's native seeming windows for tmux panes
-    home.packages = pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [pkgs.iterm2];
+    #home.packages = pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [pkgs.iterm2];
     programs.kitty = {
-      enable = false;
+      enable = true;
       #package = pkgs.emptyDirectory; # post 15.1 update, having issues with nix version and moving to brew for now 2024-10-30
       keybindings = {
         "super+equal" = "increase_font_size";
@@ -142,10 +142,7 @@
         quick-terminal-autohide = true;
         #quick-terminal-animation-duration = 0;
 
-        macos-titlebar-style = "tabs";
-        #macos-titlebar-style = "hidden";
-        #macos-titlebar-style = "native";
-        #macos-titlebar-style = "transparent";
+        macos-titlebar-style = "hidden"; # tabs | hidden | native | transparent
 
         window-height = 35;
         window-width = 110;
