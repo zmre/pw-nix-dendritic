@@ -3,8 +3,10 @@
     # Nice shell history https://atuin.sh -- experimenting with this 2024-07-26
     programs.atuin = {
       enable = true;
-      enableZshIntegration = true;
-      flags = ["--disable-up-arrow"];
+      # Integration is done manually in zsh-private.nix so that private
+      # (zsh-priv) sessions can skip it entirely instead of tearing it down
+      # after the fact. The `--disable-up-arrow` flag is applied there too.
+      enableZshIntegration = false;
       settings = {
         update_check = false;
         search_mode = "fuzzy";

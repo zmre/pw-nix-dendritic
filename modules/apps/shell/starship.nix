@@ -16,6 +16,7 @@
       enableBashIntegration = true;
       settings = {
         format = pkgs.lib.concatStrings [
+          "\${env_var.ZSH_PRIVATE}" # shown only inside a zsh-priv session
           #"$os" # turns out it takes starship 20ms to figure out the OS at every prompt, but we can hard code it at build time
           # alt for linux: "🐧 "
           (
@@ -119,6 +120,11 @@
         gcloud.disabled = true;
         aws.disabled = true;
         os.disabled = false;
+        env_var.ZSH_PRIVATE = {
+          variable = "ZSH_PRIVATE";
+          format = "[ 🔒 PRIVATE ]($style)";
+          style = "bold white bg:red";
+        };
         os.symbols.Macos = "";
         kubernetes = {
           disabled = false;

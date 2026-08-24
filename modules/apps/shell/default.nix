@@ -72,6 +72,7 @@
       starship
       tmux
       zsh
+      zsh-private
     ];
     home.packages = with pkgs;
       [
