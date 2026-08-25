@@ -38,15 +38,24 @@
             "batch-size" = 512;
             "ubatch-size" = 512;
           };
-          "gemma4-26b-a4b-q4" = {
+          "gemma4-26b-a4b-q4-summaries" = {
             hf-repo = "unsloth/gemma-4-26B-A4B-it-GGUF";
             hf-file = "gemma-4-26B-A4B-it-UD-Q4_K_M.gguf";
             "gpu-layers" = 999; # 999 = as many as possible
-            "ctx-size" = 262144;
+            "reasoning" = "off";
+            "ctx-size" = 32768;
             "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
             "flash-attn" = "on"; # explicit; auto already enables it but be sure
             "batch-size" = 512;
             "ubatch-size" = 512;
+            "n-predict" = 1024; # bound output; default -1 is unbounded
+            "cache-type-k" = "q8_0";
+            "cache-type-v" = "q8_0";
+            "temp" = 0.7; # Gemma 4's baked-in default is 1.0
+            "top-k" = 40;
+            "top-p" = 0.95;
+            "min-p" = 0.05;
+            "repeat-penalty" = 1.05;
           };
           "qwen36-27b-q4" = {
             model = "/var/lib/models/Qwen3.6-27B-Q4_K_M.gguf";
@@ -79,7 +88,7 @@
             #"cache-type-k" = "q8_0";
             #"cache-type-v" = "q8_0";
             "presence-penalty" = 0.0;
-            "repetition-penalty" = 1.0;
+            #"repetition-penalty" = 1.0;
             "n-predict" = 32768; # this is output-length
             "temp" = 1.0;
             "top-p" = 0.95;
@@ -99,7 +108,7 @@
             #"cache-type-k" = "q8_0";
             #"cache-type-v" = "q8_0";
             "presence-penalty" = 0.0;
-            "repetition-penalty" = 1.0;
+            #"repetition-penalty" = 1.0;
             "n-predict" = 32768; # this is output-length
             "temp" = 1.0;
             "top-p" = 0.95;

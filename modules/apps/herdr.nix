@@ -248,6 +248,7 @@ _: {
           agent_panel_sort = "spaces";
           # Ask the OS notification service directly, rather than in-app toasts.
           toast.delivery = "system";
+          tab_bar_right = [{type = "hostname";}];
         };
 
         theme = {
