@@ -314,7 +314,7 @@
           rustfmt
           cargo # have this as a fallback when a local flake isn't in place
           rustc # have this as a fallback when a local flake isn't in place
-          vscode-extensions.vadimcn.vscode-lldb.adapter # for debugging rust
+          #vscode-extensions.vadimcn.vscode-lldb.adapter # for debugging rust
           (python3.withPackages (ps: with ps; [debugpy])) # required for debugging python, but better if that's per project installed since we don't have python
 
           metals # lsp for scala

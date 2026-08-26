@@ -2,14 +2,29 @@
   flake.nixosModules.x-windows = {pkgs, ...}: {
     services = {
       # Enable the X11 windowing system.
-      xserver.enable = true;
+      desktopManager.gnome.enable = true;
       displayManager = {
-        sddm.enable = true;
-        sddm.wayland.enable = true;
+        gdm.enable = true;
       };
-      desktopManager.plasma6.enable = true;
+      xserver = {
+        enable = true;
+        # desktopManager.cinnamon.enable = true;
+        defaultDepth = 24;
+        xkb.options = "caps:escape";
+        xkb.layout = "us";
+        # displayManager = {
+        #sddm.enable = true;
+        #sddm.wayland.enable = true;
+        #plasma-login-manager.enable = true;
+        # lightdm.enable = true;
+        #};
+        # Keyboard
+        autoRepeatDelay = 265;
+        autoRepeatInterval = 20;
+      };
+      #desktopManager.plasma6.enable = true;
     };
-    programs.firefox.enable = true;
+    #programs.firefox.enable = true;
     environment.systemPackages = with pkgs; [
       wezterm
     ];

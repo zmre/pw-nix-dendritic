@@ -159,7 +159,7 @@
         avahi
         arp-scan
         dnsenum
-        dnsrecon
+        #dnsrecon
         fierce # dns recon
         httrack # offline browser / website mirror
         fping
@@ -254,7 +254,7 @@
         tcpflow
         p0f
         netsniff-ng
-        mitmproxy
+        #mitmproxy # not building 2026-07-27
         dhcpdump
         proxychains
 
@@ -302,7 +302,7 @@
         bomber-go
         cargo-audit
         credential-detector
-        deepsecrets
+        #deepsecrets
         detect-secrets
         freeze
         git-secret

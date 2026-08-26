@@ -45,6 +45,7 @@
     "vim"
     "vim-gui"
     "window-mgmt"
+    #"x-windows"
   ];
 
   nixosMods = filterModules inputs.self.nixosModules wantedModules;
@@ -95,10 +96,10 @@ in {
         supportedFilesystems = ["btrfs"];
         kernelPackages = pkgs.linuxPackages_latest;
         initrd.checkJournalingFS = false;
-        initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "uas" "sd_mod" "apfs" "usbhid"];
+        initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "uas" "sd_mod" "usbhid"];
         initrd.kernelModules = ["i915"];
         kernelModules = ["kvm-intel"];
-        extraModulePackages = [pkgs.linuxKernel.packages.linux_6_18.apfs];
+        extraModulePackages = [];
         kernelParams = ["mem_sleep_default=deep" "nvme.noacpi=1" "net.ifnames=1"];
         tmp.cleanOnBoot = true;
         tmp.useTmpfs = true;
@@ -222,7 +223,6 @@ in {
       # You can use https://search.nixos.org/ to find more packages (and options).
       environment.systemPackages = with pkgs; [
         firmware-manager
-        apfsprogs
         libsecret
         psmisc
         veracrypt
@@ -236,7 +236,7 @@ in {
       services.locate.enable = true;
       services.timesyncd.enable = true;
       services.earlyoom.enable = true;
-      programs.ssh.startAgent = true;
+      programs.ssh.startAgent = false;
       programs.dconf.enable = true;
       # clight requires a latitude and longitude
       location.latitude = 38.0;
@@ -260,7 +260,7 @@ in {
         firewall = {
           enable = true;
           allowPing = false;
-          checkReversePath = false;
+          checkReversePath = "loose";
         };
         wireless.interfaces = ["wlan0"];
         wireless.iwd.enable = true;
