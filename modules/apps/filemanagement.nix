@@ -280,7 +280,6 @@
           };
         };
         shellWrapperName = "y";
-        theme = {};
       };
     };
   };
