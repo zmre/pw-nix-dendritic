@@ -12,6 +12,31 @@ _: {
   }: let
     herdrPkg = pkgs.herdr;
 
+    # `herdr integration install <target>` drops an agent-state reporter into
+    # the agent's own extension directory, which is how herdr learns whether a
+    # pane's agent is working/blocked/idle. The file is embedded in the herdr
+    # binary, so we can extract it at build time instead of running the
+    # installer imperatively — the result is pinned to this herdr version and
+    # re-extracted whenever herdr updates.
+    #
+    # The installer refuses to write unless the target dir already exists (its
+    # "install <target> first" check), hence the mkdir. HOME/XDG_CONFIG_HOME
+    # are redirected so nothing escapes the build sandbox.
+    herdrIntegration = target: dest:
+      pkgs.runCommand "herdr-${target}-integration" {} ''
+        export HOME="$TMPDIR/home"
+        export XDG_CONFIG_HOME="$HOME/.config"
+        mkdir -p "$HOME/${builtins.dirOf dest}"
+        ${lib.getExe herdrPkg} integration install ${target}
+        install -Dm444 "$HOME/${dest}" "$out"
+      '';
+
+    # omp reads extensions out of ~/.omp (not XDG), so this is home.file rather
+    # than xdg.configFile. Note this lands as a read-only store symlink: a later
+    # `herdr integration install omp` by hand will fail, and that is the point —
+    # the herdr version bump is what updates it.
+    ompIntegrationPath = ".omp/agent/extensions/herdr-omp-agent-state.ts";
+
     # Pick a herdr CLI the running server will actually talk to. HERDR_BIN_PATH
     # is what the server injects into its own panes, so in normal operation it
     # is correct by construction. The store path is the fallback for CLI
@@ -233,6 +258,8 @@ _: {
       '';
     };
   in {
+    home.file.${ompIntegrationPath}.source = herdrIntegration "omp" ompIntegrationPath;
+
     programs.herdr = {
       enable = true;
       package = herdrPkg;
