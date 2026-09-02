@@ -43,7 +43,7 @@
             hf-file = "gemma-4-26B-A4B-it-UD-Q4_K_M.gguf";
             "gpu-layers" = 999; # 999 = as many as possible
             "reasoning" = "off";
-            "ctx-size" = 32768;
+            "ctx-size" = 65536;
             "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
             "flash-attn" = "on"; # explicit; auto already enables it but be sure
             "batch-size" = 512;
@@ -59,6 +59,25 @@
           };
           "qwen36-27b-q4" = {
             model = "/var/lib/models/Qwen3.6-27B-Q4_K_M.gguf";
+            "gpu-layers" = 999; # 999 = as many as possible
+            "ctx-size" = 262144;
+            "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
+            "flash-attn" = "on"; # explicit; auto already enables it but be sure
+            "batch-size" = 512;
+            "ubatch-size" = 512;
+            # Halve the 16 GiB KV cache at full context if memory gets tight:
+            #"cache-type-k" = "q8_0";
+            #"cache-type-v" = "q8_0";
+            "presence-penalty" = 0.2;
+            "n-predict" = 32768; # this is output-length
+            "temp" = 0.6;
+            "top-p" = 0.95;
+            "top-k" = 20;
+            "min-p" = 0.00;
+          };
+          "qwen36-35b-a3b-q4" = {
+            hf-repo = "unsloth/Qwen3.8-27B-GGUF";
+            hf-file = "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf";
             "gpu-layers" = 999; # 999 = as many as possible
             "ctx-size" = 262144;
             "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
