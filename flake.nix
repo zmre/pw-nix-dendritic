@@ -71,6 +71,10 @@
       url = "github:aome510/hackernews-TUI?ref=v0.13.5";
       flake = false;
     };
+    hombrew-omlx = {
+      url = "github:jundot/omlx";
+      flake = false;
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

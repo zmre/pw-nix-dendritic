@@ -30,6 +30,10 @@
       url = "github:pikachuexe/homebrew-freetube";
       flake = false;
     };
+    hombrew-omlx = {
+      url = "github:jundot/omlx";
+      flake = false;
+    };
     # below is needed for m4b-tool
     # homebrew-sandreas = {
     #   url = "github:sandreas/homebrew-tap";
@@ -42,6 +46,7 @@
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
       "pikachuexe/homebrew-freetube" = inputs.homebrew-freetube; # note: always name things with "homebrew-" prefix in attr name. this is normally pikachuexe/freetube, but adding the homebrew- fixes errors
+      "jundot/homebrew-omlx" = inputs.hombrew-omlx; # ditto, this is a rename from the github repo
       # "sandreas/homebrew-sandreas" = inputs.homebrew-sandreas;
     };
   in {

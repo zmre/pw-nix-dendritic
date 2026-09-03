@@ -16,6 +16,9 @@
       "ollama-app"
       "lm-studio"
     ];
+    homebrew.brews = [
+      "jundot/omlx/omlx"
+    ];
   };
 
   flake.nixosModules.ai-gui = {pkgs, ...}: {
@@ -31,17 +34,6 @@
   }: let
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
     irisPkg = inputs.iris.packages.${system}.default;
-    aichat-wrapped = let
-      pkg = pkgs.aichat;
-      tools = with pkgs; [argc jq poppler-utils pdfminer tesseract];
-      toolPath = pkgs.lib.makeBinPath tools;
-    in
-      pkgs.runCommand "${pkg.pname}-wrapped" {
-        nativeBuildInputs = [pkgs.makeBinaryWrapper];
-      } ''
-        mkdir -p $out/bin
-        makeBinaryWrapper ${pkgs.lib.getExe pkg} $out/bin/${pkg.pname} --prefix PATH : ${toolPath}
-      '';
   in {
     imports = with inputs.self.modules.homeManager; [
       herdr
