@@ -5,7 +5,7 @@
   flake.darwinModules.security-gui = {
     homebrew.casks = [
       "blockblock"
-      "burp-suite" # TODO: move to home-manager? (burpsuite)
+      #"burp-suite" # TODO: move to home-manager? (burpsuite)
       "gpg-suite"
       "knockknock"
       "little-snitch"
@@ -17,7 +17,6 @@
       "wireshark-chmodbpf"
       #"yubico-yubikey-manager" # deprecated
       #"yubico-authenticator" # using app store version
-      "zap" # TODO: move to home-manager? (zap)
     ];
     homebrew.brews = [
       "recon-ng" # TODO nix version doesn't work on mac at last try 2024-07-31

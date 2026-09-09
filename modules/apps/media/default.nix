@@ -11,7 +11,6 @@
       "keycastr" # show keys being pressed
       "noun-project"
       #"obs"
-      "stolendata-mpv" # 2024-12-11 switching to brew but keeping hm config; gui not launching
       "screenflow"
       "subler" # used to edit metadata on videos
     ];
