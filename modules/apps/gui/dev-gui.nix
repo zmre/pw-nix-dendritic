@@ -10,8 +10,8 @@
     homebrew.casks = [
       "dash" # offline developer docs
       "devtoys"
-      "fork"
-      "gitkraken-cli"
+      #"fork"
+      #"gitkraken-cli"
     ];
     homebrew.masApps = {
       #"Kaleidoscope" = 587512244; # GUI 3-way merge

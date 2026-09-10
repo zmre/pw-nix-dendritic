@@ -6,7 +6,7 @@
     homebrew.casks = [
       "blockblock"
       #"burp-suite" # TODO: move to home-manager? (burpsuite)
-      "gpg-suite"
+      #"gpg-suite" # removing because i don't need so much stuff across my system running all the time
       "knockknock"
       "little-snitch"
       #"lockrattler"

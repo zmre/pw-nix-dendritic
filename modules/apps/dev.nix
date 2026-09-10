@@ -25,6 +25,7 @@
     home.packages = with pkgs; [
       devenv # alternative to direnv stuff
       lazygit
+      gnupg # needed by git for signing things
       # file viewers
       jq
       lynx

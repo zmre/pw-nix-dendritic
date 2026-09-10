@@ -6,8 +6,8 @@
 
   flake.darwinModules.filemanagement-gui = {
     homebrew.casks = [
-      "dropbox"
-      "google-drive"
+      #"dropbox"
+      #"google-drive"
       #"proton-drive"
       "sync"
       "transmission"
