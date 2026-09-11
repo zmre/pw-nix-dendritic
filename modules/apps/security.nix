@@ -8,6 +8,7 @@
       #"burp-suite" # TODO: move to home-manager? (burpsuite)
       #"gpg-suite" # removing because i don't need so much stuff across my system running all the time
       "knockknock"
+      #"launchcontrol"
       "little-snitch"
       #"lockrattler"
       #"metasploit" # TODO 2024-07-31 nix version not running on mac; 2025-12-09 brew version deprecated

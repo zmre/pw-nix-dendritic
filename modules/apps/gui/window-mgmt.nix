@@ -70,7 +70,7 @@
 
       # quicklook plugins
       #"qlmarkdown" # to be replaced by mbr
-      "qlstephen"
+      #"qlstephen"
       #"qlprettypatch" # not updated in 9 years
       #"qlvideo"
       "apparency" # get info on apps
