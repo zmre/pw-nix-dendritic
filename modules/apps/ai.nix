@@ -10,7 +10,7 @@
 
   flake.darwinModules.ai-gui = {
     homebrew.casks = [
-      "chatgpt"
+      #"chatgpt" # freaking openai is trying to worm its way into every part of my system. i'm constantly denying it access. browser only going forward.
       "claude"
       "macwhisper"
       "ollama-app"
