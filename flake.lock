@@ -1109,22 +1109,6 @@
         "type": "github"
       }
     },
-    "markless": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1779034114,
-        "narHash": "sha256-orjJ++948WEJ031c5Dcvmfyqw2JMRJRjoBsGU+A+B4w=",
-        "owner": "jvanderberg",
-        "repo": "markless",
-        "rev": "318917082165dac8e46e63d7723126a993150172",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jvanderberg",
-        "repo": "markless",
-        "type": "github"
-      }
-    },
     "mbr": {
       "inputs": {
         "crane": "crane_3",
@@ -1160,32 +1144,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1788970608,
-        "narHash": "sha256-45b+7+sS0FcZNPj9/2RKIXnOy494g3NGxj26D1x8bCc=",
+        "lastModified": 1789100455,
+        "narHash": "sha256-S3O4eMuY9y3xvLLUaGirW5ZGBBvIO/7S6DdgkVl46WE=",
         "owner": "zmre",
         "repo": "mbr-markdown-browser",
-        "rev": "c704d4f6e00ed5c0bdfbd2f6c252c1ae2ae35cb1",
+        "rev": "7867f8b2686bfc1568d8f5209a346b620325c0f9",
         "type": "github"
       },
       "original": {
         "owner": "zmre",
         "repo": "mbr-markdown-browser",
-        "type": "github"
-      }
-    },
-    "mdterm": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1789048364,
-        "narHash": "sha256-jjYxndaHTitWAQ5MaMMCosVT7yU4m7PKgmbd7Vhj+lQ=",
-        "owner": "bahdotsh",
-        "repo": "mdterm",
-        "rev": "5560db756e60766bca79c61b86dc20c34ce14850",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bahdotsh",
-        "repo": "mdterm",
         "type": "github"
       }
     },
@@ -1984,9 +1952,7 @@
         "ironoxide": "ironoxide",
         "ldash-src": "ldash-src",
         "ledgeline": "ledgeline",
-        "markless": "markless",
         "mbr-markdown-browser": "mbr-markdown-browser",
-        "mdterm": "mdterm",
         "nix-auth": "nix-auth",
         "nix-homebrew": "nix-homebrew",
         "nix-index-database": "nix-index-database",

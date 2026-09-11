@@ -122,7 +122,7 @@
         "Fantastical" = 975937182; # calendar alternative
         "Forecast Bar" = 982710545;
         #"Ghostery – Privacy Ad Blocker" = 1436953057; # old version
-        "iA Writer" = 775737590;
+        #"iA Writer" = 775737590;  # haven't used this on desktop in ages
         #"Ice Cubes" = 6444915884; # mastodon client -- it's good but i switched to ivory
         "iMovie" = 408981434;
         "InYourFace" = 1476964367;

@@ -117,15 +117,7 @@
       flake = false;
     };
     ledgeline.url = "github:zmre/ledgeline";
-    markless = {
-      url = "github:jvanderberg/markless";
-      flake = false;
-    };
     mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
-    mdterm = {
-      url = "github:bahdotsh/mdterm";
-      flake = false;
-    };
     nix-auth.url = "github:numtide/nix-auth";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-index-database = {
