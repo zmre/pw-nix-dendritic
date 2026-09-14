@@ -4,6 +4,17 @@
   # fetchNpmDepsWithPackuments compatibility with gemini-cli
   flake-file.inputs.iris.inputs.flake-parts.follows = "flake-parts";
 
+  # Personal layer over IronCore's tachikoma: its own omp profile, a
+  # path-scoped approval gate, and personal skills, agents and rules. Private
+  # repo, so eval and build need GitHub auth (nix `access-tokens`).
+  #
+  # Safe to follow nixpkgs: eva's own derivations are shell wrappers and file
+  # merges, and tachikoma's omp is a fetchurl of an upstream release asset.
+  # eva's llm-agents input, which is the one with cache-sensitive bun2nix
+  # builds, declines to follow on its own side.
+  flake-file.inputs.eva.url = "git+ssh://git@github.com/zmre/eva.git";
+  flake-file.inputs.eva.inputs.nixpkgs.follows = "nixpkgs";
+
   # flake-file.inputs.alita.url = "git+ssh://git@github.com/ironcorelabs/alita.git";
   # flake-file.inputs.alita.inputs.nixpkgs.follows = "nixpkgs";
   # flake-file.inputs.alita.inputs.flake-parts.follows = "flake-parts";
@@ -35,9 +46,17 @@
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
     irisPkg = inputs.iris.packages.${system}.default;
   in {
-    imports = with inputs.self.modules.homeManager; [
-      herdr
-    ];
+    imports =
+      (with inputs.self.modules.homeManager; [
+        herdr
+      ])
+      ++ [inputs.eva.homeManagerModules.eva];
+
+    # Installs `eva`, `tachikoma` and `pi`. The deny list is deliberately not
+    # set here: this repo is public, and naming a directory you want kept away
+    # from an agent defeats the purpose. It belongs in eva's own default for
+    # `programs.eva.policy.deny`.
+    programs.eva.enable = true;
 
     home.packages = with pkgs; [
       #aichat-wrapped # ai cli tool that can use local rag, local models, etc.

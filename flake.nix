@@ -52,6 +52,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    eva = {
+      url = "git+ssh://git@github.com/zmre/eva.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-compat.url = "github:NixOS/flake-compat";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
