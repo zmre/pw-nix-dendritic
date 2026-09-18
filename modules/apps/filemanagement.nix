@@ -63,55 +63,19 @@
         enable = true;
         enableZshIntegration = true;
         flavors = {
-          catppuccin-mocha = inputs.yazi-flavors + /catppuccin-mocha.yazi;
+          #catppuccin-mocha = inputs.yazi-flavors + /catppuccin-mocha.yazi;
+          #catppuccin-macchiato = inputs.yazi-flavors + /catppuccin-macchiato.yazi;
+          #catppuccin-latte = inputs.yazi-flavors + /catppuccin-latte.yazi;
+          catppuccin-frappe = inputs.yazi-flavors + /catppuccin-frappe.yazi;
+          dracula = inputs.yazi-flavors + /dracula.yazi;
         };
         theme = {
-          use = "catppuccin-mocha";
-
-          status = {
-            separator_open = "";
-            separator_close = "";
-            separator_style = {
-              fg = "#45475a";
-              bg = "#45475a";
-            };
-
-            # Mode
-            mode_normal = {
-              fg = "#1e1e2e";
-              bg = "#a6e3a1";
-              bold = true;
-            };
-            mode_select = {
-              fg = "#1e1e2e";
-              bg = "#a6e3a1";
-              bold = true;
-            };
-            mode_unset = {
-              fg = "#1e1e2e";
-              bg = "#f2cdcd";
-              bold = true;
-            };
-
-            # Progress
-            progress_label = {
-              fg = "#ffffff";
-              bold = true;
-            };
-            progress_normal = {
-              fg = "#89b4fa";
-              bg = "#45475a";
-            };
-            progress_error = {
-              fg = "#f38ba8";
-              bg = "#45475a";
-            };
-          };
-
-          tasks = {
-            border = {fg = "#a6e3a1";};
-            title = {};
-            hovered = {underline = true;};
+          # NOTE: flavor selection lives under [flavor] with dark/light keys.
+          # A bare top-level `use = "..."` is silently ignored by yazi and you
+          # end up on the built-in default theme.
+          flavor = {
+            dark = "dracula";
+            light = "catppuccin-frappe";
           };
         };
         initLua = ../../dotfiles/yazi/init.lua;
