@@ -194,11 +194,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1768625275,
-        "narHash": "sha256-rLhXZLdHzts9J269K2YDzO351tk2Tfg3bd4hysW3asU=",
+        "lastModified": 1790002588,
+        "narHash": "sha256-APXY2byxDuc9f6+a/GevrO90gFaz1Lo9z66nn1rzPnc=",
         "owner": "zmre",
         "repo": "city-explorer",
-        "rev": "a622e04c6f30247d17098a548e03a3f8b99fd6fd",
+        "rev": "ed2c102299ea4ab0b5a0544251784d25c536e44b",
         "type": "github"
       },
       "original": {
