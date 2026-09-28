@@ -62,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787091671,
-        "narHash": "sha256-d45ez7SbaHFWtwEphJSCb8ReRVqxiKc0Ex14uwUTf+o=",
+        "lastModified": 1790183742,
+        "narHash": "sha256-MKsnDiUW77H+HnHRBQeg9qLZ1pi+L1w5d7Ol4RF31tE=",
         "ref": "refs/heads/main",
-        "rev": "54c211edb095e49c156b8b355f0a43d4fa05d573",
-        "revCount": 57,
+        "rev": "f3eeb8b3579637c1ec1a8d03148c076a9d62469f",
+        "revCount": 58,
         "type": "git",
         "url": "ssh://git@github.com/ironcorelabs/alita"
       },
@@ -170,16 +170,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1788011267,
-        "narHash": "sha256-mEq2kU+ljompTToZ44Afvm7d/rHJ5iMBl0tjZuyShJs=",
+        "lastModified": 1790001035,
+        "narHash": "sha256-1/SLBjSYBzDdDhvLQ83wrzBakyS/xNGgtxHGNuveOEQ=",
         "owner": "Mic92",
         "repo": "bun2nix",
-        "rev": "5765b0614591f75ee8ba5596e81ae85c167d1071",
+        "rev": "07a5bfc8ac36c5370199343fa620b69f63186e33",
         "type": "github"
       },
       "original": {
         "owner": "Mic92",
-        "ref": "fix-structured-attrs-hook",
+        "ref": "llm-agents",
         "repo": "bun2nix",
         "type": "github"
       }
@@ -391,11 +391,11 @@
     "fabric": {
       "flake": false,
       "locked": {
-        "lastModified": 1788808663,
-        "narHash": "sha256-E4FCKDSUWyEhmDj8jNoqvMP2Q27zpyCt/ULMXOd1CiI=",
+        "lastModified": 1790183642,
+        "narHash": "sha256-g+2a0ScMjEtvPQEZkC4oG/WQvqfM29YkrlgGpXQ1aPg=",
         "owner": "danielmiessler",
         "repo": "fabric",
-        "rev": "b682dad740f24e85ce9a48d23babc6780dd476ac",
+        "rev": "9ca59387a2ff1287e67cfce88758ad1324a8b216",
         "type": "github"
       },
       "original": {
@@ -1032,11 +1032,11 @@
         "paiTemplate": "paiTemplate"
       },
       "locked": {
-        "lastModified": 1789137026,
-        "narHash": "sha256-hZuQT6uQGcvWuxuwvQBJTaUojsUlztUmtDnCs4maOpk=",
+        "lastModified": 1790220367,
+        "narHash": "sha256-rqn9VGl9bdzW8ROLSEk2Vi8ugeKFZmalZmRxW9f/Yuw=",
         "ref": "refs/heads/main",
-        "rev": "84072b9e5e4b50a9a34fe104bbf5ff01a4cf0954",
-        "revCount": 129,
+        "rev": "251716994069fd66ccae6643e15006aa7a989fc7",
+        "revCount": 130,
         "type": "git",
         "url": "ssh://git@github.com/zmre/iris.git"
       },
@@ -1168,11 +1168,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1789117782,
-        "narHash": "sha256-R6DjdXEg4gWt/INX5oRYkh17p66nuYr8qiAuBkZ4oqU=",
+        "lastModified": 1790156955,
+        "narHash": "sha256-fX01id/iJpSbHzVDYgrQHy1vr7OsqCZrNAwfYsestLQ=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "d706bc302d3a7854659e3b5b5ad35270f7dcf8da",
+        "rev": "06830d044f23ec9bc55cec62771122d2941c634d",
         "type": "github"
       },
       "original": {
@@ -1611,11 +1611,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1788982683,
-        "narHash": "sha256-PJCTsE4I20CrJJPcye9/z6brRFysG5+aygr/dZK097k=",
+        "lastModified": 1790055231,
+        "narHash": "sha256-QpXotokGh5eeMG1Njiuh27oP0rK6t5+cMp7ymXSs7mc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5052d7ccbcfb7e4ae1586cb2ecf95a2e3707dce9",
+        "rev": "b6c98e9e6633ee64753b594ff4a5febf0367fc00",
         "type": "github"
       },
       "original": {
@@ -1627,11 +1627,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1789006805,
-        "narHash": "sha256-xB8mKMOx1IA9vTDNLmJZ6n4wCMq/cuWBBOzGCRnqxrU=",
+        "lastModified": 1790046670,
+        "narHash": "sha256-MYiI+CzL0tuWgRPjGsKCDHqYs2T3OzMlMQWOYWG0qso=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8ce4ef6cb6f871616146b9fe26d2a5ae594e94fe",
+        "rev": "6774f7bc253789b113a4f39285dc0fa100abeacc",
         "type": "github"
       },
       "original": {
@@ -1815,11 +1815,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789135921,
-        "narHash": "sha256-K3Fjwo9wD2fKUkx5n0i5MsasrvUa7EMYTiinFKDp8o4=",
+        "lastModified": 1790183577,
+        "narHash": "sha256-IR3DxUm4Piv5EwIgTIPvzHk8avufRk/cLeoh5NLxBDA=",
         "owner": "zmre",
         "repo": "nix-pai",
-        "rev": "1090ea6e8cfdeb4fb9555db127dd291550cf338c",
+        "rev": "312327b387ee6a40e7ffa00464b5944acb4a5466",
         "type": "github"
       },
       "original": {
