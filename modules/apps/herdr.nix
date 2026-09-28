@@ -250,7 +250,16 @@ _: {
             | if . == null then empty else . end' 2>/dev/null)"
 
         if [ -n "$target" ]; then
-          exec "$herdr" agent focus "$target"
+          # Two steps since herdr 0.9, where each attached TUI client keeps its
+          # own view. agent.focus moves only the server's focus (and marks the
+          # agent seen); the server pushes a focus change out to clients only
+          # for workspace/tab/pane.focus. So focus the agent first, which
+          # selects its pane within its tab, then focus that tab to move the
+          # client's view there. The CLI's `pane focus` is directional-only, so
+          # tab.focus is the reachable one.
+          tab="$("$herdr" agent focus "$target" 2>/dev/null | jq -r '.result.agent.tab_id // empty')"
+          [ -n "$tab" ] || exit 1
+          exec "$herdr" tab focus "$tab"
         fi
 
         # Only reachable when there are no agents at all.
