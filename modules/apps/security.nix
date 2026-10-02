@@ -107,7 +107,7 @@
       sdrPkgs.gnuradio
       sdrPkgs.sdrpp
       sdrPkgs.gqrx
-      sdrangel
+      #sdrangel  # 2026-09-29 this breaks the build like every other update so commenting for now
     ];
   };
 
