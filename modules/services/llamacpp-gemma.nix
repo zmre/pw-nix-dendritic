@@ -33,7 +33,7 @@
             alias = "gemma4-26b-a4b-q8";
             "gpu-layers" = 999; # 999 = as many as possible
             "ctx-size" = 262144;
-            "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
+            "load-mode" = "none"; # was no-mmap (removed upstream); mmap'd pages kill ROCm perf on Strix Halo (2X+)
             "flash-attn" = "on"; # explicit; auto already enables it but be sure
             "batch-size" = 512;
             "ubatch-size" = 512;
@@ -44,7 +44,7 @@
             "gpu-layers" = 999; # 999 = as many as possible
             "reasoning" = "off";
             "ctx-size" = 65536;
-            "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
+            "load-mode" = "none"; # was no-mmap (removed upstream); mmap'd pages kill ROCm perf on Strix Halo (2X+)
             "flash-attn" = "on"; # explicit; auto already enables it but be sure
             "batch-size" = 512;
             "ubatch-size" = 512;
@@ -61,7 +61,7 @@
             model = "/var/lib/models/Qwen3.6-27B-Q4_K_M.gguf";
             "gpu-layers" = 999; # 999 = as many as possible
             "ctx-size" = 262144;
-            "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
+            "load-mode" = "none"; # was no-mmap (removed upstream); mmap'd pages kill ROCm perf on Strix Halo (2X+)
             "flash-attn" = "on"; # explicit; auto already enables it but be sure
             "batch-size" = 512;
             "ubatch-size" = 512;
@@ -76,11 +76,11 @@
             "min-p" = 0.00;
           };
           "qwen36-35b-a3b-q4" = {
-            hf-repo = "unsloth/Qwen3.8-27B-GGUF";
+            hf-repo = "unsloth/Qwen3.6-35B-A3B-GGUF";
             hf-file = "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf";
             "gpu-layers" = 999; # 999 = as many as possible
             "ctx-size" = 262144;
-            "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
+            "load-mode" = "none"; # was no-mmap (removed upstream); mmap'd pages kill ROCm perf on Strix Halo (2X+)
             "flash-attn" = "on"; # explicit; auto already enables it but be sure
             "batch-size" = 512;
             "ubatch-size" = 512;
@@ -99,7 +99,7 @@
             hf-file = "Qwen3.8-27B-Q8_0.gguf";
             "gpu-layers" = 999; # 999 = as many as possible
             "ctx-size" = 262144;
-            "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
+            "load-mode" = "none"; # was no-mmap (removed upstream); mmap'd pages kill ROCm perf on Strix Halo (2X+)
             "flash-attn" = "on"; # explicit; auto already enables it but be sure
             "batch-size" = 512;
             "ubatch-size" = 512;
@@ -119,7 +119,7 @@
             hf-file = "Qwen3.8-27B-Q4_0.gguf";
             "gpu-layers" = 999; # 999 = as many as possible
             "ctx-size" = 262144;
-            "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
+            "load-mode" = "none"; # was no-mmap (removed upstream); mmap'd pages kill ROCm perf on Strix Halo (2X+)
             "flash-attn" = "on"; # explicit; auto already enables it but be sure
             "batch-size" = 512;
             "ubatch-size" = 512;
@@ -134,7 +134,36 @@
             "top-k" = 20;
             "min-p" = 0.00;
           };
-        };
+          # Qwen3.8-Flash-Next (qwen4exp arch: 512-expert MoE, 10 active, Gated
+          # DeltaNet hybrid attention, n-gram embedding table). ISTA-DASLab's
+          # GSQ-RCO non-uniform quant; IQ3_S is their recommended tier (matches
+          # or beats the base model on their evals). Two shards: 00001 = weights
+          # (54.8 GB), 00002 = the 51B-param n-gram table (28.8 GB). llama.cpp
+          # fetches the second shard automatically.
+          # https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF
+          "qwen38-flash-next-gsq-iq3s" = {
+            hf-repo = "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF";
+            hf-file = "IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf";
+            "gpu-layers" = 999; # 999 = as many as possible
+            "ctx-size" = 262144; # hybrid DeltaNet => KV cache stays small at full ctx
+            # Deviates from the other presets on purpose: the repo README says to
+            # keep the n-gram shard mmap'd and read on demand (-lm mmap
+            # --lazy-mode on) instead of pulling all 83.6 GB resident. Benchmark
+            # "none" vs "mmap" here if tg feels slow.
+            "load-mode" = "mmap";
+            "lazy-mode" = "on";
+            "flash-attn" = "on";
+            "batch-size" = 1024;
+            "ubatch-size" = 512;
+            "n-predict" = 32768; # this is output-length
+            # Qwen's thinking-mode sampling (unsloth docs); non-thinking is
+            # temp 0.7 / top-p 0.8 / presence 1.5
+            "temp" = 1.0;
+            "top-p" = 0.95;
+            "top-k" = 20;
+            "min-p" = 0.00;
+            "presence-penalty" = 0.0;
+          };
         # Halve the 16 GiB KV cache at full context if memory gets tight:
         #"cache-type-k" = "q8_0";
         #"cache-type-v" = "q8_0";

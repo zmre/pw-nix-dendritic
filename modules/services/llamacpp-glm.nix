@@ -21,7 +21,7 @@
         host = "127.0.0.1";
         port = 8081;
         model = "/var/lib/models/GLM-4.7-Flash-Q8_0.gguf";
-        "no-mmap" = true; # CRITICAL for ROCm (2X+ perf)
+        "load-mode" = "none"; # was no-mmap (removed upstream); CRITICAL for ROCm (2X+ perf)
         #"--mlock" # Keep in memory
         "gpu-layers" = 999; # All layers to GPU
         #"--threads"

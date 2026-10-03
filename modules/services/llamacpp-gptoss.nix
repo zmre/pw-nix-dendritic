@@ -20,7 +20,7 @@
         host = "127.0.0.1";
         port = 5533;
         model = "/var/lib/models/ggml-org_gpt-oss-120b-GGUF_gpt-oss-120b-mxfp4-00001-of-00003.gguf";
-        "no-mmap" = true; # CRITICAL for ROCm (2X+ perf)
+        "load-mode" = "none"; # was no-mmap (removed upstream); CRITICAL for ROCm (2X+ perf)
         #"--mlock" # Keep in memory
         "gpu-layers" = 999; # All layers to GPU
         #"--threads"

@@ -31,7 +31,7 @@
         "log-file" = "/tmp/llama-server.log";
         "gpu-layers" = 999; # 999 = as many as possible
         "ctx-size" = 262144;
-        "no-mmap" = true; # mmap'd pages kill ROCm perf on Strix Halo (2X+)
+        "load-mode" = "none"; # was no-mmap (removed upstream); mmap'd pages kill ROCm perf on Strix Halo (2X+)
         "flash-attn" = "on"; # explicit; auto already enables it but be sure
         "batch-size" = 512;
         "ubatch-size" = 512;

@@ -17,7 +17,7 @@
         host = "127.0.0.1";
         port = 8081;
         model = "/var/lib/models/MiniMax-M2.1-IQ3_M.gguf";
-        "no-mmap" = true; # CRITICAL for ROCm (2X+ perf)
+        "load-mode" = "none"; # was no-mmap (removed upstream); CRITICAL for ROCm (2X+ perf)
         "mlock" = true; # Keep in memory
         "gpu-layers" = 999; # All layers to GPU
         "threads" = 16; # CPU threads for non-GPU ops
