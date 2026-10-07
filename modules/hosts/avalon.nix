@@ -24,12 +24,15 @@
     "glance"
     "homebridge"
     "llamacpp-packages" # overlay with tuned llama.cpp builds (gfx1151)
-    "llamacpp-gemma" # Gemma
+    #"llamacpp-gemma" # llama.cpp router (8081/8082); off while testing gufo, may come back
     #"llamacpp-qwen36" # Qwen 3.6
     #"llamacpp-glm" # GLM-4.7-Flash (smallest, for initial testing)
     #"llamacpp-gptoss" # Alternative: GPT-OSS-120B
     #"llamacpp-minimax"   # Alternative: MiniMax-M2.1
     #"llamacpp-qwen235b"  # Alternative: Qwen3-235B
+    #"llamacpp-mtp" # experiment: mainline llama.cpp @master w/ Qwen4Exp MTP spec-decode (Flash-Next)
+    "gufo" # Gufo serving Qwen3.8-Flash-Next (8085, Caddy 8086); replaces llama-cpp for now
+    #"odysseus" # experiment: self-hosted AI workspace on top of llama-cpp
     "mbr"
     "nfs"
     "nginx-rtmp"
@@ -87,8 +90,10 @@ in {
         home.homeDirectory = "/home/${username}";
         home.stateVersion = "25.05";
         home.sessionVariables = {
-          # llama.cpp endpoint via Caddy with TLS
-          LLAMA_CPP_HOST = "https://avalon.savannah-basilisk.ts.net:8082";
+          # OpenAI-compatible LLM endpoint via Caddy with TLS.
+          # 8086 = gufo (Qwen3.8-Flash-Next, model name "qwen38-flash-next");
+          # 8082 = llama.cpp router when llamacpp-gemma is enabled instead.
+          LLAMA_CPP_HOST = "https://avalon.savannah-basilisk.ts.net:8086";
         };
       };
       users.defaultUserShell = pkgs.zsh;

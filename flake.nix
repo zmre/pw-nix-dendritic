@@ -71,6 +71,10 @@
       url = "github:zmre/gh-worktree";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gufo = {
+      url = "github:gufo-org/gufo";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hackernews-tui = {
       url = "github:aome510/hackernews-TUI?ref=v0.13.5";
       flake = false;
@@ -121,6 +125,10 @@
       flake = false;
     };
     ledgeline.url = "github:zmre/ledgeline";
+    llama-cpp-mtp-src = {
+      url = "github:ggml-org/llama.cpp/c061df19838ff60970faf54fd7e414953590125d";
+      flake = false;
+    };
     mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
     nix-auth.url = "github:numtide/nix-auth";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";

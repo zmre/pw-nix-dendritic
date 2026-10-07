@@ -164,6 +164,19 @@
             "min-p" = 0.00;
             "presence-penalty" = 0.0;
           };
+          # Tiny embedding model so the router answers /v1/embeddings
+          # (used by odysseus.nix for RAG/memory). ~300 MB, 768-dim, 2k ctx.
+          "embeddinggemma-300m" = {
+            hf-repo = "ggml-org/embeddinggemma-300M-GGUF";
+            hf-file = "embeddinggemma-300M-Q8_0.gguf";
+            "embedding" = true;
+            "gpu-layers" = 999;
+            "ctx-size" = 2048; # model max
+            "batch-size" = 2048;
+            "ubatch-size" = 2048; # must be >= ctx for non-causal embedding
+            "load-mode" = "none";
+          };
+        };
         # Halve the 16 GiB KV cache at full context if memory gets tight:
         #"cache-type-k" = "q8_0";
         #"cache-type-v" = "q8_0";

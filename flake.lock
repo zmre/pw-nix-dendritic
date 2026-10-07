@@ -75,6 +75,27 @@
         "url": "ssh://git@github.com/ironcorelabs/alita"
       }
     },
+    "audio-cpp": {
+      "inputs": {
+        "nixpkgs": [
+          "gufo",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789940897,
+        "narHash": "sha256-+9tVcd+0TkDxg7JRU7M06Lvm20sXEbuerm62uhm6JKA=",
+        "owner": "0xShug0",
+        "repo": "audio.cpp",
+        "rev": "e3de8e3f3cbfac55ffa58df71426c41550a8598b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xShug0",
+        "repo": "audio.cpp",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -867,6 +888,27 @@
         "url": "https://flakehub.com/f/cachix/git-hooks.nix/0.1.941"
       }
     },
+    "gufo": {
+      "inputs": {
+        "audio-cpp": "audio-cpp",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790939322,
+        "narHash": "sha256-b47+epLFY6G8IWQX/Ipntul8uOaXhOqYssKQtg4JS1k=",
+        "owner": "gufo-org",
+        "repo": "gufo",
+        "rev": "23cacbb9379d5a8e8531535270891729ca6c00dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gufo-org",
+        "repo": "gufo",
+        "type": "github"
+      }
+    },
     "hackernews-tui": {
       "flake": false,
       "locked": {
@@ -1134,6 +1176,23 @@
       "original": {
         "owner": "zmre",
         "repo": "ledgeline",
+        "type": "github"
+      }
+    },
+    "llama-cpp-mtp-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790853207,
+        "narHash": "sha256-wvYSa4zxGUQn4KxAd+FOQcuJ9pkkj0AjDhJe0zedFMo=",
+        "owner": "ggml-org",
+        "repo": "llama.cpp",
+        "rev": "c061df19838ff60970faf54fd7e414953590125d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggml-org",
+        "repo": "llama.cpp",
+        "rev": "c061df19838ff60970faf54fd7e414953590125d",
         "type": "github"
       }
     },
@@ -1990,6 +2049,7 @@
         "flake-utils": "flake-utils",
         "gh-feed": "gh-feed",
         "gh-worktree": "gh-worktree",
+        "gufo": "gufo",
         "hackernews-tui": "hackernews-tui",
         "hombrew-omlx": "hombrew-omlx",
         "home-manager": "home-manager",
@@ -2002,6 +2062,7 @@
         "ironoxide": "ironoxide",
         "ldash-src": "ldash-src",
         "ledgeline": "ledgeline",
+        "llama-cpp-mtp-src": "llama-cpp-mtp-src",
         "mbr-markdown-browser": "mbr-markdown-browser",
         "nix-auth": "nix-auth",
         "nix-homebrew": "nix-homebrew",
