@@ -9,6 +9,7 @@
       "imageoptim"
       "insta360-studio"
       "keycastr" # show keys being pressed
+      "libation"
       "noun-project"
       #"obs"
       "screenflow"

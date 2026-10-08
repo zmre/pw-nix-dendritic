@@ -26,6 +26,8 @@
       "macwhisper"
       "ollama-app"
       "lm-studio"
+      "block-goose" # goose-desktop equiv
+      "unsloth"
     ];
     homebrew.brews = [
       "jundot/omlx/omlx"
@@ -35,6 +37,8 @@
   flake.nixosModules.ai-gui = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       #chatgpt
+      goose-desktop
+      unsloth-desktop
     ];
   };
 
@@ -67,6 +71,7 @@
       python313Packages.hf-transfer
       # herdr is installed by programs.herdr — see apps/herdr.nix
       tuicr # terminal review diff where you can add comments and then share in different ways
+      goose-cli
     ];
 
     # Link opencode's skills/agents at iris's bundled copies. These are
