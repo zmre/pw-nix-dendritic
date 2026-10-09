@@ -1991,11 +1991,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1791431545,
-        "narHash": "sha256-P47L7TjloZ8u9j6McfajxkPC6fQs7WMFgxF6gxTDVTY=",
+        "lastModified": 1791500445,
+        "narHash": "sha256-GnW6+uNzT2ptCUSI9Vc2Mvtp54E1wZHvhlPrE+p9vLk=",
         "owner": "zmre",
         "repo": "pwneovide",
-        "rev": "3855e5f6307a697b97563b8100b286f7352e6ea9",
+        "rev": "cbc5168dfda6821943e2cbf7bc6f2f1b40ed66e5",
         "type": "github"
       },
       "original": {
