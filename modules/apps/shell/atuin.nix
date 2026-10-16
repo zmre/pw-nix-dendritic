@@ -1,8 +1,11 @@
 {
-  flake.modules.homeManager.atuin = {
+  flake.modules.homeManager.atuin = {pkgs, ...}: {
     # Nice shell history https://atuin.sh -- experimenting with this 2024-07-26
     programs.atuin = {
       enable = true;
+      # 18.23.0: PTY e2e tests time out in the Darwin build sandbox and no
+      # cached build exists, so skip the (~20 min) test suite. (2026-10-16)
+      package = pkgs.atuin.overrideAttrs {doCheck = false;};
       # Integration is done manually in zsh-private.nix so that private
       # (zsh-priv) sessions can skip it entirely instead of tearing it down
       # after the fact. The `--disable-up-arrow` flag is applied there too.
