@@ -98,13 +98,12 @@
                       }
                       {
                         type = "reddit";
-                        subreddit = "boulder";
+                        subreddit = "news";
                         limit = 20;
                         collapse-after = 10;
                       }
                       {
-                        type = "reddit";
-                        subreddit = "news";
+                        type = "stocks";
                         limit = 20;
                         collapse-after = 10;
                       }
@@ -115,20 +114,14 @@
                         collapse-after = 10;
                       }
                       {
-                        type = "reddit";
-                        subreddit = "magic";
+                        type = "financenews";
+                        subreddit = "boulder";
                         limit = 20;
                         collapse-after = 10;
                       }
                       {
                         type = "reddit";
-                        subreddit = "coinmagic";
-                        limit = 20;
-                        collapse-after = 10;
-                      }
-                      {
-                        type = "reddit";
-                        subreddit = "magictricksrevealed";
+                        subreddit = "boulder";
                         limit = 20;
                         collapse-after = 10;
                       }
@@ -181,6 +174,31 @@
                       {
                         type = "reddit";
                         subreddit = "commandline";
+                        limit = 20;
+                        collapse-after = 10;
+                      }
+                    ];
+                  }
+                  {
+                    type = "group";
+                    collapse-after = 15;
+                    cache = "12h";
+                    widgets = [
+                      {
+                        type = "reddit";
+                        subreddit = "magic";
+                        limit = 20;
+                        collapse-after = 10;
+                      }
+                      {
+                        type = "reddit";
+                        subreddit = "coinmagic";
+                        limit = 20;
+                        collapse-after = 10;
+                      }
+                      {
+                        type = "reddit";
+                        subreddit = "magictricksrevealed";
                         limit = 20;
                         collapse-after = 10;
                       }
