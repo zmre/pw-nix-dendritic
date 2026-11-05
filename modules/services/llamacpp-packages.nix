@@ -23,10 +23,16 @@
         # leaks into pkgs.llama-cpp-vulkan and compiles the HIP backend in
         # too -- llama.cpp then sees the same iGPU as two devices. Disabling
         # rocmSupport also matches Hydra's cached llama-cpp-vulkan build.
-        llama-cpp-vulkan-strix = prev.llama-cpp.override {
-          vulkanSupport = true;
-          rocmSupport = false;
-        };
+        llama-cpp-vulkan-strix =
+          (prev.llama-cpp.override {
+            vulkanSupport = true;
+            rocmSupport = false;
+          }).overrideAttrs (old: {
+            # Qwen3.8-Flash-Next (qwen4exp) MTP speculative decoding aborts at
+            # load on 0.6.0-0.8.0 (ggml-org/llama.cpp#30860, open as of
+            # 2026-11-04). Remove once nixpkgs ships a release with the fix.
+            patches = (old.patches or []) ++ [./patches/llamacpp-qwen4exp-mtp-kpool.patch];
+          });
 
         # Note: pkgs.llama-cpp-rocm is a thin wrapper whose .override only
         # accepts `llama-cpp`, so override the base package directly.

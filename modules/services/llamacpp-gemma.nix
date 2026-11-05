@@ -23,6 +23,9 @@
         port = 8081; # cuz glance is on 8080
         "verbose" = true;
         "log-file" = "/tmp/llama-server.log";
+        # Never co-load two models: Flash-Next alone is ~90 GB of the 128 GB
+        # unified memory. Requesting another model unloads the current one.
+        "models-max" = 1;
         models-preset = (pkgs.formats.ini {}).generate "models-preset.ini" {
           # note some other ways to specify models and names:
           #           hf-repo = "unsloth/Qwen3-Coder-Next-GGUF";
@@ -134,30 +137,45 @@
             "top-k" = 20;
             "min-p" = 0.00;
           };
-          # Qwen3.8-Flash-Next (qwen4exp arch: 512-expert MoE, 10 active, Gated
-          # DeltaNet hybrid attention, n-gram embedding table). ISTA-DASLab's
-          # GSQ-RCO non-uniform quant; IQ3_S is their recommended tier (matches
-          # or beats the base model on their evals). Two shards: 00001 = weights
-          # (54.8 GB), 00002 = the 51B-param n-gram table (28.8 GB). llama.cpp
-          # fetches the second shard automatically.
-          # https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF
-          "qwen38-flash-next-gsq-iq3s" = {
-            hf-repo = "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF";
-            hf-file = "IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf";
+          # Qwen3.8-Flash-Next (qwen4exp arch: 512-expert MoE, Gated DeltaNet
+          # hybrid attention, 51B-param n-gram "engram" table). Unsloth Dynamic
+          # v3.1 (2026-11-04) UD-Q4_K_XL: 92.3% top-1 vs BF16, 111 GB on disk
+          # = ~82 GB weights (shards 1-3) + 28.8 GB IQ4_NL engram (shard 4).
+          # Downloaded by hand (see gufo.nix for the hf command) into
+          # /var/lib/models/qwen3.8-flash-next/UD-Q4_K_XL; the loader finds
+          # shards 2-4 from shard 1.
+          #
+          # MTP speculative decoding: the non-"shared" Q8_0 draft head (4.1 GB,
+          # carries its own embeddings + LM head). The 2.8 GB "shared" head
+          # needs the unsloth fork; mainline fails with "token_embd.weight not
+          # found". Needs the kpool patch in llamacpp-packages.nix or the
+          # draft probe aborts at load (ggml-org/llama.cpp#30860). Strix Halo
+          # Vulkan reports: ~1.5-2x decode, best at n-max 3-5; MTP hurts at
+          # concurrency >= 8, so this preset is single-slot.
+          # Do NOT quantize the KV cache for this arch: it flips on the
+          # Hadamard-rotation path that breaks the sparse-attention (QSA) code.
+          "qwen38-flash-next-ud-q4" = {
+            model = "/var/lib/models/qwen3.8-flash-next/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf";
+            "spec-draft-model" = "/var/lib/models/qwen3.8-flash-next/MTP/mtp-Qwen3.8-Flash-Next-Q8_0.gguf";
+            "spec-type" = "draft-mtp";
+            "spec-draft-n-max" = 3; # sweep 2/3/5 with ~/bench; unsloth docs say 5, their README 2
+            "spec-draft-p-min" = 0.0; # always draft the full n-max
+            "parallel" = 1;
             "gpu-layers" = 999; # 999 = as many as possible
             "ctx-size" = 262144; # hybrid DeltaNet => KV cache stays small at full ctx
-            # Deviates from the other presets on purpose: the repo README says to
-            # keep the n-gram shard mmap'd and read on demand (-lm mmap
-            # --lazy-mode on) instead of pulling all 83.6 GB resident. Benchmark
-            # "none" vs "mmap" here if tg feels slow.
+            # Keep the 28.8 GB engram shard mmap'd and read on demand instead of
+            # pulling it resident (Unsloth guidance). Benchmark "none" vs "mmap"
+            # here if tg feels slow; community saw ~2% for "none".
             "load-mode" = "mmap";
             "lazy-mode" = "on";
             "flash-attn" = "on";
-            "batch-size" = 1024;
-            "ubatch-size" = 512;
+            "batch-size" = 2048;
+            "ubatch-size" = 1024;
             "n-predict" = 32768; # this is output-length
-            # Qwen's thinking-mode sampling (unsloth docs); non-thinking is
-            # temp 0.7 / top-p 0.8 / presence 1.5
+            # Qwen thinking-mode sampling (unsloth docs); non-thinking is
+            # temp 0.7 / top-p 0.8 / presence 1.5. reasoning_effort defaults
+            # to xhigh; pass chat_template_kwargs {"reasoning_effort":"medium"}
+            # per request (or set "reasoning-effort" here) to trim thinking.
             "temp" = 1.0;
             "top-p" = 0.95;
             "top-k" = 20;
