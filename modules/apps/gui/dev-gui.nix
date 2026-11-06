@@ -51,7 +51,7 @@
 
     programs = {
       vscode = {
-        enable = true;
+        enable = false;
         mutableExtensionsDir =
           true; # to allow vscode to install extensions not available via nix
         # package = pkgs.vscode-fhs; # or pkgs.vscodium or pkgs.vscode-with-extensions

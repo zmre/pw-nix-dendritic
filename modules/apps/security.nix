@@ -104,9 +104,9 @@
         else pkgs.pinentry_mac;
     };
     home.packages = [
-      sdrPkgs.gnuradio
-      sdrPkgs.sdrpp
-      sdrPkgs.gqrx
+      #sdrPkgs.gnuradio
+      #sdrPkgs.sdrpp
+      #sdrPkgs.gqrx
       #sdrangel  # 2026-09-29 this breaks the build like every other update so commenting for now
     ];
   };
