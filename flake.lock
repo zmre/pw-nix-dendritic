@@ -62,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791381093,
-        "narHash": "sha256-nYMLzIB5bkYDci5q1w9NHbz0OCS2T0B4dBQW3eidVAk=",
+        "lastModified": 1792799421,
+        "narHash": "sha256-MC2GPnBlodW+Eb0IUvO39YgnNHc5jz6IKtPXAKlg57A=",
         "ref": "refs/heads/main",
-        "rev": "6a7946a5dff858fa1588a8d94f4697fcdc330a65",
-        "revCount": 59,
+        "rev": "9f945638d96f229a175ae01755bb0bb6a0939267",
+        "revCount": 60,
         "type": "git",
         "url": "ssh://git@github.com/ironcorelabs/alita"
       },
@@ -429,11 +429,11 @@
     "fabric": {
       "flake": false,
       "locked": {
-        "lastModified": 1792777527,
-        "narHash": "sha256-c2MorqgimTOYr2yad4XU0GwQecXJBqC/3t+N/8Q7bCM=",
+        "lastModified": 1793744478,
+        "narHash": "sha256-wCy974QwIeVgB+zkG7T5DbmIH4CqQEeu7noizVTjEcs=",
         "owner": "danielmiessler",
         "repo": "fabric",
-        "rev": "f16de16827ae23e4bb9aa35c2e4b690d40c5907c",
+        "rev": "8e8511c770b2589a6066398a86343fbf8c2a56a3",
         "type": "github"
       },
       "original": {
@@ -669,11 +669,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790898470,
-        "narHash": "sha256-zTwuwezD0w3hpga6a6P8emidzAZFyWqlNeRBlpWOOl8=",
+        "lastModified": 1793576659,
+        "narHash": "sha256-V1h85lUaJBQoHFrB2vpXZOE0Ju1MYSnIpsehoVZYlDo=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "024633cd702b10285db5cb19b40ad48d2399ba60",
+        "rev": "ea2630b7470978622c7689a1ff75d2b389175399",
         "type": "github"
       },
       "original": {
@@ -1092,11 +1092,11 @@
         "paiTemplate": "paiTemplate"
       },
       "locked": {
-        "lastModified": 1792799165,
-        "narHash": "sha256-1Z9f186jqwLDbi4se4Qyb/ieGxNcTpzBSigrfPKUZn4=",
+        "lastModified": 1793988105,
+        "narHash": "sha256-A5i5bCHWawb326MDUYVMtvTb6eub75SG8HA8QBPYGDg=",
         "ref": "refs/heads/main",
-        "rev": "89176153a2b609b128fe2f89f79144f8b63a5bd5",
-        "revCount": 132,
+        "rev": "ba3efa0bd555306aa35bad08e374a78c0567a684",
+        "revCount": 136,
         "type": "git",
         "url": "ssh://git@github.com/zmre/iris.git"
       },
@@ -1160,11 +1160,11 @@
     "laya": {
       "flake": false,
       "locked": {
-        "lastModified": 1792759457,
-        "narHash": "sha256-HCW4LJw8ms9oiELfLGCzh1nPW3rtO0SgkTD+oSi4eh0=",
+        "lastModified": 1793982747,
+        "narHash": "sha256-RuXjfg1fasB7V6/s1RG9LPO5fkGueUGw1gITUDENDPg=",
         "owner": "NandhaKishorM",
         "repo": "laya",
-        "rev": "0a05a45052e23ae0b887a490fe8d6d9c8cff2ab5",
+        "rev": "4444f2f56acdd31a633d594e9f3227f853241d9e",
         "type": "github"
       },
       "original": {
@@ -1261,11 +1261,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1792793952,
-        "narHash": "sha256-Y5fOTPtp+5W9t2uvRxkhmV701P+gdIkdzFMySARdcY8=",
+        "lastModified": 1793949034,
+        "narHash": "sha256-xws6ZOZuv6+BtqF9BZ9NRH5GdJ8zTa/ACN9lNeKC/+s=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "026ba44dab642e20f82140de114d944f242b8a50",
+        "rev": "baf924369e8d5ec02af1eab444db411d6fed1e5e",
         "type": "github"
       },
       "original": {
@@ -1283,11 +1283,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1793935033,
-        "narHash": "sha256-OSMlxjjdW6HTPsHCL1Q4qS9UPC/n10UZlvMPErWfrLg=",
+        "lastModified": 1794152233,
+        "narHash": "sha256-LDLuEZfchhvVUPOLoZEl8p66i0STOJFkTk95vVd05cQ=",
         "owner": "zmre",
         "repo": "mbr-markdown-browser",
-        "rev": "fb7bd8cfef7171c44fa8f648cbd71610a70d1824",
+        "rev": "dd7dd4da036e6b6926497e8078b08da80ccae558",
         "type": "github"
       },
       "original": {
@@ -1738,11 +1738,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1792116957,
-        "narHash": "sha256-EjZqHKObBfIOeHZnMRVV87HB3pPq/WBkmRJWyFxmZu8=",
+        "lastModified": 1793826729,
+        "narHash": "sha256-D5H7H+qMoTGI/jJtxKP4u7BdjkFnUyhOovTrf3pTOr0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f20cd90e28fe0403873f473b29e42662cd86e8c4",
+        "rev": "6dadaf4375be35033e1c84395adbd53ff5fded96",
         "type": "github"
       },
       "original": {
@@ -1754,11 +1754,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1792502884,
-        "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA=",
+        "lastModified": 1793726008,
+        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
+        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
         "type": "github"
       },
       "original": {
@@ -1944,11 +1944,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792798057,
-        "narHash": "sha256-IZrrMEZkxfb/FWx/v6NNwrnCVfUodGrRBRONi5DRIoI=",
+        "lastModified": 1793987867,
+        "narHash": "sha256-Dv0cxGPCAobase420A21vq9NyXP1Xw5GLyFApf1UOhs=",
         "owner": "zmre",
         "repo": "nix-pai",
-        "rev": "d10d98a68a15df044f2c720644fe33d6e6895693",
+        "rev": "e1371d34ac16d3a75ae9d6a089ebde5be095d980",
         "type": "github"
       },
       "original": {
