@@ -99,6 +99,10 @@
       url = "github:pikachuexe/homebrew-freetube";
       flake = false;
     };
+    homebrew-itspriddle = {
+      url = "github:itspriddle/homebrew-brews";
+      flake = false;
+    };
     import-tree.url = "github:vic/import-tree";
     iris = {
       url = "git+ssh://git@github.com/zmre/iris.git";

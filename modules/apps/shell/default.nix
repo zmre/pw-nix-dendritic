@@ -2,6 +2,8 @@
   # Declare flake input for mbr-markdown-browser (note, this is duplicated here and in the service, but that's on purpose)
   flake-file.inputs.mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
   flake-file.inputs.nix-auth.url = "github:numtide/nix-auth";
+  flake-file.inputs.homebrew-itspriddle.url = "github:itspriddle/homebrew-brews"; # tap for ical-guy https://github.com/itspriddle/ical-guy
+  flake-file.inputs.homebrew-itspriddle.flake = false;
 
   # Putting mbr in global packages instead of home-manager ones so that the .app on macos will go where it can register
   # the quicklook plugin properly.
@@ -21,7 +23,12 @@
     ];
     homebrew.brews = [
       #"mactop" # moved here while nix version is failing to compile
+      "ical-guy" # for command line display of calendar and reminders, see https://github.com/itspriddle/ical-guy
     ];
+  };
+
+  flake.darwinModules.brew.nix-homebrew.taps = {
+    "itspriddle/homebrew-brews" = inputs.homebrew-itspriddle; # tap for ical-guy https://github.com/itspriddle/ical-guy
   };
 
   flake.modules.homeManager.shell = {
