@@ -303,6 +303,12 @@ _: {
             split_vertical = "prefix+|";
             detach = "prefix+d";
             switch_workspace = "prefix+shift+1..9";
+            # Tab N via prefix+N (herdr's default) or directly via ctrl+N. Must
+            # be an array on switch_tab: the legacy `indexed.tabs = "ctrl"`
+            # replaces the prefix binding instead of adding to it. cmd+1..9
+            # belongs to WezTerm's own tabs, and cmd+shift+N can't be used
+            # because WezTerm drops the shift on cmd chords.
+            switch_tab = ["prefix+1..9" "ctrl+1..9"];
           }
           # agent's pane. Use prefix+shift+a to go backwards.
           // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
