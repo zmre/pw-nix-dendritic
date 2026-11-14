@@ -1216,11 +1216,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1794590963,
-        "narHash": "sha256-2mUjdW1k0MVmijv1eprDaH9fWZoeNlpXeFrwGKEY9Fk=",
+        "lastModified": 1794629000,
+        "narHash": "sha256-yQtEO3SGFQ+3Hz6R+e2QcLeoXSXl5kwjmrC6m4BXmzY=",
         "owner": "zmre",
         "repo": "ledgeline",
-        "rev": "509e343218972c5e2e2e1cd1bdb6cf803feeeeed",
+        "rev": "35df626b0b71889d385f4275d7aa6c33c85b7f9d",
         "type": "github"
       },
       "original": {
@@ -1299,11 +1299,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1794547227,
-        "narHash": "sha256-aFLbDYX3fD3fl/8OIlNXaM3zlxEvMD3Bq8ShsLzBkGQ=",
+        "lastModified": 1794623498,
+        "narHash": "sha256-ZCAMm5W3vD4AzSfx9/5TsAVSJaIiHiQ7zQ6VvGGCft4=",
         "owner": "zmre",
         "repo": "mbr-markdown-browser",
-        "rev": "d7572dadb92d6ba610b9d4e720e4dac550e38954",
+        "rev": "0b640c0ab81a95ff1bd33cd93e54633ad82b75b0",
         "type": "github"
       },
       "original": {
@@ -2024,11 +2024,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1794589215,
-        "narHash": "sha256-+SxsW8tzSkpN9OZmaTjKfRHOPcWQ+ZLFhARVdL1pJXE=",
+        "lastModified": 1794594777,
+        "narHash": "sha256-e4NmzP6vn+Y6ctu32Tambi/fEgs3bi7St1s3jm32YJ8=",
         "owner": "zmre",
         "repo": "pwneovide",
-        "rev": "971ccb389ac0ff650707457a4fa4dff1c39e6fb7",
+        "rev": "eddd5ec30ea5829d803f1a3f3b22ee34499db134",
         "type": "github"
       },
       "original": {
