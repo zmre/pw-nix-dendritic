@@ -231,6 +231,10 @@ in {
       services.timesyncd.enable = true;
       services.earlyoom.enable = true;
       services.earlyoom.freeMemThreshold = 5;
+      # Never pick session plumbing as a victim: losing the user manager or
+      # its bus breaks `nixos-rebuild switch` and every user service.
+      # Matched against /proc/<pid>/comm (15 chars, so "dbus-broker-lau").
+      services.earlyoom.extraArgs = ["--avoid" "^(systemd|dbus-broker.*|ssh-agent)$"];
       programs.ssh.startAgent = true;
       programs.mtr.enable = true;
       services.udisks2 = {
