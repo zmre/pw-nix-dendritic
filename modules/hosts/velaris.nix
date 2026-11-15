@@ -40,6 +40,7 @@
     "media-gui"
     "network"
     "network-gui"
+    "productivity-gui"
     "prose"
     "scripts"
     "security"
