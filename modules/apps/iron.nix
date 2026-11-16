@@ -11,8 +11,16 @@
 
   flake.modules.homeManager.iron = {pkgs, ...}: let
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
+    # nixpkgs cargoSetupHook now exports AWS_LC_SYS_USE_SYSTEM=1; aws-lc-sys
+    # needs pkg-config + aws-lc to find the system lib. Drop once upstream
+    # flakes add these inputs.
+    withSystemAwsLc = p:
+      p.overrideAttrs (o: {
+        nativeBuildInputs = (o.nativeBuildInputs or []) ++ [pkgs.pkg-config];
+        buildInputs = (o.buildInputs or []) ++ [pkgs.aws-lc];
+      });
   in {
-    home.packages = [
+    home.packages = map withSystemAwsLc [
       inputs.ironhide.packages.${system}.ironhide
       inputs.ironoxide.packages.${system}.ironoxide-cli
     ];
