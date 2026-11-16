@@ -162,7 +162,8 @@
             "spec-draft-p-min" = 0.0; # always draft the full n-max
             "parallel" = 1;
             "gpu-layers" = 999; # 999 = as many as possible
-            "ctx-size" = 262144; # hybrid DeltaNet => KV cache stays small at full ctx
+            "ctx-size" = 131072; # was 262144 which worked, but the system got dangerously low on mem and killed other processes
+            # hybrid DeltaNet => KV cache stays small at full ctx
             # Keep the 28.8 GB engram shard mmap'd and read on demand instead of
             # pulling it resident (Unsloth guidance). Benchmark "none" vs "mmap"
             # here if tg feels slow; community saw ~2% for "none".
