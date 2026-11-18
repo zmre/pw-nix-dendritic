@@ -1163,11 +1163,11 @@
         "paiTemplate": "paiTemplate"
       },
       "locked": {
-        "lastModified": 1794280209,
-        "narHash": "sha256-BJNF/gwDrs6Y0qVk3HUZR2stdZZ+8Ifm3oUq/lz6Wzc=",
+        "lastModified": 1794861100,
+        "narHash": "sha256-r4AnQEWn66Y+MoaE2VykiNMK6yziZsKZ8CkjTXKD97I=",
         "ref": "refs/heads/main",
-        "rev": "669c5ce449c2f80e93bd0f93d754a17b8e8b1c41",
-        "revCount": 137,
+        "rev": "ba4b96e9fc6caeaa15951f01f575482b49e2e94b",
+        "revCount": 138,
         "type": "git",
         "url": "ssh://git@github.com/zmre/iris.git"
       },
@@ -1271,11 +1271,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1794671782,
-        "narHash": "sha256-RzkUEsoQl+U1dNHNWd4PWPCv8eizIrGKKVWBOt7n68c=",
+        "lastModified": 1794885946,
+        "narHash": "sha256-YI1otAhHOE7a8EP0eThywp3q8zA5Y5rVtW32prNQOSk=",
         "owner": "zmre",
         "repo": "ledgeline",
-        "rev": "be9faa34311a5d8be5d1b65bdc77a1bbc05a1738",
+        "rev": "b046d1d860b918b492c06a95750451bda7dfcef7",
         "type": "github"
       },
       "original": {
@@ -1376,11 +1376,11 @@
         "rust-overlay": "rust-overlay_4"
       },
       "locked": {
-        "lastModified": 1794775508,
-        "narHash": "sha256-YnBOIZBqEwuvDNt/EkaR+PShJMjriAqd9ordHqYhoho=",
+        "lastModified": 1794977575,
+        "narHash": "sha256-35LIHyHHsHzVOrGq1HlzwLTMbYMOmPEuvqsJvZNy4vA=",
         "owner": "zmre",
         "repo": "mbr-markdown-browser",
-        "rev": "3fabde5e40479207350e8a56500bd2c3f498830c",
+        "rev": "56d3316bdfe47a444cea3d270c65a4e671f7ae8d",
         "type": "github"
       },
       "original": {
@@ -2210,11 +2210,11 @@
         "todo-comments-nvim": "todo-comments-nvim_2"
       },
       "locked": {
-        "lastModified": 1794589139,
-        "narHash": "sha256-QfjUCWjHZcLSH95WC6LCDTVoXsjSWxAd2XzZqcbNkY0=",
+        "lastModified": 1794946999,
+        "narHash": "sha256-kqMg/EIqL2Pwai65uVXsbGn9BjcmOQ88U7Clj9Q8ONg=",
         "owner": "zmre",
         "repo": "pwnvim",
-        "rev": "e05245016ab651b83109c674dc28987336ace11d",
+        "rev": "e34d0308f46e84bcb99ce6cfc7cd701e875b1f7e",
         "type": "github"
       },
       "original": {
