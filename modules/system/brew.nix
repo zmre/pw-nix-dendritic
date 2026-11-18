@@ -99,15 +99,15 @@
         # TODO: move these into better places; this file should just setup homebrew system
         #"balenaetcher" # once again going back to ventoy; needs setup on linux, but then can copy isos in from anywhere
         "elgato-stream-deck"
-        "handy"
-        "istat-menus"
+        #"handy"
+        #"istat-menus"
         #"karabiner-elements"
-        "kopiaui" # ui for kopia dedupe backup
+        #"kopiaui" # ui for kopia dedupe backup
         #"league-of-legends"
         #"marked-app"
-        "parallels"
+        #"parallels"
         #"reader"
-        "zotero" # TODO: move to home-manager?
+        #"zotero" # TODO: move to home-manager?
       ];
 
       masApps = {
