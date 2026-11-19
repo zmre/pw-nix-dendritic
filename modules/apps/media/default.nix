@@ -1,20 +1,27 @@
 {
   flake.darwinModules.media-gui = {
-    homebrew.casks = [
-      "adobe-creative-cloud"
-      "calibre" # available in nix, but marked broken for darwin as of 2025-09-18
-      "descript"
-      "pikachuexe/freetube/pikachuexe-freetube" # TODO: this is in nixpkgs now for darwin -- try there and see if we get arm
-      "plex" # plex desktop client
-      "imageoptim"
-      "insta360-studio"
-      "keycastr" # show keys being pressed
-      "libation"
-      "noun-project"
-      #"obs"
-      "screenflow"
-      "subler" # used to edit metadata on videos
-    ];
+    config,
+    lib,
+    ...
+  }: {
+    homebrew.casks =
+      [
+        "pikachuexe/freetube/pikachuexe-freetube" # TODO: this is in nixpkgs now for darwin -- try there and see if we get arm
+      ]
+      ++ lib.optionals config.powerExtras.enable [
+        "adobe-creative-cloud"
+        "calibre" # available in nix, but marked broken for darwin as of 2025-09-18
+        "descript"
+        "insta360-studio"
+        "keycastr" # show keys being pressed
+        "noun-project"
+        "plex" # plex desktop client
+        "subler" # used to edit metadata on videos
+        "imageoptim"
+        "libation"
+        #"obs"
+        "screenflow"
+      ];
     homebrew.masApps = {
       "Gifox" = 1461845568; # For short animated gif screen caps
       "Kindle" = 302584613;

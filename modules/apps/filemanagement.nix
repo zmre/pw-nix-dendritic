@@ -5,13 +5,20 @@
   flake-file.inputs.yazi-quicklook.flake = false;
 
   flake.darwinModules.filemanagement-gui = {
-    homebrew.casks = [
-      #"dropbox"
-      #"google-drive"
-      #"proton-drive"
-      "sync"
-      "transmission"
-    ];
+    config,
+    lib,
+    ...
+  }: {
+    homebrew.casks =
+      [
+        #"dropbox"
+        #"google-drive"
+        #"proton-drive"
+        "sync"
+      ]
+      ++ lib.optionals config.powerExtras.enable [
+        "transmission"
+      ];
     homebrew.masApps = {
       "DaisyDisk" = 411643860;
     };

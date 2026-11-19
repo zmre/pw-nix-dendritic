@@ -41,7 +41,11 @@
     # };
   };
 
-  flake.darwinModules.brew = {config, ...}: let
+  flake.darwinModules.brew = {
+    config,
+    lib,
+    ...
+  }: let
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
@@ -83,7 +87,7 @@
     homebrew = {
       enable = true;
       greedyCasks = true;
-      caskArgs.no_quarantine = true;
+      #caskArgs.no_quarantine = true;
       user = config.system.primaryUser;
       onActivation = {
         autoUpdate = false;
@@ -95,17 +99,17 @@
         autoUpdate = false;
       };
       taps = builtins.attrNames taps;
-      casks = [
+      casks = lib.optionals config.powerExtras.enable [
         # TODO: move these into better places; this file should just setup homebrew system
         #"balenaetcher" # once again going back to ventoy; needs setup on linux, but then can copy isos in from anywhere
         "elgato-stream-deck"
-        #"handy"
+        "handy"
         #"istat-menus"
         #"karabiner-elements"
         #"kopiaui" # ui for kopia dedupe backup
         #"league-of-legends"
         #"marked-app"
-        #"parallels"
+        "parallels"
         #"reader"
         #"zotero" # TODO: move to home-manager?
       ];
@@ -138,8 +142,8 @@
         #"MsgFiler" = 6478043112; # Mail extension (sort of) for keyboard driven message filing
         #"NextDNS" = 1464122853;
         #"NotePlan" = 1505432629;
-        "Numbers" = 409203825;
-        "Pages" = 409201541;
+        #"Numbers" = 409203825;
+        #"Pages" = 409201541;
         "PCalc" = 403504866;
         #"PeakHour" = 1560576252;
         "Scrivener" = 1310686187;
@@ -149,15 +153,18 @@
         #"Tailscale" = 1475387142; # P2P mesh VPN for my devices
         #"WireGuard" = 1451685025; # VPN -- but tailscale does it all for me now
       };
-      brews = [
-        # TODO: move these into better places; this file should just setup homebrew system
-        "ansiweather"
-        "brightness"
-        "ca-certificates"
-        "choose-gui"
-        "ddcctl"
-        "ical-buddy"
-      ];
+      brews =
+        [
+          # TODO: move these into better places; this file should just setup homebrew system
+          "ansiweather"
+          "brightness"
+          "ca-certificates"
+          "choose-gui"
+          "ddcctl"
+        ]
+        ++ lib.optionals config.powerExtras.enable [
+          "ical-buddy"
+        ];
     };
   };
 }

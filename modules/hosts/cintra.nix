@@ -11,6 +11,7 @@
 
   # Single source of truth: all desired modules by name
   wantedModules = [
+    "hardware-options"
     # System/darwin-only
     "cintra-config"
     "brew"
@@ -59,6 +60,7 @@ in {
         shell = pkgs.stable.zsh;
         packages = with pkgs; [tree];
       };
+      powerExtras.enable = false;
       networking.hostName = hostname;
       system.primaryUser = username;
       nixpkgs.hostPlatform = "aarch64-darwin";
