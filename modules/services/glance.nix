@@ -114,7 +114,7 @@
                         collapse-after = 10;
                       }
                       {
-                        type = "financenews";
+                        type = "reddit";
                         subreddit = "boulder";
                         limit = 20;
                         collapse-after = 10;
