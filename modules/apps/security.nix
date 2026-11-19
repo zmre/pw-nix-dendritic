@@ -8,6 +8,10 @@
   flake-file.inputs.sbhosts.flake = false; # this is a lie, but we don't want to import its dependencies
 
   flake.darwinModules.security-gui = {
+    config,
+    lib,
+    ...
+  }: {
     homebrew.casks = lib.optionals config.powerExtras.enable [
       "blockblock"
       #"burp-suite" # TODO: move to home-manager? (burpsuite)
