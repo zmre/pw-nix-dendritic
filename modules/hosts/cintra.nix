@@ -34,6 +34,7 @@
     "network"
     "network-gui"
     "scripts"
+    "security-gui"
     "shell"
     "term-gui"
     "vim"

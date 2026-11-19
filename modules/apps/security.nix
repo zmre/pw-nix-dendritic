@@ -1,9 +1,14 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  lib,
+  ...
+}: {
   flake-file.inputs.sbhosts.url = "github:StevenBlack/hosts";
   flake-file.inputs.sbhosts.flake = false; # this is a lie, but we don't want to import its dependencies
 
   flake.darwinModules.security-gui = {
-    homebrew.casks = [
+    homebrew.casks = lib.optionals config.powerExtras.enable [
       "blockblock"
       #"burp-suite" # TODO: move to home-manager? (burpsuite)
       #"gpg-suite" # removing because i don't need so much stuff across my system running all the time
@@ -19,7 +24,7 @@
       #"yubico-yubikey-manager" # deprecated
       #"yubico-authenticator" # using app store version
     ];
-    homebrew.brews = [
+    homebrew.brews = lib.optionals config.powerExtras.enable [
       "recon-ng" # TODO nix version doesn't work on mac at last try 2024-07-31
       "hashcat" # the nix one only builds on linux
       "hydra" # the nix one only builds on linux
