@@ -50,11 +50,10 @@
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
     irisPkg = inputs.iris.packages.${system}.default;
   in {
-    imports =
-      (with inputs.self.modules.homeManager; [
-        herdr
-      ])
-      ++ [inputs.eva.homeManagerModules.eva];
+    imports = with inputs.self.modules.homeManager; [
+      herdr
+      eva
+    ];
 
     # Installs `eva`, `tachikoma` and `pi`. The deny list is deliberately not
     # set here: this repo is public, and naming a directory you want kept away

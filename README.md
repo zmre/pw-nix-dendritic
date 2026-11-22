@@ -30,7 +30,7 @@ But note: this is done for you if you use the automatic switch/update aliases ab
 
 Not sure you need to specify hostname since I think that's the default, but I always have, so here it is:
 
-* `sudo darwin-rebuild switch --flake .#$(hostname -s)`
+* `sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#$(hostname -s)`
 * `home-manager switch --flake .#$(hostname -s)`
 * `sudo nixos-rebuild switch --flake .#$(hostname -s)`
 

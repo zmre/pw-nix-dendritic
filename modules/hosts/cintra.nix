@@ -22,6 +22,7 @@
     "touchid"
 
     # Cross-platform or home-manager only
+    "ai"
     "browsers-gui"
     "comms-gui"
     "dev"
