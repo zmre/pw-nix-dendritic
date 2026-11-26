@@ -15,7 +15,54 @@
   # Benchmarks on avalon (Qwen3.6-27B Q4_K_M, 2026-07-06, llama.cpp b9842):
   #   rocm-strix:  pp512 290 t/s | pp4096 259 t/s | tg128 11.8 t/s
   #   vulkan-radv: pp512 313 t/s | pp4096 286 t/s | tg128 12.7 t/s  <- winner
-  flake.nixosModules.llamacpp-packages = {
+  #
+  # Source pin: nixpkgs is still on v1.0.0 (build 12359, 2026-11-25) and
+  # upstream has not tagged a newer versioned release. Inkling 2
+  # (inkling2_loop arch) needs build >= 12611 (PRs #32694 + #32704), so build
+  # from a pinned upstream build tag instead. To bump: change the tag here and
+  # llamaBuild below, `nix run .#write-flake`, then recompute npmDepsHash
+  # (set to lib.fakeHash, build, paste the "got:" value) if
+  # tools/ui/package-lock.json changed. Drop the pin once nixpkgs catches up.
+  flake-file.inputs.llama-cpp-src = {
+    url = "github:ggml-org/llama.cpp/b12756";
+    flake = false;
+  };
+
+  flake.nixosModules.llamacpp-packages = {lib, ...}: let
+    llamaSrc = inputs.llama-cpp-src;
+    llamaBuild = "12756";
+    llamaCommit = builtins.substring 0 7 llamaSrc.rev;
+    # overrideAttrs re-runs the finalAttrs fixpoint, so the derivation's own
+    # fetchNpmDeps picks up the new src and hash.
+    pinSrc = pkg:
+      pkg.overrideAttrs (_: old: {
+        version = "1.1.0-b${llamaBuild}"; # upstream CMake reports 1.1.0 at this tag
+        src = llamaSrc;
+        # Upstream moved the web UI from tools/ui to ui/apps/chat after
+        # v1.0.0. Building it there leaves ui/apps/chat/dist, which
+        # scripts/ui-assets.cmake embeds ahead of any npm/HF-download step.
+        npmRoot = "ui/apps/chat";
+        preConfigure = ''
+          pushd ui/apps/chat
+          LLAMA_BUILD_NUMBER=${llamaBuild} LLAMA_UI_VERSION=b${llamaBuild} npm run build
+          popd
+        '';
+        # Unavoidable hashed fetch: npm deps are not a flake input.
+        npmDepsHash = "sha256-7xZK5hFUsVuhStLH+LHDaJWPwanbfkTY6pPrvuYLyLs=";
+        # Informational only (--version, /props).
+        cmakeFlags =
+          (lib.filter (f:
+            !(lib.hasPrefix "-DLLAMA_BUILD_COMMIT" f)
+            && !(lib.hasPrefix "-DLLAMA_BUILD_NUMBER" f))
+          old.cmakeFlags)
+          ++ [
+            (lib.cmakeFeature "LLAMA_BUILD_NUMBER" llamaBuild)
+            (lib.cmakeFeature "LLAMA_BUILD_COMMIT" llamaCommit)
+            # never try to download a prebuilt UI inside the sandbox
+            (lib.cmakeBool "LLAMA_USE_PREBUILT_UI" false)
+          ];
+      });
+  in {
     nixpkgs.overlays = [
       (final: prev: {
         # Pure Vulkan build. Needed because avalon sets
@@ -24,10 +71,10 @@
         # too -- llama.cpp then sees the same iGPU as two devices. Disabling
         # rocmSupport also matches Hydra's cached llama-cpp-vulkan build.
         llama-cpp-vulkan-strix =
-          (prev.llama-cpp.override {
+          (pinSrc (prev.llama-cpp.override {
             vulkanSupport = true;
             rocmSupport = false;
-          }).overrideAttrs (old: {
+          })).overrideAttrs (old: {
             # Qwen3.8-Flash-Next (qwen4exp) MTP speculative decoding aborts at
             # load on 0.6.0-0.8.0 (ggml-org/llama.cpp#30860, open as of
             # 2026-11-04). Remove once nixpkgs ships a release with the fix.
@@ -37,10 +84,10 @@
         # Note: pkgs.llama-cpp-rocm is a thin wrapper whose .override only
         # accepts `llama-cpp`, so override the base package directly.
         llama-cpp-rocm-strix =
-          (prev.llama-cpp.override {
+          (pinSrc (prev.llama-cpp.override {
             rocmSupport = true;
             rocmGpuTargets = ["gfx1151"];
-          }).overrideAttrs (old: {
+          })).overrideAttrs (old: {
             cmakeFlags =
               (old.cmakeFlags or [])
               ++ [

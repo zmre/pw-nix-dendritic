@@ -183,6 +183,28 @@
             "min-p" = 0.00;
             "presence-penalty" = 0.0;
           };
+          # Inkling 2 Mini (Thinking Machines, 26B looped MoE, inkling2_loop
+          # arch). Needs llama.cpp build >= 12611, see the source pin in
+          # llamacpp-packages.nix. The repo-root Unsloth files are the mainline
+          # layout (same sha256 as Mainline_Support/). ~15.7 GB.
+          "inkling2-mini-ud-iq4xs" = {
+            hf-repo = "unsloth/Inkling-2-Mini-GGUF";
+            hf-file = "Inkling-2-Mini-UD-IQ4_XS.gguf";
+            "gpu-layers" = 999; # 999 = as many as possible
+            "ctx-size" = 131072; # model supports 1M; raise after checking memory
+            "load-mode" = "none";
+            "flash-attn" = "on";
+            "batch-size" = 512;
+            "ubatch-size" = 512;
+            # Bound output: Inkling can loop in thinking, and reasoning-budget
+            # re-arms per thinking block (ggml-org/llama.cpp#32836).
+            "n-predict" = 32768;
+            # Unsloth-recommended sampling
+            "temp" = 1.0;
+            "top-p" = 1.0;
+            "top-k" = 0;
+            "min-p" = 0.00;
+          };
           # Tiny embedding model so the router answers /v1/embeddings
           # (used by odysseus.nix for RAG/memory). ~300 MB, 768-dim, 2k ctx.
           "embeddinggemma-300m" = {

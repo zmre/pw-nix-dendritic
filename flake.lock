@@ -1301,6 +1301,23 @@
         "type": "github"
       }
     },
+    "llama-cpp-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795628846,
+        "narHash": "sha256-mpNVLjodB0RaH4HowHU+C8v1pDWQHbxUwOC56jEuJ+U=",
+        "owner": "ggml-org",
+        "repo": "llama.cpp",
+        "rev": "94a1e4b722d4bff82a0319230682cb54e29ea4e7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggml-org",
+        "ref": "b12756",
+        "repo": "llama.cpp",
+        "type": "github"
+      }
+    },
     "llm-agents": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -2260,6 +2277,7 @@
         "ldash-src": "ldash-src",
         "ledgeline": "ledgeline",
         "llama-cpp-mtp-src": "llama-cpp-mtp-src",
+        "llama-cpp-src": "llama-cpp-src",
         "mbr-markdown-browser": "mbr-markdown-browser",
         "nix-auth": "nix-auth",
         "nix-homebrew": "nix-homebrew",

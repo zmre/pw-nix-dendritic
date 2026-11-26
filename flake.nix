@@ -137,6 +137,10 @@
       url = "github:ggml-org/llama.cpp/c061df19838ff60970faf54fd7e414953590125d";
       flake = false;
     };
+    llama-cpp-src = {
+      url = "github:ggml-org/llama.cpp/b12756";
+      flake = false;
+    };
     mbr-markdown-browser.url = "github:zmre/mbr-markdown-browser";
     nix-auth.url = "github:numtide/nix-auth";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
