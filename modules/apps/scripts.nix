@@ -85,8 +85,8 @@
         transcribe-video-to-subtitles
         cleanup-dev-disk
       ]
-      ++ lib.optionals pkgs.stdenvNoCC.isLinux []
-      ++ lib.optionals pkgs.stdenvNoCC.isDarwin [
+      ++ lib.optionals pkgs.stdenvNoCC.hostPlatform.isLinux []
+      ++ lib.optionals pkgs.stdenvNoCC.hostPlatform.isDarwin [
         bright
         desktop-hide
         desktop-show

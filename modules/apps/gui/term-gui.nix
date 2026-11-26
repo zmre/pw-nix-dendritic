@@ -61,7 +61,7 @@
         #name = "VictorMono Nerd Font";
         #name = "FiraCode Nerd Font"; # missing italic
         size =
-          if pkgs.stdenvNoCC.isDarwin
+          if pkgs.stdenvNoCC.hostPlatform.isDarwin
           then 17
           else 12;
       };
@@ -164,7 +164,7 @@
         font.italic.style = "Italic";
         font.bold_italic.style = "Bold Italic";
         font.size =
-          if pkgs.stdenvNoCC.isDarwin
+          if pkgs.stdenvNoCC.hostPlatform.isDarwin
           then 16
           else 9;
         terminal.shell.program = "${pkgs.zsh}/bin/zsh";

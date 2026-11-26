@@ -81,10 +81,10 @@
           init.defaultBranch = "main";
           http.sslVerify = true;
           commit.verbose = true;
-          commit.gpgSign = pkgs.stdenvNoCC.isDarwin; # only sign on my main machine where my keys live
-          tag.gpgSign = pkgs.stdenvNoCC.isDarwin; # only sign on my main machine where my keys live
+          commit.gpgSign = pkgs.stdenvNoCC.hostPlatform.isDarwin; # only sign on my main machine where my keys live
+          tag.gpgSign = pkgs.stdenvNoCC.hostPlatform.isDarwin; # only sign on my main machine where my keys live
           credential.helper =
-            if pkgs.stdenvNoCC.isDarwin
+            if pkgs.stdenvNoCC.hostPlatform.isDarwin
             then "osxkeychain"
             else "cache --timeout=10000000";
           diff.algorithm = "patience";

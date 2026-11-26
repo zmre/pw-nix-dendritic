@@ -48,7 +48,7 @@
       #   home-manager.source = "${inputs.home-manager}";
       #   nixpkgs-unstable.source = "${inputs.nixpkgs}";
       #   nixpkgs-stable.source =
-      #     if pkgs.stdenvNoCC.isDarwin
+      #     if pkgs.stdenvNoCC.hostPlatform.isDarwin
       #     then "${inputs.nixpkgs-stable-darwin}"
       #     else "${inputs.nixpkgs-stable}";
       # };

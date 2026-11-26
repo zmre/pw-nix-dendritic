@@ -45,7 +45,7 @@
       then pkgs.btop-rocm
       else pkgs.btop;
     homeDir =
-      if pkgs.stdenvNoCC.isDarwin
+      if pkgs.stdenvNoCC.hostPlatform.isDarwin
       then "/Users/${config.home.username}"
       else "/home/${config.home.username}";
     inherit (pkgs.stdenvNoCC.hostPlatform) system;
@@ -154,7 +154,7 @@
       KEYTIMEOUT = 1;
       EDITOR = "nvim";
       VISUAL =
-        if pkgs.stdenvNoCC.isDarwin
+        if pkgs.stdenvNoCC.hostPlatform.isDarwin
         then "pwneovide"
         else "nvim";
       GIT_EDITOR = "nvim";
@@ -178,7 +178,7 @@
       # Where PAI is installed
 
       ZK_NOTEBOOK_DIR =
-        if pkgs.stdenvNoCC.isDarwin
+        if pkgs.stdenvNoCC.hostPlatform.isDarwin
         then "${homeDir}/Library/Mobile Documents/com~apple~CloudDocs/Notes"
         else "${homeDir}/Notes";
     };
